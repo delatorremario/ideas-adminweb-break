@@ -1,0 +1,164 @@
+a {
+    cursor: pointer
+}
+
+@import "base/extends";
+@import "base/animations";
+@import "base/forms";
+
+@import "layout/variables";
+@import "layout/mixins";
+@import "layout/badge";
+@import "layout/base";
+@import "layout/buttons";
+@import "layout/calendar";
+@import "layout/charts";
+@import "layout/contacts";
+@import "layout/demo-settings";
+@import "layout/forms";
+@import "layout/growl";
+@import "layout/header";
+@import "layout/icons";
+@import "layout/left-sidebar";
+@import "layout/mail";
+@import "layout/main-content";
+@import "layout/misc";
+@import "layout/modals";
+@import "layout/nested-sortable";
+@import "layout/page-loader";
+@import "layout/pages";
+@import "layout/panels";
+@import "layout/preloader";
+@import "layout/profile-status";
+@import "layout/progress";
+@import "layout/right-sidebar";
+@import "layout/sliders";
+@import "layout/tabs";
+@import "layout/theme-colors";
+@import "layout/ui-tree";
+@import "layout/widgets";
+
+@import "module/Loading";
+@import "module/Login";
+@import "module/PageHeader";
+@import "module/Signup";
+
+@import "state/Navbar";
+
+
+// Own styles
+.login-box-container {
+    width: 100vw;
+    height: 100vh;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center
+}
+.login-box {
+    background-color: #FFFFFF;
+    border: none;
+    width: 360px;
+    margin: 0 auto;
+    padding: 50px 35px 55px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    border-radius: 3px;
+}
+.login-box input {
+    height: 43px;
+    padding: 10px 16px 10px 52px;
+    font-size: 0.9em;
+    background-color: #eee;
+    border: none !important;
+}
+.login-box input:focus {
+    background-color: #eee;
+}
+.login-box .modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    padding: 0 15px 25px 28px
+}
+.login-box .modal-header h1 {
+    font-size: 2em;
+    margin: 0;
+    border-bottom: 0;
+}
+.login-box p,
+.login-box h1 {
+    color: #232833
+}
+.login-box p {
+    margin: 50px auto 10px;
+}
+.login-box a {
+    font-size: 0.9em;
+    display: block;
+    margin-top: 25px;
+    width: 100% !important;
+    text-align: center !important;
+    color: $successColor
+}
+.login-box a:hover {
+    color: #232833;
+}
+.login-box label {
+    color: #AFAFAF;
+    width: 100%;
+    text-align: center;
+    font-weight: normal;
+    font-size: 0.7em;
+    margin-bottom: 0;
+    text-transform: uppercase
+}
+.login-box label.error {
+    color: #fff;
+    margin-top: 0;
+}
+.login-box button {
+    margin-top: 35px
+}
+.login-box .modal-footer {
+    border-bottom: 3px solid $successColor
+}
+.login-box hr {
+    width: 80%;
+    margin-top: 0;
+    margin-bottom: 25px
+}
+.login-box .form-group {
+    position: relative
+}
+.login-box .form-group i {
+    color: #979797;
+    top: 21px;
+    left: 0;
+    position: absolute;
+    line-height: 43px;
+    padding: 0 18px;
+}
+
+/* Change Autocomplete styles in Chrome*/
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus
+input:-webkit-autofill, 
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  border: none;
+  -webkit-text-fill-color: #232833;
+  -webkit-box-shadow: 0 0 0px 1000px #eee inset;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+.sidebar-profile .profile-body .title{
+    font-size: 13px;
+    margin: 7px 0 10px;
+    line-height: 1.4em;
+}
