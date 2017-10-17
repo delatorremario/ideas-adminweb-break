@@ -1,10 +1,13 @@
+// nginx config https://gist.github.com/jamiewilson/4e1d28f9a200cb34ad59
+// http://meteor-up.com/
+
 module.exports = {
   servers: {
     one: {
       // TODO: set host address, username, and authentication method
-      host: 'ideas.e-captum.com',
+      host: 'url',
       username: 'ubuntu',
-      pem: '~/DEVELOPS/HOLOS/pems/productionServer.pem'
+      pem: '~/server.pem'
       // password: 'server-password'
       // or neither for authenticate from ssh-agent
     }
@@ -12,7 +15,7 @@ module.exports = {
 
   meteor: {
     // TODO: change app name and path
-    name: 'ideas-webadmin',
+    name: 'app-name',
     path: '../.',
 
     servers: {
@@ -26,8 +29,8 @@ module.exports = {
     env: {
       // TODO: Change to your app's url
       // If you are using ssl, it needs to start with https://
-      ROOT_URL: 'http://ideas.e-captum.com',
-      MONGO_URL: 'mongodb://ideas:ideas@ds129053.mlab.com:29053/ideas-dev',
+      ROOT_URL: 'http://url',
+      MONGO_URL: 'mongodb://xxxxx',
       PORT: 5001
     },
 
