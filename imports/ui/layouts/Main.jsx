@@ -1,7 +1,5 @@
-import React, { Component, PropTypes } from 'react'
-import MainWrapper from './MainWrapper'
-import Dashboard from '../pages/Dashboard'
-import { Route, Redirect } from 'react-router-dom'
+import React, { Component, PropTypes } from 'react';
+import MainWrapper from './MainWrapper';
 
 // class Main extends Component {
 //     render() {
@@ -13,9 +11,8 @@ import { Route, Redirect } from 'react-router-dom'
 //     }
 // }
 
-const Main = ({ loggingIn, authenticated, component, ...rest, location }) => {
-    return authenticated ? <MainWrapper match={location}/> : (<Redirect to="/login" />)
-}
+const Main = ({ loggingIn, authenticated, component, ...rest, location }) =>  <MainWrapper match={location}/>
+
 
 Main.propTypes = {
     loggingIn: PropTypes.bool,

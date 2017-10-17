@@ -5,9 +5,9 @@ module.exports = {
   servers: {
     one: {
       // TODO: set host address, username, and authentication method
-      host: 'url',
+      host: 'ideas.e-captum.com',
       username: 'ubuntu',
-      pem: '~/server.pem'
+      pem: '~/DEVELOPS/HOLOS/pems/productionServer.pem'
       // password: 'server-password'
       // or neither for authenticate from ssh-agent
     }
@@ -15,7 +15,7 @@ module.exports = {
 
   meteor: {
     // TODO: change app name and path
-    name: 'app-name',
+    name: 'ideas-webadmin',
     path: '../.',
 
     servers: {
@@ -29,8 +29,8 @@ module.exports = {
     env: {
       // TODO: Change to your app's url
       // If you are using ssl, it needs to start with https://
-      ROOT_URL: 'http://url',
-      MONGO_URL: 'mongodb://xxxxx',
+      ROOT_URL: 'http://ideas.e-captum.com',
+      MONGO_URL: 'mongodb://ideas:ideas@ds129053.mlab.com:29053/ideas-dev',
       PORT: 5001
     },
 

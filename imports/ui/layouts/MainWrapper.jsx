@@ -12,7 +12,7 @@ class MainWrapper extends Component {
             user: Meteor.users.findOne(Meteor.userId())
         };
 
-        console.log(this.state.user)
+        console.log('this.state.user',this.state.user)
     }
 
     render() {
