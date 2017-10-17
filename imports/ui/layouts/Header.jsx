@@ -4,7 +4,6 @@ import { Meteor } from 'meteor/meteor';
 
 const handleLogout = () => {
     Meteor.logout();
-    console.log("asdasd")
 }
 
 const userName = () => {
