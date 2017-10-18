@@ -1,3 +1,19 @@
+sudo nano /etc/nginx/nginx.conf
+Find and uncomment the line with
+
+server_tokens off;
+Save and exit this file. Then run:
+
+sudo service nginx restart
+To test the change, open a new terminal window and run:
+
+curl -I http://www.yourdomain.com
+
+
+
+
+sudo nano /etc/nginx/sites-enabled/default
+
 #############							
 # IDEAS 3.0 #							
 #############
