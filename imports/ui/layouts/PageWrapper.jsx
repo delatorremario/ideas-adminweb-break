@@ -1,36 +1,17 @@
-import React, { Component } from 'react'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
-import Authenticated from '../pages/Authenticated';
+import React from 'react';
+import { Route } from 'react-router-dom';
 
-import Dashboard from '../pages/Dashboard'
-import BlankPage from '../pages/BlankPage'
+import Dashboard from '../pages/Dashboard';
+import BlankPage from '../pages/BlankPage';
+import ComponentsPage from '../pages/ComponentsPage';
 
-// class PageWrapper extends Component {
-//     constructor(props) {
-//         super(props)
-//         console.log(props.match)
-//     }
-//     render() {
-//         return (
-//             <section className="main-content-wrapper">
-//                 <div>PageWrapper</div>
-
-//                 <Route path={`${this.props.match.url}/dashboard`} component={Dashboard} />
-//                 <Route path="/blank-page" component={BlankPage} />
-
-//             </section>
-//         )
-//     }
-// }
-
-const PageWrapper = () => {
-    return (
+const PageWrapper = () => (
         <section className="main-content-wrapper">
-            <Route exact path="/" component={Dashboard} />            
+            <Route exact path="/" component={Dashboard} />
             <Route path="/dashboard" component={Dashboard} />
             <Route path="/blank-page" component={BlankPage} />
+            <Route path="/components-page" component={ComponentsPage} />
         </section>
-    )
-}
+    );
 
 export default PageWrapper;

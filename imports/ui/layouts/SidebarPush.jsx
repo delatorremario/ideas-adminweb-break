@@ -32,6 +32,12 @@ class SidebarPush extends Component {
                     collapsed: true,
                 },
                 {
+                    title: "Components",
+                    path: "/components-page",
+                    iconClasses: ["fa", "fa-fw", "fa-bar-chart-o"],
+                    collapsed: true,
+                },
+                {
                     title: "Sublevels",
                     path: false,
                     iconClasses: ["fa", "fa-fw", "fa-list"],
