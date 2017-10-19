@@ -19,7 +19,7 @@ const App = appProps => (
   <Router>
     <div>
        {/* <Route exact path="/" component={Index} /> */}
-       <Route exact path="/" component={Login} {...appProps} />
+       {/* <Route exact path="/" component={Login} {...appProps} /> */}
        
        <Route name="recover-password" path="/recover-password" component={RecoverPassword} />
        <Route name="reset-password" path="/reset-password/:token" component={ResetPassword} />

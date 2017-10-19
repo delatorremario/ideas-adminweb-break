@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-
+// import { browserHistory } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
 import { Bert } from 'meteor/themeteorchef:bert';
 import './validation.js';
@@ -13,14 +13,15 @@ const login = () => {
   Meteor.loginWithPassword(email, password, (error) => {
     if (error) {
       Bert.alert(error.reason, 'warning');
-    } else {
-      const { location } = component.props;
-      if (location.state && location.state.nextPathname) {
-        browserHistory.push(location.state.nextPathname);
-      } else {
-        // browserHistory.push('/');
-      }
     }
+    // else {
+    //   const { location } = component.props;
+    //   if (location.state && location.state.nextPathname) {
+    //     browserHistory.push(location.state.nextPathname);
+    //   } else {
+    //     browserHistory.push('/dashboard');
+    //   }
+    // }
   });
 };
 
