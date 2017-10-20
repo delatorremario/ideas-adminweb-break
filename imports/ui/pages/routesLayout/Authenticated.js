@@ -3,7 +3,9 @@ import { Route, Redirect } from 'react-router-dom';
 import _ from 'lodash';
 
 const Authenticated = ({ loggingIn, authenticated, component, ...rest }) => (
-  !_.includes(location.pathname, 'recover-password') && !_.includes(location.pathname, 'reset-password') &&
+  !_.includes(location.pathname, 'recover-password') &&
+  !_.includes(location.pathname, 'reset-password') &&
+  !_.includes(location.pathname, 'signup') &&
   <Route {...rest} render={(props) => {
     if (loggingIn) return <div>Logging In !!</div>;
 

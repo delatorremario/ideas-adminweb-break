@@ -1,6 +1,8 @@
 import { Meteor } from 'meteor/meteor';
 import { developmentEnv, productionEnv } from './env';
 import Start from './start';
+import '../imports/startup/server/accounts/email-templates';
+import '../imports/startup/server/accounts/default-roles';
 
 
 Meteor.startup(() => {

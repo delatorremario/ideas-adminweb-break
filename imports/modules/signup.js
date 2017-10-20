@@ -18,14 +18,15 @@ const getUserData = () => ({
 });
 
 const signup = () => {
+  const { history } = component.props;
   const user = getUserData();
 
   Accounts.createUser(user, (error) => {
     if (error) {
       Bert.alert(error.reason, 'danger');
     } else {
-      // browserHistory.push('/');
       Bert.alert('Welcome!', 'success');
+      history.push('/');
     }
   });
 };

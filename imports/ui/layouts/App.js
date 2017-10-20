@@ -10,6 +10,7 @@ import Authenticated from '../pages/routesLayout/Authenticated';
 import Login from '../pages/singinup/Login';
 import RecoverPassword from '../pages/singinup/RecoverPassword';
 import ResetPassword from '../pages/singinup/ResetPassword';
+import Signup from '../pages/singinup/Signup';
 
 // Layouts components pages
 
@@ -21,8 +22,9 @@ const App = appProps => (
       {/* <Route exact path="/" component={Index} /> */}
       {/* <Route exact path="/" component={Login} {...appProps} /> */}
 
-      <Route name="recover-password" path="/recover-password" component={RecoverPassword} { ...appProps } />
+      <Route name="recover-password" path="/recover-password" component={RecoverPassword} />
       <Route name="reset-password" path="/reset-password/:token" component={ResetPassword} />
+      <Route name="signup" path="/signup" component={Signup} />
 
       <Public path="/login" component={Login} {...appProps} />
       <Authenticated path="/" component={MainWrapper} {...appProps} />
