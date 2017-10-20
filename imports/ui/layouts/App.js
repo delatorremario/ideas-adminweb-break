@@ -18,14 +18,14 @@ import MainWrapper from './MainWrapper';
 const App = appProps => (
   <Router>
     <div>
-       {/* <Route exact path="/" component={Index} /> */}
-       {/* <Route exact path="/" component={Login} {...appProps} /> */}
-       
-       <Route name="recover-password" path="/recover-password" component={RecoverPassword} />
-       <Route name="reset-password" path="/reset-password/:token" component={ResetPassword} />
+      {/* <Route exact path="/" component={Index} /> */}
+      {/* <Route exact path="/" component={Login} {...appProps} /> */}
 
-       <Public path="/login" component={Login} {...appProps} />
-       <Authenticated path="/" component={MainWrapper} {...appProps} />
+      <Route name="recover-password" path="/recover-password" component={RecoverPassword} { ...appProps } />
+      <Route name="reset-password" path="/reset-password/:token" component={ResetPassword} />
+
+      <Public path="/login" component={Login} {...appProps} />
+      <Authenticated path="/" component={MainWrapper} {...appProps} />
     </div>
   </Router>
 );
