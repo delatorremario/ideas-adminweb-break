@@ -23,6 +23,12 @@ $size22px:1.375em;
 $size23px:1.438em;
 $size24px:1.500em;
 
+
+//bhp orange 1
+$naranjo1:#e65400; //grey
+$naranjo1Hover:lighten($naranjo1,5%); //lighter grey
+
+
 //Button and Banner Colors
  $defaultColor:#bdbebc; //grey
  $defaultColorHover:lighten($defaultColor,5%); //lighter grey
@@ -35,7 +41,7 @@ $size24px:1.500em;
  $infoColor:#0E91aC; //blue
  $infoColorHover:lighten($infoColor,5%); //lighter blue
  $dangerColor:#e65f41; //red
- $dangerColorHover:lighten($dangerColor,5%); //lighter red 
+ $dangerColorHover:lighten($dangerColor,5%); //lighter red
 
 //Main link color
 $aLinkColor:#2E2E32;
