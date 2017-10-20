@@ -1,15 +1,15 @@
 import React, { PropTypes } from 'react';
-import { BrowserRouter as Router, Route, browserHistory } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { composeWithTracker } from 'react-komposer';
 import { Meteor } from 'meteor/meteor';
-import Public from '../pages/Public';
-import Authenticated from '../pages/Authenticated';
+import Public from '../pages/routesLayout/Public';
+import Authenticated from '../pages/routesLayout/Authenticated';
 
 // import Index from '../pages/Index';
 
-import Login from '../pages/Login';
-import RecoverPassword from '../pages/RecoverPassword';
-import ResetPassword from '../pages/ResetPassword';
+import Login from '../pages/singinup/Login';
+import RecoverPassword from '../pages/singinup/RecoverPassword';
+import ResetPassword from '../pages/singinup/ResetPassword';
 
 // Layouts components pages
 
