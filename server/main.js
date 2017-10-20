@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor';
+import { developmentEnv, productionEnv } from './env';
 import Start from './start';
-import developmentEnv from './env';
+
 
 Meteor.startup(() => {
   Start.start();
@@ -8,5 +9,9 @@ Meteor.startup(() => {
     console.log('Meteor.isDevelopment');
     developmentEnv();
   }
-  if (Meteor.isProduction) console.log('Meteor.isProduction');
+  if (Meteor.isProduction) {
+    console.log('Meteor.isProduction');
+    productionEnv();
+  }
 });
+
