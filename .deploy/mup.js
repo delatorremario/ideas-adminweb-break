@@ -1,11 +1,13 @@
 // nginx config https://gist.github.com/jamiewilson/4e1d28f9a200cb34ad59
 // http://meteor-up.com/
 
+const url = 'ideas.e-captum.com';
+
 module.exports = {
   servers: {
     one: {
       // TODO: set host address, username, and authentication method
-      host: 'ideas.e-captum.com',
+      host: url,
       username: 'ubuntu',
       pem: '~/DEVELOPS/HOLOS/pems/productionServer.pem'
       // password: 'server-password'
@@ -26,13 +28,22 @@ module.exports = {
       serverOnly: true,
     },
 
+    // ssl: {
+    //   autogenerate: {
+    //     email: 'desarrollo@holos.cl',
+    //     domains: `${url}, www.${url}`
+    //   }
+    // },
+
     env: {
       // TODO: Change to your app's url
       // If you are using ssl, it needs to start with https://
-      ROOT_URL: 'http://ideas.e-captum.com',
+      ROOT_URL: `https://${url}`,
       MONGO_URL: 'mongodb://ideas:ideas@ds129053.mlab.com:29053/ideas-dev',
       PORT: 5001
     },
+
+    
 
     docker: {
       // change to 'kadirahq/meteord' if your app is not using Meteor 1.4
