@@ -1,0 +1,415 @@
+// Form gird
+$sidesPadding: 15px;
+
+.label-right .control-label {
+    font-size: 0.9em;
+    width: 100%;
+    text-align: right !important;
+    margin-bottom: 0;
+    margin-top: 10px;
+    line-height: 16px;
+}
+.label-left .control-label {
+    font-size: 0.9em;
+    width: 100%;
+    text-align: left !important;
+    margin-bottom: 0;
+    margin-top: 10px;
+    line-height: 16px;
+}
+
+.input-group-btn button {
+    padding: 8px 10px 8px 10px !important;
+    border-radius: 0 2px 2px 0;
+    height: 37px;    
+    margin-bottom: 0 
+}
+
+.col-flex {
+    flex: 1;
+    padding: 0 $sidesPadding !important;
+    align-self: flex-start;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.col-fixed {
+    display: flex;
+    width: 200px;
+    padding: 0 $sidesPadding !important;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.form-group {
+    overflow: hidden;
+}
+
+form label.error {
+    color: #FFFFFF !important;
+    font-size: 0.9em;
+    margin-top: -1px
+}
+
+// Buttons Resets
+.input-group-btn {
+    vertical-align: top !important
+}
+.btn.reset-icon i {
+    padding-left: 0 !important;
+}
+
+// Own styles
+.login-box-container {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    box-sizing: border-box;
+    justify-content: center;
+    align-items: center
+}
+.login-box {
+    background-color: #FFFFFF;
+    border: none;
+    width: 360px;
+    margin: 0 auto;
+    padding: 50px 35px 55px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    border-radius: 3px;
+}
+.login-box input {
+    height: 43px;
+    padding: 10px 16px 10px 52px !important;
+    font-size: 0.9em;
+    background-color: #eee;
+    border: none !important;
+}
+.login-box input:focus {
+    background-color: #eee;
+}
+.login-box .modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    padding: 0 15px 25px 28px
+}
+.login-box .modal-header h1 {
+    font-size: 2em;
+    margin: 0;
+    border-bottom: 0;
+}
+.login-box p,
+.login-box h1 {
+    color: #232833
+}
+.login-box p {
+    margin: 50px auto 10px;
+}
+.login-box a {
+    font-size: 0.9em;
+    display: block;
+    margin-top: 25px;
+    width: 100% !important;
+    text-align: center !important;
+    color: $successColor
+}
+.login-box a:hover {
+    color: #232833;
+}
+.login-box label {
+    color: #AFAFAF;
+    width: 100%;
+    text-align: center;
+    font-weight: normal;
+    font-size: 0.7em;
+    margin-bottom: 0;
+    text-transform: uppercase
+}
+.login-box label.error {
+    color: #fff;
+    margin-top: 0;
+}
+.login-box button {
+    margin-top: 35px
+}
+.login-box .modal-footer {
+    border-bottom: 3px solid $successColor
+}
+.login-box hr {
+    width: 80%;
+    margin-top: 0;
+    margin-bottom: 25px
+}
+.login-box .form-group {
+    position: relative
+}
+.login-box .form-group i {
+    color: #979797;
+    top: 21px;
+    left: 0;
+    position: absolute;
+    line-height: 43px;
+    padding: 0 18px;
+}
+
+/* Change Autocomplete styles in Chrome */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus
+input:-webkit-autofill, 
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  border: none;
+  -webkit-text-fill-color: #232833;
+  -webkit-box-shadow: 0 0 0px 1000px #eee inset;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+.sidebar-profile .profile-body .title {
+    font-size: 13px;
+    margin: 7px 0 10px;
+    line-height: 1.4em;
+}
+
+.bert-alert {
+    margin-top: 55px
+}
+
+// Table Table Table
+.table * {
+    font-size: 0.95em
+}
+.table .actions button,
+.table .actions a {
+    width: 26px;
+    height: 26px;
+    padding: 0;
+    margin: 0 2px;
+}
+.table .actions button i,
+.table .actions a i {
+    line-height: 26px;
+    margin: 0;
+    padding: 0 7px;
+}
+.table .actions {
+    text-align: center;
+    position: relative;
+    right: auto;
+    top: auto;
+}
+.table tbody .actions {
+    padding: 5px 8px;
+}
+.control-bottom {
+    margin-top: 15px
+}
+.table-top {
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+}
+.table-top .dataTables_length select {
+    display: inline-block;
+    width: auto
+}
+.table-top button,
+.table-top .dataTables_length label {
+    margin-bottom: 0
+}
+.table-top .col-flex input {
+    transition: all 0.3s ease-in;
+    width: 100%
+}
+.searcherDisplayed {
+    top: 30px;
+    left: 0;
+    position: absolute;
+    width: 100%
+}
+
+// main-list main-list main-list main-list
+.main-list {
+    margin: 0 0 25px 0;
+    padding: 0;
+    list-style: none;
+    transition: all 0.3s ease-in
+}
+
+.main-list li {
+    display: flex;
+    overflow: hidden;
+    justify-content: flex-end;
+    padding: 3px 13px 3px 0;
+    line-height: 24px;
+    transition: all 0.3s ease-in
+}
+.main-list li p {
+    flex: 1;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    padding: 0 $sidesPadding !important;
+    margin-bottom: 0;
+    padding-left: 12px !important;
+    align-self: flex-start;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.main-list li span.btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0;
+    width: 24px;
+    height: 24px;
+    border-radius: 2px
+}
+.main-list li span.btn i {
+    padding: 0;
+    line-height: 23px;
+}
+
+
+// Animation and CSStransitions
+.listItem-enter {
+    animation: itemIn ease 300ms;
+}
+.listItem-leave {
+    animation: itemOut ease 300ms;
+}
+
+@keyframes itemIn {
+    0% {
+        opacity: 0;
+        transform: translate3d(-50px, 0, 0)
+    }
+    100% {
+        opacity: 1;
+        transform: translate3d(0, 0, 0)
+    }
+}
+@keyframes itemOut {
+    0% {
+        opacity: 1;
+        transform: translate3d(0, 0, 0)
+    }
+    100% {
+        opacity: 0;
+        transform: translate3d(50px, 0, 0)
+    }
+}
+
+.main-label {
+    color: #555;
+    display: inline-block;
+    background-color: #e2e1e3;
+    font-size: 0.9em;
+    line-height: 1.3em;
+    padding: .15em 1.1em;
+    border-radius: 2em;
+    margin: 2px 5px !important;
+}
+
+// Cards
+.cards-container {
+    display: flex;
+    flex-direction: column;
+    flex-flow: row wrap
+}
+.cards-item {
+    display: flex;
+}
+.cards-item .panel-default {
+    width: 100%
+}
+
+// Avatar Colored
+.colored-avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 65px;
+    height: 65px;
+    margin: auto;
+    border-radius: 50%;
+    border: 4px solid rgba(255,255,255,0.3);
+    h2 {
+        font-size: 2em !important;
+        font-weight: normal;
+        margin: 0;
+        padding: 0;
+        color: #FFFFFF !important;
+        text-transform: uppercase
+    };
+    i {
+        position: absolute !important;
+        background: red !important;
+        width: 10px !important;
+        height: 10px !important;
+        border-radius: 50%;
+        left: 90px;
+        top: 88px;
+        border: 2px solid #13161c;
+    }
+}
+
+
+input,
+input:-webkit-autofill {
+    color: #232833
+}
+input:-webkit-autofill::-webkit-input-placeholder {
+    -webkit-text-fill-color: #a1a1a1;
+}
+
+// MD
+@media all and (max-width: 991px) {
+    // Cards
+    .cards-container {
+        display: flex;
+    }
+}
+
+// SM
+@media all and (min-width: 768px) and (max-width: 990px) {
+    // Cards
+    .cards-container {
+        display: flex;
+    }
+}
+
+// XS
+@media all and (max-width: 767px) {
+    .label-right .control-label {
+        text-align: left !important;
+    }
+
+    // Login
+    .login-box-container {
+        align-items: flex-start;
+    }
+    .login-box {
+        width: 100%;
+        max-width: 350px;
+        margin: 0 auto;
+        padding: 50px 35px 55px;
+        box-shadow: none;
+        border-radius: 0;
+    }
+    .login-box .modal-header h1 {
+        font-size: 2.2em !important;
+    }
+
+    // Cards
+    .cards-container {
+        display: block;
+    }
+}

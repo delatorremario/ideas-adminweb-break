@@ -17,14 +17,19 @@ import {
     MenuItem,
     ProgressBar
 } from "react-bootstrap";
-
-import $ from 'jquery'
+import ColoredAvatar from '../components/ColoredAvatar';
+import $ from 'jquery';
 
 class SidebarPush extends Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
             navLinks: [
+                {
+                    title: "Corporaciones",
+                    iconClasses: ["fa", "fa-fw", "fa-sitemap"],
+                    path: "/corporations",
+                },
                 {
                     title: "Dashboard",
                     path: "/dashboard",
@@ -69,6 +74,22 @@ class SidebarPush extends Component {
 
     }
 
+    componentDidMount() {
+        let bodyEl = $('#main-wrapper');
+        $(window).on('resize', () => {
+            if ($(window).width() < 767) {
+                $(bodyEl).removeClass('sidebar-mini');
+            }
+        })
+    }
+
+    sidebarPushMobile = () => {
+        let bodyEl = $('#main-wrapper');
+        if ($(window).width() < 767) {
+            $(bodyEl).toggleClass('sidebar-opened');
+        }
+    }
+
     activeRoute(getPath) {
         getPath = Array.isArray(getPath) ? getPath : [getPath];
         
@@ -106,7 +127,7 @@ class SidebarPush extends Component {
             if (!link.subLevel) {
                 return (
                     <li key={index} className={this.activeRoute(link.path) ? 'active' : ''}>
-                        <Link to={link.path} title={link.path}>
+                        <Link onClick={this.sidebarPushMobile} to={link.path} title={link.path}>
                             <i className={link.iconClasses.join(" ")}></i>
                             {link.title}
                         </Link>
@@ -127,7 +148,7 @@ class SidebarPush extends Component {
                             {link.subLevel.map((subLink, index) => {
                                 return (
                                     <li key={index}>
-                                        <Link title={subLink.title} to={subLink.path} className={this.activeRoute(subLink.path) ? 'active' : ''}>
+                                        <Link onClick={this.sidebarPushMobile} title={subLink.title} to={subLink.path} className={this.activeRoute(subLink.path) ? 'active' : ''}>
                                             {subLink.title}
                                         </Link>
                                     </li>
@@ -143,20 +164,25 @@ class SidebarPush extends Component {
     }
 
     render() {
+        const { user } = this.props;
+
         return (
             <aside className="sidebar sidebar-left">
                 <div className="sidebar-profile">
-                    <div className="avatar">
-                        <img className="img-circle profile-image" src="img/profile.jpg" />
-                        <i className="on border-dark animated bounceIn"></i>
-                    </div>
+                    {user.imageUrl ?
+                        <div className="avatar">
+                            <img className="img-circle profile-image" src="img/profile.jpg" />
+                            <i className="on border-dark animated bounceIn"></i>
+                        </div>
+                        : <ColoredAvatar color={ user.profile && user.profile.color } userName={ user && user.name ? user.name : user.emails[0].address } />
+                    }
                     <div className="profile-body dropdown">
                         <a href="javascript:void(0);" className="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                             <h4>{this.renderUserName()}<span className="caret"></span>
                             </h4>
                         </a>
-                        <p className="title">{this.props.user.roles.map((rol, index) => (
-                            index === 0 ? rol : `, ${rol}`))}</p>
+                        <p className="title">{user && user.roles && user.roles.map((rol, index) => (
+                            index === 0 ? rol : `, ${rol}`)) || ' NO TIENE ROLES '}</p>
 
                         <ul className="dropdown-menu animated fadeInRight" role="menu">
                             <li className="profile-progress">

@@ -1,50 +1,50 @@
 .btn {
     
-    border: none;
-   font-size: 15px;
-    font-weight: normal;
-    @include roundBorders(3px);
-    padding: 8px 14px;
-    margin-bottom : 5px;
-    -webkit-font-smoothing: subpixel-antialiased;
-    -webkit-transition: border .25s linear, color .25s linear, background-color .25s linear;
-    transition: border .25s linear, color .25s linear, background-color .25s linear;
+    border: none !important;
+   font-size: 15px !important;
+    font-weight: normal !important;
+    @include roundBorders(3px !important);
+    padding: 8px 14px !important;
+    margin-bottom : 5px !important;
+    -webkit-font-smoothing: subpixel-antialiased !important;
+    -webkit-transition: border .25s linear, color .25s linear, background-color .25s linear !important;
+    transition: border .25s linear, color .25s linear, background-color .25s linear !important;
     &:hover, &:focus {
-    outline: none;
+    outline: none !important;
     }
     &:active, &.active {
-    outline: none;
-    -webkit-box-shadow: none;
-    box-shadow: none;
+    outline: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
     outline:none!important;
     }
     &.disabled, &[disabled], fieldset[disabled] .btn { 
-    background-color: $defaultColor;
-    color: rgba(255, 255, 255, 0.75);
-    opacity: 0.7;
-    filter: alpha(opacity=70);
+    background-color: $defaultColor !important;
+    color: rgba(255, 255, 255, 0.75) !important;
+    opacity: 0.7 !important;
+    filter: alpha(opacity=70) !important;
     }
    
 }
 
 
 .btn i{
-   padding: 0 5px;
+   padding: 0 5px !important;
 }
 
 
 /* Default Buttons*/
 .btn-default, a.btn-default:link, a.btn-default:visited { 
-    color: #ffffff;
-    background-color: $defaultColor;
-    outline:none!important;
+    color: #ffffff !important;
+    background-color: $defaultColor !important;
+    outline:none !important;
 }
 
 a.btn-default:hover, 
 a.btn-default:active {
-    color: #ffffff;
-    background-color: $defaultColorHover;
-    border-color: $defaultColorHover;
+    color: #ffffff !important;
+    background-color: $defaultColorHover !important;
+    border-color: $defaultColorHover !important;
 }
 
 .btn-default:hover, 
@@ -52,16 +52,16 @@ a.btn-default:active {
 .btn-default:active, 
 .btn-default.active, 
 .open .dropdown-toggle.btn-default {
-    color: #ffffff;
-    background-color: $defaultColorHover;
-    border-color: $defaultColorHover;
+    color: #ffffff !important;
+    background-color: $defaultColorHover !important;
+    border-color: $defaultColorHover !important;
 }
 
 .btn-default:active, 
 .btn-default.active, 
 .open .dropdown-toggle.btn-default {
-    background: $defaultColor;
-    border-color: $defaultColor;
+    background: $defaultColor !important;
+    border-color: $defaultColor !important;
 }
 
 .btn-default.disabled, .btn-default[disabled], 
@@ -78,19 +78,19 @@ fieldset[disabled] .btn-default:active,
 .btn-default.disabled.active, 
 .btn-default[disabled].active, 
 fieldset[disabled] .btn-default.active {
-    background-color: $defaultColor;
-    border-color: $defaultColor;
+    background-color: $defaultColor !important;
+    border-color: $defaultColor !important;
 }
 
 .btn-primary, a.btn-primary:link, a.btn-primary:visited {
-    color: #fff;
-    background-color: $primaryColor;
+    color: #fff !important;
+    background-color: $primaryColor !important;
 }
 
 a.btn-primary:hover, a.btn-primary:active {
-    color: #ffffff;
-    background-color: $primaryColorHover;
-    border-color: $primaryColorHover;
+    color: #ffffff !important;
+    background-color: $primaryColorHover !important;
+    border-color: $primaryColorHover !important;
 }
 
 .btn-primary:hover, 
@@ -98,16 +98,16 @@ a.btn-primary:hover, a.btn-primary:active {
 .btn-primary:active, 
 .btn-primary.active, 
 .open .dropdown-toggle.btn-primary {
-    color: #ffffff;
-    background-color: $primaryColorHover;
-    border-color: $primaryColorHover;
+    color: #ffffff !important;
+    background-color: $primaryColorHover !important;
+    border-color: $primaryColorHover !important;
 }
 
 .btn-primary:active, 
 .btn-primary.active, 
 .open .dropdown-toggle.btn-primary {
-    background: $primaryColor;
-    border-color: $primaryColor;
+    background: $primaryColor !important;
+    border-color: $primaryColor !important;
 }
 
 .btn-primary.disabled, 
@@ -125,25 +125,25 @@ fieldset[disabled] .btn-primary:active,
  .btn-primary.disabled.active,
   .btn-primary[disabled].active, 
 fieldset[disabled] .btn-primary.active {
-    background-color: $primaryColor;
-    border-color: $primaryColor;
+    background-color: $primaryColor !important;
+    border-color: $primaryColor !important;
 }
 
 .btn-info {
-    color: #ffffff;
-    background-color: $infoColor;
+    color: #ffffff !important;
+    background-color: $infoColor !important;
 }
 
 .btn-info, a.btn-info:link,
 a.btn-info:visited {
-    color: #ffffff;
-    background-color: $infoColor;
+    color: #ffffff !important;
+    background-color: $infoColor !important;
 }
 
 a.btn-info:hover,
 a.btn-info:active {
-    color: #ffffff;
-    background-color: $infoColorHover;
+    color: #ffffff !important;
+    background-color: $infoColorHover !important;
 }
 
 .btn-info:hover,
@@ -151,16 +151,16 @@ a.btn-info:active {
 .btn-info:active,
 .btn-info.active, 
 .open .dropdown-toggle.btn-info {
-    color: #ffffff;
-    background-color: $infoColorHover;
-    border-color: $infoColorHover;
+    color: #ffffff !important;
+    background-color: $infoColorHover !important;
+    border-color: $infoColorHover !important;
 }
 
 .btn-info:active,
 .btn-info.active,
 .open .dropdown-toggle.btn-info {
-    background: $infoColor;
-    border-color: $infoColor;
+    background: $infoColor !important;
+    border-color: $infoColor !important;
 }
 
 .btn-info.disabled,
@@ -178,13 +178,13 @@ fieldset[disabled] .btn-info:active,
 .btn-info.disabled.active, 
 .btn-info[disabled].active,
 fieldset[disabled] .btn-info.active {
-    background-color: $infoColor;
-    border-color: $infoColor;
+    background-color: $infoColor !important;
+    border-color: $infoColor !important;
 }
 
 .btn-danger {
-    color: #ffffff;
-    background-color: $dangerColor;
+    color: #ffffff !important;
+    background-color: $dangerColor !important;
 }
 
 .btn-danger:hover, 
@@ -192,16 +192,16 @@ fieldset[disabled] .btn-info.active {
 .btn-danger:active, 
 .btn-danger.active, 
 .open .dropdown-toggle.btn-danger {
-    color: #ffffff;
-    background-color: $dangerColorHover;
-    border-color: $dangerColorHover;
+    color: #ffffff !important;
+    background-color: $dangerColorHover !important;
+    border-color: $dangerColorHover !important;
 }
 
 .btn-danger:active, 
 .btn-danger.active, 
 .open .dropdown-toggle.btn-danger {
-    background: $dangerColorHover;
-    border-color: $dangerColorHover;
+    background: $dangerColorHover !important;
+    border-color: $dangerColorHover !important;
 }
 
 .btn-danger.disabled,
@@ -219,12 +219,12 @@ fieldset[disabled] .btn-danger:active,
 .btn-danger.disabled.active, 
 .btn-danger[disabled].active, 
 fieldset[disabled] .btn-danger.active {
-    background-color: $dangerColor;
-    border-color: $dangerColor;
+    background-color: $dangerColor !important;
+    border-color: $dangerColor !important;
 }
 
 .btn-success {
-    color: #ffffff;
+    color: #ffffff !important;
     background-color: $successColor !important;
 }
 
@@ -233,7 +233,7 @@ fieldset[disabled] .btn-danger.active {
 .btn-success:active, 
 .btn-success.active, 
 .open .dropdown-toggle.btn-success {
-    color: #ffffff;
+    color: #ffffff !important;
     background-color: $successColorHover !important;
     border-color: $successColorHover !important;
 }
@@ -265,8 +265,8 @@ fieldset[disabled] .btn-success:active,
 }
 
 .btn-warning {
-    color: #ffffff;
-    background-color: $warningColor;
+    color: #ffffff !important;
+    background-color: $warningColor !important;
 }
 
 .btn-warning:hover, 
@@ -274,16 +274,16 @@ fieldset[disabled] .btn-success:active,
 .btn-warning:active,
 .btn-warning.active, 
 .open .dropdown-toggle.btn-warning {
-    color: #ffffff;
-    background-color: $warningColor;
-    border-color: $warningColor;
+    color: #ffffff !important;
+    background-color: $warningColor !important;
+    border-color: $warningColor !important;
 }
 
 .btn-warning:active,
 .btn-warning.active,
 .open .dropdown-toggle.btn-warning {
-    background: $warningColorHover;
-    border-color: $warningColorHover;
+    background: $warningColorHover !important;
+    border-color: $warningColorHover !important;
 }
 
 .btn-warning.disabled,
@@ -301,104 +301,104 @@ fieldset[disabled] .btn-warning:active,
 .btn-warning.disabled.active, 
 .btn-warning[disabled].active, 
 fieldset[disabled] .btn-warning.active {
-    background-color: $warningColor;
-    border-color: $warningColor;
+    background-color: $warningColor !important;
+    border-color: $warningColor !important;
 }
 
 /* 3d Buttons*/
  .btn.btn-3d {
-    -webkit-transform: translate(0, 0);
-    -moz-transform: translate(0, 0);
-    transform: translate(0, 0);
+    -webkit-transform: translate(0, 0) !important;
+    -moz-transform: translate(0, 0) !important;
+    transform: translate(0, 0) !important;
     @include transition(all, .2s, ease);
 }
 .btn.btn-3d:active {
-    -webkit-transform: translate(0, 3px);
-    -moz-transform: translate(0, 3px);
-    transform: translate(0, 3px);
+    -webkit-transform: translate(0, 3px) !important;
+    -moz-transform: translate(0, 3px) !important;
+    transform: translate(0, 3px) !important;
 }
 .btn-default.btn-3d {
-    -webkit-box-shadow: 0px 6px 0px #858e93;
-    -moz-box-shadow: 0px 6px 0px #858e93;
-    box-shadow: 0px 6px 0px #858e93;
+    -webkit-box-shadow: 0px 6px 0px #858e93 !important;
+    -moz-box-shadow: 0px 6px 0px #858e93 !important;
+    box-shadow: 0px 6px 0px #858e93 !important;
 }
 .btn-default.btn-3d:hover, 
 .btn-default.btn-3d:focus {
-    background-color: $defaultColor;
+    background-color: $defaultColor !important;
 }
 .btn-default.btn-3d:active {
-    -webkit-box-shadow: 0px 2px 0px #858e93;
-    -moz-box-shadow: 0px 2px 0px #858e93;
-    box-shadow: 0px 2px 0px #858e93;
+    -webkit-box-shadow: 0px 2px 0px #858e93 !important;
+    -moz-box-shadow: 0px 2px 0px #858e93 !important;
+    box-shadow: 0px 2px 0px #858e93 !important;
 }
 .btn-default.btn-3d:hover, .btn-default.btn-3d:focus {
-    background-color: $defaultColor;
+    background-color: $defaultColor !important;
 }
 .btn-primary.btn-3d {
-    -webkit-box-shadow: 0px 6px 0px #4d617f;
-    -moz-box-shadow: 0px 6px 0px #4d617f;
-    box-shadow: 0px 6px 0px #4d617f;
+    -webkit-box-shadow: 0px 6px 0px #4d617f !important;
+    -moz-box-shadow: 0px 6px 0px #4d617f !important;
+    box-shadow: 0px 6px 0px #4d617f !important;
 }
 .btn-primary.btn-3d:active {
-    -webkit-box-shadow: 0px 2px 0px #4d617f;
-    -moz-box-shadow: 0px 2px 0px #4d617f;
-    box-shadow: 0px 2px 0px #4d617f;
+    -webkit-box-shadow: 0px 2px 0px #4d617f !important;
+    -moz-box-shadow: 0px 2px 0px #4d617f !important;
+    box-shadow: 0px 2px 0px #4d617f !important;
 }
 .btn-primary.btn-3d:hover, .btn-primary.btn-3d:focus {
-    background-color: $primaryColor;
+    background-color: $primaryColor !important;
 }
 .btn-success.btn-3d {
-    -webkit-box-shadow: 0px 6px 0px #24aca5;
-    -moz-box-shadow: 0px 6px 0px #24aca5;
-    box-shadow: 0px 6px 0px #24aca5;
+    -webkit-box-shadow: 0px 6px 0px #24aca5 !important;
+    -moz-box-shadow: 0px 6px 0px #24aca5 !important;
+    box-shadow: 0px 6px 0px #24aca5 !important;
     border: none !important;
 }
 .btn-success.btn-3d:active {
-    -webkit-box-shadow: 0px 2px 0px #24aca5;
-    -moz-box-shadow: 0px 2px 0px #24aca5;
-    box-shadow: 0px 2px 0px #24aca5;
+    -webkit-box-shadow: 0px 2px 0px #24aca5 !important;
+    -moz-box-shadow: 0px 2px 0px #24aca5 !important;
+    box-shadow: 0px 2px 0px #24aca5 !important;
 }
 .btn-success.btn-3d:hover, .btn-success.btn-3d:focus {
-    background-color: $successColor;
+    background-color: $successColor !important;
 }
 .btn-info.btn-3d {
-    -webkit-box-shadow: 0px 6px 0px #2273a5;
-    -moz-box-shadow: 0px 6px 0px #2273a5;
-    box-shadow: 0px 6px 0px #2273a5;
+    -webkit-box-shadow: 0px 6px 0px #2273a5 !important;
+    -moz-box-shadow: 0px 6px 0px #2273a5 !important;
+    box-shadow: 0px 6px 0px #2273a5 !important;
 }
 .btn-info.btn-3d:active {
-    -webkit-box-shadow: 0px 2px 0px #2273a5;
-    -moz-box-shadow: 0px 2px 0px #2273a5;
-    box-shadow: 0px 2px 0px #2273a5;
+    -webkit-box-shadow: 0px 2px 0px #2273a5 !important;
+    -moz-box-shadow: 0px 2px 0px #2273a5 !important;
+    box-shadow: 0px 2px 0px #2273a5 !important;
 }
 .btn-info.btn-3d:hover, .btn-info.btn-3d:focus {
-    background-color: $infoColor;
+    background-color: $infoColor !important;
 }
 .btn-warning.btn-3d {
-    -webkit-box-shadow: 0px 6px 0px #dbbd7d;
-    -moz-box-shadow: 0px 6px 0px #dbbd7d;
-    box-shadow: 0px 6px 0px #dbbd7d;
+    -webkit-box-shadow: 0px 6px 0px #dbbd7d !important;
+    -moz-box-shadow: 0px 6px 0px #dbbd7d !important;
+    box-shadow: 0px 6px 0px #dbbd7d !important;
 }
 .btn-warning.btn-3d:active {
-    -webkit-box-shadow: 0px 2px 0px #d6ae11;
-    -moz-box-shadow: 0px 2px 0px #d6ae11;
-    box-shadow: 0px 2px 0px #d6ae11;
+    -webkit-box-shadow: 0px 2px 0px #d6ae11 !important;
+    -moz-box-shadow: 0px 2px 0px #d6ae11 !important;
+    box-shadow: 0px 2px 0px #d6ae11 !important;
 }
 .btn-warning.btn-3d:hover, .btn-warning.btn-3d:focus {
-    background-color: $warningColor;
+    background-color: $warningColor !important;
 }
 .btn-danger.btn-3d {
-    -webkit-box-shadow: 0px 6px 0px #c94034;
-    -moz-box-shadow: 0px 6px 0px #c94034;
-    box-shadow: 0px 6px 0px #c94034;
+    -webkit-box-shadow: 0px 6px 0px #c94034 !important;
+    -moz-box-shadow: 0px 6px 0px #c94034 !important;
+    box-shadow: 0px 6px 0px #c94034 !important;
 }
 .btn-danger.btn-3d:active {
-    -webkit-box-shadow: 0px 2px 0px #c94034;
-    -moz-box-shadow: 0px 2px 0px #c94034;
-    box-shadow: 0px 2px 0px #c94034;
+    -webkit-box-shadow: 0px 2px 0px #c94034 !important;
+    -moz-box-shadow: 0px 2px 0px #c94034 !important;
+    box-shadow: 0px 2px 0px #c94034 !important;
 }
 .btn-danger.btn-3d:hover, .btn-danger.btn-3d:focus {
-    background-color: $dangerColor;
+    background-color: $dangerColor !important;
 }
 /* square buttons */
  .btn-square {
@@ -406,24 +406,24 @@ fieldset[disabled] .btn-warning.active {
 }
 /* Transparent buttons */
  .btn-default.btn-trans {
-    color: $defaultColor;
-    background-color: transparent;
-    border: solid thin $defaultColor;
+    color: $defaultColor !important;
+    background-color: transparent !important;
+    border: solid thin $defaultColor !important;
 }
 .btn-default.btn-trans:hover, .btn-default.btn-trans:active, .btn-default.btn-trans:focus {
-    color: #fff;
-    background-color: $defaultColor;
-    border: solid thin $defaultColor;
+    color: #fff !important;
+    background-color: $defaultColor !important;
+    border: solid thin $defaultColor !important;
 }
 .btn-primary.btn-trans {
-    color: $primaryColor;
-    background-color: transparent;
-    border: solid thin $primaryColor;
+    color: $primaryColor !important;
+    background-color: transparent !important;
+    border: solid thin $primaryColor !important;
 }
 .btn-primary.btn-trans:hover, .btn-primary.btn-trans:active, .btn-primary.btn-trans:focus {
-    color: #fff;
-    background-color: $primaryColor;
-    border: solid thin $primaryColor;
+    color: #fff !important;
+    background-color: $primaryColor !important;
+    border: solid thin $primaryColor !important;
 }
 .btn-success.btn-trans {
     color:$successColor !important;
@@ -436,75 +436,75 @@ fieldset[disabled] .btn-warning.active {
     border: solid thin $successColor !important;
 }
 .btn-info.btn-trans {
-    color: $infoColor;
-    background-color: transparent;
-    border: solid thin $infoColor;
+    color: $infoColor !important;
+    background-color: transparent !important;
+    border: solid thin $infoColor !important;
 }
 .btn-info.btn-trans:hover, .btn-info.btn-trans:active, .btn-info.btn-trans:focus {
-    color: #fff;
-    background-color: $infoColor;
-    border: solid thin $infoColor;
+    color: #fff !important;
+    background-color: $infoColor !important;
+    border: solid thin $infoColor !important;
 }
 .btn-warning.btn-trans {
-    color: $warningColor;
-    background-color: transparent;
-    border: solid thin $warningColor;
+    color: $warningColor !important;
+    background-color: transparent !important;
+    border: solid thin $warningColor !important;
 }
 .btn-warning.btn-trans:hover, .btn-warning.btn-trans:active, .btn-warning.btn-trans:focus {
-    color: #fff;
-    background-color: $warningColor;
-    border: solid thin $warningColor;
+    color: #fff !important;
+    background-color: $warningColor !important;
+    border: solid thin $warningColor !important;
 }
 .btn-danger.btn-trans {
-    color:$dangerColor;
-    background-color: transparent;
-    border: solid thin $dangerColor;
+    color:$dangerColor !important;
+    background-color: transparent !important;
+    border: solid thin $dangerColor !important;
 }
 .btn-danger.btn-trans:hover, .btn-danger.btn-trans:active, .btn-danger.btn-trans:focus {
-    color: #fff;
-    background-color: $dangerColor;
-    border: solid thin $dangerColor;
+    color: #fff !important;
+    background-color: $dangerColor !important;
+    border: solid thin $dangerColor !important;
 }
 /* Button Sizes */
  .btn-lg {
-    padding: 10px 16px;
-    font-size: $size18px;
-    line-height: 1.33;
+    padding: 10px 16px !important;
+    font-size: $size18px !important;
+    line-height: 1.33 !important;
 }
 .btn-sm {
-    padding: 5px 10px;
-    font-size: 12px;
-    line-height: 1.5;
-    @include roundBorders(3px);
+    padding: 5px 10px !important;
+    font-size: 12px !important;
+    line-height: 1.5 !important;
+    @include roundBorders(3px !important);
 }
 .btn-xs {
-    padding: 1px 5px;
-    font-size: 12px;
-    line-height: 1.5;
-   @include roundBorders(3px);
+    padding: 1px 5px !important;
+    font-size: 12px !important;
+    line-height: 1.5 !important;
+   @include roundBorders(3px !important);
 }
 
 .dropdown-menu{
-    border-radius:2px;
-    box-shadow: none;
-    border: 1px solid rgba(0,0,0,.10);
+    border-radius:2px !important;
+    box-shadow: none !important;
+    border: 1px solid rgba(0,0,0,.10) !important;
 }
 
 .dropdown-menu li a i {
-    width: 20px;
-    color:#989898;
+    width: 20px !important;
+    color:#989898 !important;
 }
 
 .btn-group.toggle{
     .btn-default{
-        border:solid thin $defaultColor;
+        border:solid thin $defaultColor !important;
     }
     .btn-default.active{
-        background: none;
-        color: $defaultColor;
+        background: none !important;
+        color: $defaultColor !important;
     }
     .btn-default:hover{
-        background: $defaultColorHover;
-        color:#fff;
+        background: $defaultColorHover !important;
+        color:#fff !important;
     }
 }

@@ -45,8 +45,11 @@ a {
 
 @import "state/Navbar";
 
-@import "main/_theme-ideas-orange";
+@import "sweetalert/colors";
+@import "sweetalert/sweetalert2";
 
+@import "main/_theme-ideas-orange";
+@import "main/main";
 
 // Own styles
 .login-box-container {
