@@ -5,7 +5,7 @@
     font-weight: normal !important;
     @include roundBorders(3px !important);
     padding: 8px 14px !important;
-    margin-bottom : 5px !important;
+    margin: 0 5px 5px;
     -webkit-font-smoothing: subpixel-antialiased !important;
     -webkit-transition: border .25s linear, color .25s linear, background-color .25s linear !important;
     transition: border .25s linear, color .25s linear, background-color .25s linear !important;
@@ -311,6 +311,7 @@ fieldset[disabled] .btn-warning.active {
     -moz-transform: translate(0, 0) !important;
     transform: translate(0, 0) !important;
     @include transition(all, .2s, ease);
+    margin: 0 3px 5px;
 }
 .btn.btn-3d:active {
     -webkit-transform: translate(0, 3px) !important;
@@ -403,8 +404,12 @@ fieldset[disabled] .btn-warning.active {
 /* square buttons */
  .btn-square {
    @include roundBorders(0 !important);
+   margin: 0 5px 5px;
 }
 /* Transparent buttons */
+.btn-trans {
+    margin: 0 5px 5px;
+}
  .btn-default.btn-trans {
     color: $defaultColor !important;
     background-color: transparent !important;
@@ -494,7 +499,9 @@ fieldset[disabled] .btn-warning.active {
     width: 20px !important;
     color:#989898 !important;
 }
-
+.btn .caret {
+    margin-left: 3px !important
+}
 .btn-group.toggle{
     .btn-default{
         border:solid thin $defaultColor !important;

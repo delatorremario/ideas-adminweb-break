@@ -3,7 +3,7 @@ import React from 'react';
 const ComponentsPage = () => (
     <div>
         {/* <!--main content start--> */}
-        <section className="main-content-wrapper">
+        <section>
             <div className="pageheader">
                 <h1>Buttons</h1>
                 <div className="breadcrumb-wrapper hidden-xs">
