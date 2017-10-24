@@ -25,7 +25,7 @@ const Authenticated = ({ loggingIn, authenticated, component, ...rest }) => {
     !_.includes(pathname, 'signup') &&
     <Route {...rest} render={(props) => {
       if (loggingIn) return <div>Logging In !!</div>;
-      if (!roleAutherized) return <BlankPage />;
+      if (authenticated && !roleAutherized) return <BlankPage />;
       return (
         authenticated &&
         React.createElement(component, { ...props, loggingIn, authenticated }))

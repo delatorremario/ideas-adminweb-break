@@ -127,7 +127,7 @@ class SidebarPush extends Component {
 
         links = navLinks.map((link, index) => {
 
-            if (link.roles && Roles.userIsInRole(Meteor.userId(), link.roles) || true) {
+            if (!link.roles || link.roles && Roles.userIsInRole(Meteor.userId(), link.roles)) {
                 if (!link.subLevel) {
                     return (
                         <li key={index} className={this.activeRoute(link.path) ? 'active' : ''}>
