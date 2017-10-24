@@ -19,6 +19,7 @@ import {
 } from "react-bootstrap";
 import ColoredAvatar from '../components/ColoredAvatar';
 import $ from 'jquery';
+import { Roles } from 'meteor/alanning:roles';
 
 class SidebarPush extends Component {
     constructor(props, context) {
@@ -29,6 +30,7 @@ class SidebarPush extends Component {
                     title: "Corporaciones",
                     iconClasses: ["fa", "fa-fw", "fa-sitemap"],
                     path: "/corporations",
+                    roles: ['SuperAdminHolos']
                 },
                 {
                     title: "Dashboard",
@@ -92,7 +94,7 @@ class SidebarPush extends Component {
 
     activeRoute(getPath) {
         getPath = Array.isArray(getPath) ? getPath : [getPath];
-        
+
         for (let i in getPath) {
             if (this.context.router.route.location.pathname == getPath[i])
                 return true;
@@ -112,7 +114,7 @@ class SidebarPush extends Component {
 
         $(".sub-level").each((index, level) => {
             let subLevelNumb = level.id.split("-")[1];
-            if(levelNumb !== subLevelNumb)
+            if (levelNumb !== subLevelNumb)
                 $(level).slideUp();
         })
 
@@ -124,39 +126,42 @@ class SidebarPush extends Component {
         const { navLinks } = this.state
 
         links = navLinks.map((link, index) => {
-            if (!link.subLevel) {
-                return (
-                    <li key={index} className={this.activeRoute(link.path) ? 'active' : ''}>
-                        <Link onClick={this.sidebarPushMobile} to={link.path} title={link.path}>
-                            <i className={link.iconClasses.join(" ")}></i>
-                            {link.title}
-                        </Link>
-                    </li>
-                )
-            }
 
-            if (link.subLevel) {
-                return (
-                    // En el primer activeRoute se debe imprimir el path de todos los sublinks del padre
-                    <li key={index} className={this.activeRoute(link.subLevel.map(obj => obj.path)) ? 'active' : ''}>
-                        <a id={`anchor-${index}`} onClick={this.toggleSubLevel}>
-                            <i className={link.iconClasses.join(" ")}></i>
-                            {link.title}
-                        </a>
-                        {/* className={classNames({ 'nav-sub': true, 'collapse': !this.state.pagesCollapsed }) */}
-                        <ul id={`level-${index}`} className={classNames('sub-level' , { 'nav-sub': true, 'collapse': !this.state.pagesCollapsed }) }>
-                            {link.subLevel.map((subLink, index) => {
-                                return (
-                                    <li key={index}>
-                                        <Link onClick={this.sidebarPushMobile} title={subLink.title} to={subLink.path} className={this.activeRoute(subLink.path) ? 'active' : ''}>
-                                            {subLink.title}
-                                        </Link>
-                                    </li>
-                                )
-                            })}
-                        </ul>
-                    </li>
-                )
+            if (link.roles && Roles.userIsInRole(Meteor.userId(), link.roles) || true) {
+                if (!link.subLevel) {
+                    return (
+                        <li key={index} className={this.activeRoute(link.path) ? 'active' : ''}>
+                            <Link onClick={this.sidebarPushMobile} to={link.path} title={link.path}>
+                                <i className={link.iconClasses.join(" ")}></i>
+                                {link.title}
+                            </Link>
+                        </li>
+                    )
+                }
+
+                if (link.subLevel) {
+                    return (
+                        // En el primer activeRoute se debe imprimir el path de todos los sublinks del padre
+                        <li key={index} className={this.activeRoute(link.subLevel.map(obj => obj.path)) ? 'active' : ''}>
+                            <a id={`anchor-${index}`} onClick={this.toggleSubLevel}>
+                                <i className={link.iconClasses.join(" ")}></i>
+                                {link.title}
+                            </a>
+                            {/* className={classNames({ 'nav-sub': true, 'collapse': !this.state.pagesCollapsed }) */}
+                            <ul id={`level-${index}`} className={classNames('sub-level', { 'nav-sub': true, 'collapse': !this.state.pagesCollapsed })}>
+                                {link.subLevel.map((subLink, index) => {
+                                    return (
+                                        <li key={index}>
+                                            <Link onClick={this.sidebarPushMobile} title={subLink.title} to={subLink.path} className={this.activeRoute(subLink.path) ? 'active' : ''}>
+                                                {subLink.title}
+                                            </Link>
+                                        </li>
+                                    )
+                                })}
+                            </ul>
+                        </li>
+                    )
+                }
             }
         });
 
@@ -174,7 +179,7 @@ class SidebarPush extends Component {
                             <img className="img-circle profile-image" src="img/profile.jpg" />
                             <i className="on border-dark animated bounceIn"></i>
                         </div>
-                        : <ColoredAvatar color={ user.profile && user.profile.color } userName={ user && user.name ? user.name : user.emails[0].address } />
+                        : <ColoredAvatar color={user.profile && user.profile.color} userName={user && user.name ? user.name : user.emails[0].address} />
                     }
                     <div className="profile-body dropdown">
                         <a href="javascript:void(0);" className="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
@@ -229,7 +234,7 @@ class SidebarPush extends Component {
                 <nav className="sidebarNav">
                     <h5 className="sidebar-header">Navigation</h5>
                     <ul className="nav nav-pills nav-stacked">
-                        
+
                         {this.renderNavigation()}
 
                     </ul>
