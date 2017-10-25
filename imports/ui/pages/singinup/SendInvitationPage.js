@@ -26,7 +26,7 @@ export default class SendInvitationPage extends React.Component {
           <div className="breadcrumb-wrapper hidden-xs">
             <span className="label">You are here:</span>
             <ol className="breadcrumb">
-              <li className="active">Dashboard</li>
+              <li className="active">Enviar Invitación</li>
             </ol>
           </div>
         </div>
@@ -34,7 +34,7 @@ export default class SendInvitationPage extends React.Component {
 
         <section id="main-content">
           <div className="row">
-            <div className="col-md-12 col-lg-12">
+            <div className="col-md-6 col-lg-6">
               <div className="panel panel-default">
                 <div className="panel-body ng-binding">
 

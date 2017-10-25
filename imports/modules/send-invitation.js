@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 
-import { Accounts } from 'meteor/accounts-base';
+import { Meteor } from 'meteor/meteor';
 import { Bert } from 'meteor/themeteorchef:bert';
 import './validation.js';
 
@@ -8,24 +8,24 @@ let component;
 
 const handleSend = () => {
     const { history } = component.props;
-
     component.setState({ loading: true });
 
     console.log('SEND INVITATION');
-    // Accounts.forgotPassword({
-    //     email: document.querySelector('[name="emailAddress"]').value,
-    // }, (error) => {
-    //     if (error) {
-    //         Bert.alert(error.reason, 'warning');
-    //     } else {
-    //         Bert.alert('Check your inbox for a reset link!', 'success');
-    //         history.push('/login');
-    //     }
-    //     component.setState({ loading: false });
-    // });
-    setTimeout(
-        () => component.setState({ loading: false }),
-        3000);
+    // Client: Asynchronously send an email.
+    Meteor.call(
+        'sendEmail',
+        document.querySelector('[name="emailAddress"]').value,
+        'no-replay@ideas.e-captum.com',
+        'Hello from Ideas 3.0!',
+        'Hello!.. Click in follow link https://ideas.e-captum.com. Thanks!', (error) => {
+            if (error) {
+                Bert.alert(error.reason, 'warning');
+            } else {
+                Bert.alert('Email Sended!', 'success');
+            }
+            component.setState({ loading: false });
+        }
+    );
 };
 
 const validate = () => {
