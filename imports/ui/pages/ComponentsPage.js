@@ -1,25 +1,13 @@
 import React from 'react';
 
 const ComponentsPage = () => (
-    <div>
+    <div className="pageWrapper">
         {/* <!--main content start--> */}
-        <section>
-            <div className="pageheader">
-                <h1>Buttons</h1>
-                <div className="breadcrumb-wrapper hidden-xs">
-                    <span className="label">You are here:</span>
-                    <ol className="breadcrumb">
-                        <li><a href="index.html">Dashboard</a>
-                        </li>
-                        <li>UI Elements</li>
-                        <li className="active">Buttons</li>
-                    </ol>
-                </div>
-            </div>
-            <section id="main-content" className="animated fadeInUp">
+          
+            <section id="main-content" classNameName="animated fadeInUp">
                 {/* <!--button start--> */}
                 <div className="row">
-                    <div className="col-md-6">
+                    <div classNameName="col-md-6">
                         <div className="panel panel-default">
                             <div className="panel-heading">
                                 <h3 className="panel-title">Default Buttons</h3>
@@ -425,7 +413,395 @@ const ComponentsPage = () => (
 
                 {/* <!--button end--> */}
             </section>
-        </section>
+
+
+       
+            
+            <section id="main-content" className="animated fadeInUp">
+                <div className="row">
+                    <div className="col-md-6">
+                        <div className="panel panel-default">
+                            <div className="panel-heading">
+                                <h3 className="panel-title">Borderless Table</h3>
+                                <div className="actions pull-right">
+                                    <i className="fa fa-expand"></i>
+                                    <i className="fa fa-chevron-down"></i>
+                                    <i className="fa fa-times"></i>
+                                </div>
+                            </div>
+                            <div className="panel-body">
+                                <table className="table">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>First Name</th>
+                                            <th>Last Name</th>
+                                            <th>Username</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>Mark</td>
+                                            <td>Otto</td>
+                                            <td>@mdo</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>Jacob</td>
+                                            <td>Thornton</td>
+                                            <td>@fat</td>
+                                        </tr>
+                                        <tr>
+                                            <td>3</td>
+                                            <td>Larry</td>
+                                            <td>the Bird</td>
+                                            <td>@twitter</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div className="col-md-6">
+                        <div className="panel panel-default">
+                            <div className="panel-heading">
+                                <h3 className="panel-title">Striped rows</h3>
+                                <div className="actions pull-right">
+                                    <i className="fa fa-expand"></i>
+                                    <i className="fa fa-chevron-down"></i>
+                                    <i className="fa fa-times"></i>
+                                </div>
+                            </div>
+                            <div className="panel-body">
+                                <table className="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>First Name</th>
+                                            <th>Last Name</th>
+                                            <th>Username</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>Mark</td>
+                                            <td>Otto</td>
+                                            <td>@mdo</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>Jacob</td>
+                                            <td>Thornton</td>
+                                            <td>@fat</td>
+                                        </tr>
+                                        <tr>
+                                            <td>3</td>
+                                            <td>Larry</td>
+                                            <td>the Bird</td>
+                                            <td>@twitter</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="row">
+                    <div className="col-md-6">
+                        <div className="panel panel-default">
+                            <div className="panel-heading">
+                                <h3 className="panel-title">Bordered table</h3>
+                                <div className="actions pull-right">
+                                    <i className="fa fa-expand"></i>
+                                    <i className="fa fa-chevron-down"></i>
+                                    <i className="fa fa-times"></i>
+                                </div>
+                            </div>
+                            <div className="panel-body">
+                                <table className="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>First Name</th>
+                                            <th>Last Name</th>
+                                            <th>Username</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td rowspan="2">1</td>
+                                            <td>Mark</td>
+                                            <td>Otto</td>
+                                            <td>@mdo</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Mark</td>
+                                            <td>Otto</td>
+                                            <td>@TwBootstrap</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>Jacob</td>
+                                            <td>Thornton</td>
+                                            <td>@fat</td>
+                                        </tr>
+                                        <tr>
+                                            <td>3</td>
+                                            <td colspan="2">Larry the Bird</td>
+                                            <td>@twitter</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div className="col-md-6">
+                        <div className="panel panel-default">
+                            <div className="panel-heading">
+                                <h3 className="panel-title">Hover rows</h3>
+                                <div className="actions pull-right">
+                                    <i className="fa fa-expand"></i>
+                                    <i className="fa fa-chevron-down"></i>
+                                    <i className="fa fa-times"></i>
+                                </div>
+                            </div>
+                            <div className="panel-body">
+                                <table className="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>First Name</th>
+                                            <th>Last Name</th>
+                                            <th>Username</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>Mark</td>
+                                            <td>Otto</td>
+                                            <td>@mdo</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>Jacob</td>
+                                            <td>Thornton</td>
+                                            <td>@fat</td>
+                                        </tr>
+                                        <tr>
+                                            <td>3</td>
+                                            <td colspan="2">Larry the Bird</td>
+                                            <td>@twitter</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div className="row">
+                    <div className="col-md-6">
+                        <div className="panel panel-default">
+                            <div className="panel-heading">
+                                <h3 className="panel-title">Condensed table</h3>
+                                <div className="actions pull-right">
+                                    <i className="fa fa-expand"></i>
+                                    <i className="fa fa-chevron-down"></i>
+                                    <i className="fa fa-times"></i>
+                                </div>
+                            </div>
+                            <div className="panel-body">
+                                <table className="table table-condensed">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>First Name</th>
+                                            <th>Last Name</th>
+                                            <th>Username</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>Mark</td>
+                                            <td>Otto</td>
+                                            <td>@mdo</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>Jacob</td>
+                                            <td>Thornton</td>
+                                            <td>@fat</td>
+                                        </tr>
+                                        <tr>
+                                            <td>3</td>
+                                            <td colspan="2">Larry the Bird</td>
+                                            <td>@twitter</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div className="col-md-6">
+                        <div className="panel panel-default">
+                            <div className="panel-heading">
+                                <h3 className="panel-title">Contextual classNamees</h3>
+                                <div className="actions pull-right">
+                                    <i className="fa fa-expand"></i>
+                                    <i className="fa fa-chevron-down"></i>
+                                    <i className="fa fa-times"></i>
+                                </div>
+                            </div>
+                            <div className="panel-body">
+
+                                <table className="table">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Column heading</th>
+                                            <th>Column heading</th>
+                                            <th>Column heading</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr className="active">
+                                            <td>1</td>
+                                            <td>Column content</td>
+                                            <td>Column content</td>
+                                            <td>Column content</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>Column content</td>
+                                            <td>Column content</td>
+                                            <td>Column content</td>
+                                        </tr>
+                                        <tr className="success">
+                                            <td>3</td>
+                                            <td>Column content</td>
+                                            <td>Column content</td>
+                                            <td>Column content</td>
+                                        </tr>
+                                        <tr>
+                                            <td>4</td>
+                                            <td>Column content</td>
+                                            <td>Column content</td>
+                                            <td>Column content</td>
+                                        </tr>
+                                        <tr className="info">
+                                            <td>5</td>
+                                            <td>Column content</td>
+                                            <td>Column content</td>
+                                            <td>Column content</td>
+                                        </tr>
+                                        <tr>
+                                            <td>6</td>
+                                            <td>Column content</td>
+                                            <td>Column content</td>
+                                            <td>Column content</td>
+                                        </tr>
+                                        <tr className="warning">
+                                            <td>7</td>
+                                            <td>Column content</td>
+                                            <td>Column content</td>
+                                            <td>Column content</td>
+                                        </tr>
+                                        <tr>
+                                            <td>8</td>
+                                            <td>Column content</td>
+                                            <td>Column content</td>
+                                            <td>Column content</td>
+                                        </tr>
+                                        <tr className="danger">
+                                            <td>9</td>
+                                            <td>Column content</td>
+                                            <td>Column content</td>
+                                            <td>Column content</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="row">
+                    <div className="col-md-12">
+
+                        <div className="panel panel-default">
+                            <div className="panel-heading">
+                                <h3 className="panel-title">Responsive table</h3>
+                                <div className="actions pull-right">
+                                    <i className="fa fa-expand"></i>
+                                    <i className="fa fa-chevron-down"></i>
+                                    <i className="fa fa-times"></i>
+                                </div>
+                            </div>
+                            <div className="panel-body">
+
+                                <div className="table-responsive">
+                                    <table className="table table-bordered table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Table heading</th>
+                                                <th>Table heading</th>
+                                                <th>Table heading</th>
+                                                <th>Table heading</th>
+                                                <th>Table heading</th>
+                                                <th>Table heading</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>Table cell</td>
+                                                <td>Table cell</td>
+                                                <td>Table cell</td>
+                                                <td>Table cell</td>
+                                                <td>Table cell</td>
+                                                <td>Table cell</td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>Table cell</td>
+                                                <td>Table cell</td>
+                                                <td>Table cell</td>
+                                                <td>Table cell</td>
+                                                <td>Table cell</td>
+                                                <td>Table cell</td>
+                                            </tr>
+                                            <tr>
+                                                <td>3</td>
+                                                <td>Table cell</td>
+                                                <td>Table cell</td>
+                                                <td>Table cell</td>
+                                                <td>Table cell</td>
+                                                <td>Table cell</td>
+                                                <td>Table cell</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+
+
+
         {/* <!--main content end--> */}
     </div>
 );
