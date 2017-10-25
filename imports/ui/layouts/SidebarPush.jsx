@@ -33,44 +33,51 @@ class SidebarPush extends Component {
                     roles: ['SuperAdminHolos']
                 },
                 {
-                    title: "Dashboard",
+                    title: "Panel de Control",
                     path: "/dashboard",
                     iconClasses: ["fa", "fa-fw", "fa-tachometer"],
                     collapsed: true,
                 },
                 {
-                    title: "Components",
+                    title: "Enviar Invitación",
+                    path: "/sendinvitation",
+                    iconClasses: ["fa", "fa-fw", "fa-envelope-o"],
+                    collapsed: true,
+                },
+                {
+                    title: "Ejemplo Componentes",
                     path: "/components-page",
                     iconClasses: ["fa", "fa-fw", "fa-bar-chart-o"],
                     collapsed: true,
                 },
-                {
-                    title: "Sublevels",
-                    path: false,
-                    iconClasses: ["fa", "fa-fw", "fa-list"],
-                    collapsed: true,
-                    subLevel: [
-                        {
-                            title: "Testing recursive links",
-                            path: "/dashboard/test",
-                        },]
-                },
-                {
-                    title: "Pages",
-                    path: false,
-                    iconClasses: ["fa", "fa-fw", "fa-bar-chart-o"],
-                    collapsed: true,
-                    subLevel: [
-                        {
-                            title: "Blank Page",
-                            path: "/blank-page",
-                        },
-                        {
-                            title: "Admin Page",
-                            path: "/admin-page",
-                        }
-                    ]
-                }
+               
+                // {
+                //     title: "Sublevels",
+                //     path: false,
+                //     iconClasses: ["fa", "fa-fw", "fa-list"],
+                //     collapsed: true,
+                //     subLevel: [
+                //         {
+                //             title: "Testing recursive links",
+                //             path: "/dashboard/test",
+                //         },]
+                // },
+                // {
+                //     title: "Pages",
+                //     path: false,
+                //     iconClasses: ["fa", "fa-fw", "fa-bar-chart-o"],
+                //     collapsed: true,
+                //     subLevel: [
+                //         {
+                //             title: "Blank Page",
+                //             path: "/blank-page",
+                //         },
+                //         {
+                //             title: "Admin Page",
+                //             path: "/admin-page",
+                //         }
+                //     ]
+                // }
             ]
         };
 

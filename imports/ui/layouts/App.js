@@ -13,7 +13,7 @@ import ResetPassword from '../pages/singinup/ResetPassword';
 import Signup from '../pages/singinup/Signup';
 
 // Layouts components pages
-import MainWrapper from '../containers/Main'
+import MainWrapper from '../containers/Main';
 
 const App = appProps => (
   <Router>

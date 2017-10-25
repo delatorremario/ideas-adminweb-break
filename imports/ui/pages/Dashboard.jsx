@@ -14,7 +14,7 @@ class Dashboard extends Component {
             <div>
                 <div className="pageheader">
                     <h1>Dashboard</h1>
-                    <p className="description">Welcome to NEUBOARD Responsive Admin Theme</p>
+                    <p className="description">Bienvenido a Ideas 3.0</p>
                     <div className="breadcrumb-wrapper hidden-xs">
                         <span className="label">You are here:</span>
                         <ol className="breadcrumb">
