@@ -6,7 +6,7 @@ import NotFound from '../NotFound'
 const EditCorporation = (props) => {
     const doc = props.doc;
     return doc ? (
-        <div>
+        <div className="pageWrapper">
             <div className="pageheader">
                 <h1>{doc && doc.name}</h1>
 

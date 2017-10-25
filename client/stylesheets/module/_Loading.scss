@@ -8,3 +8,25 @@
   animation-iteration-count: infinite;
   animation-timing-function: linear;
 }
+
+.loader-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(250,250,250,0.8);
+  z-index: 5000;
+  &.loader-container-absolute {
+    position: absolute !important;
+  }
+  &.loader-container-fixed {
+    position: fixed !important;
+  }
+}
+
+.blur-content {
+  filter: blur(2px);
+}

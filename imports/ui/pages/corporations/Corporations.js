@@ -2,7 +2,7 @@ import React from 'react';
 import CorporationsList from '../../containers/corporations/CorporationsList';
 
 const Corporations = ({ history }) => (
-    <div>
+    <div className="pageWrapper">
         <div className="pageheader">
             <h1>Corporaciones</h1>
 

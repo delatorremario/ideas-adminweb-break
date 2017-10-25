@@ -12,7 +12,7 @@ const handleEdit = (history, _id) => {
 
 const ViewCorporation = ({ doc, history }) => {
     return doc ? (
-        <div>
+        <div className="pageWrapper">
             <div className="pageheader">
                 <h1>{doc && doc.name}</h1>
 

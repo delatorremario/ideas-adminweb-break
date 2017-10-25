@@ -3,6 +3,7 @@ import React, { PropTypes } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import _ from 'lodash';
 import BlankPage from '../BlankPage';
+import Loading from '../../components/Loading';
 
 const Authenticated = ({ loggingIn, authenticated, component, ...rest }) => {
 
@@ -24,7 +25,7 @@ const Authenticated = ({ loggingIn, authenticated, component, ...rest }) => {
     !_.includes(pathname, 'reset-password') &&
     !_.includes(pathname, 'signup') &&
     <Route {...rest} render={(props) => {
-      if (loggingIn) return <div>Logging In !!</div>;
+      if (loggingIn) return <Loading style="loader-container-fixed"/>;
       if (authenticated && !roleAutherized) return <BlankPage />;
       return (
         authenticated &&

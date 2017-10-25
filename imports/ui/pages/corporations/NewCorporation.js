@@ -3,7 +3,7 @@ import CorporationEditor from '../../components/corporations/CorporationEditor.j
 import { Link } from 'react-router-dom';
 
 const NewCorporation = ({ history }) => (
-    <div>
+    <div className="pageWrapper">
         <div className="pageheader">
             <h1>Nueva Corporación</h1>
 
