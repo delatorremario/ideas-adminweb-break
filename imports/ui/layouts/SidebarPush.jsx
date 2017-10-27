@@ -33,6 +33,11 @@ class SidebarPush extends Component {
                     roles: ['SuperAdminHolos']
                 },
                 {
+                    title: "Areas",
+                    iconClasses: ["fa", "fa-fw", "fa-sitemap"],
+                    path: "/areas",
+                },
+                {
                     title: "Panel de Control",
                     path: "/dashboard",
                     iconClasses: ["fa", "fa-fw", "fa-tachometer"],

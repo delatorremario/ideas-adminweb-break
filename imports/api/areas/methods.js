@@ -5,11 +5,10 @@ import rateLimit from '../../modules/rate-limit.js';
 
 export const upsertArea = new ValidatedMethod({
     name: 'areas.upsert',
-    // validate:  new SimpleSchema({
-    //     _id: { type: String, optional: true },
-    //     name: { type: String, optional: true },
-    //     adminsEmails: { type: [String], optional: true },
-    //   }).validator(),
+    validate:  new SimpleSchema({
+        _id: { type: String, optional: true },
+        name: { type: String, optional: true },
+      }).validator(),
     run(area) {
         return Areas.upsert({ _id: area._id }, { $set: area });
     },

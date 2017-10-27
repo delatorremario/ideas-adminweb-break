@@ -13,6 +13,7 @@ export default class Signup extends React.Component {
   }
 
   render() {
+    console.log('PROPS', this.props);
     return (
       <div className="login-box-container">
         <div className="login-box">

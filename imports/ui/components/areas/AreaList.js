@@ -1,10 +1,10 @@
 import React, { PropTypes } from 'react';
-import { Alert, Button } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
-import { Bert } from 'meteor/themeteorchef:bert'
-import { removeArea } from '../../../api/areas/methods'
-import $ from 'jquery'
-import swal from 'sweetalert2'
+import { Alert, Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import { Bert } from 'meteor/themeteorchef:bert';
+import { removeArea } from '../../../api/areas/methods';
+import $ from 'jquery';
+import swal from 'sweetalert2';
 
 const handleNav = (history, _id) => {
     history.push(`/area/${_id}`)
@@ -33,7 +33,7 @@ const handleRemove = (history, _id) => {
 }
 
 const AreasList = ({ history, areas }) => (
-    <div>
+    <div className='pageWrapper'>
         <div className="panel panel-body">
             <div role="grid" id="example_wrapper" className="dataTables_wrapper form-inline no-footer">
                 <div className="row table-top">
@@ -49,8 +49,8 @@ const AreasList = ({ history, areas }) => (
             </div>
         </div>
 
-        {areas.length > 0 ?
-            <div className="row cards-container">
+        { 
+            areas.length > 0 ? <div className="row cards-container">
                 {areas.map((area, index) => {
                     return (
                         <div key={index} className="col-sm-6 col-lg-4 cards-item">
@@ -67,13 +67,15 @@ const AreasList = ({ history, areas }) => (
                     );
                 })}
             </div>
-            : <Alert bsStyle="warning">No areas yet.</Alert>}
+            : <Alert bsStyle="warning">No areas yet.</Alert>
+            
+            }
     </div>
 );
 
 AreasList.propTypes = {
-    history: PropTypes.object,
-    areas: PropTypes.array,
+    history: PropTypes.object.isRequired,
+    areas: PropTypes.array.isRequired,
 };
 
 export default AreasList;

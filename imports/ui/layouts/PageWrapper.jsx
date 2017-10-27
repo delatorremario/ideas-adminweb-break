@@ -6,6 +6,11 @@ import Corporations from '../pages/corporations/Corporations';
 import NewCorporation from '../pages/corporations/NewCorporation';
 import EditCorporation from '../containers/corporations/EditCorporation';
 
+// Areas
+import Areas from '../pages/areas/Areas';
+// import NewArea from '../pages/areas/NewArea';
+// import EditCorporation from '../containers/corporations/EditCorporation';
+
 import Dashboard from '../pages/Dashboard';
 import BlankPage from '../pages/BlankPage';
 import ComponentsPage from '../pages/ComponentsPage';
@@ -20,6 +25,11 @@ const PageWrapper = () => (
             <Route exact path="/corporations" component={Corporations} />
             <Route exact path="/corporations/new" component={NewCorporation} />
             <Route exact path="/corporation/:_id/edit" component={EditCorporation} />
+            
+            {/* Areas */}
+            <Route exact path="/areas" component={Areas} />
+            {/* <Route exact path="/areas/new" component={NewArea} />
+            <Route exact path="/area/:_id/edit" component={EditCorporation} /> */}
             
             <Route path="/sendinvitation" component={SendInvitationPage} />
             
