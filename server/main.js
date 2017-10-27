@@ -1,4 +1,5 @@
 import { Meteor } from 'meteor/meteor';
+import { Accounts } from 'meteor/accounts-base';
 import { developmentEnv, productionEnv } from './env';
 import Start from './start';
 
@@ -20,3 +21,13 @@ Meteor.startup(() => {
   }
 });
 
+
+
+Accounts.onCreateUser = (options, user) => {
+    console.log('onCreated', options, user);
+    // user.roles = ['Empleado'];
+    if (options.profile) {
+        user.profile = options.profile;
+    }
+    return user;
+}
