@@ -4,6 +4,8 @@ import { Meteor } from 'meteor/meteor';
 import { Bert } from 'meteor/themeteorchef:bert';
 import './validation.js';
 
+import { selectByUser } from '../../imports/api/corporations/methods';
+
 let component;
 
 const login = () => {
@@ -13,15 +15,16 @@ const login = () => {
   Meteor.loginWithPassword(email, password, (error) => {
     if (error) {
       Bert.alert(error.reason, 'warning');
+      return false;
     }
-    // else {
-    //   const { location } = component.props;
-    //   if (location.state && location.state.nextPathname) {
-    //     browserHistory.push(location.state.nextPathname);
-    //   } else {
-    //     browserHistory.push('/dashboard');
-    //   }
-    // }
+    /* assign default selected corporarion */
+    selectByUser.call({ }, (err) => {
+      if (err) {
+        Bert.alert(err.message, 'danger')
+      } else {
+        Bert.alert('Lgin', 'success')
+      }
+    });
   });
 };
 

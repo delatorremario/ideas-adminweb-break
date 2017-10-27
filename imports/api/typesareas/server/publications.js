@@ -7,17 +7,17 @@ import { check } from 'meteor/check';
 
 import TypesAreas from '../typesareas';
 
-Meteor.publish('typesareas.list', () => {
+Meteor.publish('typesareas.list', (corporationId) => {
   const self = this.Meteor;
   const user = self.user();
 
-  let filters = {};
+  let filters = { corporationId };
 
   // if (user) {
   //   if (!Roles.userIsInRole(user._id, ['SuperAdminHolos'])) { // No Está en el Rol SuperAdminHolos
   //     filters = { adminsEmails: { $in: _.map(user.emails, 'address') } };
   //   }
-    return TypesAreas.find(filters);
+  return TypesAreas.find(filters);
   // } else return;
 });
 
