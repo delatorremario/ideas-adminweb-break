@@ -26,4 +26,4 @@ Corporations.schema = new SimpleSchema({
     },
 })
 
-Corporations.attachSchema(Corporations.schema)
+Corporations.attachSchema(Corporations.schema);

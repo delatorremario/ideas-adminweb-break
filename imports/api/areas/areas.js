@@ -18,10 +18,10 @@ Area.deny({
 })
 
 Area.schema = new SimpleSchema({
-    tipo: {
-        type: String, optional: true
-    },
     name: {
+        type: String
+    },
+    tipo: {
         type: String, optional: true
     },
     parentAreaId: {

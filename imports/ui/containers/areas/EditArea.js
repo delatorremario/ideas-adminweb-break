@@ -6,7 +6,6 @@ import Loading from '../../components/Loading.js';
 
 const composer = ({ match }, onData) => {
   const docId = match.params._id;
-  console.log('docId', docId);
   const subscription = Meteor.subscribe('areas.view', docId);
 
   if (subscription.ready()) {
