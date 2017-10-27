@@ -23,6 +23,7 @@ Meteor.publish('areas.list', () => {
 
 
 Meteor.publish('areas.view', (_id) => {
+  console.log('Meteor.publish(areas.view, (_id)');
   check(_id, String);
   return Areas.find(_id);
 });

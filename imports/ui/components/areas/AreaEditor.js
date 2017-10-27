@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap'
-import areaEditor from '../../../modules/areas/area-editor.js'
+import areaEditor from '../../../modules/areas/areas-editor';
 import CSSTransitionGroup from 'react-addons-css-transition-group'
 import MainList from '../MainList'
 import _ from 'lodash'
@@ -77,6 +77,6 @@ export default class AreaEditor extends Component {
     }
 }
 
-CorporationEditor.propTypes = {
+AreaEditor.propTypes = {
     doc: PropTypes.object,
 };

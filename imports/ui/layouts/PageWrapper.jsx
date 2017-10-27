@@ -8,8 +8,8 @@ import EditCorporation from '../containers/corporations/EditCorporation';
 
 // Areas
 import Areas from '../pages/areas/Areas';
-// import NewArea from '../pages/areas/NewArea';
-// import EditCorporation from '../containers/corporations/EditCorporation';
+import NewArea from '../pages/areas/NewArea';
+import EditArea from '../containers/areas/EditArea';
 
 import Dashboard from '../pages/Dashboard';
 import BlankPage from '../pages/BlankPage';
@@ -28,8 +28,8 @@ const PageWrapper = () => (
             
             {/* Areas */}
             <Route exact path="/areas" component={Areas} />
-            {/* <Route exact path="/areas/new" component={NewArea} />
-            <Route exact path="/area/:_id/edit" component={EditCorporation} /> */}
+            <Route exact path="/areas/new" component={NewArea} />
+            <Route exact path="/area/:_id/edit" component={EditArea} />
             
             <Route path="/sendinvitation" component={SendInvitationPage} />
             

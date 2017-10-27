@@ -9,7 +9,7 @@ const handleUpsert = () => {
     console.log("props ", component.props)
     const confirmation = doc && doc._id ? 'Datos actualizados correctamente' : 'Datos guardados con éxito';
     const upsert = {
-        // name: doc.name.trim(),
+         name: doc.name.trim(),
         // adminsEmails: doc.adminsEmails,
     };
 
@@ -30,21 +30,15 @@ const handleUpsert = () => {
 
 const validate = () => {
     $(component.areaEditorForm).validate({
-        // rules: {
-        //     name: {
-        //         required: true,
-        //     },
-        //     adminsEmails: {
-        //         required: true,
-        //     },
-        // },
-        // messages: {
-        //     name: {
-        //         required: 'Ingrese el nombre de la compañía',
-        //     },
-        //     adminsEmails: {
-        //         required: 'El campo email debe contener al menos una dirección válida',
-        //     },
+        rules: {
+            name: {
+                required: true,
+            },
+        },
+        messages: {
+            name: {
+                required: 'Ingrese el nombre',
+            },
         },
         submitHandler() { handleUpsert(); },
     });

@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import CorporationEditor from '../../components/corporations/CorporationEditor.js';
+import AreaEditor from '../../components/areas/AreaEditor.js';
 import { Link } from 'react-router-dom';
 
-const NewCorporation = ({ history }) => (
+const NewArea = ({ history }) => (
     <div className="pageWrapper">
         <div className="pageheader">
-            <h1>Nueva Corporación</h1>
+            <h1>Nueva Area</h1>
 
             <div className="breadcrumb-wrapper hidden-xs">
                 <span className="label">You are here:</span>
@@ -13,7 +13,7 @@ const NewCorporation = ({ history }) => (
                     <li>  <Link to="/">Dashboard</Link>
                     </li>
                     <li>Pages</li>
-                    <li className="active">Nueva Corporación</li>
+                    <li className="active">Nueva Area</li>
                 </ol>
             </div>
         </div>
@@ -23,7 +23,7 @@ const NewCorporation = ({ history }) => (
                 <div className="col-md-12 col-lg-12">
                     <div className="panel">
                         <div className="panel-body ng-binding">
-                            <CorporationEditor history={history} />
+                            <AreaEditor history={history} />
                         </div>
                     </div>
                 </div>
@@ -32,4 +32,4 @@ const NewCorporation = ({ history }) => (
     </div>
 );
 
-export default NewCorporation;
+export default NewArea;
