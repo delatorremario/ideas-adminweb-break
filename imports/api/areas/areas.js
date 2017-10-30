@@ -21,8 +21,11 @@ Area.schema = new SimpleSchema({
     name: {
         type: String
     },
-    tipo: {
-        type: String, optional: true
+    typeAreaId: {
+        type: String, optional: true // Area Operativa o Area Funcional
+    },
+    typeAreaStructureId: {
+        type: String, optional: true // 'Presidencia', 'Vicepresidencia', 'Gerencia General', 'Gerencia', 'SuperIntendencia
     },
     parentAreaId: {
         type: String, optional: true
