@@ -3,7 +3,7 @@ import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import TypesAreaStructure from './typesareastructure';
 import rateLimit from '../../modules/rate-limit.js';
 
-export const upsertAreaStructure = new ValidatedMethod({
+export const upsertTypeAreaStructure = new ValidatedMethod({
     name: 'typesareastructure.upsert',
     validate:  new SimpleSchema({
         _id: { type: String, optional: true },

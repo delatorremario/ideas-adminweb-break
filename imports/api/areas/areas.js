@@ -36,6 +36,9 @@ Area.schema = new SimpleSchema({
     responsableId: {
         type: String, optional: true
     },
+    corporationId: {
+        type: String, optional: true
+    },
 })
 
 Area.attachSchema(Area.schema);

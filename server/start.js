@@ -66,9 +66,17 @@ const addSomeCollections = () => {
     const areas = [
       {
         name: 'Escondida',
-        typeAreaId: 'Fot9zrZ8vJ3Fz8jJG',
-        typeAreaStructureId: 'XJimmrw5rrH98pthG',
+        typeAreaId: 'Fot9zrZ8vJ3Fz8jJG', // presidencia
+        typeAreaStructureId: 'XJimmrw5rrH98pthG', // operativa
         masterDataMatchText: 'Escondida',
+        corporationId: corp._id,
+      },
+      {
+        name: 'Cooper',
+        typeAreaId: 'Fot9zrZ8vJ3Fz8jJG', // presidencia
+        typeAreaStructureId: '"XoK9GXoBrJ53iMp6e"', // funcional
+        masterDataMatchText: 'Cooper',
+        corporationId: corp._id,
       },
     ];
 

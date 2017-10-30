@@ -32,7 +32,7 @@ const handleRemove = (history, _id) => {
     })
 }
 
-const AreasList = ({ history, areas }) => (
+const AreasList = ({ history, areas, typesAreaStructure }) => (
     <div className='pageWrapper'>
         <div className="panel panel-body">
             <div role="grid" id="example_wrapper" className="dataTables_wrapper form-inline no-footer">
@@ -48,6 +48,12 @@ const AreasList = ({ history, areas }) => (
                 </div>
             </div>
         </div>
+        types:
+        {
+            typesAreaStructure.map((type, index) => {
+                return <div> type: {type.name}</div>;
+            })
+        }
 
         { 
             areas.length > 0 ? <div className="row cards-container">
@@ -76,6 +82,7 @@ const AreasList = ({ history, areas }) => (
 AreasList.propTypes = {
     history: PropTypes.object.isRequired,
     areas: PropTypes.array.isRequired,
+    typesAreaStructure: PropTypes.array.isRequired,
 };
 
 export default AreasList;
