@@ -24,6 +24,19 @@ export const removeArea = new ValidatedMethod({
     },
 });
 
+Meteor.methods({
+    'areas.getTree': () => {
+
+        const self = this.Meteor;
+        const user = self.user();
+        console.log('USR', user);
+        if (user) {
+          const filters = { corporationId: (user.profile && user.profile.selectedCorporationId) || '' };
+          return Areas.find(filters).fetch();
+        } else return;
+    }
+});
+
 rateLimit({
     methods: [
         upsertArea,

@@ -21,9 +21,10 @@ const login = () => {
     selectByUser.call({ }, (err) => {
       if (err) {
         Bert.alert(err.message, 'danger')
-      } else {
-        Bert.alert('Lgin', 'success')
-      }
+      } 
+      // else {
+      //    Bert.alert('Lgin', 'success')
+      // }
     });
   });
 };

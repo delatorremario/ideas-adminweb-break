@@ -48,41 +48,36 @@ const AreasList = ({ history, areas, typesAreaStructure }) => (
                 </div>
             </div>
         </div>
-        types:
-        {
-            typesAreaStructure.map((type, index) => {
-                return <div> type: {type.name}</div>;
-            })
-        }
 
-        { 
+        {
             areas.length > 0 ? <div className="row cards-container">
-                {areas.map((area, index) => {
-                    return (
-                        <div key={index} className="col-sm-6 col-lg-4 cards-item">
-                            <div className="panel panel-default">
-                                <div className="panel-heading">
-                                    <h3 className="panel-title">{area.name}</h3>
-                                    <div className="actions pull-right">
-                                        <Link to={`/area/${area._id}/edit`}><i className="fa fa-pencil"></i></Link>
-                                        <i className="fa fa-trash" onClick={() => { handleRemove(history, area._id); }}></i>
+                {
+                    areas.map((area, index) => {
+                        return (
+                            <div key={index} className="col-sm-6 col-lg-4 cards-item">
+                                <div className="panel panel-default">
+                                    <div className="panel-heading">
+                                        <h3 className="panel-title">{area.name}</h3>
+                                        <div className="actions pull-right">
+                                            <Link to={`/area/${area._id}/edit`}><i className="fa fa-pencil"></i></Link>
+                                            <i className="fa fa-trash" onClick={() => { handleRemove(history, area._id); }}></i>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    );
-                })}
+                        );
+                    })
+                }
             </div>
-            : <Alert bsStyle="warning">No areas yet.</Alert>
-            
-            }
+                : <Alert bsStyle="warning">No areas yet.</Alert>
+
+        }
     </div>
 );
 
 AreasList.propTypes = {
     history: PropTypes.object.isRequired,
     areas: PropTypes.array.isRequired,
-    typesAreaStructure: PropTypes.array.isRequired,
 };
 
 export default AreasList;
