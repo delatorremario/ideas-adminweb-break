@@ -26,8 +26,8 @@ export const removeArea = new ValidatedMethod({
 
 const addChildNodes = parentnode => {
 
+    console.log('PARENT', parentnode);
     const childs = Areas.aggregate({ $match: { parentAreaId: parentnode._id } });
-    console.log('CHILDS', childs);
     _.map(childs, child => {
         child = addChildNodes(child);
     })
@@ -44,12 +44,10 @@ Meteor.methods({
             const filters = { corporationId: (user.profile && user.profile.selectedCorporationId) || '' };
             const firstnodes = Areas.aggregate(
                 [
-                    {
-                        $project: { name: 1, typeAreaId: 1 },
-
-                    },
                     { $lookup: { from: 'typesareas', foreignField: '_id', localField: 'typeAreaId', as: 'TypeArea' } },
-                    { $unwind: '$TypeArea' }
+                    { $unwind: '$TypeArea' },
+                    { $lookup: { from: 'typesareastructure', foreignField: '_id', localField: 'typeAreaStructureId', as: 'TypeAreaStructure' } },
+                    { $unwind: '$TypeAreaStructure' },
                 ]
 
             )
