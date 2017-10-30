@@ -63,7 +63,7 @@ const addSomeCollections = () => {
 
 
 
-    const areas = [
+    const presidencias = [
       {
         name: 'Escondida',
         typeAreaId: 'Fot9zrZ8vJ3Fz8jJG', // presidencia
@@ -78,12 +78,73 @@ const addSomeCollections = () => {
         masterDataMatchText: 'Cooper',
         corporationId: corp._id,
       },
-    ];
+    ]
 
-    _.map(areas, (area) => {
+    _.map(presidencias, (area) => {
       const find = Areas.findOne(area);
       if (!find) Areas.insert(area);
     });
+
+    // "_id":"rm9tP4J6sscggvvWg"
+    // "name":"Vicepresidencia",
+    const vicepresidencias = [
+      {
+        name: 'Warehouse Escondida B',
+        typeAreaId: 'rm9tP4J6sscggvvWg',
+        parentAreaId: Areas.findOne({ name: 'Cooper', corporationId: corp._id })._id,
+        corporationId: corp._id,
+      },
+      {
+        name: 'Purchasing MEL',
+        typeAreaId: 'rm9tP4J6sscggvvWg',
+        parentAreaId: Areas.findOne({ name: 'Cooper', corporationId: corp._id })._id,
+        corporationId: corp._id,
+      },
+      {
+        name: 'Corporate Affairs Copper',
+        typeAreaId: 'rm9tP4J6sscggvvWg',
+        parentAreaId: Areas.findOne({ name: 'Cooper', corporationId: corp._id })._id,
+        corporationId: corp._id,
+      },
+    ]
+
+    _.map(vicepresidencias, (area) => {
+      const find = Areas.findOne(area);
+      if (!find) Areas.insert(area);
+    });
+    // "_id":"Zon5d8M2MAB2Ec4My",
+    // "name":"Gerencia General"
+        const generalmanager = [
+          {
+            name: 'Concentrate Operations',
+            typeAreaId: 'Zon5d8M2MAB2Ec4My',
+            parentAreaId: Areas.findOne({ name: 'Escondida', corporationId: corp._id })._id,
+            corporationId: corp._id,
+          },
+          {
+            name: 'Mine Operations',
+            typeAreaId: 'Zon5d8M2MAB2Ec4My',
+            parentAreaId: Areas.findOne({ name: 'Escondida', corporationId: corp._id })._id,
+            corporationId: corp._id,
+          },
+          {
+            name: 'NPI & Conc. Handling Operations',
+            typeAreaId: 'Zon5d8M2MAB2Ec4My',
+            parentAreaId: Areas.findOne({ name: 'Escondida', corporationId: corp._id })._id,
+            corporationId: corp._id,
+          },
+        ]
+    
+        _.map(generalmanager, (area) => {
+          const find = Areas.findOne(area);
+          if (!find) Areas.insert(area);
+        });
+
+      // "_id":"6SJCXwG9tEKKQRs7u",
+      // "name":"Gerencia"
+
+      // "_id":"NagX7s2zzkfQZpXq6",
+      // "name":"SuperIntendencia"  
   });
 };
 
