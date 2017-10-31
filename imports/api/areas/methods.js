@@ -1,4 +1,5 @@
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import _ from 'lodash';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import Areas from './areas';
 import rateLimit from '../../modules/rate-limit.js';
@@ -25,11 +26,16 @@ export const removeArea = new ValidatedMethod({
 });
 
 const addChildNodes = parentnode => {
-
-    console.log('PARENT', parentnode);
-    const childs = Areas.aggregate({ $match: { parentAreaId: parentnode._id } });
-    _.map(childs, child => {
-        child = addChildNodes(child);
+    const childs = Areas.aggregate([
+        { $match: { parentAreaId: parentnode._id } },
+        { $lookup: { from: 'typesareastructure', foreignField: '_id', localField: 'typeAreaStructureId', as: 'TypeAreaStructure' } },
+        { $unwind: '$TypeAreaStructure' },
+        { $project: { name: { $concat: ['$name',' - ', '$TypeAreaStructure.name'] }, parentAreaId: '$parantAreaId', TypeAreaStructure: '$TypeAreaStructure', TypeArea: '$TypeArea' } },
+        
+    ]);
+    _.map(childs, (child) => {
+        const children = addChildNodes(child);
+        if (!!children.length) child.children = addChildNodes(child);
     })
     return childs;
 }
@@ -48,16 +54,13 @@ Meteor.methods({
                     { $unwind: '$TypeArea' },
                     { $lookup: { from: 'typesareastructure', foreignField: '_id', localField: 'typeAreaStructureId', as: 'TypeAreaStructure' } },
                     { $unwind: '$TypeAreaStructure' },
+                    { $project: { name: { $concat: ['$name', ' - ', '$TypeAreaStructure.name', ' - ', '$TypeArea.name'] }, parentAreaId: '$parantAreaId', TypeAreaStructure: '$TypeAreaStructure', TypeArea: '$TypeArea' } },
                 ]
-
             )
 
             _.map(firstnodes, firstnode => {
-                firstnode.childs = addChildNodes(firstnode);
+                firstnode.children = addChildNodes(firstnode);
             })
-           
-
-            console.info('aggregate', firstnodes);
 
             return firstnodes;
         } else return;

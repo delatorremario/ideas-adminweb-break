@@ -60,9 +60,6 @@ const addSomeCollections = () => {
       }
     });
 
-
-
-
     const presidencias = [
       {
         name: 'Escondida',
@@ -78,7 +75,7 @@ const addSomeCollections = () => {
         masterDataMatchText: 'Cooper',
         corporationId: corp._id,
       },
-    ]
+    ];
 
     _.map(presidencias, (area) => {
       const find = Areas.findOne(area);
@@ -106,7 +103,7 @@ const addSomeCollections = () => {
         parentAreaId: Areas.findOne({ name: 'Cooper', corporationId: corp._id })._id,
         corporationId: corp._id,
       },
-    ]
+    ];
 
     _.map(vicepresidencias, (area) => {
       const find = Areas.findOne(area);
@@ -133,7 +130,7 @@ const addSomeCollections = () => {
         parentAreaId: Areas.findOne({ name: 'Escondida', corporationId: corp._id })._id,
         corporationId: corp._id,
       },
-    ]
+    ];
 
     _.map(generalmanager, (area) => {
       const find = Areas.findOne(area);
@@ -162,7 +159,7 @@ const addSomeCollections = () => {
         parentAreaId: Areas.findOne({ name: 'NPI & Conc. Handling Operations', corporationId: corp._id })._id,
         corporationId: corp._id,
       },
-    ]
+    ];
 
     _.map(manager, (area) => {
       const find = Areas.findOne(area);
