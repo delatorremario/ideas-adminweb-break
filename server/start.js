@@ -60,18 +60,19 @@ const addSomeCollections = () => {
       }
     });
 
+    const presidenciaId = TypesAreaStructure.findOne({ name: 'Presidencia' })._id
     const presidencias = [
       {
         name: 'Escondida',
         typeAreaId: TypesAreas.findOne({ name: 'Area Operativa' })._id,
-        typeAreaStructureId: 'XJimmrw5rrH98pthG',
+        typeAreaStructureId: presidenciaId,
         masterDataMatchText: 'Escondida',
         corporationId: corp._id,
       },
       {
         name: 'Cooper',
         typeAreaId: TypesAreas.findOne({ name: 'Area Funcional' })._id,
-        typeAreaStructureId: 'XJimmrw5rrH98pthG',
+        typeAreaStructureId: presidenciaId,
         masterDataMatchText: 'Cooper',
         corporationId: corp._id,
       },
@@ -84,22 +85,24 @@ const addSomeCollections = () => {
 
     // "_id":"rm9tP4J6sscggvvWg"
     // "name":"Vicepresidencia",
+    const vicepresidenciaId = TypesAreaStructure.findOne({ name: 'Vicepresidencia' })._id
+    
     const vicepresidencias = [
       {
         name: 'Warehouse Escondida B',
-        typeAreaStructureId: 'rm9tP4J6sscggvvWg',
+        typeAreaStructureId: vicepresidenciaId,
         parentAreaId: Areas.findOne({ name: 'Cooper', corporationId: corp._id })._id,
         corporationId: corp._id,
       },
       {
         name: 'Purchasing MEL',
-        typeAreaStructureId: 'rm9tP4J6sscggvvWg',
+        typeAreaStructureId: vicepresidenciaId,
         parentAreaId: Areas.findOne({ name: 'Cooper', corporationId: corp._id })._id,
         corporationId: corp._id,
       },
       {
         name: 'Corporate Affairs Copper',
-        typeAreaStructureId: 'rm9tP4J6sscggvvWg',
+        typeAreaStructureId: vicepresidenciaId,
         parentAreaId: Areas.findOne({ name: 'Cooper', corporationId: corp._id })._id,
         corporationId: corp._id,
       },
@@ -111,22 +114,24 @@ const addSomeCollections = () => {
     });
     // "_id":"Zon5d8M2MAB2Ec4My",
     // "name":"Gerencia General"
+    const gmId = TypesAreaStructure.findOne({ name: 'Gerencia General' })._id
+    
     const generalmanager = [
       {
         name: 'Concentrate Operations',
-        typeAreaStructureId: 'Zon5d8M2MAB2Ec4My',
+        typeAreaStructureId: gmId,
         parentAreaId: Areas.findOne({ name: 'Escondida', corporationId: corp._id })._id,
         corporationId: corp._id,
       },
       {
         name: 'Mine Operations',
-        typeAreaStructureId: 'Zon5d8M2MAB2Ec4My',
+        typeAreaStructureId: gmId,
         parentAreaId: Areas.findOne({ name: 'Escondida', corporationId: corp._id })._id,
         corporationId: corp._id,
       },
       {
         name: 'NPI & Conc. Handling Operations',
-        typeAreaStructureId: 'Zon5d8M2MAB2Ec4My',
+        typeAreaStructureId: gmId,
         parentAreaId: Areas.findOne({ name: 'Escondida', corporationId: corp._id })._id,
         corporationId: corp._id,
       },
@@ -139,23 +144,24 @@ const addSomeCollections = () => {
 
     // "_id":"6SJCXwG9tEKKQRs7u",
     // "name":"Gerencia"
-
+    const managerId = TypesAreaStructure.findOne({ name: 'Gerencia' })._id
+    
     const manager = [
       {
         name: 'Production Mine',
-        typeAreaStructureId: '6SJCXwG9tEKKQRs7u',
+        typeAreaStructureId: managerId,
         parentAreaId: Areas.findOne({ name: 'Mine Operations', corporationId: corp._id })._id,
         corporationId: corp._id,
       },
       {
         name: 'Production Mine M1',
-        typeAreaStructureId: '6SJCXwG9tEKKQRs7u',
+        typeAreaStructureId: managerId,
         parentAreaId: Areas.findOne({ name: 'Mine Operations', corporationId: corp._id })._id,
         corporationId: corp._id,
       },
       {
         name: 'NPI Maitenance',
-        typeAreaStructureId: '6SJCXwG9tEKKQRs7u',
+        typeAreaStructureId: managerId,
         parentAreaId: Areas.findOne({ name: 'NPI & Conc. Handling Operations', corporationId: corp._id })._id,
         corporationId: corp._id,
       },

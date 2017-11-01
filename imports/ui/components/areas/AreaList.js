@@ -119,7 +119,7 @@ export default class AreasList extends React.Component {
                     <div role="grid" id="example_wrapper" className="dataTables_wrapper form-inline no-footer">
                         <div className="row table-top">
                             <div className="col-fixed" style={{ width: "115px" }}>
-                                <Link to="/areas/new" className="btn btn-success"><i className="fa fa-plus"></i> Nuevo</Link>
+                                {/* <Link to="/areas/new" className="btn btn-success"><i className="fa fa-plus"></i> Nuevo</Link> */}
                             </div>
                             <div className="col-flex smart-searcher-container">
                                 <div id="example_filter" className="dataTables_filter">
