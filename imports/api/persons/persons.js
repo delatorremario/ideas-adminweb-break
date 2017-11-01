@@ -2,38 +2,38 @@ import { Mongo } from 'meteor/mongo';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Factory } from 'meteor/dburles:factory';
 
-const Areas = new Mongo.Collection('areas');
-export default Areas
+const Persons = new Mongo.Collection('persons');
+export default Persons
 
-Areas.allow({
+Persons.allow({
     insert: () => false,
     update: () => false,
     remove: () => false,
 })
 
-Areas.deny({
+Persons.deny({
     insert: () => true,
     update: () => true,
     remove: () => true,
 })
 
-Areas.schema = new SimpleSchema({
-    name: {
+Persons.schema = new SimpleSchema({
+    firstName: {
         type: String
     },
-    typeAreaId: {
-        type: String, optional: true // Area Operativa o Area Funcional
-    },
-    typeAreaStructureId: {
-        type: String, optional: true // 'Presidencia', 'Vicepresidencia', 'Gerencia General', 'Gerencia', 'SuperIntendencia
-    },
-    parentAreaId: {
+    secondName: {
         type: String, optional: true
     },
-    masterDataMatchText: {
+    lastName: {
+        type: String
+    },
+    email: {
         type: String, optional: true
     },
-    responsableId: {
+    areaId: {
+        type: String, optional: true
+    },
+    masterArea: {
         type: String, optional: true
     },
     corporationId: {
@@ -41,4 +41,4 @@ Areas.schema = new SimpleSchema({
     },
 })
 
-Areas.attachSchema(Areas.schema);
+Persons.attachSchema(Persons.schema);
