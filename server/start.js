@@ -7,6 +7,7 @@ import TypesAreas from '../imports/api/typesareas/typesareas';
 import TypesAreaStructure from '../imports/api/typesareastructure/typesareastructure';
 import Corporations from '../imports/api/corporations/corporations';
 import Areas from '../imports/api/areas/areas';
+import Persons from '../imports/api/persons/persons';
 
 const mails = ['mariodelatorre@holos.cl', 'ctomba@holos.cl', 'cbaiardi@holos.cl', 'rmarambio@holos.cl', 'asusel@holos.cl'];
 
@@ -171,9 +172,6 @@ const addSomeCollections = () => {
       const find = Areas.findOne(area);
       if (!find) Areas.insert(area);
     });
-
-    // "_id":"NagX7s2zzkfQZpXq6",
-    // "name":"SuperIntendencia"  
   });
 };
 

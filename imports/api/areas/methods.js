@@ -2,6 +2,7 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import _ from 'lodash';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import Areas from './areas';
+import Persons from '../persons/persons';
 import rateLimit from '../../modules/rate-limit.js';
 
 export const upsertArea = new ValidatedMethod({
@@ -30,16 +31,25 @@ const addChildNodes = parentnode => {
         { $match: { parentAreaId: parentnode._id } },
         { $lookup: { from: 'typesareastructure', foreignField: '_id', localField: 'typeAreaStructureId', as: 'TypeAreaStructure' } },
         { $unwind: '$TypeAreaStructure' },
-        { $project: { name: { $concat: ['$name',' - ', '$TypeAreaStructure.name'] }, parentAreaId: '$parantAreaId', TypeAreaStructure: '$TypeAreaStructure', TypeArea: '$TypeArea' } },
-        
+        { $project: { name: { $concat: ['$name', ' - ', '$TypeAreaStructure.name'] }, parentAreaId: '$parantAreaId', TypeAreaStructure: '$TypeAreaStructure', TypeArea: '$TypeArea' } },
+
     ]);
     _.map(childs, (child) => {
-        const children = addChildNodes(child);
-        if (!!children.length) child.children = addChildNodes(child);
+        let children = addChildNodes(child);
+        const persons = Persons.aggregate([
+            { $match: { areaId: child._id } },
+            { $project: { name : {$concat:["$firstName"," ", "$secondName", " ", "$lastName"]}}}
+        ])
+        console.log('PERSONS', persons, child._id);
+        children = _.union(children, persons);
+        if (!!children.length) child.children = children;
     })
     return childs;
 }
 
+const addPersons = () => {
+
+}
 
 Meteor.methods({
     'areas.getTree': () => {

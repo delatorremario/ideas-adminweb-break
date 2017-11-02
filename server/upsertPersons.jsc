@@ -3,7 +3,7 @@ import { Meteor } from 'meteor/meteor';
 import masterPersons from '../imports/api/persons/personsData';
 import Persons from '../imports/api/persons/persons';
 import Corporations from '../imports/api/corporations/corporations';
-import Areas from '../imports/api/persons/persons';
+import Areas from '../imports/api/areas/areas';
 import _ from 'lodash';
 
 
@@ -17,12 +17,14 @@ Meteor.startup(() => {
 
             _.extend(person, { corporationId: corp._id })
 
-            const area = person.masterArea && Areas.findOne({ name: person.masterArea, corporationId:corp._id })
+            let area = person.masterArea && Areas.findOne({ name: person.masterArea, corporationId:corp._id });
+            if(!area) area = Areas.findOne({name:'Production Mine'})
             const find = Persons.findOne(person)
-
+            console.log('AREA', area);
             if (area) _.extend(person, { areaId: area._id })
+            else console.log('sin area')
             if (find) Persons.upsert({ _id: find._id }, { $set: { person } }, (data, err) => console.log('upsert', data, err));
-            else Persons.insert(person, (data, err) => console.log('insert', data, err));
+            else Persons.insert(person, (data, err) => err && console.error('insert', data, err.message));
 
         })
     })

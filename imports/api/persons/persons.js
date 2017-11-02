@@ -28,7 +28,7 @@ Persons.schema = new SimpleSchema({
         type: String
     },
     email: {
-        type: String, optional: true
+        type: String, unique: true
     },
     areaId: {
         type: String, optional: true
