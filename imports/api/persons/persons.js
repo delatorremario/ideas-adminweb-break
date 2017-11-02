@@ -33,6 +33,9 @@ Persons.schema = new SimpleSchema({
     rut: {
         type: String, optional: true
     },
+    oneUp: {
+        type: String, optional: true
+    },
     areaId: {
         type: String, optional: true
     },

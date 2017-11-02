@@ -38,7 +38,20 @@ const addChildNodes = parentnode => {
         let children = addChildNodes(child);
         const persons = Persons.aggregate([
             { $match: { areaId: child._id } },
-            { $project: { name : {$concat:["$firstName"," ", "$secondName", " ", "$lastName"]}}}
+            {
+                $project: {
+                    name: {
+                        $concat: [
+                             { $ifNull: [ "$firstName", ""] }
+                             , " ",
+                             { $ifNull: [ "$secondName", ""] }
+                             , " ",
+                             { $ifNull: [ "$lastName", ""] }
+                             , " rut: ",
+                             { $ifNull: [ "$rut", "NN"] }
+                        ]} 
+                }
+            }
         ])
         console.log('PERSONS', persons, child._id);
         children = _.union(children, persons);

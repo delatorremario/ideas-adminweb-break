@@ -94,19 +94,27 @@ export default class AreasList extends React.Component {
 
     onFilterMouseUp(e) {
         e.preventDefault();
-
         const filter = e.target.value.trim();
+
+
+
         const { initialnode } = this.state;
 
         if (!!filter) {
-            var filtered = filters.filterTree(initialnode, filter);
-            filtered = filters.expandFilteredNodes(filtered, filter);
-            this.setState({ data: filtered });
+
+            if (e.keyCode === 13) {
+
+                var filtered = filters.filterTree(initialnode, filter);
+                filtered = filters.expandFilteredNodes(filtered, filter);
+                this.setState({ data: filtered });
+
+            }
         } else {
             this.setState((prev) => {
                 return { data: prev.initialnode };
             })
         }
+
     };
 
     render() {
@@ -125,6 +133,7 @@ export default class AreasList extends React.Component {
                                 <div id="example_filter" className="dataTables_filter">
                                     <input type="search" className="form-control input-md"
                                         onKeyUp={this.onFilterMouseUp.bind(this)}
+                                        // onChange={this.onFilterMouseUp.bind(this)}
                                         placeholder="Buscar..."
                                         type="text"
                                         aria-controls="example" />
