@@ -30,6 +30,9 @@ Persons.schema = new SimpleSchema({
     email: {
         type: String, unique: true
     },
+    rut: {
+        type: String, optional: true
+    },
     areaId: {
         type: String, optional: true
     },
