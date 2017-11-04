@@ -20,6 +20,7 @@ export default class IdeaEditor extends Component {
             _id: '',
             origin: '',
             description: '',
+            person: {}
         },
         persons: []
     }
@@ -95,7 +96,7 @@ export default class IdeaEditor extends Component {
         var rx = [];
         arrayText.forEach(function name(value) {
             var v = ".*" + value + ".*"; //value.replace(/\//ig, "");
-            rx.push(new RegExp(v));
+            rx.push(new RegExp(v, "i"));
         });
         console.log('RX', rx)
         const persons = Persons.find({
@@ -107,12 +108,22 @@ export default class IdeaEditor extends Component {
                 { rut: { $in: rx } },
 
             ]
-        }, { limit: 10 }).fetch() || []
-        console.log('Persons', persons);
+        }, { sort: { firstName: 1, secondName: 1, lastName: 1 }, limit: 100 }).fetch() || []
         this.setState({ persons: persons });
     }
 
+    selectPerson = person => e => {
+        e.preventDefault()
+        this.setState({ doc: { person }, persons: [] })
+    }
+
+    selectOrigin = origin => e => {
+        e.preventDefault()
+        this.setState({ doc: { origin } })
+    }
+
     render() {
+        const origins = ['Email, Yamer, Otra']
         const formMaxStep = 2;
 
         const { formStep } = this.state;
@@ -147,12 +158,17 @@ export default class IdeaEditor extends Component {
                                                 ref={form => (this.ideaEditorForm = form)}
                                                 onSubmit={event => event.preventDefault()}>
 
-                                                {formStep === 1 && <IdeasStepOne onChangeForm={this.onChangeDoc}
-                                                    data={doc}
-                                                    onChangeSearchPerson={this.onChangeSearchPerson}
-                                                    persons={persons}
-                                                />}
-                                                {formStep === 2 && <IdeasStepTwo onChangeForm={this.onChangeDoc} data={doc} />}
+                                                {formStep === 1 &&
+                                                    <IdeasStepOne onChangeForm={this.onChangeDoc}
+                                                        data={doc}
+                                                        onChangeSearchPerson={this.onChangeSearchPerson}
+                                                        persons={persons}
+                                                        selectPerson={this.selectPerson}
+                                                        origins={origins}
+                                                        selectOrigin={this.selectOrigin}
+                                                    />}
+                                                {formStep === 2 &&
+                                                    <IdeasStepTwo onChangeForm={this.onChangeDoc} data={doc} />}
 
                                                 <div className="forms-bottom-panel">
                                                     {
