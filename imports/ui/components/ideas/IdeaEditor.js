@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 import ideaEditor from '../../../modules/ideas/idea-editor.js'
 import CSSTransitionGroup from 'react-addons-css-transition-group'
 import MainList from '../MainList'
@@ -41,9 +42,9 @@ export default class IdeaEditor extends Component {
 
     toggleStepReady = () => {
         const { formStep } = this.state;
-        const { origin, description } = this.state.doc;
-        return (formStep === 1 && origin) ||
-            (formStep === 2 && origin && description)
+        const { origin, person, description } = this.state.doc;
+        return (formStep === 1 && origin && person) ||
+            (formStep === 2 && origin && person && description)
     }
 
 
@@ -98,7 +99,6 @@ export default class IdeaEditor extends Component {
             var v = ".*" + value + ".*"; //value.replace(/\//ig, "");
             rx.push(new RegExp(v, "i"));
         });
-        console.log('RX', rx)
         const persons = Persons.find({
             $or: [
 
@@ -114,22 +114,22 @@ export default class IdeaEditor extends Component {
 
     selectPerson = person => e => {
         e.preventDefault()
-        this.setState({ doc: { person }, persons: [] })
+        this.setState(prev => ({ doc: { ...prev.doc, person }, persons: [] }))
     }
 
     selectOrigin = origin => e => {
         e.preventDefault()
-        this.setState({ doc: { origin } })
+        this.setState(prev => ({ doc: { ...prev.doc, origin } }))
     }
 
     render() {
-        const origins = ['Email, Yamer, Otra']
+        const origins = ['Email', 'Yamer', 'Otra']
         const formMaxStep = 2;
 
         const { formStep } = this.state;
         const { doc, persons } = this.state;
         const { origin, _id } = this.state.doc;
-
+        console.log('DOC', doc);
         return (
             <div>
 
@@ -203,6 +203,7 @@ export default class IdeaEditor extends Component {
                                                     }
 
                                                     <Button onClick={(e) => e.preventDefault()} type="button" bsStyle="default" className="btn btn-trans btn-sm pull-right"><i className="fa fa-times"></i>Cancelar</Button>
+                                                   
                                                 </div>
                                             </form>
                                             {/* <div className="row">
