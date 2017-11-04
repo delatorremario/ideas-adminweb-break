@@ -21,7 +21,8 @@ export default class IdeaEditor extends Component {
             _id: '',
             origin: '',
             description: '',
-            person: {}
+            person: {},
+            chief:{},
         },
         persons: []
     }
@@ -44,7 +45,7 @@ export default class IdeaEditor extends Component {
         const { formStep } = this.state;
         const { origin, person, description } = this.state.doc;
         return (formStep === 1 && origin && person) ||
-            (formStep === 2 && origin && person && description)
+            (formStep === 2 && origin && person && chief)
     }
 
 
@@ -117,6 +118,11 @@ export default class IdeaEditor extends Component {
         this.setState(prev => ({ doc: { ...prev.doc, person }, persons: [] }))
     }
 
+    selectChief = chief => e => {
+        e.preventDefault()
+        this.setState(prev => ({ doc: { ...prev.doc, chief }, persons: [] }))
+    }
+
     selectOrigin = origin => e => {
         e.preventDefault()
         this.setState(prev => ({ doc: { ...prev.doc, origin } }))
@@ -124,7 +130,7 @@ export default class IdeaEditor extends Component {
 
     render() {
         const origins = ['Email', 'Yamer', 'Otra']
-        const formMaxStep = 2;
+        const formMaxStep = 4;
 
         const { formStep } = this.state;
         const { doc, persons } = this.state;
@@ -168,7 +174,12 @@ export default class IdeaEditor extends Component {
                                                         selectOrigin={this.selectOrigin}
                                                     />}
                                                 {formStep === 2 &&
-                                                    <IdeasStepTwo onChangeForm={this.onChangeDoc} data={doc} />}
+                                                    <IdeasStepTwo onChangeForm={this.onChangeDoc}
+                                                        data={doc}
+                                                        onChangeSearchPerson={this.onChangeSearchPerson}
+                                                        persons={persons}
+                                                        selectChief={this.selectChief}
+                                                  />}
 
                                                 <div className="forms-bottom-panel">
                                                     {

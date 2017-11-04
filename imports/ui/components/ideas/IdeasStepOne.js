@@ -24,9 +24,7 @@ const IdeasStepOne = ({ onChangeForm, data, onChangeSearchPerson, persons, selec
                 </div>
             </div>
             }
-            {
-
-                data && !data.person &&
+            { data && !data.person &&
                 <div>
                     <div className="form-group">
                         <label className="col-sm-3 control-label">Buscar la Persona Dueña de la Idea</label>

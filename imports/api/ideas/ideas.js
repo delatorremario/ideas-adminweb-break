@@ -22,8 +22,10 @@ Ideas.deny({
 Ideas.schema = new SimpleSchema([
     Base,
     { origin: { type: String } },
+    { person: { type: Object } },
+    { chief: { type: Object } },
     { description: { type: String } },
-    
+
 
     // firstName: {
     //     type: String

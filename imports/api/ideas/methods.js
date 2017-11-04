@@ -9,6 +9,8 @@ export const upsertIdea = new ValidatedMethod({
     validate: new SimpleSchema({
         _id: { type: String, optional: true },
         origin: { type: String },
+        person: { type: Object },
+        chief: { type: Object },
         description: { type: String },
     }).validator(),
     run(idea) {
