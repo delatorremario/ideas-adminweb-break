@@ -38,6 +38,11 @@ class SidebarPush extends Component {
                     path: "/areas",
                 },
                 {
+                    title: "Ideas",
+                    iconClasses: ["fa", "fa-fw", "fa-sitemap"],
+                    path: "/ideas",
+                },
+                {
                     title: "Panel de Control",
                     path: "/dashboard",
                     iconClasses: ["fa", "fa-fw", "fa-tachometer"],

@@ -13,6 +13,7 @@ export const upsertCorporation = new ValidatedMethod({
         adminsEmails: { type: [String], optional: true },
     }).validator(),
     run(corporation) {
+        console.log('CORP', corporation);
         return Corporations.upsert({ _id: corporation._id }, { $set: corporation });
     },
 });

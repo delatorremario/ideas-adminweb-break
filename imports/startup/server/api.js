@@ -10,3 +10,8 @@ import '../../api/typesareastructure/server/publications';
 
 import '../../api/typesareas/methods';
 import '../../api/typesareas/server/publications';
+
+import '../../api/ideas/methods';
+import '../../api/ideas/server/publications';
+
+import '../../api/base/base';

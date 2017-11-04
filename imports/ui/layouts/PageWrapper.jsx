@@ -11,6 +11,11 @@ import Areas from '../pages/areas/Areas';
 import NewArea from '../pages/areas/NewArea';
 import EditArea from '../containers/areas/EditArea';
 
+// Ideas
+import Ideas from '../pages/ideas/Ideas';
+import NewIdea from '../pages/ideas/NewIdea';
+import EditIdea from '../containers/ideas/EditIdea';
+
 import Dashboard from '../pages/Dashboard';
 import BlankPage from '../pages/BlankPage';
 import ComponentsPage from '../pages/ComponentsPage';
@@ -30,6 +35,11 @@ const PageWrapper = () => (
             <Route exact path="/areas" component={Areas} />
             <Route exact path="/areas/new" component={NewArea} />
             <Route exact path="/area/:_id/edit" component={EditArea} />
+
+            {/* Ideas */}
+            <Route exact path="/ideas" component={Ideas} />
+            <Route exact path="/ideas/new" component={NewIdea} />
+            <Route exact path="/idea/:_id/edit" component={EditIdea} />
             
             <Route path="/sendinvitation" component={SendInvitationPage} />
             

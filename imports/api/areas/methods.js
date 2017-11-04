@@ -53,15 +53,10 @@ const addChildNodes = parentnode => {
                 }
             }
         ])
-        console.log('PERSONS', persons, child._id);
         children = _.union(children, persons);
         if (!!children.length) child.children = children;
     })
     return childs;
-}
-
-const addPersons = () => {
-
 }
 
 Meteor.methods({
