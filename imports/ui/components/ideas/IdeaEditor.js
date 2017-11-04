@@ -21,6 +21,7 @@ export default class IdeaEditor extends Component {
             origin: '',
             description: '',
         },
+        persons: []
     }
 
     componentDidMount() {
@@ -86,20 +87,37 @@ export default class IdeaEditor extends Component {
         $(".line-progress-front").width(eachStep * formStep);
     }
 
-    onChangeSearchPerson  = e => {
+    onChangeSearchPerson = e => {
         e.preventDefault();
-        const persons = Persons.find({}).fetch()
-        console.log('text', e.target.value);
+        const text = e.target.value;
+        const arrayText = _.split(_.replace(text.trim(), ' ', ','), ',');
+
+        var rx = [];
+        arrayText.forEach(function name(value) {
+            var v = ".*" + value + ".*"; //value.replace(/\//ig, "");
+            rx.push(new RegExp(v));
+        });
+        console.log('RX', rx)
+        const persons = Persons.find({
+            $or: [
+
+                { firstName: { $in: rx } },
+                { secondName: { $in: rx } },
+                { lastName: { $in: rx } },
+                { rut: { $in: rx } },
+
+            ]
+        }, { limit: 10 }).fetch() || []
         console.log('Persons', persons);
+        this.setState({ persons: persons });
     }
 
     render() {
         const formMaxStep = 2;
 
         const { formStep } = this.state;
-        const { doc } = this.state;
+        const { doc, persons } = this.state;
         const { origin, _id } = this.state.doc;
-        console.log("step: ", formStep);
 
         return (
             <div>
@@ -129,7 +147,11 @@ export default class IdeaEditor extends Component {
                                                 ref={form => (this.ideaEditorForm = form)}
                                                 onSubmit={event => event.preventDefault()}>
 
-                                                {formStep === 1 && <IdeasStepOne onChangeForm={this.onChangeDoc} data={doc} onChangeSearchPerson={this.onChangeSearchPerson} />}
+                                                {formStep === 1 && <IdeasStepOne onChangeForm={this.onChangeDoc}
+                                                    data={doc}
+                                                    onChangeSearchPerson={this.onChangeSearchPerson}
+                                                    persons={persons}
+                                                />}
                                                 {formStep === 2 && <IdeasStepTwo onChangeForm={this.onChangeDoc} data={doc} />}
 
                                                 <div className="forms-bottom-panel">

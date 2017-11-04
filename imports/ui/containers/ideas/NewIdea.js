@@ -5,15 +5,15 @@ import EditIdea from '../../pages/ideas/EditIdea';
 import Loading from '../../components/Loading.js';
 
 const composer = ({ match }, onData) => {
-  const docId = match.params._id;
-  const subscription = Meteor.subscribe('ideas.view', docId);
+  // const docId = match.params._id;
+  // const subscription = Meteor.subscribe('ideas.view', docId);
 
   const subscriptionPersons = Meteor.subscribe('persons.list');
 
-  if (subscription.ready() && subscriptionPersons.ready()) {
+  if (subscriptionPersons.ready()) {
     console.log('READY subscription');
-    const doc = Ideas.findOne(docId);
-    onData(null, { doc });
+    // const doc = Ideas.findOne(docId);
+    onData(null, { doc: {} });
   }
 
 };

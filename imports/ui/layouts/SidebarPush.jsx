@@ -39,7 +39,7 @@ class SidebarPush extends Component {
                 },
                 {
                     title: "Ideas",
-                    iconClasses: ["fa", "fa-fw", "fa-sitemap"],
+                    iconClasses: ["fa", "fa-fw", "fa-lightbulb-o"],
                     path: "/ideas",
                 },
                 {

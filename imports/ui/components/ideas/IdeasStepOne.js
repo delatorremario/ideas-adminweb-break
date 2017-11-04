@@ -1,8 +1,7 @@
-import React, { Component } from 'react';
-import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
-import { Button, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
+import React from 'react';
+import _ from 'lodash';
 
-const IdeasStepOne = ({ onChangeForm, data, onChangeSearchPerson }) =>
+const IdeasStepOne = ({ onChangeForm, data, onChangeSearchPerson, persons }) =>
 
     (
         <div className="form-steps step-one">
@@ -29,9 +28,12 @@ const IdeasStepOne = ({ onChangeForm, data, onChangeSearchPerson }) =>
                 <div className="col-md-10">
                     <div className="card">
                         <ul className="list-group list-group-flush">
-                            <li className="list-group-item">Cras justo odio</li>
-                            <li className="list-group-item">Dapibus ac facilisis in</li>
-                            <li className="list-group-item">Vestibulum at eros</li>
+                            {
+                                _.map(persons, (person, index) => (<li key={index} className="list-group-item">
+                                     rut: {person.rut}   {person.firstName} {person.secondName} {person.lastName}
+                                </li>))
+                            }
+
                         </ul>
                     </div>
                 </div>

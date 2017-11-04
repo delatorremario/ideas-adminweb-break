@@ -13,7 +13,7 @@ import EditArea from '../containers/areas/EditArea';
 
 // Ideas
 import Ideas from '../pages/ideas/Ideas';
-import NewIdea from '../pages/ideas/NewIdea';
+import NewIdea from '../containers/ideas/NewIdea';
 import EditIdea from '../containers/ideas/EditIdea';
 
 import Dashboard from '../pages/Dashboard';
@@ -38,7 +38,7 @@ const PageWrapper = () => (
 
             {/* Ideas */}
             <Route exact path="/ideas" component={Ideas} />
-            <Route exact path="/ideas/new" component={EditIdea} />
+            <Route exact path="/ideas/new" component={NewIdea} />
             <Route exact path="/idea/:_id/edit" component={EditIdea} />
             
             <Route path="/sendinvitation" component={SendInvitationPage} />
