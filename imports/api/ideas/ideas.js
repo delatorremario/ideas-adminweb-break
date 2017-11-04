@@ -22,6 +22,7 @@ Ideas.deny({
 Ideas.schema = new SimpleSchema([
     Base,
     { origin: { type: String } },
+    { description: { type: String } },
     
 
     // firstName: {

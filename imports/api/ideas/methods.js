@@ -8,10 +8,10 @@ export const upsertIdea = new ValidatedMethod({
     name: 'ideas.upsert',
     validate: new SimpleSchema({
         _id: { type: String, optional: true },
-        origin: { type: String, optional: true },
+        origin: { type: String },
+        description: { type: String },
     }).validator(),
     run(idea) {
-        console.log('IDEA', idea);
         return Ideas.upsert({ _id: idea._id }, { $set: idea });
     },
 });

@@ -10,7 +10,7 @@ const handleUpsert = () => {
     const confirmation = doc && doc._id ? 'Datos actualizados correctamente' : 'Datos guardados con éxito';
     const upsert = {
         origin: doc.origin.trim(),
-        // adminsEmails: doc.adminsEmails,
+        description: doc.description.trim(),
     };
 
     if (doc && doc._id) upsert._id = doc._id;
@@ -35,10 +35,16 @@ const validate = () => {
             origin: {
                 required: true,
             },
+            description: {
+                required: true,
+            },
         },
         messages: {
             origin: {
                 required: 'Ingrese el Origen',
+            },
+            description: {
+                required: 'Ingrese una Descripción de la Idea',
             },
         },
         submitHandler() { handleUpsert(); },

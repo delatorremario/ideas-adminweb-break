@@ -8,13 +8,15 @@ import _ from 'lodash'
 // Step components
 import StepIndicator from '../../components/StepIndicator';
 import IdeasStepOne from './IdeasStepOne'
+import IdeasStepTwo from './IdeasStepTwo'
 
 export default class IdeaEditor extends Component {
     state = {
         formStep: 1,
         doc: {
             _id: '',
-            origin: ''
+            origin: '',
+            description: '',
         },
     }
 
@@ -34,19 +36,9 @@ export default class IdeaEditor extends Component {
 
     toggleStepReady = () => {
         const { formStep } = this.state;
-        const { origin } = this.state.doc;
-        // const { contratistaRut, name, phone, fax, email, web, region, province, commune, street, streetNumber, office, endowment } = this.state.formTwo;
-        // const { contractName, initDate, endDate, contractAdmin, description } = this.state.formThree;
-        // const { rutRunExperto, expertName, registryNumberSNGM } = this.state.formFour;
-        // const { representativeRutRun, representativeName, representativePhone, representativeFax, representativeEmail, representativeRegion, representativeProvince, representativeCommune, representativeStreet, representativeStreetNumber, representativeOffice } = this.state.formFive;
-
-        return (formStep === 1 && origin)
-            || (formStep === 2)
-        //     (formStep === 2 && contratistaRut && name && phone && fax && email && web && region && province && commune && street && streetNumber && office && endowment) ||
-        //     (formStep === 3 && contractName && initDate && endDate && contractAdmin && description) ||
-        //     (formStep === 4 && rutRunExperto && expertName && registryNumberSNGM) ||
-        //     (formStep === 5 && representativeRutRun && representativeName && representativePhone && representativeFax && representativeEmail && representativeRegion && representativeProvince && representativeCommune && representativeStreet && representativeStreetNumber && representativeOffice);
-
+        const { origin, description } = this.state.doc;
+        return (formStep === 1 && origin) ||
+            (formStep === 2 && origin && description)
     }
 
 
@@ -128,14 +120,13 @@ export default class IdeaEditor extends Component {
                                                 onSubmit={event => event.preventDefault()}>
 
                                                 {formStep === 1 && <IdeasStepOne onChangeForm={this.onChangeDoc} data={doc} />}
-
-
+                                                {formStep === 2 && <IdeasStepTwo onChangeForm={this.onChangeDoc} data={doc} />}
 
                                                 <div className="forms-bottom-panel">
                                                     {
                                                         formStep === formMaxStep &&
                                                         <Button
-                                                            disabled={this.toggleStepReady ? false : true}
+                                                            disabled={this.toggleStepReady() ? false : true}
                                                             type='submit'
                                                             bsStyle="success"
                                                             className="btn btn-sm pull-right">
@@ -145,7 +136,7 @@ export default class IdeaEditor extends Component {
                                                         ||
                                                         <Button
                                                             onClick={this.changeStep(true, 1)}
-                                                            disabled={this.toggleStepReady ? false : true}
+                                                            disabled={this.toggleStepReady() ? false : true}
                                                             type='button'
                                                             bsStyle="success"
                                                             className="btn btn-sm pull-right">

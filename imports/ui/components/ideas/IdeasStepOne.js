@@ -2,11 +2,9 @@ import React, { Component } from 'react';
 import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
 import { Button, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
 
-class IdeasStepOne extends Component {
-    render() {
-        const { onChangeForm, data } = this.props;
+const IdeasStepOne = ({ onChangeForm, data }) =>
 
-        return (
+         (
             <div className="form-steps step-one">
              
                 <FormGroup>
@@ -33,7 +31,7 @@ class IdeasStepOne extends Component {
                 </div> */}
             </div>
         )
-    }
-}
+    
+
 
 export default IdeasStepOne;
