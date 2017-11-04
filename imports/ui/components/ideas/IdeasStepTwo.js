@@ -12,7 +12,7 @@ const IdeasStepTwo = ({ onChangeForm, data }) =>
                 </div>
                 <div className="col-sm-6">
                     <FormControl
-                        type="area"
+                        type="text"
                         name="description"
                         value={data.description}
                         onChange={onChangeForm}

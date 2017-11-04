@@ -8,6 +8,7 @@ import { check } from 'meteor/check';
 import Persons from '../persons';
 
 Meteor.publish('persons.list', () => {
+  console.log('persons.list');
   const self = this.Meteor;
   const user = self.user();
   if (user) {

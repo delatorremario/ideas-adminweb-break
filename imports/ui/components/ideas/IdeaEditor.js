@@ -5,6 +5,9 @@ import CSSTransitionGroup from 'react-addons-css-transition-group'
 import MainList from '../MainList'
 import _ from 'lodash'
 
+// collections
+import Persons from '../../../api/persons/persons';
+
 // Step components
 import StepIndicator from '../../components/StepIndicator';
 import IdeasStepOne from './IdeasStepOne'
@@ -83,6 +86,13 @@ export default class IdeaEditor extends Component {
         $(".line-progress-front").width(eachStep * formStep);
     }
 
+    onChangeSearchPerson  = e => {
+        e.preventDefault();
+        const persons = Persons.find({}).fetch()
+        console.log('text', e.target.value);
+        console.log('Persons', persons);
+    }
+
     render() {
         const formMaxStep = 2;
 
@@ -119,7 +129,7 @@ export default class IdeaEditor extends Component {
                                                 ref={form => (this.ideaEditorForm = form)}
                                                 onSubmit={event => event.preventDefault()}>
 
-                                                {formStep === 1 && <IdeasStepOne onChangeForm={this.onChangeDoc} data={doc} />}
+                                                {formStep === 1 && <IdeasStepOne onChangeForm={this.onChangeDoc} data={doc} onChangeSearchPerson={this.onChangeSearchPerson} />}
                                                 {formStep === 2 && <IdeasStepTwo onChangeForm={this.onChangeDoc} data={doc} />}
 
                                                 <div className="forms-bottom-panel">

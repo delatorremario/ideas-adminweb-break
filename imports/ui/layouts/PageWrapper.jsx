@@ -8,7 +8,7 @@ import EditCorporation from '../containers/corporations/EditCorporation';
 
 // Areas
 import Areas from '../pages/areas/Areas';
-import NewArea from '../pages/areas/NewArea';
+import NewArea from '../pages/areas/NewArea'; // debería llamar al contenedor
 import EditArea from '../containers/areas/EditArea';
 
 // Ideas
@@ -38,7 +38,7 @@ const PageWrapper = () => (
 
             {/* Ideas */}
             <Route exact path="/ideas" component={Ideas} />
-            <Route exact path="/ideas/new" component={NewIdea} />
+            <Route exact path="/ideas/new" component={EditIdea} />
             <Route exact path="/idea/:_id/edit" component={EditIdea} />
             
             <Route path="/sendinvitation" component={SendInvitationPage} />

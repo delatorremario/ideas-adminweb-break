@@ -14,4 +14,7 @@ import '../../api/typesareas/server/publications';
 import '../../api/ideas/methods';
 import '../../api/ideas/server/publications';
 
+import '../../api/persons/methods';
+import '../../api/persons/server/publications';
+
 import '../../api/base/base';
