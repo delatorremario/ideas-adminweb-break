@@ -193,6 +193,7 @@ export default class IdeaEditor extends Component {
                                                     <IdeasStep3 onChangeForm={this.onChangeDoc}
                                                         data={doc}
                                                         driversArray={driversArray}     
+                                                        selectDriver={this.selectDriver}
                                                   />}
 
                                                 <div className="forms-bottom-panel">

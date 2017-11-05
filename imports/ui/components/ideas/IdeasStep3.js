@@ -1,8 +1,8 @@
 import React from 'react';
-import { Button, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
+import { Button, FormGroup, ControlLabel, FormControl, TextArea } from 'react-bootstrap';
 import _ from 'lodash';
 
-const IdeasStep3 = ({ onChangeForm, data, driversArray }) =>
+const IdeasStep3 = ({ onChangeForm, data, driversArray, selectDriver }) =>
 
     (
         <div className="form-steps step-one">
@@ -10,48 +10,36 @@ const IdeasStep3 = ({ onChangeForm, data, driversArray }) =>
             <div className="form-group">
                 <div className="col-md-6">
                     <FormGroup>
-                        <ControlLabel>Descripción de la </ControlLabel>
-                        <i className="fa fa-hashtag"></i>
-                        <input
-                            type="text"
+                        <FormControl componentClass="textarea"
                             name="description"
                             onChange={onChangeForm}
-                            value={data.description}
-                            placeholder=""
-                            className="form-control"
-                        />
+                            value={data.description} />
                     </FormGroup>
                 </div>
             </div>
 
-
-            {data && !data.chief &&
-                <div>
-                    <div className="form-group">
-                        <label className="col-sm-3 control-label">Buscar la Persona Encargada del Area</label>
-                        <div className="col-md-6">
-                            <input type="text" className="form-control" onChange={onChangeSearchPerson} />
-                        </div>
-                    </div>
-                    <div className="form-group">
-                        <label className="col-md-10 control-label">Seleccione una Persona para continuar</label>
-                        <div className="col-md-10">
-                            <div className="card">
-                                <ul className="list-group list-group-flush">
-                                    {
-                                        _.map(persons, (person, index) => (
-                                            <li key={index} className="list-group-item" onClick={selectChief(person).bind(this)}>
-                                                rut: {person.rut}   {person.firstName} {person.secondName} {person.lastName}
-                                            </li>))
-                                    }
-
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+            <h2>Oportunidad</h2>
+            <div className="form-group">
+                <div className="col-md-6">
+                    <FormGroup>
+                        <FormControl componentClass="textarea"
+                            name="opportunity"
+                            onChange={onChangeForm}
+                            value={data.opportunity} />
+                    </FormGroup>
                 </div>
-            }
+            </div>
 
+            <h2>Drivers de Valor</h2>
+            <div className="form-group">
+                <div className="col-md-6">
+                    {_.map(driversArray, (driver, index) =>
+                        <button key={index}
+                            onClick={selectDriver(driver).bind(this)}
+                            className={driver === data.driver ? 'btn btn-sm btn-success' : 'btn btn-sm btn-trans'}>{driver}</button>
+                    )}
+                </div>
+            </div>
         </div>
     );
 
