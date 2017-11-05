@@ -1,20 +1,31 @@
 import React from 'react';
+import { Button, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
 import _ from 'lodash';
 
-const IdeasStepTwo = ({ onChangeForm, data, onChangeSearchPerson, persons, selectChief }) =>
+const IdeasStep3 = ({ onChangeForm, data, driversArray }) =>
 
     (
         <div className="form-steps step-one">
-            <h2>Selección de Encargado de Área de Destino</h2>
-
-            {data && data.chief && <div className="panel panel-default">
-                <div className="panel-body">
-                    <p>{data.chief.firstName} {data.chief.secondName} {data.chief.lastName}</p>
-                    {data.chief.rut && <p>rut: {data.chief.rut}</p>}
+            <h2>Descripción de la Idea</h2>
+            <div className="form-group">
+                <div className="col-md-6">
+                    <FormGroup>
+                        <ControlLabel>Descripción de la </ControlLabel>
+                        <i className="fa fa-hashtag"></i>
+                        <input
+                            type="text"
+                            name="description"
+                            onChange={onChangeForm}
+                            value={data.description}
+                            placeholder=""
+                            className="form-control"
+                        />
+                    </FormGroup>
                 </div>
             </div>
-            }
-            { data && !data.chief &&
+
+
+            {data && !data.chief &&
                 <div>
                     <div className="form-group">
                         <label className="col-sm-3 control-label">Buscar la Persona Encargada del Area</label>
@@ -44,4 +55,4 @@ const IdeasStepTwo = ({ onChangeForm, data, onChangeSearchPerson, persons, selec
         </div>
     );
 
-export default IdeasStepTwo;
+export default IdeasStep3;

@@ -1,33 +1,23 @@
 import React from 'react';
 import _ from 'lodash';
 
-const IdeasStepOne = ({ onChangeForm, data, onChangeSearchPerson, persons, selectPerson, origins, selectOrigin }) =>
+const IdeasStep2 = ({ onChangeForm, data, onChangeSearchPerson, persons, selectChief }) =>
 
     (
         <div className="form-steps step-one">
-            <h2>Origen de la Idea</h2>
-            <div className="form-group">
-                <div className="col-md-6">
-                    {_.map(origins, (origin, index) =>
-                        <button key={index}
-                            onClick={selectOrigin(origin).bind(this)}
-                            className={origin === data.origin ? 'btn btn-sm btn-success' : 'btn btn-sm btn-trans'}>{origin}</button>
-                    )}
-                </div>
-            </div>
-            <h2>Selección de Persona</h2>
+            <h2>Selección de Encargado de Área de Destino</h2>
 
-            {data && data.person && <div className="panel panel-default">
+            {data && data.chief && <div className="panel panel-default">
                 <div className="panel-body">
-                    <p>{data.person.firstName} {data.person.secondName} {data.person.lastName}</p>
-                    {data.person.rut && <p>rut: {data.person.rut}</p>}
+                    <p>{data.chief.firstName} {data.chief.secondName} {data.chief.lastName}</p>
+                    {data.chief.rut && <p>rut: {data.chief.rut}</p>}
                 </div>
             </div>
             }
-            { data && !data.person &&
+            { data && !data.chief &&
                 <div>
                     <div className="form-group">
-                        <label className="col-sm-3 control-label">Buscar la Persona Dueña de la Idea</label>
+                        <label className="col-sm-3 control-label">Buscar la Persona Encargada del Area</label>
                         <div className="col-md-6">
                             <input type="text" className="form-control" onChange={onChangeSearchPerson} />
                         </div>
@@ -39,7 +29,7 @@ const IdeasStepOne = ({ onChangeForm, data, onChangeSearchPerson, persons, selec
                                 <ul className="list-group list-group-flush">
                                     {
                                         _.map(persons, (person, index) => (
-                                            <li key={index} className="list-group-item" onClick={selectPerson(person).bind(this)}>
+                                            <li key={index} className="list-group-item" onClick={selectChief(person).bind(this)}>
                                                 rut: {person.rut}   {person.firstName} {person.secondName} {person.lastName}
                                             </li>))
                                     }
@@ -54,4 +44,4 @@ const IdeasStepOne = ({ onChangeForm, data, onChangeSearchPerson, persons, selec
         </div>
     );
 
-export default IdeasStepOne;
+export default IdeasStep2;

@@ -11,8 +11,9 @@ import Persons from '../../../api/persons/persons';
 
 // Step components
 import StepIndicator from '../../components/StepIndicator';
-import IdeasStepOne from './IdeasStepOne'
-import IdeasStepTwo from './IdeasStepTwo'
+import IdeasStep1 from './IdeasStep1'
+import IdeasStep2 from './IdeasStep2'
+import IdeasStep3 from './IdeasStep3'
 
 export default class IdeaEditor extends Component {
     state = {
@@ -20,9 +21,11 @@ export default class IdeaEditor extends Component {
         doc: {
             _id: '',
             origin: '',
-            description: '',
             person: {},
             chief:{},
+            description: '',
+            opportunity:'',
+            drivers:[],
         },
         persons: []
     }
@@ -43,7 +46,7 @@ export default class IdeaEditor extends Component {
 
     toggleStepReady = () => {
         const { formStep } = this.state;
-        const { origin, person, description } = this.state.doc;
+        const { origin, person, chief, description } = this.state.doc;
         return (formStep === 1 && origin && person) ||
             (formStep === 2 && origin && person && chief)
     }
@@ -128,8 +131,14 @@ export default class IdeaEditor extends Component {
         this.setState(prev => ({ doc: { ...prev.doc, origin } }))
     }
 
+    selectDriver = drivers => e => {
+        e.preventDefault()
+        this.setState(prev => ({ doc: { ...prev.doc, drivers } }))
+    }
+
     render() {
         const origins = ['Email', 'Yamer', 'Otra']
+        const driversArray = ['Driver 1', 'Driver 2', 'Drivers 3', 'Driver 4']
         const formMaxStep = 4;
 
         const { formStep } = this.state;
@@ -165,7 +174,7 @@ export default class IdeaEditor extends Component {
                                                 onSubmit={event => event.preventDefault()}>
 
                                                 {formStep === 1 &&
-                                                    <IdeasStepOne onChangeForm={this.onChangeDoc}
+                                                    <IdeasStep1 onChangeForm={this.onChangeDoc}
                                                         data={doc}
                                                         onChangeSearchPerson={this.onChangeSearchPerson}
                                                         persons={persons}
@@ -174,11 +183,16 @@ export default class IdeaEditor extends Component {
                                                         selectOrigin={this.selectOrigin}
                                                     />}
                                                 {formStep === 2 &&
-                                                    <IdeasStepTwo onChangeForm={this.onChangeDoc}
+                                                    <IdeasStep2 onChangeForm={this.onChangeDoc}
                                                         data={doc}
                                                         onChangeSearchPerson={this.onChangeSearchPerson}
                                                         persons={persons}
                                                         selectChief={this.selectChief}
+                                                  />}
+                                                {formStep === 3 &&
+                                                    <IdeasStep3 onChangeForm={this.onChangeDoc}
+                                                        data={doc}
+                                                        driversArray={driversArray}     
                                                   />}
 
                                                 <div className="forms-bottom-panel">

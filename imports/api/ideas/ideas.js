@@ -25,35 +25,8 @@ Ideas.schema = new SimpleSchema([
     { person: { type: Object } },
     { chief: { type: Object } },
     { description: { type: String } },
-
-
-    // firstName: {
-    //     type: String
-    // },
-    // secondName: {
-    //     type: String, optional: true
-    // },
-    // lastName: {
-    //     type: String
-    // },
-    // email: {
-    //     type: String, unique: true
-    // },
-    // rut: {
-    //     type: String, optional: true
-    // },
-    // oneUp: {
-    //     type: String, optional: true
-    // },
-    // areaId: {
-    //     type: String, optional: true
-    // },
-    // masterArea: {
-    //     type: String, optional: true
-    // },
-    // corporationId: {
-    //     type: String
-    // },
+    { opportunity: { type: String } },
+    { 'drivers.$': { type: String } },
 ]);
 
 Ideas.attachSchema(Ideas.schema);

@@ -12,6 +12,10 @@ export const upsertIdea = new ValidatedMethod({
         person: { type: Object },
         chief: { type: Object },
         description: { type: String },
+        description: { type: String },
+        opportunity: { type: String },
+        'drivers.$': { type: String },
+
     }).validator(),
     run(idea) {
         return Ideas.upsert({ _id: idea._id }, { $set: idea });
