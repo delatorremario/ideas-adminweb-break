@@ -12,6 +12,7 @@ Meteor.publish('areas.list', () => {
   const user = self.user();
   if (user) {
     const filters = { corporationId: (user.profile && user.profile.selectedCorporationId) || '' };
+    console.log('publish area.list', filters);
     return Areas.find(filters);
   } else return;
 });

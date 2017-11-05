@@ -79,7 +79,7 @@ Meteor.methods({
             _.map(firstnodes, firstnode => {
                 firstnode.children = addChildNodes(firstnode);
             })
-
+            
             return firstnodes;
         } else return;
     }

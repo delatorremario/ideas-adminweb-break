@@ -14,6 +14,7 @@ import StepIndicator from '../../components/StepIndicator';
 import IdeasStep1 from './IdeasStep1'
 import IdeasStep2 from './IdeasStep2'
 import IdeasStep3 from './IdeasStep3'
+import IdeasStep4 from './IdeasStep4'
 
 export default class IdeaEditor extends Component {
     state = {
@@ -26,6 +27,7 @@ export default class IdeaEditor extends Component {
             description: '',
             opportunity: '',
             drivers: [],
+            collaborators: [],
         },
         persons: []
     }
@@ -49,7 +51,8 @@ export default class IdeaEditor extends Component {
         const { origin, person, chief, description, opportunity, drivers } = this.state.doc;
         return (formStep === 1 && origin && person) ||
             (formStep === 2 && origin && person && chief) ||
-            (formStep === 3 && origin && person && chief && description && opportunity && drivers)
+            (formStep === 3 && origin && person && chief && description && opportunity && drivers) ||
+            (formStep === 4 && origin && person && chief && description && opportunity && drivers)
     }
 
 
@@ -118,166 +121,148 @@ export default class IdeaEditor extends Component {
         this.setState({ persons });
     }
 
-selectPerson = person => e => {
-    e.preventDefault()
-    this.setState(prev => ({ doc: { ...prev.doc, person }, persons: [] }))
-}
+    selectPerson = person => e => {
+        e.preventDefault()
+        this.setState(prev => ({ doc: { ...prev.doc, person }, persons: [] }))
+    }
 
-selectChief = chief => e => {
-    e.preventDefault()
-    this.setState(prev => ({ doc: { ...prev.doc, chief }, persons: [] }))
-}
+    selectChief = chief => e => {
+        e.preventDefault()
+        this.setState(prev => ({ doc: { ...prev.doc, chief }, persons: [] }))
+    }
+    selectCollaborator = collaborator => e => {
+        e.preventDefault()
+        const prevCollaborators = this.state.doc.collaborators;
+        const collaborators = _.includes(prevCollaborators, collaborator) && _.pull(prevCollaborators, collaborator) || _.union(prevCollaborators, [collaborator])
+        this.setState(prev => ({ doc: { ...prev.doc, collaborators }, persons: [] }))
+    }
 
-selectOrigin = origin => e => {
-    e.preventDefault()
-    this.setState(prev => ({ doc: { ...prev.doc, origin } }))
-}
+    selectOrigin = origin => e => {
+        e.preventDefault()
+        this.setState(prev => ({ doc: { ...prev.doc, origin } }))
+    }
 
-selectDriver = driver => e => {
-    e.preventDefault()
-    const prevDrivers = this.state.doc.drivers;
-    const drivers=_.includes(prevDrivers, driver) && _.pull(prevDrivers,driver) || _.union(prevDrivers, [driver]) 
-    this.setState(prev => ({ doc: { ...prev.doc, drivers } }))
-}
+    selectDriver = driver => e => {
+        e.preventDefault()
+        const prevDrivers = this.state.doc.drivers;
+        const drivers = _.includes(prevDrivers, driver) && _.pull(prevDrivers, driver) || _.union(prevDrivers, [driver])
+        this.setState(prev => ({ doc: { ...prev.doc, drivers } }))
+    }
 
-render() {
-    const origins = ['Email', 'Yamer', 'Otra']
-    const driversArray = ['Driver 1', 'Driver 2', 'Drivers 3', 'Driver 4']
-    const formMaxStep = 4;
+    render() {
+        const origins = ['Email', 'Yamer', 'Otra']
+        const driversArray = ['Driver 1', 'Driver 2', 'Drivers 3', 'Driver 4']
+        const formMaxStep = 4;
 
-    const { formStep } = this.state;
-    const { doc, persons } = this.state;
-    const { origin, _id } = this.state.doc;
-    console.log('DOC', doc);
-    return (
-        <div>
+        const { formStep } = this.state;
+        const { doc, persons } = this.state;
+        const { origin, _id } = this.state.doc;
+        console.log('DOC', doc);
+        return (
+            <div>
 
-            <section id="main-content">
-                <div className="row">
-                    <div className="col-md-12 col-lg-12">
-                        <div className="panel">
+                <section id="main-content">
+                    <div className="row">
+                        <div className="col-md-12 col-lg-12">
+                            <div className="panel">
 
-                            <div className="row">
-                                <div className="col-xs-12">
-                                    <StepIndicator changeStep={this.changeStep} formStep={formStep} items={formMaxStep} />
-                                </div>
-                                <div className="panel-body ng-binding col-xs-10 col-xs-offset-1">
+                                <div className="row">
+                                    <div className="col-xs-12">
+                                        <StepIndicator changeStep={this.changeStep} formStep={formStep} items={formMaxStep} />
+                                    </div>
+                                    <div className="panel-body ng-binding col-xs-10 col-xs-offset-1">
 
-                                    <CSSTransitionGroup
-                                        component="div"
-                                        className="steps-container"
-                                        transitionName="formTransition"
-                                        transitionEnterTimeout={1000}
-                                        transitionLeaveTimeout={1000}
-                                    >
+                                        <CSSTransitionGroup
+                                            component="div"
+                                            className="steps-container"
+                                            transitionName="formTransition"
+                                            transitionEnterTimeout={1000}
+                                            transitionLeaveTimeout={1000}
+                                        >
 
-                                        <form
-                                            className="label-left"
-                                            noValidate
-                                            ref={form => (this.ideaEditorForm = form)}
-                                            onSubmit={event => event.preventDefault()}>
+                                            <form
+                                                className="label-left"
+                                                noValidate
+                                                ref={form => (this.ideaEditorForm = form)}
+                                                onSubmit={event => event.preventDefault()}>
 
-                                            {formStep === 1 &&
-                                                <IdeasStep1 onChangeForm={this.onChangeDoc}
-                                                    data={doc}
-                                                    onChangeSearchPerson={this.onChangeSearchPerson}
-                                                    persons={persons}
-                                                    selectPerson={this.selectPerson}
-                                                    origins={origins}
-                                                    selectOrigin={this.selectOrigin}
-                                                />}
-                                            {formStep === 2 &&
-                                                <IdeasStep2 onChangeForm={this.onChangeDoc}
-                                                    data={doc}
-                                                    onChangeSearchPerson={this.onChangeSearchPerson}
-                                                    persons={persons}
-                                                    selectChief={this.selectChief}
-                                                />}
-                                            {formStep === 3 &&
-                                                <IdeasStep3 onChangeForm={this.onChangeDoc}
-                                                    data={doc}
-                                                    driversArray={driversArray}
-                                                    selectDriver={this.selectDriver}
-                                                />}
+                                                {formStep === 1 &&
+                                                    <IdeasStep1 onChangeForm={this.onChangeDoc}
+                                                        data={doc}
+                                                        onChangeSearchPerson={this.onChangeSearchPerson}
+                                                        persons={persons}
+                                                        selectPerson={this.selectPerson}
+                                                        origins={origins}
+                                                        selectOrigin={this.selectOrigin}
+                                                    />}
+                                                {formStep === 2 &&
+                                                    <IdeasStep2 onChangeForm={this.onChangeDoc}
+                                                        data={doc}
+                                                        onChangeSearchPerson={this.onChangeSearchPerson}
+                                                        persons={persons}
+                                                        selectChief={this.selectChief}
+                                                    />}
+                                                {formStep === 3 &&
+                                                    <IdeasStep3 onChangeForm={this.onChangeDoc}
+                                                        data={doc}
+                                                        driversArray={driversArray}
+                                                        selectDriver={this.selectDriver}
+                                                    />}
+                                                {formStep === 4 &&
+                                                    <IdeasStep4 
+                                                        data={doc}
+                                                        onChangeSearchPerson={this.onChangeSearchPerson}
+                                                        persons={persons}
+                                                        selectCollaborator={this.selectCollaborator}
+                                                    />}
 
-                                            <div className="forms-bottom-panel">
-                                                {
-                                                    formStep === formMaxStep &&
-                                                    <Button
-                                                        disabled={this.toggleStepReady() ? false : true}
-                                                        type='submit'
-                                                        bsStyle="success"
-                                                        className="btn btn-sm pull-right">
-                                                        <i className="fa fa-paper-plane"></i>
-                                                        Finalizar
+                                                <div className="forms-bottom-panel">
+                                                    {
+                                                        formStep === formMaxStep &&
+                                                        <Button
+                                                            disabled={this.toggleStepReady() ? false : true}
+                                                            type='submit'
+                                                            bsStyle="success"
+                                                            className="btn btn-sm pull-right">
+                                                            <i className="fa fa-paper-plane"></i>
+                                                            Finalizar
+                                                        </Button> ||
+                                                        <Button
+                                                            onClick={this.changeStep(true, 1)}
+                                                            disabled={this.toggleStepReady() ? false : true}
+                                                            type='button'
+                                                            bsStyle="success"
+                                                            className="btn btn-sm pull-right">
+                                                            <i className="fa fa-arrow-right"></i>
+                                                            Siguiente
                                                         </Button>
-                                                    ||
-                                                    <Button
-                                                        onClick={this.changeStep(true, 1)}
-                                                        disabled={this.toggleStepReady() ? false : true}
-                                                        type='button'
-                                                        bsStyle="success"
-                                                        className="btn btn-sm pull-right">
-                                                        <i className="fa fa-arrow-right"></i>
-                                                        Siguiente
+                                                    }
+
+                                                    {
+                                                        formStep !== 1 &&
+                                                        <Button
+                                                            onClick={this.changeStep(true, -1)}
+                                                            type="button" bsStyle="default" className="btn btn-sm pull-right">
+                                                            <i className="fa fa-arrow-left"></i>{`Anterior`}
                                                         </Button>
-                                                }
+                                                    }
 
-                                                {
-                                                    formStep !== 1 &&
-                                                    <Button
-                                                        onClick={this.changeStep(true, -1)}
-                                                        type="button" bsStyle="default" className="btn btn-sm pull-right">
-                                                        <i className="fa fa-arrow-left"></i>{`Anterior`}
-                                                    </Button>
-                                                }
+                                                    <Button onClick={(e) => this.props.history.push('/ideas')} type="button" bsStyle="default" className="btn btn-trans btn-sm pull-right"><i className="fa fa-times"></i>Cancelar</Button>
 
-                                                <Button onClick={(e) => this.props.history.push('/ideas')} type="button" bsStyle="default" className="btn btn-trans btn-sm pull-right"><i className="fa fa-times"></i>Cancelar</Button>
-
-                                            </div>
-                                        </form>
-                                        {/* <div className="row">
-                                                <div className="col-xs-12 col-sm-offset-4 col-sm-6 control-bottom">
-                                                    <Button type="submit" className="reset-icon" bsStyle="success">
-                                                        <i className="fa fa-plus"></i>{_id ? ' Guardar' : ' Crear'}
-                                                    </Button>
                                                 </div>
-                                            </div> */}
+                                            </form>
 
-                                    </CSSTransitionGroup>
+                                        </CSSTransitionGroup>
 
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-
-            </section>
-
-
-            {/* 
-
-                    <FormGroup>
-                        <div className="col-sm-4">
-                            <ControlLabel>Origin</ControlLabel>
-                        </div>
-                        <div className="col-sm-6">
-                            <FormControl
-                                type="text"
-                                name="origin"
-                                value={origin}
-                                onChange={this.onChangeDoc}
-                                placeholder="Origen"
-                            />
-                        </div>
-                    </FormGroup>
-
-                   
-
-               */}
-        </div>
-    )
-}
+                </section>
+            </div>
+        )
+    }
 }
 
 IdeaEditor.propTypes = {

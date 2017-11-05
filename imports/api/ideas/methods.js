@@ -15,6 +15,7 @@ export const upsertIdea = new ValidatedMethod({
         description: { type: String },
         opportunity: { type: String },
         'drivers.$': { type: String },
+        'collaborators.$': { type: Object, optional: true },
 
     }).validator(),
     run(idea) {
