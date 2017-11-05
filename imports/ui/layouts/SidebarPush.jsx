@@ -32,11 +32,12 @@ class SidebarPush extends Component {
                     path: "/corporations",
                     roles: ['SuperAdminHolos']
                 },
-                {
-                    title: "Areas",
-                    iconClasses: ["fa", "fa-fw", "fa-sitemap"],
-                    path: "/areas",
-                },
+                // {
+                //     title: "Areas",
+                //     iconClasses: ["fa", "fa-fw", "fa-sitemap"],
+                //     path: "/areas",
+                //     roles: ['SuperAdminHolos']
+                // },
                 {
                     title: "Ideas",
                     iconClasses: ["fa", "fa-fw", "fa-lightbulb-o"],
