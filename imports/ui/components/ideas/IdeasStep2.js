@@ -1,5 +1,6 @@
 import React from 'react';
 import _ from 'lodash';
+import IdeaCard from './IdeaCard';
 
 const IdeasStep2 = ({ onChangeForm, data, onChangeSearchPerson, persons, selectChief }) =>
 
@@ -33,6 +34,10 @@ const IdeasStep2 = ({ onChangeForm, data, onChangeSearchPerson, persons, selectC
                                                 rut: {person.rut}   {person.firstName} {person.secondName} {person.lastName}
                                             </li>))
                                     }
+
+                                    <div className="row">
+                                        <IdeaCard />
+                                    </div>
 
                                 </ul>
                             </div>
