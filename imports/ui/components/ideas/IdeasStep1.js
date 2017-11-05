@@ -29,7 +29,7 @@ const IdeasStep1 = ({ onChangeForm, data, onChangeSearchPerson, persons, selectP
                     <div className="form-group">
                         <label className="col-sm-3 control-label">Buscar la Persona Dueña de la Idea</label>
                         <div className="col-md-6">
-                            <input type="text" className="form-control" onChange={onChangeSearchPerson} />
+                            <input type="text" className="form-control" onChange={onChangeSearchPerson.bind(this)} />
                         </div>
                     </div>
                     <div className="form-group">

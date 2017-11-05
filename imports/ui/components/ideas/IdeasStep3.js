@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, FormGroup, ControlLabel, FormControl, TextArea } from 'react-bootstrap';
+import { FormGroup,FormControl,  } from 'react-bootstrap';
 import _ from 'lodash';
 
 const IdeasStep3 = ({ onChangeForm, data, driversArray, selectDriver }) =>
@@ -36,7 +36,7 @@ const IdeasStep3 = ({ onChangeForm, data, driversArray, selectDriver }) =>
                     {_.map(driversArray, (driver, index) =>
                         <button key={index}
                             onClick={selectDriver(driver).bind(this)}
-                            className={driver === data.driver ? 'btn btn-sm btn-success' : 'btn btn-sm btn-trans'}>{driver}</button>
+                            className={ _.includes(data.drivers, driver) ? 'btn btn-sm btn-success' : 'btn btn-sm btn-trans'}>{driver}</button>
                     )}
                 </div>
             </div>
