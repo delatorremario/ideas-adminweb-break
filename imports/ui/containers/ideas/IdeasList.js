@@ -11,7 +11,7 @@ import Loading from '../../components/Loading.js';
 const composer = (params, onData) => {
     const subscription = Meteor.subscribe('ideas.list');
     if (subscription.ready()) {
-        const ideas = Ideas.find({}).fetch();
+        const ideas = Ideas.find({}, { createdAt: -1, limit: 10 }).fetch();
         onData(null, { ideas });
     }
 };
