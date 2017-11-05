@@ -1,5 +1,4 @@
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
-import { Random } from 'meteor/random';
 import { Meteor } from 'meteor/meteor';
 
 const BaseSchema = new SimpleSchema({
@@ -14,6 +13,7 @@ const BaseSchema = new SimpleSchema({
   //   }
   // },
 
+  _id: { type: String, optional: true },
   userId: {
     type: String,
     index: true,

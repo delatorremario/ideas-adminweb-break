@@ -2,8 +2,8 @@ import { Mongo } from 'meteor/mongo';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Factory } from 'meteor/dburles:factory';
 
-import Base from '../base/base';
-import Persons from '../persons/persons';
+import BaseSchema from '../base/baseSchema';
+import PersonSchema from '../persons/personSchema';
 
 const Ideas = new Mongo.Collection('ideas');
 export default Ideas;
@@ -21,14 +21,14 @@ Ideas.deny({
 })
 
 Ideas.schema = new SimpleSchema([
-    Base,
+    BaseSchema,
     { origin: { type: String } },
-    { person: { type: Object } },
-    { chief: { type: Object } },
+    { person: { type: PersonSchema } },
+    { chief: { type: PersonSchema } },
     { description: { type: String } },
     { opportunity: { type: String } },
-    { 'drivers.$': { type: String } },
-    { 'collaborators.$': { type: Object, optional: true } },
+    { drivers: { type: [String] } },
+    { collaborators: { type: [PersonSchema], optional: true } },
 ]);
 
 Ideas.attachSchema(Ideas.schema);

@@ -3,22 +3,27 @@ import _ from 'lodash';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import Ideas from './ideas';
 import rateLimit from '../../modules/rate-limit.js';
+import PersonSchema from '../../api/persons/personSchema';
+
 
 export const upsertIdea = new ValidatedMethod({
     name: 'ideas.upsert',
     validate: new SimpleSchema({
         _id: { type: String, optional: true },
+        userId: { type: String, optional: true },
+        corporationId: { type: String, optional: true },
+        createdAt: { type: Date, optional: true },
         origin: { type: String },
-        person: { type: Object },
-        chief: { type: Object },
-        description: { type: String },
+        person: { type: PersonSchema },
+        chief: { type: PersonSchema },
         description: { type: String },
         opportunity: { type: String },
-        'drivers.$': { type: String },
-        'collaborators.$': { type: Object, optional: true },
+        drivers: { type: [String] },
+        collaborators: { type: [PersonSchema], optional: true },
 
     }).validator(),
     run(idea) {
+        console.log('IDEA', idea);
         return Ideas.upsert({ _id: idea._id }, { $set: idea });
     },
 });

@@ -1,3 +1,4 @@
+import Meteor from 'meteor/meteor';
 import { Bert } from 'meteor/themeteorchef:bert';
 import { upsertIdea } from '../../api/ideas/methods.js';
 import '../validation.js';
@@ -6,6 +7,14 @@ let component;
 
 const handleUpsert = () => {
     const { doc } = component.state;
+    const user = this.Meteor.user()
+    console.log('USER', user);
+    _.extend(doc,{
+        createdAt: new Date(),
+        // updatedAt: new Date,
+       // userId: user._id,
+       // corporationId: user.profile.selectedCorporationId
+    })
     console.log('handleUpsert doc', doc);
     const confirmation = doc && doc._id ? 'Datos actualizados correctamente' : 'Datos guardados con éxito';
     // const upsert = {
@@ -16,6 +25,7 @@ const handleUpsert = () => {
     const upsert = doc;
 
     if (doc && doc._id) upsert._id = doc._id;
+    
     console.log('UPSERT', upsert)
     upsertIdea.call(upsert, (error, response) => {
         if (error) {

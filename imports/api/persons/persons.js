@@ -1,6 +1,7 @@
 import { Mongo } from 'meteor/mongo';
-import { SimpleSchema } from 'meteor/aldeed:simple-schema';
-import { Factory } from 'meteor/dburles:factory';
+// import { Factory } from 'meteor/dburles:factory';
+
+import PersonSchema from './personSchema';
 
 const Persons = new Mongo.Collection('persons');
 export default Persons
@@ -17,34 +18,4 @@ Persons.deny({
     remove: () => true,
 })
 
-Persons.schema = new SimpleSchema({
-    firstName: {
-        type: String
-    },
-    secondName: {
-        type: String, optional: true
-    },
-    lastName: {
-        type: String
-    },
-    email: {
-        type: String, unique: true
-    },
-    rut: {
-        type: String, optional: true
-    },
-    oneUp: {
-        type: String, optional: true
-    },
-    areaId: {
-        type: String, optional: true
-    },
-    masterArea: {
-        type: String, optional: true
-    },
-    corporationId: {
-        type: String
-    },
-})
-
-Persons.attachSchema(Persons.schema);
+Persons.attachSchema(PersonSchema);

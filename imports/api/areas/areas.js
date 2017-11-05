@@ -1,6 +1,7 @@
 import { Mongo } from 'meteor/mongo';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Factory } from 'meteor/dburles:factory';
+import BaseSchema from '../../api/base/baseSchema';
 
 const Areas = new Mongo.Collection('areas');
 export default Areas
@@ -17,28 +18,29 @@ Areas.deny({
     remove: () => true,
 })
 
-Areas.schema = new SimpleSchema({
-    name: {
+Areas.schema = new SimpleSchema([
+    BaseSchema,
+    {name: {
         type: String
-    },
-    typeAreaId: {
+    }},
+    {typeAreaId: {
         type: String, optional: true // Area Operativa o Area Funcional
-    },
-    typeAreaStructureId: {
+    }},
+    {typeAreaStructureId: {
         type: String, optional: true // 'Presidencia', 'Vicepresidencia', 'Gerencia General', 'Gerencia', 'SuperIntendencia
-    },
-    parentAreaId: {
+    }},
+    {parentAreaId: {
         type: String, optional: true
-    },
-    masterDataMatchText: {
+    }},
+    {masterDataMatchText: {
         type: String, optional: true
-    },
-    responsableId: {
+    }},
+    {responsableId: {
         type: String, optional: true
-    },
-    corporationId: {
+    }},
+    {corporationId: {
         type: String
-    },
-})
+    }},
+])
 
 Areas.attachSchema(Areas.schema);
