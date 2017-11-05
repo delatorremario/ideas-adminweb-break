@@ -5,7 +5,6 @@ import { Bert } from 'meteor/themeteorchef:bert';
 import { removeIdea } from '../../../api/ideas/methods';
 import $ from 'jquery';
 import swal from 'sweetalert2';
-import moment from 'moment';
 
 const handleNav = (history, _id) => {
     history.push(`/idea/${_id}`)
