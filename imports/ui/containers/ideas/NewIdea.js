@@ -2,7 +2,6 @@ import { Meteor } from 'meteor/meteor';
 import { composeWithTracker } from 'react-komposer';
 import { ReactiveVar } from 'meteor/reactive-var'
 
-import Ideas from '../../../api/ideas/ideas';
 import EditIdea from '../../pages/ideas/EditIdea';
 import Loading from '../../components/Loading.js';
 import Persons from '../../../api/persons/persons';

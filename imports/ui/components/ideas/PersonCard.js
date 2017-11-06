@@ -24,7 +24,7 @@ class PersonCard extends Component {
                 <div className="panel-body">
                     <div className="col-md-6 card-single">
                         <div className="close-card" onClick={removePerson(person).bind(this)} ><i className="fa fa-times"></i></div>
-                        <h3><i className="fa fa-user title-icon"></i> {person.firstName} {person.secondName} {person.lastName}</h3>
+                        <h3><i className="fa fa-user title-icon"></i> {person.lastName}, {person.firstName} {person.secondName}</h3>
                         <small>{person.email}</small>
                         <h4>{area && area.name}</h4>
                         {/* <p>Escondida - NPI & Conc. Handling Operations</p>

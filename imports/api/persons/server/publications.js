@@ -13,13 +13,12 @@ Meteor.publish('persons.search', (text, limit) => {
   check(limit, Number);
   const self = this.Meteor;
   const user = self.user();
+
   if (user) {
     const filters = { $text: { $search: text }, corporationId: (user.profile && user.profile.selectedCorporationId) || '' };
     const persons = Persons.find(
       filters,
       { fields: { score: { $meta: 'textScore' } } }, { sort: { score: -1 }, limit: limit });
-
-    console.log('PERSONS', persons.fetch() && persons.fetch()[0]);
 
     return persons;
   } else return;

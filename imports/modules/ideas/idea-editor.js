@@ -7,15 +7,19 @@ let component;
 
 const handleUpsert = () => {
     const { doc } = component.state;
-    const user = this.Meteor.user()
-    console.log('USER', user);
-    _.extend(doc,{
+    const user = this.Meteor.user();
+   
+    _.extend(doc, {
         createdAt: new Date(),
         // updatedAt: new Date,
-       // userId: user._id,
-       // corporationId: user.profile.selectedCorporationId
+        // userId: user._id,
+        // corporationId: user.profile.selectedCorporationId
     })
-    console.log('handleUpsert doc', doc);
+
+    console.log('handleUpsert doc undelete', doc);
+
+    console.log('handleUpsert doc DEELTE', doc);
+    
     const confirmation = doc && doc._id ? 'Datos actualizados correctamente' : 'Datos guardados con éxito';
     // const upsert = {
     //     origin: doc.origin.trim(),
@@ -25,8 +29,9 @@ const handleUpsert = () => {
     const upsert = doc;
 
     if (doc && doc._id) upsert._id = doc._id;
-    
+
     console.log('UPSERT', upsert)
+    
     upsertIdea.call(upsert, (error, response) => {
         if (error) {
             Bert.alert(error.reason, 'danger');

@@ -133,6 +133,8 @@ export default class IdeaEditor extends Component {
 
     selectPerson = person => e => {
         e.preventDefault()
+        delete person.score;
+        
         this.setState(prev => ({
             doc: { ...prev.doc, person: prev.doc.person !== person && person || undefined }
         }))
@@ -140,12 +142,16 @@ export default class IdeaEditor extends Component {
 
     selectChief = chief => e => {
         e.preventDefault()
+        delete chief.score;
+        
         this.setState(prev => ({
             doc: { ...prev.doc, chief: prev.doc.chief !== chief && chief || undefined }
         }))
     }
     selectCollaborator = collaborator => e => {
         e.preventDefault()
+        delete collaborator.score;
+        
         const prevCollaborators = this.state.doc.collaborators;
         const collaborators = _.includes(prevCollaborators, collaborator) && _.pull(prevCollaborators, collaborator) || _.union(prevCollaborators, [collaborator])
         this.setState(prev => ({ doc: { ...prev.doc, collaborators }, persons: [] }))
