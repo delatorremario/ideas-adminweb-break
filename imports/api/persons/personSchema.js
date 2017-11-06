@@ -7,12 +7,12 @@ const PersonSchema = new SimpleSchema([
     { userId: { type: String, optional: true } },
     { createdAt: { type: Date, optional: true } },
     { updatedAt: { type: Date, optional: true } },
-    
+
+    { lastName: { type: String } },
     { firstName: { type: String } },
     { secondName: { type: String, optional: true } },
-    { lastName: { type: String } },
-    { email: { type: String } },
     { rut: { type: String, optional: true } },
+    { email: { type: String } },
     { oneUp: { type: String, optional: true } },
     { areaId: { type: String, optional: true } },
     { masterArea: { type: String, optional: true } },

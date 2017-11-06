@@ -27,9 +27,8 @@ const IdeasStep1 = ({ onChangeForm, data, onChangeSearchPerson, persons, selectP
             {data && !data.person &&
                 <div>
                     <div className="form-group">
-                        <label className="col-sm-3 control-label">Buscar la Persona Dueña de la Idea</label>
                         <div className="col-md-6">
-                            <input type="text" className="form-control" onChange={onChangeSearchPerson.bind(this)} />
+                            <input type="text" className="form-control" placeholder="Buscar por Apellido y Nombres o RUT" onChange={onChangeSearchPerson.bind(this)} />
                         </div>
                     </div>
                     {
@@ -41,7 +40,7 @@ const IdeasStep1 = ({ onChangeForm, data, onChangeSearchPerson, persons, selectP
                                         {
                                             _.map(persons, (person, index) => (
                                                 <li key={index} className="list-group-item" onClick={selectPerson(person).bind(this)}>
-                                                    {person.firstName} {person.secondName} {person.lastName}
+                                                    {person.lastName}, {person.firstName} {person.secondName}  <span className="badge"><small>{person.rut}</small></span>
                                                 </li>))
                                         }
 

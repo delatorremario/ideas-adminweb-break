@@ -29,7 +29,7 @@ export default class IdeaEditor extends Component {
             drivers: [],
             collaborators: [],
         },
-        persons: []
+       // persons: Persons.find({}).fetch()
     }
 
     componentDidMount() {
@@ -99,43 +99,49 @@ export default class IdeaEditor extends Component {
     onChangeSearchPerson = e => {
         e.preventDefault();
         const text = e.target.value;
-        const arrayText = _.split(_.replace(text.trim(), ' ', ','), ',');
+       // const arrayText = _.split(_.replace(text.trim(), ' ', ','), ',');
+      
 
-        var rx = [];
-        arrayText.forEach(function name(value) {
-            var v = "^" + value + ".*"; //value.replace(/\//ig, "");
-            rx.push(new RegExp(v, "i"));
-        });
+        this.props.textSearch.set(text);
 
-        console.log('RX', rx);
+        // var rx = [];
+        // arrayText.forEach(function name(value) {
+        //     var v = "^" + value + ".*"; //value.replace(/\//ig, "");
+        //     rx.push(new RegExp(v, "i"));
+        // });
 
-        const persons = Persons.find({
-            $or: [
+        // console.log('RX', rx);
 
-                { firstName: { $in: rx } },
-                { secondName: { $in: rx } },
-                { lastName: { $in: rx } },
-                { rut: { $in: rx } },
+        // const newsearch = Persons.find({ $text: { $search: text } }, { score: { $meta: "textScore" } }).sort({ score: { $meta: "textScore" } }).fetch()
+        // console.log('newsearch', newsearch)
 
-            ]
-        }, { sort: { firstName: 1, secondName: 1, lastName: 1 }, limit: 100 }).fetch() || []
+        // const persons = Persons.find({
+        //     $or: [
 
-        this.setState({ persons });
+        //         { firstName: { $in: rx } },
+        //         { secondName: { $in: rx } },
+        //         { lastName: { $in: rx } },
+        //         { rut: { $in: rx } },
+
+        //     ]
+        // }, { sort: { firstName: 1, secondName: 1, lastName: 1 }, limit: 100 }).fetch() || []
+
+        // const persons = Persons.find({}).fetch();
+
+        // this.setState({ persons });
     }
 
     selectPerson = person => e => {
         e.preventDefault()
         this.setState(prev => ({
-            doc: { ...prev.doc, person: prev.doc.person !== person && person || undefined }, 
-            persons: []
+            doc: { ...prev.doc, person: prev.doc.person !== person && person || undefined }
         }))
     }
 
     selectChief = chief => e => {
         e.preventDefault()
         this.setState(prev => ({
-            doc: { ...prev.doc, chief: prev.doc.chief !== chief && chief || undefined }, 
-            persons: []
+            doc: { ...prev.doc, chief: prev.doc.chief !== chief && chief || undefined }
         }))
     }
     selectCollaborator = collaborator => e => {
@@ -162,8 +168,12 @@ export default class IdeaEditor extends Component {
         const driversArray = ['Driver 1', 'Driver 2', 'Drivers 3', 'Driver 4']
         const formMaxStep = 4;
 
+        const { persons } = this.props;
+
+        console.log('persons', persons);
+
         const { formStep } = this.state;
-        const { doc, persons } = this.state;
+        const { doc } = this.state;
         const { origin, _id } = this.state.doc;
         console.log('DOC', doc);
         return (
