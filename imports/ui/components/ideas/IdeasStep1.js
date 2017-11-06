@@ -1,11 +1,13 @@
 import React from 'react';
 import _ from 'lodash';
 
+import PersonCard from './PersonCard';
+
 const IdeasStep1 = ({ onChangeForm, data, onChangeSearchPerson, persons, selectPerson, origins, selectOrigin }) =>
 
     (
         <div className="form-steps step-one">
-            <h2>Origen de la Idea</h2>
+            <h2>Medio de Captura la Idea</h2>
             <div className="form-group">
                 <div className="col-md-6">
                     {_.map(origins, (origin, index) =>
@@ -15,16 +17,14 @@ const IdeasStep1 = ({ onChangeForm, data, onChangeSearchPerson, persons, selectP
                     )}
                 </div>
             </div>
-            <h2>Selección de Persona</h2>
 
-            {data && data.person && <div className="panel panel-default">
-                <div className="panel-body">
-                    <p>{data.person.firstName} {data.person.secondName} {data.person.lastName}</p>
-                    {data.person.rut && <p>rut: {data.person.rut}</p>}
-                </div>
-            </div>
+            <h2>Selección de Persona dueña de la Idea</h2>
+            {
+                data && data.person && <PersonCard person={data.person} removePerson={selectPerson} />
             }
-            { data && !data.person &&
+
+
+            {data && !data.person &&
                 <div>
                     <div className="form-group">
                         <label className="col-sm-3 control-label">Buscar la Persona Dueña de la Idea</label>
@@ -32,22 +32,24 @@ const IdeasStep1 = ({ onChangeForm, data, onChangeSearchPerson, persons, selectP
                             <input type="text" className="form-control" onChange={onChangeSearchPerson.bind(this)} />
                         </div>
                     </div>
-                    <div className="form-group">
-                        <label className="col-md-10 control-label">Seleccione una Persona para continuar</label>
-                        <div className="col-md-10">
-                            <div className="card">
-                                <ul className="list-group list-group-flush">
-                                    {
-                                        _.map(persons, (person, index) => (
-                                            <li key={index} className="list-group-item" onClick={selectPerson(person).bind(this)}>
-                                                rut: {person.rut}   {person.firstName} {person.secondName} {person.lastName}
-                                            </li>))
-                                    }
+                    {
+                        persons && <div className="form-group">
+                            <label className="col-md-10 control-label">Seleccione una Persona para continuar</label>
+                            <div className="col-md-10">
+                                <div className="card">
+                                    <ul className="list-group list-group-flush">
+                                        {
+                                            _.map(persons, (person, index) => (
+                                                <li key={index} className="list-group-item" onClick={selectPerson(person).bind(this)}>
+                                                    {person.firstName} {person.secondName} {person.lastName}
+                                                </li>))
+                                        }
 
-                                </ul>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    }
                 </div>
             }
 

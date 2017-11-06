@@ -1,20 +1,16 @@
 import React from 'react';
 import _ from 'lodash';
-import IdeaCard from './IdeaCard';
+import PersonCard from './PersonCard';
 
 const IdeasStep2 = ({ onChangeForm, data, onChangeSearchPerson, persons, selectChief }) =>
 
     (
         <div className="form-steps step-one">
             <h2>Selección de Encargado de Área de Destino</h2>
-
-            {data && data.chief && <div className="panel panel-default">
-                <div className="panel-body">
-                    <p>{data.chief.firstName} {data.chief.secondName} {data.chief.lastName}</p>
-                    {data.chief.rut && <p>rut: {data.chief.rut}</p>}
-                </div>
-            </div>
+            {
+                data && data.chief && <PersonCard person={data.chief} removePerson={selectChief} />
             }
+          
             { data && !data.chief &&
                 <div>
                     <div className="form-group">
@@ -31,13 +27,9 @@ const IdeasStep2 = ({ onChangeForm, data, onChangeSearchPerson, persons, selectC
                                     {
                                         _.map(persons, (person, index) => (
                                             <li key={index} className="list-group-item" onClick={selectChief(person).bind(this)}>
-                                                rut: {person.rut}   {person.firstName} {person.secondName} {person.lastName}
+                                                {person.firstName} {person.secondName} {person.lastName}
                                             </li>))
                                     }
-
-                                    <div className="row">
-                                        <IdeaCard />
-                                    </div>
 
                                 </ul>
                             </div>

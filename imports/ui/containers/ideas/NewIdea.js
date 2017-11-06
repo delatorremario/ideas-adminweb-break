@@ -5,14 +5,11 @@ import EditIdea from '../../pages/ideas/EditIdea';
 import Loading from '../../components/Loading.js';
 
 const composer = ({ match }, onData) => {
-  // const docId = match.params._id;
-  // const subscription = Meteor.subscribe('ideas.view', docId);
 
   const subscriptionPersons = Meteor.subscribe('persons.list');
-
-  if (subscriptionPersons.ready()) {
-    console.log('READY subscription');
-    // const doc = Ideas.findOne(docId);
+  const subscriptionAreas = Meteor.subscribe('areas.list');
+  
+  if (subscriptionPersons.ready() && subscriptionAreas.ready()) {
     onData(null, { doc: {} });
   }
 

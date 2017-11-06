@@ -130,44 +130,46 @@ const IdeasList = ({ history, ideas }) => (
                             <div key={index} className="col-sm-6 col-lg-4 cards-item">
                                 <div className="panel panel-default">
                                     <div className="panel-heading">
-                                        <h4 className="panel-title">
+                                        <h5 className="panel-title">
                                             <Moment format="DD MMM YYYY" date={createdAt} /> {person.lastName}
-                                        </h4>
+                                        </h5>
                                         <div className="actions pull-right">
                                             <Link to={`/idea/${idea._id}/edit`}><i className="fa fa-pencil"></i></Link>
                                             <i className="fa fa-trash" onClick={() => { handleRemove(history, idea._id) }}></i>
                                         </div>
                                     </div>
                                     <div className="row panel-body">
-                                        <p className="col-md-12 panel-body-title">
-                                            <i className="fa fa-user"></i> Idea de <b>{person.firstName} {person.secondName} {person.lastName}</b>
-                                        </p>
-                                        <div className="col-md-12 panel-body-description">
-                                            <p>Creada el: <b></b></p>
-                                            <p>Encargado de Area: <b>{chief.firstName} {chief.secondName} {chief.lastName}</b></p>
-                                            <p>Descripción: <b>{description}</b></p>
-                                            <p>Oportunidad: <b>{opportunity}</b></p>
-                                            <p>Origin: <b>{origin}</b></p>
-                                            <p>Drivers:</p>
-                                            {
-                                                _.map(drivers, (driver, index) =>
-                                                    <div key={index}>{driver}</div>
-                                                )
-                                            }
+                                        <small>
+                                            <p className="col-md-12 panel-body-title">
+                                                <i className="fa fa-user"></i> Idea de <b>{person.firstName} {person.secondName} {person.lastName}</b>
+                                            </p>
+                                            <div className="col-md-12 panel-body-description">
+                                                <p>Encargado de Area: <b>{chief.firstName} {chief.secondName} {chief.lastName}</b></p>
+                                                <p>Descripción: <b>{description}</b></p>
+                                                <p>Oportunidad: <b>{opportunity}</b></p>
+                                                <p>Origin: <b>{origin}</b></p>
+                                                <p>
+                                                    {
+                                                        _.map(drivers, (driver, index) =>
+                                                            <small key={index}><label className='label label-default'>{driver}</label></small>
+                                                        )
+                                                    }
+                                                </p>
 
-                                            {
-                                                collaborators && <div>
-                                                    <p>Colaboradores</p>
-                                                    <ul>
-                                                        {
-                                                            _.map(collaborators, (person, index) =>
-                                                                <li key={index}>{person.firstName} {person.secondName} {person.lastName}</li>
-                                                            )
-                                                        }
-                                                    </ul>
-                                                </div>
-                                            }
-                                        </div>
+                                                {
+                                                    collaborators && <div>
+                                                        <p>Colaboradores</p>
+                                                        <ul>
+                                                            {
+                                                                _.map(collaborators, (person, index) =>
+                                                                    <li key={index}>{person.firstName} {person.secondName} {person.lastName}</li>
+                                                                )
+                                                            }
+                                                        </ul>
+                                                    </div>
+                                                }
+                                            </div>
+                                        </small>
                                     </div>
                                 </div>
                             </div>

@@ -103,9 +103,11 @@ export default class IdeaEditor extends Component {
 
         var rx = [];
         arrayText.forEach(function name(value) {
-            var v = ".*" + value + ".*"; //value.replace(/\//ig, "");
+            var v = "^" + value + ".*"; //value.replace(/\//ig, "");
             rx.push(new RegExp(v, "i"));
         });
+
+        console.log('RX', rx);
 
         const persons = Persons.find({
             $or: [
@@ -123,12 +125,18 @@ export default class IdeaEditor extends Component {
 
     selectPerson = person => e => {
         e.preventDefault()
-        this.setState(prev => ({ doc: { ...prev.doc, person }, persons: [] }))
+        this.setState(prev => ({
+            doc: { ...prev.doc, person: prev.doc.person !== person && person || undefined }, 
+            persons: []
+        }))
     }
 
     selectChief = chief => e => {
         e.preventDefault()
-        this.setState(prev => ({ doc: { ...prev.doc, chief }, persons: [] }))
+        this.setState(prev => ({
+            doc: { ...prev.doc, chief: prev.doc.chief !== chief && chief || undefined }, 
+            persons: []
+        }))
     }
     selectCollaborator = collaborator => e => {
         e.preventDefault()
@@ -209,7 +217,7 @@ export default class IdeaEditor extends Component {
                                                         selectDriver={this.selectDriver}
                                                     />}
                                                 {formStep === 4 &&
-                                                    <IdeasStep4 
+                                                    <IdeasStep4
                                                         data={doc}
                                                         onChangeSearchPerson={this.onChangeSearchPerson}
                                                         persons={persons}

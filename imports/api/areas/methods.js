@@ -42,14 +42,15 @@ const addChildNodes = parentnode => {
                 $project: {
                     name: {
                         $concat: [
-                             { $ifNull: [ "$firstName", ""] }
-                             , " ",
-                             { $ifNull: [ "$secondName", ""] }
-                             , " ",
-                             { $ifNull: [ "$lastName", ""] }
-                             , " rut: ",
-                             { $ifNull: [ "$rut", "NN"] }
-                        ]} 
+                            { $ifNull: ["$firstName", ""] }
+                            , " ",
+                            { $ifNull: ["$secondName", ""] }
+                            , " ",
+                            { $ifNull: ["$lastName", ""] }
+                            , " rut: ",
+                            { $ifNull: ["$rut", "NN"] }
+                        ]
+                    }
                 }
             }
         ])
@@ -57,6 +58,26 @@ const addChildNodes = parentnode => {
         if (!!children.length) child.children = children;
     })
     return childs;
+}
+
+const addParentsNodes = node => {
+    let parent = Areas.aggregate([
+        { $match: { _id: node.parentAreaId } },
+        { $lookup: { from: 'typesareastructure', foreignField: '_id', localField: 'typeAreaStructureId', as: 'TypeAreaStructure' } },
+        { $unwind: '$TypeAreaStructure' },
+        {
+            $project: {
+                name: 1,
+                parentAreaId: 1,
+                typeAreaStructure: '$TypeAreaStructure.name',
+                typeArea: '$TypeArea.name',
+            }
+        },
+    ]);
+    console.log('PERENT', parent);
+    parent = parent & parent[0] && addParentsNodes(parent[0]);
+    if (parent) node.parent = parent;
+    return node;
 }
 
 Meteor.methods({
@@ -79,9 +100,31 @@ Meteor.methods({
             _.map(firstnodes, firstnode => {
                 firstnode.children = addChildNodes(firstnode);
             })
-            
+
             return firstnodes;
         } else return;
+    },
+    'areas.getTreeByArea': areaId => {
+        if (!Meteor.isServer) return;
+        check(areaId, String);
+
+        let area = Areas.aggregate([
+            { $match: { _id: areaId } },
+            { $lookup: { from: 'typesareastructure', foreignField: '_id', localField: 'typeAreaStructureId', as: 'TypeAreaStructure' } },
+            { $unwind: '$TypeAreaStructure' },
+            {
+                $project: {
+                    name: 1,
+                    parentAreaId: 1,
+                    typeAreaStructure: '$TypeAreaStructure.name',
+                    typeArea: '$TypeArea.name',
+                }
+            },
+
+        ]);
+       // area.parent = (area && area[0] && addParentsNodes(area[0])) || [];
+        console.log('AREA get', area);
+        return area && area[0];
     }
 });
 

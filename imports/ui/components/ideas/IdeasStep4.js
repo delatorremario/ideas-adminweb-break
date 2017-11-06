@@ -1,6 +1,8 @@
 import React from 'react';
 import _ from 'lodash';
 
+import PersonCard from './PersonCard';
+
 const IdeasStep4 = ({ data, onChangeSearchPerson, persons, selectCollaborator }) => {
 
     const { collaborators } = data;
@@ -9,14 +11,7 @@ const IdeasStep4 = ({ data, onChangeSearchPerson, persons, selectCollaborator })
         <div className="form-steps step-one">
             <h2>Selección de Colaboradores</h2>
             {
-                _.map(collaborators, (collaborator, index) =>
-                    (<div key={index} className="panel panel-default">
-                        <div className="panel-body">
-                            <p>{collaborator.firstName} {collaborator.secondName} {collaborator.lastName}</p>
-                            {collaborator.rut && <p>rut: {collaborator.rut}</p>}
-                        </div>
-                    </div>)
-                )
+                _.map(collaborators, (collaborator, index) => <PersonCard key={index} person={collaborator} removePerson={selectCollaborator} />)
             }
             <div>
                 <div className="form-group">
@@ -33,7 +28,7 @@ const IdeasStep4 = ({ data, onChangeSearchPerson, persons, selectCollaborator })
                                 {
                                     _.map(persons, (person, index) => (
                                         <li key={index} className="list-group-item" onClick={selectCollaborator(person).bind(this)}>
-                                            rut: {person.rut}   {person.firstName} {person.secondName} {person.lastName}
+                                            {person.firstName} {person.secondName} {person.lastName}
                                         </li>))
                                 }
 
