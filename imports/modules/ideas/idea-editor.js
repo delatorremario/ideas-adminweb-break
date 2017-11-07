@@ -9,6 +9,8 @@ const handleUpsert = () => {
     const { doc } = component.state;
     const user = this.Meteor.user();
    
+    doc.date= doc && doc.date && new Date(doc.date);
+    
     _.extend(doc, {
         createdAt: new Date(),
     })

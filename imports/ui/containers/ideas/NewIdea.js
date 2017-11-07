@@ -17,7 +17,7 @@ const composer = ({ match }, onData) => {
 
   if (subscriptionPersons.ready() && subscriptionAreas.ready()) {
     const persons = Persons.find({}, { sort: { score: -1 }, limit: textSearchLimit.get() }).fetch();
-    onData(null, { doc: {}, textSearch, persons });
+    onData(null, { doc: { date: new Date().toISOString() }, textSearch, persons });
   }
 
 };

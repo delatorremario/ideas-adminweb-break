@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
-import { Alert, Button } from 'react-bootstrap';
+import { Meteor } from 'meteor/meteor';
+import { Alert } from 'react-bootstrap';
 import Moment from 'react-moment';
 import { Link } from 'react-router-dom';
 import { Bert } from 'meteor/themeteorchef:bert';
@@ -125,17 +126,19 @@ const IdeasList = ({ history, ideas }) => (
                 <div className="row cards-container">
                     {ideas.map((idea, index) => {
                         let lap = index / 2;
-                        const { person, chief, description, opportunity, collaborators, drivers, origin, createdAt } = idea;
+                        const { userId, person, chief, description, opportunity, collaborators, drivers, origin, createdAt, date } = idea;
+                        const createdUser = Meteor.users.findOne(userId);
+                        const userName = `${createdUser.profile && createdUser.profile.name && createdUser.profile.name.first} ${createdUser.profile && createdUser.profile.name && createdUser.profile.name.last}`;
                         return (
                             <div key={index} className="col-sm-6 col-lg-4 cards-item">
                                 <div className="panel panel-default">
                                     <div className="panel-heading">
                                         <h5 className="panel-title">
-                                            <Moment format="DD MMM YYYY" date={createdAt} /> {person.lastName}
+                                            <small> <Moment format="DD MMM YYYY" date={date} /></small> {person.lastName}
                                         </h5>
                                         <div className="actions pull-right">
                                             <Link to={`/idea/${idea._id}/edit`}><i className="fa fa-pencil"></i></Link>
-                                            <i className="fa fa-trash" onClick={() => { handleRemove(history, idea._id) }}></i>
+                                            <i className="fa fa-trash" onClick={() => { handleRemove(history, idea._id); }}></i>
                                         </div>
                                     </div>
                                     <div className="row panel-body">
@@ -144,10 +147,11 @@ const IdeasList = ({ history, ideas }) => (
                                                 <i className="fa fa-user"></i> Idea de <b>{person.firstName} {person.secondName} {person.lastName}</b>
                                             </p>
                                             <div className="col-md-12 panel-body-description">
+                                                <p>Ingresada por: {userName} <small><Moment format="DD MMM YYYY" date={createdAt} /></small></p>
                                                 <p>Encargado de Area: <b>{chief.firstName} {chief.secondName} {chief.lastName}</b></p>
                                                 <p>Descripción: <b>{description}</b></p>
                                                 <p>Oportunidad: <b>{opportunity}</b></p>
-                                                <p>Origin: <b>{origin}</b></p>
+                                                <p>Medio de Captura: <b>{origin}</b></p>
                                                 <p>
                                                     {
                                                         _.map(drivers, (driver, index) =>

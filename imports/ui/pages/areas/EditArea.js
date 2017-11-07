@@ -5,7 +5,6 @@ import NotFound from '../NotFound';
 
 const EditArea = (props) => {
     const doc = props.doc;
-    console.log('doc', doc);
     return doc ? (
         <div className="pageWrapper">
             <div className="pageheader">

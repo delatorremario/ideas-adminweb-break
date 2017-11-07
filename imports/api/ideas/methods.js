@@ -13,6 +13,7 @@ export const upsertIdea = new ValidatedMethod({
         userId: { type: String, optional: true },
         corporationId: { type: String, optional: true },
         createdAt: { type: Date, optional: true },
+        date: { type: Date },
         origin: { type: String },
         person: { type: PersonSchema },
         chief: { type: PersonSchema },

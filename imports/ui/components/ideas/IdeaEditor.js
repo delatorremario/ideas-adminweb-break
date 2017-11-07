@@ -51,8 +51,8 @@ export default class IdeaEditor extends Component {
         const { origin, person, chief, description, opportunity, drivers } = this.state.doc;
         return (formStep === 1 && origin && person) ||
             (formStep === 2 && origin && person && chief) ||
-            (formStep === 3 && origin && person && chief && description && opportunity && drivers) ||
-            (formStep === 4 && origin && person && chief && description && opportunity && drivers)
+            (formStep === 3 && origin && person && chief && description && opportunity && drivers && drivers.length>0) ||
+            (formStep === 4 && origin && person && chief && description && opportunity && drivers && drivers.length>0)
     }
 
 
@@ -105,37 +105,37 @@ export default class IdeaEditor extends Component {
     selectPerson = person => e => {
         e.preventDefault()
         delete person.score;
-        
+
         this.setState(prev => ({
             doc: { ...prev.doc, person: prev.doc.person !== person && person || undefined }
         }))
 
         this.props.textSearch.set('');
-        
+
     }
 
     selectChief = chief => e => {
         e.preventDefault()
         delete chief.score;
-        
+
         this.setState(prev => ({
             doc: { ...prev.doc, chief: prev.doc.chief !== chief && chief || undefined }
         }))
 
         this.props.textSearch.set('');
-        
+
     }
     selectCollaborator = collaborator => e => {
         e.preventDefault()
         $('#personSearchInput').html('');
         delete collaborator.score;
-        
+
         const prevCollaborators = this.state.doc.collaborators;
         const collaborators = _.includes(prevCollaborators, collaborator) && _.pull(prevCollaborators, collaborator) || _.union(prevCollaborators, [collaborator])
         this.setState(prev => ({ doc: { ...prev.doc, collaborators }, persons: [] }))
 
         this.props.textSearch.set('');
-        
+
     }
 
     selectOrigin = origin => e => {
@@ -150,6 +150,19 @@ export default class IdeaEditor extends Component {
         this.setState(prev => ({ doc: { ...prev.doc, drivers } }))
     }
 
+    handleChangeDate = (date, formattedValue) => {
+        this.setState(prev => ({
+            doc: { ...prev.doc, date }  // ISO String, ex: "2016-11-19T12:00:00.000Z" 
+        }));
+    }
+    //formattedValue: formattedValue // Formatted String, ex: "11/19/2016" 
+
+    //   componentDidUpdate: function(){
+    //     // Access ISO String and formatted values from the DOM. 
+    //     var hiddenInputElement = document.getElementById("example-datepicker");
+    //     console.log(hiddenInputElement.value); // ISO String, ex: "2016-11-19T12:00:00.000Z" 
+    //     console.log(hiddenInputElement.getAttribute('data-formattedvalue')) // Formatted String, ex: "11/19/2016" 
+    //   },
     render() {
         const origins = ['Email', 'Yamer', 'Otra']
         const driversArray = ['Driver 1', 'Driver 2', 'Drivers 3', 'Driver 4']
@@ -197,6 +210,7 @@ export default class IdeaEditor extends Component {
                                                         selectPerson={this.selectPerson}
                                                         origins={origins}
                                                         selectOrigin={this.selectOrigin}
+                                                        handleChangeDate={this.handleChangeDate}
                                                     />}
                                                 {formStep === 2 &&
                                                     <IdeasStep2 onChangeForm={this.onChangeDoc}
