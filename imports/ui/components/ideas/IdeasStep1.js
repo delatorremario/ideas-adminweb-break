@@ -2,6 +2,7 @@ import React from 'react';
 import _ from 'lodash';
 
 import PersonCard from './PersonCard';
+import PersonSearch from './PersonSearch';
 
 const IdeasStep1 = ({ onChangeForm, data, onChangeSearchPerson, persons, selectPerson, origins, selectOrigin }) =>
 
@@ -23,33 +24,8 @@ const IdeasStep1 = ({ onChangeForm, data, onChangeSearchPerson, persons, selectP
                 data && data.person && <PersonCard person={data.person} removePerson={selectPerson} />
             }
 
-
-            {data && !data.person &&
-                <div>
-                    <div className="form-group">
-                        <div className="col-md-6">
-                            <input type="text" className="form-control" placeholder="Buscar por Apellido y Nombres o RUT" onChange={onChangeSearchPerson.bind(this)} />
-                        </div>
-                    </div>
-                    {
-                        persons && <div className="form-group">
-                            <label className="col-md-10 control-label">Seleccione una Persona para continuar</label>
-                            <div className="col-md-10">
-                                <div className="card">
-                                    <ul className="list-group list-group-flush">
-                                        {
-                                            _.map(persons, (person, index) => (
-                                                <li key={index} className="list-group-item" onClick={selectPerson(person).bind(this)}>
-                                                    {person.lastName}, {person.firstName} {person.secondName}  <span className="badge"><small>{person.rut}</small></span>
-                                                </li>))
-                                        }
-
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    }
-                </div>
+            {
+                data && !data.person && <PersonSearch persons={persons} onChangeSearchPerson={onChangeSearchPerson} selectPerson={selectPerson} />
             }
 
         </div>

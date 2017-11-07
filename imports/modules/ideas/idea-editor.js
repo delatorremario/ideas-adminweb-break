@@ -11,27 +11,14 @@ const handleUpsert = () => {
    
     _.extend(doc, {
         createdAt: new Date(),
-        // updatedAt: new Date,
-        // userId: user._id,
-        // corporationId: user.profile.selectedCorporationId
     })
-
-    console.log('handleUpsert doc undelete', doc);
-
-    console.log('handleUpsert doc DEELTE', doc);
-    
+  
     const confirmation = doc && doc._id ? 'Datos actualizados correctamente' : 'Datos guardados con éxito';
-    // const upsert = {
-    //     origin: doc.origin.trim(),
-    //     description: doc.description.trim(),
-    // };
-
+  
     const upsert = doc;
 
     if (doc && doc._id) upsert._id = doc._id;
 
-    console.log('UPSERT', upsert)
-    
     upsertIdea.call(upsert, (error, response) => {
         if (error) {
             Bert.alert(error.reason, 'danger');
@@ -40,7 +27,6 @@ const handleUpsert = () => {
             component.ideaEditorForm.reset();
             Bert.alert(confirmation, 'success');
             component.props.history.push('/ideas');
-            // component.props.history.push(`/corporations/${response.insertedId || doc._id}/edit`);
         }
     });
 };

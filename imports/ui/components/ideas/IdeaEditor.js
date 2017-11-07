@@ -1,10 +1,11 @@
-import React, { Component, PropTypes } from 'react'
-import { FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
-import ideaEditor from '../../../modules/ideas/idea-editor.js'
-import CSSTransitionGroup from 'react-addons-css-transition-group'
-import MainList from '../MainList'
-import _ from 'lodash'
+import React, { Component, PropTypes } from 'react';
+import { FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import ideaEditor from '../../../modules/ideas/idea-editor.js';
+import CSSTransitionGroup from 'react-addons-css-transition-group';
+import MainList from '../MainList';
+import _ from 'lodash';
+import $ from 'jquery';
 
 // collections
 import Persons from '../../../api/persons/persons';
@@ -29,7 +30,6 @@ export default class IdeaEditor extends Component {
             drivers: [],
             collaborators: [],
         },
-       // persons: Persons.find({}).fetch()
     }
 
     componentDidMount() {
@@ -99,36 +99,7 @@ export default class IdeaEditor extends Component {
     onChangeSearchPerson = e => {
         e.preventDefault();
         const text = e.target.value;
-       // const arrayText = _.split(_.replace(text.trim(), ' ', ','), ',');
-      
-
         this.props.textSearch.set(text);
-
-        // var rx = [];
-        // arrayText.forEach(function name(value) {
-        //     var v = "^" + value + ".*"; //value.replace(/\//ig, "");
-        //     rx.push(new RegExp(v, "i"));
-        // });
-
-        // console.log('RX', rx);
-
-        // const newsearch = Persons.find({ $text: { $search: text } }, { score: { $meta: "textScore" } }).sort({ score: { $meta: "textScore" } }).fetch()
-        // console.log('newsearch', newsearch)
-
-        // const persons = Persons.find({
-        //     $or: [
-
-        //         { firstName: { $in: rx } },
-        //         { secondName: { $in: rx } },
-        //         { lastName: { $in: rx } },
-        //         { rut: { $in: rx } },
-
-        //     ]
-        // }, { sort: { firstName: 1, secondName: 1, lastName: 1 }, limit: 100 }).fetch() || []
-
-        // const persons = Persons.find({}).fetch();
-
-        // this.setState({ persons });
     }
 
     selectPerson = person => e => {
@@ -138,6 +109,9 @@ export default class IdeaEditor extends Component {
         this.setState(prev => ({
             doc: { ...prev.doc, person: prev.doc.person !== person && person || undefined }
         }))
+
+        this.props.textSearch.set('');
+        
     }
 
     selectChief = chief => e => {
@@ -147,14 +121,21 @@ export default class IdeaEditor extends Component {
         this.setState(prev => ({
             doc: { ...prev.doc, chief: prev.doc.chief !== chief && chief || undefined }
         }))
+
+        this.props.textSearch.set('');
+        
     }
     selectCollaborator = collaborator => e => {
         e.preventDefault()
+        $('#personSearchInput').html('');
         delete collaborator.score;
         
         const prevCollaborators = this.state.doc.collaborators;
         const collaborators = _.includes(prevCollaborators, collaborator) && _.pull(prevCollaborators, collaborator) || _.union(prevCollaborators, [collaborator])
         this.setState(prev => ({ doc: { ...prev.doc, collaborators }, persons: [] }))
+
+        this.props.textSearch.set('');
+        
     }
 
     selectOrigin = origin => e => {
@@ -176,12 +157,10 @@ export default class IdeaEditor extends Component {
 
         const { persons } = this.props;
 
-        console.log('persons', persons);
-
         const { formStep } = this.state;
         const { doc } = this.state;
         const { origin, _id } = this.state.doc;
-        console.log('DOC', doc);
+
         return (
             <div>
 

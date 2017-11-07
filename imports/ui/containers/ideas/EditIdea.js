@@ -13,8 +13,6 @@ const textSearchLimit = new ReactiveVar(10);
 
 const composer = ({ match }, onData) => {
 
-  console.log('textSearch', textSearch.get());
-  
   const docId = match.params._id;
   const subscription = Meteor.subscribe('ideas.view', docId);
 

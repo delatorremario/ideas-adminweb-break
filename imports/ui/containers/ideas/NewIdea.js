@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { composeWithTracker } from 'react-komposer';
-import { ReactiveVar } from 'meteor/reactive-var'
+import { ReactiveVar } from 'meteor/reactive-var';
 
 import EditIdea from '../../pages/ideas/EditIdea';
 import Loading from '../../components/Loading.js';
@@ -11,8 +11,6 @@ const textSearch = new ReactiveVar('');
 const textSearchLimit = new ReactiveVar(10);
 
 const composer = ({ match }, onData) => {
-
-  console.log('textSearch', textSearch.get());
 
   const subscriptionPersons = Meteor.subscribe('persons.search', textSearch.get(), textSearchLimit.get());
   const subscriptionAreas = Meteor.subscribe('areas.list');
