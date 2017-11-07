@@ -73,11 +73,11 @@ export default class IdeaEditor extends Component {
         e.preventDefault()
         if (add) {
             this.setState(prev => ({
-                formStep: prev.formStep + step
+                formStep: prev.formStep + step,
             }))
         } else {
             this.setState({
-                formStep: step
+                formStep: step,
             })
         }
 
@@ -164,7 +164,7 @@ export default class IdeaEditor extends Component {
     //     console.log(hiddenInputElement.getAttribute('data-formattedvalue')) // Formatted String, ex: "11/19/2016" 
     //   },
     render() {
-      
+
         const formMaxStep = 4;
 
         const { persons, driversArray, origins } = this.props;
@@ -187,19 +187,11 @@ export default class IdeaEditor extends Component {
                                     </div>
                                     <div className="panel-body ng-binding col-xs-10 col-xs-offset-1">
 
-                                        <CSSTransitionGroup
-                                            component="div"
-                                            className="steps-container"
-                                            transitionName="formTransition"
-                                            transitionEnterTimeout={1000}
-                                            transitionLeaveTimeout={1000}
-                                        >
-
-                                            <form
-                                                className="label-left"
-                                                noValidate
-                                                ref={form => (this.ideaEditorForm = form)}
-                                                onSubmit={event => event.preventDefault()}>
+                                        <form
+                                            className="label-left"
+                                            noValidate
+                                            ref={form => (this.ideaEditorForm = form)}
+                                            onSubmit={event => event.preventDefault()}>
 
                                                 {formStep === 1 &&
                                                     <IdeasStep1 onChangeForm={this.onChangeDoc}
@@ -266,9 +258,7 @@ export default class IdeaEditor extends Component {
                                                     <Button onClick={(e) => this.props.history.push('/ideas')} type="button" bsStyle="default" className="btn btn-trans btn-sm pull-right"><i className="fa fa-times"></i>Cancelar</Button>
 
                                                 </div>
-                                            </form>
-
-                                        </CSSTransitionGroup>
+                                        </form>
 
                                     </div>
                                 </div>

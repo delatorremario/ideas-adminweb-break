@@ -6,17 +6,6 @@ const IdeasStep3 = ({ onChangeForm, data, driversArray, selectDriver }) =>
 
     (
         <div className="form-steps step-one">
-            <h2>Descripción de la Idea</h2>
-            <div className="form-group">
-                <div className="col-md-6">
-                    <FormGroup>
-                        <FormControl componentClass="textarea"
-                            name="description"
-                            onChange={onChangeForm}
-                            value={data.description} />
-                    </FormGroup>
-                </div>
-            </div>
 
             <h2>Oportunidad</h2>
             <div className="form-group">
@@ -25,10 +14,28 @@ const IdeasStep3 = ({ onChangeForm, data, driversArray, selectDriver }) =>
                         <FormControl componentClass="textarea"
                             name="opportunity"
                             onChange={onChangeForm}
-                            value={data.opportunity} />
+                            value={data.opportunity}
+                            placeholder={'¿Cuál es el desafío que estamos solucionando? (Descripción del problema que la idea busca solucionar)'}
+                            />
                     </FormGroup>
                 </div>
             </div>
+
+            <h2>Descripción de la Idea</h2>
+            <div className="form-group">
+                <div className="col-md-6">
+                    <FormGroup>
+                        <FormControl componentClass="textarea"
+                            name="description"
+                            onChange={onChangeForm}
+                            value={data.description}
+                            placeholder={'Descripción detallada de la idea / sugerencia a implementar'}
+                            />
+                    </FormGroup>
+                </div>
+            </div>
+
+
 
             <h2>Drivers de Valor</h2>
             <div className="form-group">
