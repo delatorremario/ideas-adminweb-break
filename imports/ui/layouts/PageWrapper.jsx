@@ -13,7 +13,6 @@ import EditArea from '../containers/areas/EditArea';
 
 // Ideas
 import Ideas from '../pages/ideas/Ideas';
-import NewIdea from '../containers/ideas/NewIdea';
 import EditIdea from '../containers/ideas/EditIdea';
 
 import Dashboard from '../pages/Dashboard';
@@ -29,7 +28,7 @@ const PageWrapper = () => (
             {/* Corporaciones */}
             <Route exact path="/corporations" component={Corporations} />
             <Route exact path="/corporations/new" component={NewCorporation} />
-            <Route exact path="/corporation/:_id/edit" component={EditCorporation} />
+            <Route exact path="/corporation/:_id/ediwt" component={EditCorporation} />
             
             {/* Areas */}
             <Route exact path="/areas" component={Areas} />
@@ -38,7 +37,7 @@ const PageWrapper = () => (
 
             {/* Ideas */}
             <Route exact path="/ideas" component={Ideas} />
-            <Route exact path="/ideas/new" component={NewIdea} />
+            <Route exact path="/ideas/new" component={EditIdea} />
             <Route exact path="/idea/:_id/edit" component={EditIdea} />
             
             <Route path="/sendinvitation" component={SendInvitationPage} />

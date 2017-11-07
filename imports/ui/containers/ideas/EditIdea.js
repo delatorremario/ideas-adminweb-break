@@ -11,20 +11,37 @@ import Persons from '../../../api/persons/persons';
 const textSearch = new ReactiveVar('');
 const textSearchLimit = new ReactiveVar(10);
 
+const origins = ['Email', 'Yamer', 'Otra'];
+
+const driversArray = [
+  { driver: 'Seguridad', placeHolder: 'Proporcionar un ambiente más seguro para todos los trabajadores' },
+  { driver: 'Personas', placeHolder: 'Desarrollar la organización más productiva y efectiva' },
+  { driver: 'Compromiso', placeHolder: 'Crear una cultura aspiracional' },
+  { driver: 'Producción', placeHolder: 'Alcanzar utilización, rendimiento y recuperación de clase mundial' },
+  { driver: 'Gasto Externo', placeHolder: 'Reducir los costos totales con proveedores externos tornando la operación más eficiente' },
+  { driver: 'Mantenimiento', placeHolder: 'Optimizar la disponibilidad con estrategia y ejecución de primera clase' },
+]
+
 const composer = ({ match }, onData) => {
 
-  const docId = match.params._id;
+  const docId = match.params._id || '';
   const subscription = Meteor.subscribe('ideas.view', docId);
 
   const subscriptionPersons = Meteor.subscribe('persons.search', textSearch.get(), textSearchLimit.get());
   const subscriptionAreas = Meteor.subscribe('areas.list');
 
   if (subscription.ready() && subscriptionPersons.ready() && subscriptionAreas.ready()) {
+    
     const persons = Persons.find({}, { sort: { score: -1 }, limit: textSearchLimit.get() }).fetch();
-    const doc = Ideas.findOne(docId);
-    const date = new Date(doc.date);
-    doc.date = date.toISOString();
-    onData(null, { doc, textSearch, persons });
+    let doc = Ideas.findOne(docId);
+
+    if (doc) {
+      doc.date = (new Date(doc.date)).toISOString();
+    } else {
+      doc = { date: new Date().toISOString() };
+    }
+
+    onData(null, { doc, textSearch, persons, driversArray, origins });
   }
 
 };

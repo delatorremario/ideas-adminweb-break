@@ -35,11 +35,17 @@ const IdeasStep3 = ({ onChangeForm, data, driversArray, selectDriver }) =>
                 <div className="col-md-6">
                     {_.map(driversArray, (driver, index) =>
                         <button key={index}
-                            onClick={selectDriver(driver).bind(this)}
-                            className={_.includes(data.drivers, driver) ? 'btn btn-sm btn-success' : 'btn btn-sm btn-trans'}>{driver}</button>
+                            onClick={selectDriver(driver.driver).bind(this)}
+                            className={_.includes(data.drivers, driver.driver) ? 'btn btn-sm btn-success' : 'btn btn-sm btn-trans'}>{driver.driver}</button>
                     )}
                 </div>
             </div>
+
+        
+
+
+
+
         </div>
     );
 

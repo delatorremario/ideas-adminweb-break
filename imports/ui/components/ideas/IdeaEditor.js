@@ -51,8 +51,8 @@ export default class IdeaEditor extends Component {
         const { origin, person, chief, description, opportunity, drivers } = this.state.doc;
         return (formStep === 1 && origin && person) ||
             (formStep === 2 && origin && person && chief) ||
-            (formStep === 3 && origin && person && chief && description && opportunity && drivers && drivers.length>0) ||
-            (formStep === 4 && origin && person && chief && description && opportunity && drivers && drivers.length>0)
+            (formStep === 3 && origin && person && chief && description && opportunity && drivers && drivers.length > 0) ||
+            (formStep === 4 && origin && person && chief && description && opportunity && drivers && drivers.length > 0)
     }
 
 
@@ -164,11 +164,10 @@ export default class IdeaEditor extends Component {
     //     console.log(hiddenInputElement.getAttribute('data-formattedvalue')) // Formatted String, ex: "11/19/2016" 
     //   },
     render() {
-        const origins = ['Email', 'Yamer', 'Otra']
-        const driversArray = ['Driver 1', 'Driver 2', 'Drivers 3', 'Driver 4']
+      
         const formMaxStep = 4;
 
-        const { persons } = this.props;
+        const { persons, driversArray, origins } = this.props;
 
         const { formStep } = this.state;
         const { doc } = this.state;
