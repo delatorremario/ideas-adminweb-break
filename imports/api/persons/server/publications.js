@@ -8,7 +8,6 @@ import { check } from 'meteor/check';
 import Persons from '../persons';
 
 Meteor.publish('persons.search', (text, limit) => {
-  console.log('persons.search', text, limit);
   check(text, String);
   check(limit, Number);
   const self = this.Meteor;

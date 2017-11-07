@@ -40,12 +40,6 @@ const IdeasStep3 = ({ onChangeForm, data, driversArray, selectDriver }) =>
                     )}
                 </div>
             </div>
-
-        
-
-
-
-
         </div>
     );
 
