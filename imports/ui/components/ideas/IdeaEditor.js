@@ -44,6 +44,7 @@ export default class IdeaEditor extends Component {
         $(window).on("resize", () => {
             this.calculateIndicatorWidth();
         })
+        console.log('ideas states', this.props.ideasstates);
     }
 
     toggleStepReady = () => {
@@ -125,6 +126,16 @@ export default class IdeaEditor extends Component {
         this.props.textSearch.set('');
 
     }
+    selectState = state => e => {
+        e.preventDefault();
+
+        console.log('STATE', state)
+        this.setState(prev => ({
+            doc: { ...prev.doc, state: [state] }
+        }))
+
+
+    }
     selectCollaborator = collaborator => e => {
         e.preventDefault()
         $('#personSearchInput').html('');
@@ -167,11 +178,12 @@ export default class IdeaEditor extends Component {
 
         const formMaxStep = 4;
 
-        const { persons, driversArray, origins } = this.props;
+        const { persons, driversArray, origins, ideasstates } = this.props;
 
         const { formStep } = this.state;
         const { doc } = this.state;
         const { origin, _id } = this.state.doc;
+        console.log('states', ideasstates);
 
         return (
             <div>
@@ -193,71 +205,73 @@ export default class IdeaEditor extends Component {
                                             ref={form => (this.ideaEditorForm = form)}
                                             onSubmit={event => event.preventDefault()}>
 
-                                                {formStep === 1 &&
-                                                    <IdeasStep1 onChangeForm={this.onChangeDoc}
-                                                        data={doc}
-                                                        onChangeSearchPerson={this.onChangeSearchPerson}
-                                                        persons={persons}
-                                                        selectPerson={this.selectPerson}
-                                                        origins={origins}
-                                                        selectOrigin={this.selectOrigin}
-                                                        handleChangeDate={this.handleChangeDate}
-                                                    />}
-                                                {formStep === 2 &&
-                                                    <IdeasStep2 onChangeForm={this.onChangeDoc}
-                                                        data={doc}
-                                                        onChangeSearchPerson={this.onChangeSearchPerson}
-                                                        persons={persons}
-                                                        selectChief={this.selectChief}
-                                                    />}
-                                                {formStep === 3 &&
-                                                    <IdeasStep3 onChangeForm={this.onChangeDoc}
-                                                        data={doc}
-                                                        driversArray={driversArray}
-                                                        selectDriver={this.selectDriver}
-                                                    />}
-                                                {formStep === 4 &&
-                                                    <IdeasStep4
-                                                        data={doc}
-                                                        onChangeSearchPerson={this.onChangeSearchPerson}
-                                                        persons={persons}
-                                                        selectCollaborator={this.selectCollaborator}
-                                                    />}
+                                            {formStep === 1 &&
+                                                <IdeasStep1 onChangeForm={this.onChangeDoc}
+                                                    data={doc}
+                                                    onChangeSearchPerson={this.onChangeSearchPerson}
+                                                    persons={persons}
+                                                    selectPerson={this.selectPerson}
+                                                    origins={origins}
+                                                    selectOrigin={this.selectOrigin}
+                                                    handleChangeDate={this.handleChangeDate}
+                                                />}
+                                            {formStep === 2 &&
+                                                <IdeasStep2 onChangeForm={this.onChangeDoc}
+                                                    data={doc}
+                                                    onChangeSearchPerson={this.onChangeSearchPerson}
+                                                    persons={persons}
+                                                    selectChief={this.selectChief}
+                                                    ideasstates={ideasstates}
+                                                    selectState={this.selectState}
+                                                />}
+                                            {formStep === 3 &&
+                                                <IdeasStep3 onChangeForm={this.onChangeDoc}
+                                                    data={doc}
+                                                    driversArray={driversArray}
+                                                    selectDriver={this.selectDriver}
+                                                />}
+                                            {formStep === 4 &&
+                                                <IdeasStep4
+                                                    data={doc}
+                                                    onChangeSearchPerson={this.onChangeSearchPerson}
+                                                    persons={persons}
+                                                    selectCollaborator={this.selectCollaborator}
+                                                />}
 
-                                                <div className="forms-bottom-panel">
-                                                    {
-                                                        formStep === formMaxStep &&
-                                                        <Button
-                                                            disabled={this.toggleStepReady() ? false : true}
-                                                            type='submit'
-                                                            bsStyle="success"
-                                                            className="btn btn-sm pull-right">
-                                                            <i className="fa fa-paper-plane"></i>
-                                                            Finalizar
+                                            <div className="forms-bottom-panel">
+                                                {
+                                                    formStep === formMaxStep &&
+                                                    <Button
+                                                        disabled={this.toggleStepReady() ? false : true}
+                                                        type='submit'
+                                                        bsStyle="success"
+                                                        className="btn btn-sm pull-right">
+                                                        <i className="fa fa-paper-plane"></i>
+                                                        Finalizar
                                                         </Button> ||
-                                                        <Button
-                                                            onClick={this.changeStep(true, 1)}
-                                                            disabled={this.toggleStepReady() ? false : true}
-                                                            type='button'
-                                                            bsStyle="success"
-                                                            className="btn btn-sm pull-right">
-                                                            <i className="fa fa-arrow-right"></i>
-                                                            Siguiente
+                                                    <Button
+                                                        onClick={this.changeStep(true, 1)}
+                                                        disabled={this.toggleStepReady() ? false : true}
+                                                        type='button'
+                                                        bsStyle="success"
+                                                        className="btn btn-sm pull-right">
+                                                        <i className="fa fa-arrow-right"></i>
+                                                        Siguiente
                                                         </Button>
-                                                    }
+                                                }
 
-                                                    {
-                                                        formStep !== 1 &&
-                                                        <Button
-                                                            onClick={this.changeStep(true, -1)}
-                                                            type="button" bsStyle="default" className="btn btn-sm pull-right">
-                                                            <i className="fa fa-arrow-left"></i>{`Anterior`}
-                                                        </Button>
-                                                    }
+                                                {
+                                                    formStep !== 1 &&
+                                                    <Button
+                                                        onClick={this.changeStep(true, -1)}
+                                                        type="button" bsStyle="default" className="btn btn-sm pull-right">
+                                                        <i className="fa fa-arrow-left"></i>{`Anterior`}
+                                                    </Button>
+                                                }
 
-                                                    <Button onClick={(e) => this.props.history.push('/ideas')} type="button" bsStyle="default" className="btn btn-trans btn-sm pull-right"><i className="fa fa-times"></i>Cancelar</Button>
+                                                <Button onClick={(e) => this.props.history.push('/ideas')} type="button" bsStyle="default" className="btn btn-trans btn-sm pull-right"><i className="fa fa-times"></i>Cancelar</Button>
 
-                                                </div>
+                                            </div>
                                         </form>
 
                                     </div>

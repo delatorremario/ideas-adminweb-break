@@ -6,7 +6,7 @@ import Ideas from '../../../api/ideas/ideas';
 import EditIdea from '../../pages/ideas/EditIdea';
 import Loading from '../../components/Loading.js';
 import Persons from '../../../api/persons/persons';
-
+import ideasstates from '../../../api/ideasStatesSchema/ideasstates'; 
 
 const textSearch = new ReactiveVar('');
 const textSearchLimit = new ReactiveVar(10);
@@ -41,7 +41,7 @@ const composer = ({ match }, onData) => {
       doc = { date: new Date().toISOString() };
     }
 
-    onData(null, { doc, textSearch, persons, driversArray, origins });
+    onData(null, { doc, textSearch, persons, driversArray, origins, ideasstates });
   }
 
 };

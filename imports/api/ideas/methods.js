@@ -4,11 +4,13 @@ import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import Ideas from './ideas';
 import rateLimit from '../../modules/rate-limit.js';
 import PersonSchema from '../../api/persons/personSchema';
+import IdeasStatesSchemas from '../ideasStatesSchema/ideasStatesSchema';
 
 
 export const upsertIdea = new ValidatedMethod({
     name: 'ideas.upsert',
     validate: new SimpleSchema({
+
         _id: { type: String, optional: true },
         userId: { type: String, optional: true },
         corporationId: { type: String, optional: true },
@@ -21,7 +23,8 @@ export const upsertIdea = new ValidatedMethod({
         opportunity: { type: String },
         drivers: { type: [String] },
         collaborators: { type: [PersonSchema], optional: true },
-
+        states: { type: [IdeasStatesSchemas], optional: true },
+        
     }).validator(),
     run(idea) {
         return Ideas.upsert({ _id: idea._id }, { $set: idea });
@@ -46,6 +49,3 @@ rateLimit({
     limit: 5,
     timeRange: 1000,
 });
-
-
-
