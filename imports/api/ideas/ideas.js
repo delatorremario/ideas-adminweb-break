@@ -31,7 +31,7 @@ Ideas.schema = new SimpleSchema([
     { opportunity: { type: String } },
     { drivers: { type: [String] } },
     { collaborators: { type: [PersonSchema], optional: true } },
-    { states: { type: [IdeasStateSchema], optional: true } },
+    { states: { type: [IdeasStateSchema] } },
 
 ]);
 

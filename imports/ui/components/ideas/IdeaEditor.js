@@ -29,6 +29,7 @@ export default class IdeaEditor extends Component {
             opportunity: '',
             drivers: [],
             collaborators: [],
+            states: []
         },
     }
 
@@ -49,11 +50,11 @@ export default class IdeaEditor extends Component {
 
     toggleStepReady = () => {
         const { formStep } = this.state;
-        const { origin, person, chief, description, opportunity, drivers } = this.state.doc;
+        const { origin, person, chief, description, opportunity, drivers, states } = this.state.doc;
         return (formStep === 1 && origin && person) ||
-            (formStep === 2 && origin && person && chief) ||
-            (formStep === 3 && origin && person && chief && description && opportunity && drivers && drivers.length > 0) ||
-            (formStep === 4 && origin && person && chief && description && opportunity && drivers && drivers.length > 0)
+            (formStep === 2 && origin && person && chief && states) ||
+            (formStep === 3 && origin && person && chief && states && description && opportunity && drivers && drivers.length > 0) ||
+            (formStep === 4 && origin && person && chief && states && description && opportunity && drivers && drivers.length > 0)
     }
 
 
@@ -128,12 +129,12 @@ export default class IdeaEditor extends Component {
     }
     selectState = state => e => {
         e.preventDefault();
-
-        console.log('STATE', state)
+        state.userId = Meteor.userId();
+        state.createdAt = new Date();
+        console.log('STATE', state);
         this.setState(prev => ({
-            doc: { ...prev.doc, state: [state] }
-        }))
-
+            doc: { ...prev.doc, states: [state] }
+        }));
 
     }
     selectCollaborator = collaborator => e => {
@@ -183,7 +184,7 @@ export default class IdeaEditor extends Component {
         const { formStep } = this.state;
         const { doc } = this.state;
         const { origin, _id } = this.state.doc;
-        console.log('states', ideasstates);
+        console.log('DOC', doc);
 
         return (
             <div className="row">

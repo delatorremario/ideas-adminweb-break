@@ -16,7 +16,7 @@ const IdeasStep2 = ({ onChangeForm, data, onChangeSearchPerson, persons, selectC
                         data && data.chief && <PersonCard person={data.chief} removePerson={selectChief} />
                     }
                     {
-                        data && data.state && data.state[0] && <StateCard state={data.state[0]} />
+                        data && data.states && data.states[0] && <StateCard state={data.states[0]} />
                     }
                 </div>
                 <div className="row">

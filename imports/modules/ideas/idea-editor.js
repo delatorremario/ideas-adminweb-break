@@ -8,15 +8,15 @@ let component;
 const handleUpsert = () => {
     const { doc } = component.state;
     const user = this.Meteor.user();
-   
-    doc.date= doc && doc.date && new Date(doc.date);
-    
+
+    doc.date = doc && doc.date && new Date(doc.date);
+
     _.extend(doc, {
         createdAt: new Date(),
     })
-  
+   
     const confirmation = doc && doc._id ? 'Datos actualizados correctamente' : 'Datos guardados con éxito';
-  
+
     const upsert = doc;
 
     if (doc && doc._id) upsert._id = doc._id;
@@ -55,6 +55,9 @@ const validate = () => {
             drivers: {
                 required: true,
             },
+            states: {
+                required: true,
+            },
         },
         messages: {
             origin: {
@@ -74,6 +77,9 @@ const validate = () => {
             },
             drivers: {
                 required: 'Ingrese los Drivers de Valor',
+            },
+            states: {
+                required: 'Debe indicar el estado de la idea',
             },
         },
         submitHandler() { handleUpsert(); },
