@@ -1,32 +1,37 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'react'
+import { ControlLabel } from 'react-bootstrap';
 
 const PersonSearch = ({ persons, onChangeSearchPerson, selectPerson }) => {
     return (
-        <div>
-            <div className="form-group">
+        <div className="col-xs-12">
+            <div className="row">
                 <div className="col-md-6">
-                    <input id="personSearchInput" type="text" className="form-control" placeholder="Buscar por Apellido y Nombres o RUT" onChange={onChangeSearchPerson.bind(this)} />
-                </div>
-            </div>
-            {
-                persons && <div className="form-group">
-                    {/* <label className="col-md-10 control-label">Seleccione una Persona para continuar</label> */}
-                    <div className="col-md-10">
-                        <div className="card">
-                            <ul className="list-group list-group-flush">
-                                {
-                                    _.map(persons, (person, index) => (
-                                        <li key={index} className="list-group-item" onClick={selectPerson(person).bind(this)}>
-                                            {person.lastName}, {person.firstName} {person.secondName}  <span className="badge"><small>{person.rut}</small></span>
-                                        </li>))
-                                }
-
-                            </ul>
-                        </div>
+                    <div className="form-group">
+                        <ControlLabel>Selección de Persona dueña de la Idea</ControlLabel>
+                        <i className="fa fa-user"></i>
+                        <input id="personSearchInput" type="text" className="form-control" placeholder="Buscar por Apellido y Nombres o RUT" onChange={onChangeSearchPerson.bind(this)} />
                     </div>
                 </div>
-            }
+                {
+                    persons && <div className="form-group">
+                        {/* <label className="col-md-10 control-label">Seleccione una Persona para continuar</label> */}
+                        <div className="col-md-6">
+                            <div className="card" style={{ marginTop: "25px" }}>
+                                <ul className="list-group list-group-flush">
+                                    {
+                                        _.map(persons, (person, index) => (
+                                            <li key={index} className="list-group-item" onClick={selectPerson(person).bind(this)}>
+                                                {person.lastName}, {person.firstName} {person.secondName}  <span className="badge"><small>{person.rut}</small></span>
+                                            </li>))
+                                    }
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
         </div>
     )
 }

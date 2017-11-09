@@ -1,49 +1,42 @@
 import React from 'react';
-import { FormGroup, FormControl } from 'react-bootstrap';
+import { FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
 import _ from 'lodash';
 
 const IdeasStep3 = ({ onChangeForm, data, driversArray, selectDriver }) =>
 
     (
-        <div className="form-steps step-one">
-
-            <h2>Oportunidad</h2>
-            <div className="form-group">
-                <div className="col-md-6">
-                    <FormGroup>
-                        <FormControl componentClass="textarea"
-                            name="opportunity"
-                            onChange={onChangeForm}
-                            value={data.opportunity}
-                            placeholder={'¿Cuál es el desafío que estamos solucionando? (Descripción del problema que la idea busca solucionar)'}
-                            />
-                    </FormGroup>
-                </div>
+        <div className="row form-steps step-three">
+            <div className="col-md-6">
+                <FormGroup>
+                    <ControlLabel>Oportunidad</ControlLabel>
+                    <FormControl componentClass="textarea"
+                        name="opportunity"
+                        onChange={onChangeForm}
+                        value={data.opportunity}
+                        placeholder={'¿Cuál es el desafío que estamos solucionando? (Descripción del problema que la idea busca solucionar)'}
+                    />
+                </FormGroup>
             </div>
 
-            <h2>Descripción de la Idea</h2>
-            <div className="form-group">
-                <div className="col-md-6">
-                    <FormGroup>
-                        <FormControl componentClass="textarea"
-                            name="description"
-                            onChange={onChangeForm}
-                            value={data.description}
-                            placeholder={'Descripción detallada de la idea / sugerencia a implementar'}
-                            />
-                    </FormGroup>
-                </div>
+            <div className="col-md-6">
+                <FormGroup>
+                    <ControlLabel>Descripción de la Idea</ControlLabel>
+                    <FormControl componentClass="textarea"
+                        name="description"
+                        onChange={onChangeForm}
+                        value={data.description}
+                        placeholder={'Descripción detallada de la idea / sugerencia a implementar'}
+                    />
+                </FormGroup>
             </div>
 
-
-
-            <h2>Drivers de Valor</h2>
-            <div className="form-group">
-                <div className="col-md-6">
+            <div className="col-md-12">
+                <div className="form-group">
+                    <ControlLabel>Drivers de Valor</ControlLabel>
                     {_.map(driversArray, (driver, index) =>
-                        <button key={index}
+                        <button style={{ marginBottom: "5px" }} key={index}
                             onClick={selectDriver(driver.driver).bind(this)}
-                            className={_.includes(data.drivers, driver.driver) ? 'btn btn-sm btn-success' : 'btn btn-sm btn-trans'}>{driver.driver}</button>
+                            className={"btn btn-sm " + (_.includes(data.drivers, driver.driver) ? 'btn-success' : 'btn-trans btn-default')}>{driver.driver}</button>
                     )}
                 </div>
             </div>
