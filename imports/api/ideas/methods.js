@@ -27,7 +27,6 @@ export const upsertIdea = new ValidatedMethod({
         
     }).validator(),
     run(idea) {
-        console.log('IDEA', idea);
         return Ideas.upsert({ _id: idea._id }, { $set: idea });
     },
 });
