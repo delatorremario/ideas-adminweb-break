@@ -59,6 +59,12 @@ class IdeasList extends Component {
         this.props.ideasStateCodeFilter.set('')
     }
 
+    onChangeTextSearch = e => {
+        e.preventDefault();
+        const text = e.target.value;
+        this.props.textSearch.set(text);
+    }
+
     render() {
 
         const { history, ideas, ideasstates } = this.props;
@@ -74,7 +80,7 @@ class IdeasList extends Component {
                             </div>
                             <div className="col-flex smart-searcher-container">
                                 <div id="example_filter" className="dataTables_filter">
-                                    <input type="search" placeholder="Buscar..." className="form-control input-sm" aria-controls="example" />
+                                    <input type="search" onChange={this.onChangeTextSearch.bind(this)} placeholder="Buscar..." className="form-control input-sm" aria-controls="example" />
                                 </div>
                             </div>
                         </div>

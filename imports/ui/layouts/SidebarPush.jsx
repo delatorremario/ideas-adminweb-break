@@ -39,15 +39,15 @@ class SidebarPush extends Component {
                 //     roles: ['SuperAdminHolos']
                 // },
                 {
-                    title: "Ideas",
-                    iconClasses: ["fa", "fa-fw", "fa-lightbulb-o"],
-                    path: "/ideas",
-                },
-                {
                     title: "Panel de Control",
                     path: "/dashboard",
                     iconClasses: ["fa", "fa-fw", "fa-tachometer"],
                     collapsed: true,
+                },
+                {
+                    title: "Ideas",
+                    iconClasses: ["fa", "fa-fw", "fa-lightbulb-o"],
+                    path: "/ideas",
                 },
                 {
                     title: "Enviar Invitación",
@@ -55,12 +55,12 @@ class SidebarPush extends Component {
                     iconClasses: ["fa", "fa-fw", "fa-envelope-o"],
                     collapsed: true,
                 },
-                {
-                    title: "Ejemplo Componentes",
-                    path: "/components-page",
-                    iconClasses: ["fa", "fa-fw", "fa-bar-chart-o"],
-                    collapsed: true,
-                },
+                // {
+                //     title: "Ejemplo Componentes",
+                //     path: "/components-page",
+                //     iconClasses: ["fa", "fa-fw", "fa-bar-chart-o"],
+                //     collapsed: true,
+                // },
                
                 // {
                 //     title: "Sublevels",
