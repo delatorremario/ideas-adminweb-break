@@ -184,7 +184,7 @@ export default class IdeaEditor extends Component {
         const { formStep } = this.state;
         const { doc } = this.state;
         const { origin, _id } = this.state.doc;
-        console.log('DOC', doc);
+        // console.log('DOC', doc);
 
         return (
             <div className="row">

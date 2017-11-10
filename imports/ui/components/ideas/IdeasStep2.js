@@ -2,7 +2,7 @@ import React from 'react';
 import _ from 'lodash';
 import PersonCard from './PersonCard';
 import PersonSearch from './PersonSearch';
-import StateSelect from './StatesSelect';
+import StatesSelect from './StatesSelect';
 import StateCard from './StateCard';
 
 const IdeasStep2 = ({ onChangeForm, data, onChangeSearchPerson, persons, selectChief, selectState, ideasstates }) =>
@@ -28,7 +28,7 @@ const IdeasStep2 = ({ onChangeForm, data, onChangeSearchPerson, persons, selectC
                     <div className="col-xs-12">
                         <div className="form-group">
                             <h2>Seleccione el estado de la Idea</h2>
-                            <StateSelect ideasstates={ideasstates} selectState={selectState} />
+                            <StatesSelect ideasstates={ideasstates} selectState={selectState} />
                         </div>
                     </div>
                 </div>

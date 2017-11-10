@@ -2,23 +2,25 @@ import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import Moment from 'react-moment';
 import { Link } from 'react-router-dom';
+import _ from 'lodash';
 
-const IdeaCard = ({ idea, lap }) => {
+const IdeaCard = ({ idea, lap, handleRemove }) => {
 
     const { userId, person, chief, description, opportunity, collaborators, drivers, origin, createdAt, date, states } = idea;
     const createdUser = Meteor.users.findOne(userId);
     const userName = `${createdUser.profile && createdUser.profile.name && createdUser.profile.name.first} ${createdUser.profile && createdUser.profile.name && createdUser.profile.name.last}`;
 
-
     return <div className="col-sm-6 col-lg-4 cards-item">
         <div className="panel panel-default">
             <div className="panel-heading" style={{ backgroundColor: states && _.last(states).color }}>
                 <h5 className="panel-title">
-                    <small> <Moment format="DD MMM YYYY" date={date} /></small> {person.lastName}
+                    <small> <Moment format="DD MMM YYYY" date={date} /></small> {person.lastName} <br></br>
+                    {states && <small> {_.last(states).state}</small>}
                 </h5>
+
                 <div className="actions pull-right">
                     <Link to={`/idea/${idea._id}/edit`}><i className="fa fa-pencil"></i></Link>
-                    <i className="fa fa-trash" onClick={() => { handleRemove(history, idea._id); }}></i>
+                    <i className="fa fa-trash" onClick={handleRemove(idea._id).bind(this)}></i>
                 </div>
             </div>
             <div className="row panel-body">
@@ -45,7 +47,7 @@ const IdeaCard = ({ idea, lap }) => {
                                 <p>Colaboradores</p>
                                 <ul>
                                     {
-                                        _.map(collaborators, (person,index) =>
+                                        _.map(collaborators, (person, index) =>
                                             <li key={index}>{person.firstName} {person.secondName} {person.lastName}</li>
                                         )
                                     }
@@ -56,7 +58,7 @@ const IdeaCard = ({ idea, lap }) => {
                 </small>
             </div>
         </div>
-    </div>
+    </div >
 }
 
 export default IdeaCard;

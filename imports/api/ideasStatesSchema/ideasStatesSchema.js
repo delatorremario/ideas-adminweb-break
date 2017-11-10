@@ -1,5 +1,4 @@
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
-import { Meteor } from 'meteor/meteor';
 
 const IdeasStatesSchema = new SimpleSchema({
   userId: { type: String },

@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { Meteor } from 'meteor/meteor';
 import { Alert } from 'react-bootstrap';
 import Moment from 'react-moment';
@@ -10,69 +10,118 @@ import swal from 'sweetalert2';
 import _ from 'lodash';
 
 import IdeaCard from './IdeaCard';
+import StatesSelect from './StatesSelect';
+import StateCard from './StateCard';
 
-const handleNav = (history, _id) => {
-    history.push(`/idea/${_id}`)
-}
+class IdeasList extends Component {
 
-const handleRemove = (history, _id) => {
-    swal({
-        title: 'Eliminar Datos',
-        text: "La eliminación de los datos es permanente. ¿Está seguro que desea continuar?",
-        type: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'Eliminar',
-        cancelButtonText: 'Cancelar',
-    }).then(() => {
-        removeIdea.call({ _id }, (error) => {
-            if (error) {
-                Bert.alert(error.reason, 'danger')
-            } else {
-                Bert.alert('Datos eliminados', 'success')
-                history.push('/ideas')
-            }
+    state = {
+        stateSelected: {}
+    }
+
+    handleNav = (history, _id) => {
+        history.push(`/idea/${_id}`)
+    }
+
+    handleRemove = (_id) => e => {
+        e.preventDefault()
+        swal({
+            title: 'Eliminar Datos',
+            text: "La eliminación de los datos es permanente. ¿Está seguro que desea continuar?",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Eliminar',
+            cancelButtonText: 'Cancelar',
+        }).then(() => {
+            removeIdea.call({ _id }, (error) => {
+                if (error) {
+                    Bert.alert(error.reason, 'danger')
+                } else {
+                    Bert.alert('Datos eliminados', 'success')
+                    // history.push('/ideas') // NO SE DEBE LLAMAR NUEVAMENTE A LA RUTA YA QUE ES LOS DATOS SON REACTIVOS
+                }
+            })
+        }, (dismiss) => {
+            console.log(dismiss)
         })
-    }, (dismiss) => {
-        console.log(dismiss)
-    })
-}
+    }
 
-const IdeasList = ({ history, ideas }) => (
-    <div>
-        <div className="panel panel-body">
-            <div role="grid" id="example_wrapper" className="dataTables_wrapper form-inline no-footer">
-                <div className="row table-top">
-                    <div className="col-fixed" style={{ width: "115px" }}>
-                        <Link to="/ideas/new" className="btn btn-success"><i className="fa fa-plus"></i> Nuevo</Link>
-                    </div>
-                    <div className="col-flex smart-searcher-container">
-                        <div id="example_filter" className="dataTables_filter">
-                            <input type="search" placeholder="Buscar..." className="form-control input-sm" aria-controls="example" />
+    selectState = state => e => {
+        e.preventDefault();
+        this.setState({ stateSelected: state });
+        this.props.ideasStateCodeFilter.set(state.code)
+
+    }
+
+    removeStateFilter = e => {
+        e.preventDefault();
+        this.setState({ stateSelected: {} });
+        this.props.ideasStateCodeFilter.set('')
+    }
+
+    render() {
+
+        const { history, ideas, ideasstates } = this.props;
+        const { stateSelected } = this.state;
+
+        return (
+            <div>
+                <div className="panel panel-body">
+                    <div role="grid" id="example_wrapper" className="dataTables_wrapper form-inline no-footer">
+                        <div className="row table-top">
+                            <div className="col-fixed" style={{ width: "115px" }}>
+                                <Link to="/ideas/new" className="btn btn-success"><i className="fa fa-plus"></i> Nuevo</Link>
+                            </div>
+                            <div className="col-flex smart-searcher-container">
+                                <div id="example_filter" className="dataTables_filter">
+                                    <input type="search" placeholder="Buscar..." className="form-control input-sm" aria-controls="example" />
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
 
-        
+                <div className="panel panel-body">
+                    <div role="grid" id="example_wrapper" className="dataTables_wrapper form-inline no-footer">
+                        <div className="row table-top">
+                            <div className="col-fixed" style={{ width: "115px" }}>
+                                {stateSelected.code && <button className="btn btn-defualt btn-sm" onClick={this.removeStateFilter}>Quitar Filtro</button> || 'Filtrar por Estado'}
+                            </div>
+                            <div className="col-flex smart-searcher-container">
+                                <div id="example_filter" className="dataTables_filter">
+                                    <StateCard state={stateSelected} />
+                                </div>
+                            </div>
+                        </div>
+                        {
+                            !stateSelected.code &&
+                            <div style={{ marginTop: '10px' }}>
+                                <StatesSelect ideasstates={ideasstates} selectState={this.selectState} />
+                            </div>
+                        }
 
-        {
-            ideas.length > 0 ?
-                <div className="row cards-container">
-                    {_.map(ideas, (idea, index) => {
-                        let lap = index / 2;
-                        return <IdeaCard key={index} idea={idea} lap={lap} />
-                    })}
+                    </div>
                 </div>
-                : <Alert bsStyle="warning">No ideas yet.</Alert>
-        }
 
-    </div>
-);
+                {
+                    ideas.length > 0 ?
+                        <div className="row cards-container">
+                            {_.map(ideas, (idea, index) => {
+                                let lap = index / 2;
+                                return <IdeaCard key={index} idea={idea} lap={lap} handleRemove={this.handleRemove} />
+                            })}
+                        </div>
+                        : <Alert bsStyle="warning">No ideas yet.</Alert>
+                }
 
+            </div>
+        )
+    }
+}
 IdeasList.propTypes = {
     history: PropTypes.object,
     ideas: PropTypes.array,
+    ideasstates: PropTypes.array,
 };
 
 export default IdeasList;

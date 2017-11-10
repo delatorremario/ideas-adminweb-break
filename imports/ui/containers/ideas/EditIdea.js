@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { composeWithTracker } from 'react-komposer';
-import { ReactiveVar } from 'meteor/reactive-var'
+import { ReactiveVar } from 'meteor/reactive-var';
 
 import Ideas from '../../../api/ideas/ideas';
 import EditIdea from '../../pages/ideas/EditIdea';
