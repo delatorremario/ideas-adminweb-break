@@ -9,7 +9,7 @@ import $ from 'jquery';
 import swal from 'sweetalert2';
 import _ from 'lodash';
 
-import IdeaCard from './IdeaCard';
+import IdeaCard from './IdeaCardContainer';
 import StatesSelect from './StatesSelect';
 import StateCard from './StateCard';
 
