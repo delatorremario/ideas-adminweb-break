@@ -1,7 +1,10 @@
 import React from 'react';
+import _ from 'lodash';
+
 import DashboardCard from './DashboardCard';
 
-const Dashboard = ({ }) => (
+
+const Dashboard = ({ data }) => (
     <div>
         <div className="pageheader">
             <h1>Dashboard</h1>
@@ -15,33 +18,9 @@ const Dashboard = ({ }) => (
         </div>
         <section id="main-content">
             <div className="row">
-                <div className="col-md-12 col-lg-12">
-                    <div className="panel panel-default">
-                        <div className="panel-body">
-                            <div className="row">
-                                <div className="col-md-4">
-                                    <DashboardCard />
-                                </div>
-                                <div className="col-md-4">
-                                    <DashboardCard />
-                                </div>
-                                <div className="col-md-4">
-                                    <DashboardCard />
-                                </div>
-                                <div className="col-md-4">
-                                    <DashboardCard />
-                                </div>
-                                <div className="col-md-4">
-                                    <DashboardCard />
-                                </div>
-                                <div className="col-md-4">
-                                    <DashboardCard />
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                {_.map(data, area =>
+                    <DashboardCard key={area._id} area={area} />
+                )}
             </div>
         </section>
     </div>
