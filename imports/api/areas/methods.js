@@ -26,7 +26,7 @@ export const removeArea = new ValidatedMethod({
     },
 });
 
-const addChildNodes = parentnode => {
+export const addChildNodes = parentnode => {
     const childs = Areas.aggregate([
         { $match: { parentAreaId: parentnode._id } },
         { $lookup: { from: 'typesareastructure', foreignField: '_id', localField: 'typeAreaStructureId', as: 'TypeAreaStructure' } },

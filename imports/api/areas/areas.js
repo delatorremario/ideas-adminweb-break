@@ -20,27 +20,46 @@ Areas.deny({
 
 Areas.schema = new SimpleSchema([
     BaseSchema,
-    {name: {
-        type: String
-    }},
-    {typeAreaId: {
-        type: String, optional: true // Area Operativa o Area Funcional
-    }},
-    {typeAreaStructureId: {
-        type: String, optional: true // 'Presidencia', 'Vicepresidencia', 'Gerencia General', 'Gerencia', 'SuperIntendencia
-    }},
-    {parentAreaId: {
-        type: String, optional: true
-    }},
-    {masterDataMatchText: {
-        type: String, optional: true
-    }},
-    {responsableId: {
-        type: String, optional: true
-    }},
-    {corporationId: {
-        type: String
-    }},
+    {
+        name: {
+            type: String
+        }
+    },
+    {
+        typeAreaId: {
+            type: String, optional: true // Area Operativa o Area Funcional
+        }
+    },
+    {
+        typeAreaStructureId: {
+            type: String, optional: true // 'Presidencia', 'Vicepresidencia', 'Gerencia General', 'Gerencia', 'SuperIntendencia
+        }
+    },
+    {
+        parentAreaId: {
+            type: String, optional: true
+        }
+    },
+    {
+        masterDataMatchText: {
+            type: String, optional: true
+        }
+    },
+    {
+        responsableId: {
+            type: String, optional: true
+        }
+    },
+    {
+        corporationId: {
+            type: String
+        }
+    },
+    {
+        dashboard: {
+            type: Boolean, optional: true, defaultValue: false,
+        }
+    },
 ])
 
 Areas.attachSchema(Areas.schema);

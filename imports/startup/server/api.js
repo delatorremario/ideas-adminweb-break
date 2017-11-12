@@ -17,4 +17,6 @@ import '../../api/ideas/server/publications';
 import '../../api/persons/methods';
 import '../../api/persons/server/publications';
 
+import '../../api/dashboard/methods';
+
 // import '../../api/base/baseSchema';
