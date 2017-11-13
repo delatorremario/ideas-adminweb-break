@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { Doughnut } from 'react-chartjs-2';
-
+import { Link } from 'react-router-dom';
+import _ from 'lodash';
 
 const DashboardCard = ({ area }) => {
 
@@ -60,9 +61,8 @@ const DashboardCard = ({ area }) => {
                         <div className="row">
                             {
                                 _.map(ideasByStatus, (state, index) =>
-                                    <div key={index} className="col-xs-12">
-                                        <label className='label label-warning label-sm transparent'>{state.state} <span className="badge">{state.count}</span></label>
-                                    </div>
+                                    // <label className='label label-warning label-sm transparent'>{state.state} <span className="badge">{state.count}</span></label>
+                                    <Link key={index} to={`/ideas/%20/${state.state}/find`} className="btn btn-default btn-xs btn-trans">{state.state} <span className="badge">{state.count}</span></Link>
                                 )
                             }
                         </div>
@@ -71,6 +71,10 @@ const DashboardCard = ({ area }) => {
             </div>
         </div>
     )
+};
+
+DashboardCard.propTypes = {
+    area: PropTypes.shape().isRequired,
 };
 
 export default DashboardCard;

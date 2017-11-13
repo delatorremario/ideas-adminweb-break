@@ -22,10 +22,15 @@ class IdeasList extends Component {
 
 
     componentWillMount() {
-        this.props.textSearch.set(this.props.params.text.trim())
-        this.props.stateFilter.set(this.props.params.state.trim())
-        
-        this.setState({ textSearch: this.props.textSearch.get() })
+        // reactVars
+        const { textSearch, stateFilter } = this.props;
+
+        const { text, state } = this.props.params;
+
+        if (text) textSearch.set(text.trim())
+        if (state) stateFilter.set(state.trim())
+
+        this.setState({ textSearch: textSearch.get() })
     }
 
 
