@@ -1,7 +1,7 @@
 import React from 'react';
 import IdeasList from '../../containers/ideas/IdeasList';
 
-const Ideas = ({ history }) => (
+const Ideas = (props) => (
     <div className="pageWrapper">
         <div className="pageheader">
             <h1>Ideas</h1>
@@ -19,7 +19,8 @@ const Ideas = ({ history }) => (
         <section id="main-content">
             <div className="row">
                 <div className="col-md-12 col-lg-12">
-                    <IdeasList history={history} />
+                    <IdeasList {...props} />
+                    {/* <IdeasList history={history} /> */}
                 </div>
             </div>
         </section>

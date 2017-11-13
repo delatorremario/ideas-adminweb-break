@@ -47,7 +47,7 @@ class SidebarPush extends Component {
                 {
                     title: "Ideas",
                     iconClasses: ["fa", "fa-fw", "fa-lightbulb-o"],
-                    path: "/ideas",
+                    path: "/ideas/find",
                 },
                 {
                     title: "Enviar Invitación",

@@ -14,7 +14,7 @@ const handleUpsert = () => {
     _.extend(doc, {
         createdAt: new Date(),
     })
-   
+
     const confirmation = doc && doc._id ? 'Datos actualizados correctamente' : 'Datos guardados con éxito';
 
     const upsert = doc;
@@ -28,7 +28,8 @@ const handleUpsert = () => {
         } else {
             component.ideaEditorForm.reset();
             Bert.alert(confirmation, 'success');
-            component.props.history.push('/ideas');
+            component.props.history.push('/ideas/find');
+            // history.pushState(state, url, param)
         }
     });
 };

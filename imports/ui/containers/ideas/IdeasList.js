@@ -15,7 +15,10 @@ const textSearch = new ReactiveVar('');
 const ideasFindLimit = new ReactiveVar(10);
 
 
-const composer = (params, onData) => {
+const composer = ({ match }, onData) => {
+
+    console.log('match', match);
+
     console.log('ideasStateCodeFilter', ideasStateCodeFilter.get());
     console.log('textSearch', textSearch.get());
     console.log('ideasFindLimit', ideasFindLimit.get());

@@ -28,7 +28,7 @@ const PageWrapper = () => (
             {/* Corporaciones */}
             <Route exact path="/corporations" component={Corporations} />
             <Route exact path="/corporations/new" component={NewCorporation} />
-            <Route exact path="/corporation/:_id/ediwt" component={EditCorporation} />
+            <Route exact path="/corporation/:_id/edit" component={EditCorporation} />
             
             {/* Areas */}
             <Route exact path="/areas" component={Areas} />
@@ -36,7 +36,7 @@ const PageWrapper = () => (
             <Route exact path="/area/:_id/edit" component={EditArea} />
 
             {/* Ideas */}
-            <Route exact path="/ideas" component={Ideas} />
+            <Route exact path="/ideas/:text?/:state?/:step?/:areaId?/find" component={Ideas} />
             <Route exact path="/ideas/new" component={EditIdea} />
             <Route exact path="/idea/:_id/edit" component={EditIdea} />
             
