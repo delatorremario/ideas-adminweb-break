@@ -3,6 +3,7 @@ import Areas from '../areas/areas';
 import { addChildNodes } from '../areas/methods';
 import Persons from '../persons/persons';
 import Ideas from '../ideas/ideas';
+import ideasstates from '../../api/ideasStatesSchema/ideasstates';
 
 const getIdsAreas = area => {
     const areaIds = []
@@ -38,16 +39,8 @@ Meteor.methods({
                             count: { $sum: 1 }
                         }
                     }]);
-                const ideasByStates = Ideas.aggregate([
-                    { $match: { 'person.areaId': { $in: area.areaIds } } },
-                    {
-                        $group: {
-                            _id: {
-                                state: '$states.state'
-                            },
-                            count: { $sum: 1 }
-                        }
-                    }, { $project: { state: '$_id.state', count: 1 } }, { $unwind: '$state' }]);
+               
+
                 const ideasPersonAdded = Ideas.aggregate([
                     { $match: { 'person.areaId': { $in: area.areaIds } } },
                     {
@@ -58,8 +51,55 @@ Meteor.methods({
                     }]);
                 area.ideasAdded = (ideasAdded && ideasAdded[0] && ideasAdded[0].count) || 0;
                 area.ideasPersonAdded = (ideasPersonAdded && ideasPersonAdded[0] && ideasPersonAdded[0].count) || 0;
-                area.ideasByStates = ideasByStates;
-                area.participation = area.employes * area.ideasPersonAdded / 100;
+
+
+                const ideasByStep = Ideas.aggregate([
+                    { $match: { 'person.areaId': { $in: area.areaIds } } },
+                    {
+                        $project:
+                        {
+                            lastState: { $arrayElemAt: ["$states", -1] }
+                        }
+                    },
+                    {
+                        $group: {
+                            _id: '$lastState.step',
+                            count: { $sum: 1 },
+                        }
+                    },
+                    { $project: { step: '$_id', count: 1 } },
+                ]);
+                _.map(ideasByStep, step => {
+                    const ideastate = _.find(ideasstates, { step: step.step });
+                    step.color = ideastate && ideastate.color || '#fff';
+                    return step;
+                })
+                area.ideasByStep = ideasByStep;
+
+                const ideasByStatus = Ideas.aggregate([
+                    { $match: { 'person.areaId': { $in: area.areaIds } } },
+                    {
+                        $project:
+                        {
+                            lastState: { $arrayElemAt: ["$states", -1] }
+                        }
+                    },
+                    {
+                        $group: {
+                            _id: '$lastState.state',
+                            count: { $sum: 1 },
+                        }
+                    },
+                    { $project: { state: '$_id', count: 1 } },
+                ]);
+                _.map(ideasByStatus, state => {
+                    const ideastate = _.find(ideasstates, { state: state.state });
+                    state.color = ideastate && ideastate.color || '#fff';
+                    return state;
+                })
+                area.ideasByStatus = ideasByStatus;
+
+                area.participation = area.ideasPersonAdded * 100 / area.employes;
             });
 
             // personal
