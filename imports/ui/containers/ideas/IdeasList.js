@@ -10,33 +10,39 @@ import ideasstates from '../../../api/ideasStatesSchema/ideasstates';
 
 import Loading from '../../components/Loading.js';
 
-const ideasStateCodeFilter = new ReactiveVar('');
 const textSearch = new ReactiveVar('');
+const stateFilter = new ReactiveVar('');
+const stepFilter = new ReactiveVar('');
+const areaIdFilter = new ReactiveVar('');
 const ideasFindLimit = new ReactiveVar(10);
-
 
 const composer = ({ match }, onData) => {
 
-    console.log('match', match);
+	console.log('match', match);
 
-    console.log('ideasStateCodeFilter', ideasStateCodeFilter.get());
-    console.log('textSearch', textSearch.get());
-    console.log('ideasFindLimit', ideasFindLimit.get());
-    const subscription = Meteor.subscribe('ideas.list');
-    if (subscription.ready()) {
+	const subscription = Meteor.subscribe('ideas.list',
+		textSearch.get(),
+		stateFilter.get(),
+		stepFilter.get(),
+		areaIdFilter.get(),
+		ideasFindLimit.get(),
+	);
 
-        const codeState = ideasStateCodeFilter.get();
-        const filter = codeState && { 'states.code': ideasStateCodeFilter.get() } || {}
+	if (subscription.ready()) {
 
-        let ideas = Ideas.find(filter, { createdAt: -1, limit: ideasFindLimit.get() }).fetch();
+		const state= stateFilter.get();
 
-        if (codeState) ideas = _.filter(ideas, idea => {
-            const last = _.last(idea.states);
-            return last && last.code === ideasStateCodeFilter.get()
-        })
+		let ideas = Ideas.find({}, { createdAt: -1, limit: ideasFindLimit.get() }).fetch();
 
-        onData(null, { ideas, ideasstates, ideasFindLimit, textSearch, ideasStateCodeFilter });
-    }
+		if (state) {
+			ideas = _.filter(ideas, (idea) => {
+				const last = _.last(idea.states);
+				return last && last.state === state;
+			})
+		}
+
+		onData(null, { ideas, ideasstates, ideasFindLimit, textSearch, stateFilter, params: match.params });
+	}
 };
 
 export default composeWithTracker(composer, Loading)(IdeasList);

@@ -34,8 +34,8 @@ const IdeaCard = ({ idea, lap, handleRemove }) => {
                     <div className="col-md-12 panel-body-description">
                         <p>Ingresada: <small><Moment format="DD MMM YYYY" date={createdAt} /></small></p>
                         <p>Encargado de Area: <b>{chief.firstName} {chief.secondName} {chief.lastName}</b></p>
-                        <p>Descripción: <b>{description}</b></p>
                         <p>Oportunidad: <b>{opportunity}</b></p>
+                        <p>Descripción: <b>{description}</b></p>
                         <p>Medio de Captura: <b>{origin}</b></p>
                         <p>
                             {

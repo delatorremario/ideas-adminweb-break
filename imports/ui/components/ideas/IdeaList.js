@@ -16,8 +16,18 @@ import StateCard from './StateCard';
 class IdeasList extends Component {
 
     state = {
-        stateSelected: {}
+        stateSelected: {},
+        textSearch: '',
     }
+
+
+    componentWillMount() {
+        this.props.textSearch.set(this.props.params.text.trim())
+        this.props.stateFilter.set(this.props.params.state.trim())
+        
+        this.setState({ textSearch: this.props.textSearch.get() })
+    }
+
 
     handleNav = (history, _id) => {
         history.push(`/idea/${_id}`)
@@ -49,26 +59,28 @@ class IdeasList extends Component {
     selectState = state => e => {
         e.preventDefault();
         this.setState({ stateSelected: state });
-        this.props.ideasStateCodeFilter.set(state.code)
+        this.props.stateFilter.set(state.state)
 
     }
 
     removeStateFilter = e => {
         e.preventDefault();
         this.setState({ stateSelected: {} });
-        this.props.ideasStateCodeFilter.set('')
+        this.props.stateFilter.set('')
     }
 
     onChangeTextSearch = e => {
         e.preventDefault();
         const text = e.target.value;
+        console.log('TEXT', text)
+        this.setState({ textSearch: text })
         this.props.textSearch.set(text);
     }
 
     render() {
 
         const { history, ideas, ideasstates } = this.props;
-        const { stateSelected } = this.state;
+        const { stateSelected, textSearch } = this.state;
 
         return (
             <div>
@@ -80,7 +92,7 @@ class IdeasList extends Component {
                             </div>
                             <div className="col-flex smart-searcher-container">
                                 <div id="example_filter" className="dataTables_filter">
-                                    <input type="search" onChange={this.onChangeTextSearch.bind(this)} placeholder="Buscar..." className="form-control input-sm" aria-controls="example" />
+                                    <input type="search" value={textSearch} onChange={this.onChangeTextSearch.bind(this)} placeholder="Buscar por palabras claves en oportunidad y descripción ..." className="form-control input-sm" aria-controls="example" />
                                 </div>
                             </div>
                         </div>
