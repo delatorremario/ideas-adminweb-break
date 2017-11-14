@@ -80,6 +80,14 @@ const addParentsNodes = node => {
     return node;
 }
 
+const getAreasIdChildren = (areaId) => {
+    const childrenAreas = Areas.find({ parentAreaId: areaId }).fetch();
+    let areasIds = _.map(childrenAreas, '_id');
+    areasIds = _.union(areasIds, _.flattenDeep(_.map(areasIds, areaIdchild => getAreasIdChildren(areaIdchild))));
+    areasIds.push(areaId);
+    return areasIds;
+}
+
 Meteor.methods({
     'areas.getTree': () => {
         if (!Meteor.isServer) return;
@@ -122,9 +130,20 @@ Meteor.methods({
             },
 
         ]);
-       // area.parent = (area && area[0] && addParentsNodes(area[0])) || [];
+        // area.parent = (area && area[0] && addParentsNodes(area[0])) || [];
         console.log('AREA get', area);
         return area && area[0];
+    },
+    'areas.generateFamily': () => {
+        if (!Meteor.isServer) return;
+        const areas = Areas.find().fetch();
+        _.map(areas, area => {
+            const family = getAreasIdChildren(area._id);
+            console.log('FAMILY', area.name, family);
+            Areas.update({ _id: area._id }, { $set: { family } });
+        })
+        console.log('---- END generate family --- ');
+        return true;
     }
 });
 

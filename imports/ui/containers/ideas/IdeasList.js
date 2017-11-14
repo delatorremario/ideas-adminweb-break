@@ -18,7 +18,7 @@ const ideasFindLimit = new ReactiveVar(10);
 
 const composer = ({ match }, onData) => {
 
-	console.log('match', match);
+	// console.log('match', match);
 
 	const subscription = Meteor.subscribe('ideas.list',
 		textSearch.get(),

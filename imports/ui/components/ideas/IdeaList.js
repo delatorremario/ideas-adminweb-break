@@ -13,6 +13,8 @@ import IdeaCard from './IdeaCardContainer';
 import StatesSelect from './StatesSelect';
 import StateCard from './StateCard';
 
+import AreasSearch from '../../containers/areas/AreasSearch';
+
 class IdeasList extends Component {
 
     state = {
@@ -97,13 +99,24 @@ class IdeasList extends Component {
                             </div>
                             <div className="col-flex smart-searcher-container">
                                 <div id="example_filter" className="dataTables_filter">
-                                    <input type="search" value={textSearch} onChange={this.onChangeTextSearch.bind(this)} placeholder="Buscar por palabras claves en oportunidad y descripción ..." className="form-control input-sm" aria-controls="example" />
+                                    <input type="search" value={textSearch} onChange={this.onChangeTextSearch.bind(this)} placeholder="Buscar por palabras claves en oportunidad o descripción o nombres ..." className="form-control input-sm" aria-controls="example" />
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
+                <div className="panel panel-body">
+                    <div role="grid" id="example_wrapper" className="dataTables_wrapper form-inline no-footer">
+                        <div className="row table-top">
+                            <div className="col-flex smart-searcher-container">
+                                <div id="example_filter" className="dataTables_filter">
+                                    {/* <input type="search" value={textSearch} onChange={this.onChangeTextSearch.bind(this)} placeholder="Buscar por palabras claves en oportunidad o descripción o nombres ..." className="form-control input-sm" aria-controls="example" /> */}
+                                    <AreasSearch {...this.props} selectArea={area => e => console.log('selectArea', area, e)} />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div className="panel panel-body">
                     <div role="grid" id="example_wrapper" className="dataTables_wrapper form-inline no-footer">
                         <div className="row table-top">

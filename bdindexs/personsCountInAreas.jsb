@@ -1,0 +1,1 @@
+db.ideas.find({ 'areaId': { $in:['bbnfxN2RZYLfmzjDd', 'ug69sAnFKXCvsXvwk'] })
