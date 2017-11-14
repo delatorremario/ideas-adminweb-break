@@ -48,9 +48,10 @@ class Login extends React.Component {
                 placeholder="Password"
               />
             </FormGroup>
-            <Button type="submit" className="btn btn-success btn-lg btn-3d btn-block">Login</Button>
-              <Link to="/recover-password">Forgot Password?</Link>
-              <Link to="/signup">Sign Up</Link>
+            <Button type="submit" bsStyle="primary" className="btn-lg btn-3d btn-block">Login</Button>
+            <p className="already-account">
+              <a className="col-halfpad-right" href="/recover-password">Fogot your password?</a> | <a class="col-halfpad-left" href="/signup">Create an account</a>
+            </p>
           </form>
         </div>
 

@@ -53,6 +53,7 @@ a {
 
 // Own styles
 .login-box-container {
+    background-color: #1966b1;
     width: 100vw;
     height: 100vh;
     box-sizing: border-box;
@@ -96,7 +97,16 @@ a {
     color: #232833
 }
 .login-box p {
+    text-align: center;
     margin: 50px auto 10px;
+    &.already-account {
+        margin-top: 30px;
+        a {
+            display: inline;
+            font-size: 1em !important;
+            border-color: transparent !important
+        }
+    }
 }
 .login-box a {
     font-size: 0.9em;
@@ -104,7 +114,7 @@ a {
     margin-top: 25px;
     width: 100% !important;
     text-align: center !important;
-    color: $successColor
+    color: $primaryColor
 }
 .login-box a:hover {
     color: #232833;
@@ -166,4 +176,18 @@ select:-webkit-autofill:focus {
     font-size: 13px;
     margin: 7px 0 10px;
     line-height: 1.4em;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a,
+span,
+li,
+ {
+    font-family: "Arial" !important;
 }

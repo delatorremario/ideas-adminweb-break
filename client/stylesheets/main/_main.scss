@@ -64,89 +64,13 @@ form label.error {
 }
 
 // Own styles
-.login-box-container {
-    display: flex;
-    width: 100vw;
-    height: 100vh;
-    box-sizing: border-box;
-    justify-content: center;
-    align-items: center
-}
-.login-box {
-    background-color: #FFFFFF;
-    border: none;
-    width: 360px;
-    margin: 0 auto;
-    padding: 50px 35px 55px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.2);
-    border-radius: 3px;
-}
+
 .login-box input {
     height: 43px;
     padding: 10px 16px 10px 52px !important;
     font-size: 0.9em;
     background-color: #eee;
     border: none !important;
-}
-.login-box input:focus {
-    background-color: #eee;
-}
-.login-box .modal-header {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: none;
-    padding: 0 15px 25px 28px
-}
-.login-box .modal-header h1 {
-    font-size: 2em;
-    margin: 0;
-    border-bottom: 0;
-}
-.login-box p,
-.login-box h1 {
-    color: #232833
-}
-.login-box p {
-    margin: 50px auto 10px;
-}
-.login-box a {
-    font-size: 0.9em;
-    display: block;
-    margin-top: 25px;
-    width: 100% !important;
-    text-align: center !important;
-    color: $successColor
-}
-.login-box a:hover {
-    color: #232833;
-}
-.login-box label {
-    color: #AFAFAF;
-    width: 100%;
-    text-align: center;
-    font-weight: normal;
-    font-size: 0.7em;
-    margin-bottom: 0;
-    text-transform: uppercase
-}
-.login-box label.error {
-    color: #fff;
-    margin-top: 0;
-}
-.login-box button {
-    margin-top: 35px
-}
-.login-box .modal-footer {
-    border-bottom: 3px solid $successColor
-}
-.login-box hr {
-    width: 80%;
-    margin-top: 0;
-    margin-bottom: 25px
-}
-.login-box .form-group {
-    position: relative
 }
 .login-box .form-group i {
     color: #979797;
@@ -178,6 +102,7 @@ select:-webkit-autofill:focus {
     font-size: 13px;
     margin: 7px 0 10px;
     line-height: 1.4em;
+    color: #fff
 }
 
 .bert-alert {
