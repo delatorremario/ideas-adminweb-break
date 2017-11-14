@@ -60,6 +60,7 @@ Areas.schema = new SimpleSchema([
             type: Boolean, optional: true, defaultValue: false,
         }
     },
+    { family: { type: [String], optional: true } },
 ])
 
 Areas.attachSchema(Areas.schema);
