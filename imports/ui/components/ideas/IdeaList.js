@@ -14,23 +14,30 @@ import StatesSelect from './StatesSelect';
 import StateCard from './StateCard';
 
 import AreasSearch from '../../containers/areas/AreasSearch';
+import Areas from '../../../api/areas/areas';
 
 class IdeasList extends Component {
 
     state = {
         stateSelected: {},
+        areaSelected: undefined,
         textSearch: '',
     }
 
 
     componentWillMount() {
         // reactVars
-        const { textSearch, stateFilter } = this.props;
+        const { textSearch, stateFilter, areasIdsFilter } = this.props;
 
-        const { text, state } = this.props.params;
+        const { text, state, areaId } = this.props.params;
 
         if (text) textSearch.set(text.trim())
         if (state) stateFilter.set(state.trim())
+        if (areaId) {
+            const area = Areas.findOne(areaId);
+            this.setState({ areaSelected: area });
+            this.props.areasIdsFilter.set(area && area.family || [])
+        }
 
         this.setState({ textSearch: textSearch.get() })
     }
@@ -70,6 +77,13 @@ class IdeasList extends Component {
 
     }
 
+    selectArea = area => {
+        console.log('AREA', area);
+        this.setState({ areaSelected: area });
+        this.props.areasIdsFilter.set(area && area.family || [])
+
+    }
+
     removeStateFilter = e => {
         e.preventDefault();
         this.setState({ stateSelected: {} });
@@ -79,7 +93,6 @@ class IdeasList extends Component {
     onChangeTextSearch = e => {
         e.preventDefault();
         const text = e.target.value;
-        console.log('TEXT', text)
         this.setState({ textSearch: text })
         this.props.textSearch.set(text);
     }
@@ -87,7 +100,10 @@ class IdeasList extends Component {
     render() {
 
         const { history, ideas, ideasstates } = this.props;
-        const { stateSelected, textSearch } = this.state;
+        const { areaId } = this.props.params;
+        const { stateSelected, textSearch, areaSelected } = this.state;
+
+        console.log('this.state', this.state);
 
         return (
             <div>
@@ -110,8 +126,7 @@ class IdeasList extends Component {
                         <div className="row table-top">
                             <div className="col-flex smart-searcher-container">
                                 <div id="example_filter" className="dataTables_filter">
-                                    {/* <input type="search" value={textSearch} onChange={this.onChangeTextSearch.bind(this)} placeholder="Buscar por palabras claves en oportunidad o descripción o nombres ..." className="form-control input-sm" aria-controls="example" /> */}
-                                    <AreasSearch {...this.props} selectArea={area => e => console.log('selectArea', area, e)} />
+                                    <AreasSearch {...this.props} selectArea={this.selectArea} />
                                 </div>
                             </div>
                         </div>

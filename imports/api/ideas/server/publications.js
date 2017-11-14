@@ -9,12 +9,12 @@ Meteor.publish('ideas.list', (
   textSearch,
   stateFilter,
   stepFilter,
-  areaIdFilter,
+  areasIdsFilter,
   limit) => {
   check(textSearch, String);
   check(stateFilter, String);
   check(stepFilter, String);
-  check(areaIdFilter, String);
+  check(areasIdsFilter, [String]);
   check(limit, Number);
 
 
@@ -28,8 +28,10 @@ Meteor.publish('ideas.list', (
 
     if (textSearch) _.extend(filters, { $text: { $search: textSearch } });
     if (stateFilter) _.extend(filters, { 'states.state': { $in: [stateFilter] } });
+    if (areasIdsFilter.length > 0) _.extend(filters, { 'chief.areaId': { $in: areasIdsFilter } });
 
-    // console.log('FILTERS', filters);
+    // console.log('areasIdsFilter', areasIdsFilter);
+   console.log('FILTERS', filters);
 
     return Ideas.find(
       filters,

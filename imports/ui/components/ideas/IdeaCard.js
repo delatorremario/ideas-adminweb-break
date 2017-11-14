@@ -17,6 +17,7 @@ const IdeaCard = ({ idea, lap, handleRemove }) => {
             <div className="panel-heading" style={{ backgroundColor: states && _.last(states).color }}>
                 <h5 className="panel-title">
                     <small> <Moment format="DD MMM YYYY" date={date} /></small> {person.lastName} <br></br>
+                    <small> DESDE: <Moment from={date} /></small> {person.areaId} <br></br>
                     {states && <small> {_.last(states).state}</small>} <br></br>
                     {idea.area && <small><label className="label label-primary">{idea.area.name}</label></small>}
                 </h5>

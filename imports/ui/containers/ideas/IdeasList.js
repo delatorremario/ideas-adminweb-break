@@ -13,24 +13,27 @@ import Loading from '../../components/Loading.js';
 const textSearch = new ReactiveVar('');
 const stateFilter = new ReactiveVar('');
 const stepFilter = new ReactiveVar('');
-const areaIdFilter = new ReactiveVar('');
+const areasIdsFilter = new ReactiveVar([]);
 const ideasFindLimit = new ReactiveVar(10);
 
 const composer = ({ match }, onData) => {
 
-	// console.log('match', match);
-
+	console.log('match', match);
+	const { areaId } = match.params;
 	const subscription = Meteor.subscribe('ideas.list',
 		textSearch.get(),
 		stateFilter.get(),
 		stepFilter.get(),
-		areaIdFilter.get(),
+		areasIdsFilter.get(),
 		ideasFindLimit.get(),
 	);
 
-	if (subscription.ready()) {
+	console.log('areaID', areaId);
 
-		const state= stateFilter.get();
+	const areasviewsub = Meteor.subscribe('areas.view', areaId || '');
+
+	if (subscription.ready() && areasviewsub.ready()) {
+		const state = stateFilter.get();
 
 		let ideas = Ideas.find({}, { createdAt: -1, limit: ideasFindLimit.get() }).fetch();
 
@@ -41,7 +44,7 @@ const composer = ({ match }, onData) => {
 			})
 		}
 
-		onData(null, { ideas, ideasstates, ideasFindLimit, textSearch, stateFilter, params: match.params });
+		onData(null, { ideas, ideasstates, ideasFindLimit, textSearch, stateFilter, areasIdsFilter, params: match.params });
 	}
 };
 

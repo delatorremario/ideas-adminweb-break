@@ -25,9 +25,11 @@ class AreasSearch extends Component {
     }
     removeFilter = e => {
         e.preventDefault()
-        this.props.textSearch.set('');
+        const { textSearch, selectArea } = this.props;
+
+        textSearch.set('');
         this.setState({ selected: undefined, text: '' })
-        this.props.selectArea(undefined);
+        selectArea(undefined);
     }
     render() {
         const { selected, text } = this.state;
@@ -52,7 +54,7 @@ class AreasSearch extends Component {
                                 </div>
                                 <div className="col-flex smart-searcher-container">
                                     <div className="well">
-                                        <h1>{selected.name}</h1>
+                                        <h1>{selected.name}</h1>{selected._id}
                                     </div>
                                 </div>
                             </div>
