@@ -15,7 +15,7 @@ const composer = ({ selectArea }, onData) => {
 	const subscription = Meteor.subscribe('areas.search', textSearch.get());
 
 	if (subscription.ready()) {
-		const areas = Areas.find().fetch();
+		const areas = Areas.find({}, { sort: { score: -1 } }).fetch();
 		onData(null, { textSearch, selectArea, areas });
 	}
 };

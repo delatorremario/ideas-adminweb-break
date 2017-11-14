@@ -7,13 +7,13 @@ import Loading from '../../components/Loading';
 
 const composer = ({ idea, lap, handleRemove }, onData) => {
    
-    const areasubs = Meteor.subscribe('areas.view', idea.chief.areaId);
+   // const areasubs = Meteor.subscribe('areas.view', idea.chief.areaId);
 
-    if (areasubs.ready()) {
-        const area = Areas.findOne({ _id: idea.chief.areaId });
-        _.extend(idea, { area });
+    //if (areasubs.ready()) {
+       // const area = Areas.findOne({ _id: idea.chief.areaId });
+       // _.extend(idea, { area });
         onData(null, { idea, lap, handleRemove });
-    }
+   // }
 };
 
 export default composeWithTracker(composer, Loading)(IdeaCard);

@@ -16,8 +16,7 @@ Meteor.publish('areas.search', (textSearch) => {
       corporationId: (user.profile && user.profile.selectedCorporationId) || '',
       $text: { $search: textSearch },
     };
-    console.log('filters', filters);
-    return Areas.find(filters, { fields: { score: { $meta: 'textScore' } } }, { sort: { score: -1 } });
+    return Areas.find(filters, { fields: { score: { $meta: 'textScore' } } });
   } else return;
 });
 
