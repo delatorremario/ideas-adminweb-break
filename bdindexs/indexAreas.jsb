@@ -1,0 +1,1 @@
+db.areas.createIndex({"name":"text"})

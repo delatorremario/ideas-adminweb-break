@@ -29,7 +29,7 @@ Meteor.publish('ideas.list', (
     if (textSearch) _.extend(filters, { $text: { $search: textSearch } });
     if (stateFilter) _.extend(filters, { 'states.state': { $in: [stateFilter] } });
 
-    console.log('FILTERS', filters);
+    // console.log('FILTERS', filters);
 
     return Ideas.find(
       filters,

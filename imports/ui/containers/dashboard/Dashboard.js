@@ -6,8 +6,8 @@ import Loading from '../../components/Loading';
 const composer = ({ match }, onData) => {
 
     Meteor.call('getDashboard', (err, data) => {
-        console.log('data', data);
-      //  console.log('err', err);
+        // console.log('data', data);
+        // console.log('err', err);
         onData(null, { data });
     })
 
