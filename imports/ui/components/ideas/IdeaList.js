@@ -97,7 +97,7 @@ class IdeasList extends Component {
                             </div>
                             <div className="col-flex smart-searcher-container">
                                 <div id="example_filter" className="dataTables_filter">
-                                    <input type="search" value={textSearch} onChange={this.onChangeTextSearch.bind(this)} placeholder="Buscar por palabras claves en oportunidad y descripción ..." className="form-control input-sm" aria-controls="example" />
+                                    <input type="search" value={textSearch} onChange={this.onChangeTextSearch.bind(this)} placeholder="Buscar por palabras claves en oportunidad o descripción o nombres ..." className="form-control input-sm" aria-controls="example" />
                                 </div>
                             </div>
                         </div>
