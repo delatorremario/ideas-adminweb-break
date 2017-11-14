@@ -6,12 +6,12 @@ import Ideas from '../../../api/ideas/ideas';
 import EditIdea from '../../pages/ideas/EditIdea';
 import Loading from '../../components/Loading.js';
 import Persons from '../../../api/persons/persons';
-import ideasstates from '../../../api/ideasStatesSchema/ideasstates'; 
+import ideasstates from '../../../api/ideasStatesSchema/ideasstates';
 
 const textSearch = new ReactiveVar('');
 const textSearchLimit = new ReactiveVar(10);
 
-const origins = ['Email', 'Yamer', 'Otra'];
+const origins = ['Email', 'Yammer', 'Formulario', 'Conversación', 'Otros'];
 
 const driversArray = [
   { driver: 'Seguridad', placeHolder: 'Proporcionar un ambiente más seguro para todos los trabajadores' },
@@ -20,10 +20,9 @@ const driversArray = [
   { driver: 'Producción', placeHolder: 'Alcanzar utilización, rendimiento y recuperación de clase mundial' },
   { driver: 'Gasto Externo', placeHolder: 'Reducir los costos totales con proveedores externos tornando la operación más eficiente' },
   { driver: 'Mantenimiento', placeHolder: 'Optimizar la disponibilidad con estrategia y ejecución de primera clase' },
-]
+];
 
 const composer = ({ match }, onData) => {
-
   const docId = match.params._id || '';
   const subscription = Meteor.subscribe('ideas.view', docId);
 
@@ -31,7 +30,6 @@ const composer = ({ match }, onData) => {
   const subscriptionAreas = Meteor.subscribe('areas.list');
 
   if (subscription.ready() && subscriptionPersons.ready() && subscriptionAreas.ready()) {
-    
     const persons = Persons.find({}, { sort: { score: -1 }, limit: textSearchLimit.get() }).fetch();
     let doc = Ideas.findOne(docId);
 
@@ -43,7 +41,6 @@ const composer = ({ match }, onData) => {
 
     onData(null, { doc, textSearch, persons, driversArray, origins, ideasstates });
   }
-
 };
 
 export default composeWithTracker(composer, Loading)(EditIdea);
