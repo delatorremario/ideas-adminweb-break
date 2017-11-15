@@ -37,12 +37,12 @@ class Header extends Component {
                             <i className="fa fa-bars"></i>
                         </button>
                     </li>
-                    <li className="hidden-xs">
+                    {/* <li className="hidden-xs">
                         <input type="text" className="search" placeholder="Search project..." />
                         <button type="submit" className="btn btn-sm btn-search">
                             <i className="fa fa-search"></i>
                         </button>
-                    </li>
+                    </li> */}
                 </ul>
                 <ul className="nav navbar-nav navbar-right">
                     <li className="toggle-navigation toggle-right">
