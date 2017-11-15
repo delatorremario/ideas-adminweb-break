@@ -16,6 +16,7 @@ import IdeasStep1 from './IdeasStep1'
 import IdeasStep2 from './IdeasStep2'
 import IdeasStep3 from './IdeasStep3'
 import IdeasStep4 from './IdeasStep4'
+import IdeasStep5 from './IdeasStep5'
 
 export default class IdeaEditor extends Component {
     state = {
@@ -52,9 +53,10 @@ export default class IdeaEditor extends Component {
         const { formStep } = this.state;
         const { origin, person, chief, description, opportunity, drivers, states } = this.state.doc;
         return (formStep === 1 && origin && person) ||
-            (formStep === 2 && origin && person && chief && states) ||
-            (formStep === 3 && origin && person && chief && states && description && opportunity && drivers && drivers.length > 0) ||
-            (formStep === 4 && origin && person && chief && states && description && opportunity && drivers && drivers.length > 0)
+            (formStep === 2 && origin && person && chief) ||
+            (formStep === 3 && origin && person && chief && description && opportunity && drivers && drivers.length > 0) ||
+            (formStep === 4 && origin && person && chief && description && opportunity && drivers && drivers.length > 0) ||
+            (formStep === 5 && origin && person && chief && states && description && opportunity && drivers && drivers.length > 0)
     }
 
 
@@ -176,7 +178,7 @@ export default class IdeaEditor extends Component {
     //   },
     render() {
 
-        const formMaxStep = 4;
+        const formMaxStep = 5;
 
         const { persons, driversArray, origins, ideasstates } = this.props;
 
@@ -213,8 +215,6 @@ export default class IdeaEditor extends Component {
                                 onChangeSearchPerson={this.onChangeSearchPerson}
                                 persons={persons}
                                 selectChief={this.selectChief}
-                                ideasstates={ideasstates}
-                                selectState={this.selectState}
                             />}
                         {formStep === 3 &&
                             <IdeasStep3 onChangeForm={this.onChangeDoc}
@@ -229,7 +229,12 @@ export default class IdeaEditor extends Component {
                                 persons={persons}
                                 selectCollaborator={this.selectCollaborator}
                             />}
-
+                        {formStep === 5 &&
+                            <IdeasStep5
+                                data={doc}
+                                ideasstates={ideasstates}
+                                selectState={this.selectState}
+                            />}
                         <div className="row forms-bottom-panel">
                             {
                                 formStep === formMaxStep &&
@@ -249,7 +254,7 @@ export default class IdeaEditor extends Component {
                                     className="btn btn-sm pull-right">
                                     <i className="fa fa-arrow-right"></i>
                                     Siguiente
-                                                        </Button>
+                                </Button>
                             }
 
                             {

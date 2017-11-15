@@ -11,15 +11,16 @@ const IdeaCard = ({ idea, lap, handleRemove }) => {
     const { userId, person, chief, description, opportunity, collaborators, drivers, origin, createdAt, date, states } = idea;
     const createdUser = Meteor.users.findOne(userId);
     // const userName = `${createdUser.profile && createdUser.profile.name && createdUser.profile.name.first} ${createdUser.profile && createdUser.profile.name && createdUser.profile.name.last}`;
-   
-   return <div className="col-sm-6 col-lg-4 cards-item">
+
+    return <div className="col-sm-6 col-lg-4 cards-item">
         <div className="panel panel-default">
             <div className="panel-heading" style={{ backgroundColor: states && _.last(states).color }}>
                 <h5 className="panel-title">
                     <small> <Moment format="DD MMM YYYY" date={date} /></small> {person.lastName} <br></br>
-                    {states && <small> {_.last(states).state}</small>} <br></br>
-                    <b>hace <Moment fromNow ago>{_.last(states).createdAt}</Moment></b> <br></br>
-                    {idea.area && <small><label className="label label-primary">{idea.area.name}</label></small>}
+                    {states && <div> <small>{_.last(states).step} - {_.last(states).state}</small> hace <Moment fromNow ago>{_.last(states).createdAt}</Moment></div>} 
+                    {
+                        idea.area && <p>{idea.area.name}</p>
+                    }
                 </h5>
 
                 <div className="actions pull-right">

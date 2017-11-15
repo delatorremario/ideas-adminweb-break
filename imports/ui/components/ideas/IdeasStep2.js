@@ -15,22 +15,11 @@ const IdeasStep2 = ({ onChangeForm, data, onChangeSearchPerson, persons, selectC
                     {
                         data && data.chief && <PersonCard person={data.chief} removePerson={selectChief} />
                     }
-                    {
-                        data && data.states && data.states[0] && <StateCard state={data.states[0]} />
-                    }
                 </div>
                 <div className="row">
                     {
                         data && !data.chief && <PersonSearch persons={persons} onChangeSearchPerson={onChangeSearchPerson} selectPerson={selectChief} />
                     }
-                </div>
-                <div className="row">
-                    <div className="col-xs-12">
-                        <div className="form-group">
-                            <h2>Seleccione el estado de la Idea</h2>
-                            <StatesSelect ideasstates={ideasstates} selectState={selectState} />
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
