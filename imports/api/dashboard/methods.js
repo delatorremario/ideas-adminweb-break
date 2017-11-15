@@ -27,12 +27,12 @@ Meteor.methods({
 
             // obtener todas las areas debajo del areas principal
             _.map(areasDashboard, area => {
-                area.children = addChildNodes(area);
-                area.areaIds = getIdsAreas(area);
-                const employes = Persons.find({ areaId: { $in: area.areaIds } }, { fields: { _id: 1 } }).fetch();
+                // area.children = addChildNodes(area);
+                // area.family = getIdsAreas(area);
+                const employes = Persons.find({ areaId: { $in: area.family } }, { fields: { _id: 1 } }).fetch();
                 area.employes = employes.length;
                 const ideasAdded = Ideas.aggregate([
-                    { $match: { 'person.areaId': { $in: area.areaIds } } },
+                    { $match: { 'person.areaId': { $in: area.family } } },
                     {
                         $group: {
                             _id: '',
@@ -42,7 +42,7 @@ Meteor.methods({
                
 
                 const ideasPersonAdded = Ideas.aggregate([
-                    { $match: { 'person.areaId': { $in: area.areaIds } } },
+                    { $match: { 'person.areaId': { $in: area.family } } },
                     {
                         $group: {
                             _id: { person: '$person' },
@@ -54,7 +54,7 @@ Meteor.methods({
 
 
                 const ideasByStep = Ideas.aggregate([
-                    { $match: { 'person.areaId': { $in: area.areaIds } } },
+                    { $match: { 'person.areaId': { $in: area.family } } },
                     {
                         $project:
                         {
@@ -77,7 +77,7 @@ Meteor.methods({
                 area.ideasByStep = ideasByStep;
 
                 const ideasByStatus = Ideas.aggregate([
-                    { $match: { 'person.areaId': { $in: area.areaIds } } },
+                    { $match: { 'person.areaId': { $in: area.family } } },
                     {
                         $project:
                         {
