@@ -35,34 +35,23 @@ class AreasSearch extends Component {
         const { selected, text } = this.state;
         const { areas, selectArea } = this.props;
 
-        return <div className="col-xs-12">
-            <div className="row">
-                <div className="col-md-6">
+        return <div>
+                {
+                    !selected &&
                     <div className="form-group">
                         <ControlLabel>Seleccione un Area</ControlLabel>
                         <input id="search" type="text" className="form-control" value={text} placeholder="Buscar por Nombre de Area" onChange={this.onChangeSearch.bind(this)} />
                     </div>
-                </div>
-
+                }
                 {
                     selected &&
-                    <div className="panel panel-body">
-                        <div role="grid" id="example_wrapper" className="dataTables_wrapper form-inline no-footer">
-                            <div className="row table-top">
-                                <div className="col-fixed" style={{ width: "115px" }}>
-                                    <button className="btn btn-defualt btn-sm" onClick={this.removeFilter.bind(this)}>Quitar Filtro</button>
-                                </div>
-                                <div className="col-flex smart-searcher-container">
-                                    <div className="well">
-                                        <h1>{selected.name}</h1>{selected._id}
-                                    </div>
-                                </div>
-                            </div>
+                    <div >
+                        <button className="btn btn-defualt btn-sm" onClick={this.removeFilter.bind(this)}>Quitar Filtro</button>
+                        <div className="area-selected">
+                            <h1>{selected.name}</h1>
                         </div>
                     </div>
                 }
-
-            </div>
 
             {
                 !selected && areas && <div className="form-group">

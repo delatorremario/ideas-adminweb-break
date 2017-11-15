@@ -10,8 +10,8 @@ import swal from 'sweetalert2';
 import _ from 'lodash';
 
 import IdeaCard from './IdeaCardContainer';
-import StatesSelect from './StatesSelect';
-import StateCard from './StateCard';
+
+import StatesSearch from './StatesSearch';
 
 import AreasSearch from '../../containers/areas/AreasSearch';
 import Areas from '../../../api/areas/areas';
@@ -122,38 +122,21 @@ class IdeasList extends Component {
                     </div>
                 </div>
                 <div className="panel panel-body">
-                    <div role="grid" id="example_wrapper" className="dataTables_wrapper form-inline no-footer">
-                        <div className="row table-top">
-                            <div className="col-flex smart-searcher-container">
-                                <div id="example_filter" className="dataTables_filter">
-                                    <AreasSearch {...this.props} selectArea={this.selectArea} />
-                                </div>
-                            </div>
+                    <div className="row">
+
+                        <div className="col-md-6"><AreasSearch {...this.props} selectArea={this.selectArea} /></div>
+
+                        <div className="col-md-6">
+                            <StatesSearch
+                                stateSelected={stateSelected}
+                                removeStateFilter={this.removeStateFilter}
+                                selectState={this.selectState}
+                                ideasstates={ideasstates}
+                            />
                         </div>
                     </div>
-                </div>
-                <div className="panel panel-body">
-                    <div role="grid" id="example_wrapper" className="dataTables_wrapper form-inline no-footer">
-                        <div className="row table-top">
-                            <div className="col-fixed" style={{ width: "115px" }}>
-                                {stateSelected.code && <button className="btn btn-defualt btn-sm" onClick={this.removeStateFilter}>Quitar Filtro</button> || 'Filtrar por Estado'}
-                            </div>
-                            <div className="col-flex smart-searcher-container">
-                                <div id="example_filter" className="dataTables_filter">
-                                    <StateCard state={stateSelected} />
-                                </div>
-                            </div>
-                        </div>
-                        {
-                            !stateSelected.code &&
-                            <div style={{ marginTop: '10px' }}>
-                                <StatesSelect ideasstates={ideasstates} selectState={this.selectState} />
-                            </div>
-                        }
 
-                    </div>
                 </div>
-
                 {
                     ideas.length > 0 ?
                         <div className="row cards-container">
