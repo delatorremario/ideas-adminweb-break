@@ -35,7 +35,7 @@ const composer = ({ match }, onData) => {
 	if (subscription.ready() && areasviewsub.ready()) {
 		const state = stateFilter.get();
 
-		let ideas = Ideas.find({}, { createdAt: -1, limit: ideasFindLimit.get() }).fetch();
+		let ideas = Ideas.find({}, { date: 1, limit: ideasFindLimit.get() }).fetch();
 
 		if (state) {
 			ideas = _.filter(ideas, (idea) => {

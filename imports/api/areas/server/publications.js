@@ -17,6 +17,16 @@ Meteor.publish('areas.search', (textSearch) => {
     return Areas.find(filters, { fields: { score: { $meta: 'textScore' } } });
   } else return;
 });
+Meteor.publish('areas.list', () => {
+  const self = this.Meteor;
+  const user = self.user();
+  if (user) {
+    const filters = {
+      corporationId: (user.profile && user.profile.selectedCorporationId) || '',
+    };
+    return Areas.find(filters);
+  } else return;
+});
 
 Meteor.publish('areas.view', (_id) => {
   check(_id, String);

@@ -27,9 +27,9 @@ const composer = ({ match }, onData) => {
   const subscription = Meteor.subscribe('ideas.view', docId);
 
   const subscriptionPersons = Meteor.subscribe('persons.search', textSearch.get(), textSearchLimit.get());
-  const subscriptionAreas = Meteor.subscribe('areas.list');
+  // const subscriptionAreas = Meteor.subscribe('areas.list');
 
-  if (subscription.ready() && subscriptionPersons.ready() && subscriptionAreas.ready()) {
+  if (subscription.ready() && subscriptionPersons.ready()) {
     const persons = Persons.find({}, { sort: { score: -1 }, limit: textSearchLimit.get() }).fetch();
     let doc = Ideas.findOne(docId);
 
