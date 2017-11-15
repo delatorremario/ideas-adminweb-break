@@ -17,7 +17,7 @@ const IdeaCard = ({ idea, lap, handleRemove }) => {
             <div className="panel-heading" style={{ backgroundColor: states && _.last(states).color }}>
                 <h5 className="panel-title">
                     <small> <Moment format="DD MMM YYYY" date={date} /></small> {person.lastName} <br></br>
-                    <b> <Moment fromNow ago>{date}</Moment></b> <br></br>
+                    <b>hace <Moment fromNow ago>{date}</Moment></b> <br></br>
                     {/* chief.areaId */}
                     {states && <small> {_.last(states).state}</small>} <br></br>
                     {idea.area && <small><label className="label label-primary">{idea.area.name}</label></small>}
@@ -31,11 +31,11 @@ const IdeaCard = ({ idea, lap, handleRemove }) => {
             <div className="row panel-body">
                 <small>
                     <p className="col-md-12 panel-body-title">
-                        <i className="fa fa-user"></i> Idea de <b>{person.firstName} {person.secondName} {person.lastName}</b>
+                        <i className="fa fa-user"></i> Idea de <b>{person.lastName} {person.firstName} {person.secondName}</b>
                     </p>
                     <div className="col-md-12 panel-body-description">
                         <p>Ingresada: <small><Moment format="DD MMM YYYY" date={createdAt} /></small></p>
-                        <p>Encargado de Area: <b>{chief.firstName} {chief.secondName} {chief.lastName}</b></p>
+                        <p>Encargado de Area: <b>{chief.lastName} {chief.firstName} {chief.secondName}</b></p>
                         <p>Oportunidad: <b>{opportunity}</b></p>
                         <p>Descripción: <b>{description}</b></p>
                         <p>Medio de Captura: <b>{origin}</b></p>
