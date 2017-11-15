@@ -3,6 +3,8 @@ import { Doughnut } from 'react-chartjs-2';
 import { Link } from 'react-router-dom';
 import _ from 'lodash';
 
+const colors = ['#e65400','#fab636','#b3de68']
+
 const DashboardCard = ({ area }) => {
 
     const { name, employes, ideasAdded, ideasByStep, ideasPersonAdded, participation, ideasByStatus } = area;
@@ -58,14 +60,16 @@ const DashboardCard = ({ area }) => {
                     </div>
 
                     {
-                        <div className="row">
-                            {
-                                _.map(ideasByStatus, (state, index) =>
-                                    // <label className='label label-warning label-sm transparent'>{state.state} <span className="badge">{state.count}</span></label>
-                                    <Link key={index} to={`/ideas/%20/${state.state}/find`} className="btn btn-default btn-xs btn-trans">{state.state} <span className="badge">{state.count}</span></Link>
-                                )
-                            }
-                        </div>
+
+                        _.map(ideasByStatus, (state, index) =>
+                            <div key={index} className="link-status"  >
+                                <Link to={`/ideas/%20/${state.state}/find`}>
+                                    <div>{state.state}</div> 
+                                    <div style={{backgroundColor:colors[_.random(0,2)]}}>{state.count}</div>
+                                </Link>
+                            </div>
+                        )
+
                     }
                 </div>
             </div>

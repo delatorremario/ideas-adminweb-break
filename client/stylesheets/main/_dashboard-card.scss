@@ -1,0 +1,31 @@
+.link-status {
+    border-radius: 3px;
+    border: 1px solid lightgray;
+    padding: 6px;
+    margin-top: 3px; 
+    a { 
+        display: flex;
+        align-items: center;
+
+        div:first-child {
+            font-size: x-small;
+            flex: 1;      
+            box-sizing: border-box;
+            padding-right: 5px
+        };
+       
+        div:last-child {
+            display: flex;
+            font-size: smaller;
+            width: 30px;
+            height: 30px;
+            box-sizing: border-box;
+            justify-content: center;
+            align-items: center;
+            background-color: red;
+            border-radius: 50%;
+           
+        };
+    }
+    
+}
