@@ -19,7 +19,6 @@ import Areas from '../../../api/areas/areas';
 class IdeasList extends Component {
 
     state = {
-        stateSelected: {},
         areaSelected: undefined,
         textSearch: '',
     }
@@ -27,12 +26,14 @@ class IdeasList extends Component {
 
     componentWillMount() {
         // reactVars
-        const { textSearch, stateFilter, areasIdsFilter } = this.props;
+        const { textSearch, statesFilter, areasIdsFilter } = this.props;
 
         const { text, state, areaId } = this.props.params;
 
+        console.log('STATE',this.props.params && this.props.params.sate);
+
         if (text) textSearch.set(text.trim())
-        if (state) stateFilter.set(state.trim())
+        if (state) statesFilter.set([state.trim()])
         if (areaId) {
             const area = Areas.findOne(areaId);
             this.setState({ areaSelected: area });
@@ -73,7 +74,7 @@ class IdeasList extends Component {
     selectState = state => e => {
         e.preventDefault();
         this.setState({ stateSelected: state });
-        this.props.stateFilter.set(state.state)
+        this.props.statesFilter.set(state.state)
 
     }
 

@@ -6,21 +6,19 @@ import StateCard from './StateCard';
 const StatesSearch = ({ stateSelected, removeStateFilter, selectState, ideasstates }) =>
     <div>
 
-        {
-            !stateSelected.code &&
-            <div style={{ marginTop: '10px' }}>
-                <StatesSelect ideasstates={ideasstates} selectState={selectState} />
+
+        <div style={{ marginTop: '10px' }}>
+            <StatesSelect ideasstates={ideasstates} selectState={selectState} />
+        </div>
+
+
+        {/* <div>
+            <button className="btn btn-defualt btn-sm" onClick={removeStateFilter}>Quitar Filtro</button>
+            <div id="example_filter" className="dataTables_filter">
+                <StateCard state={stateSelected} />
             </div>
-        }
-        {
-            stateSelected.code &&
-            <div>
-                <button className="btn btn-defualt btn-sm" onClick={removeStateFilter}>Quitar Filtro</button>
-                <div id="example_filter" className="dataTables_filter">
-                    <StateCard state={stateSelected} />
-                </div>
-            </div>
-        }
+        </div> */}
+
 
     </div>
 

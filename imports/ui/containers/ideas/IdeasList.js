@@ -11,8 +11,8 @@ import ideasstates from '../../../api/ideasStatesSchema/ideasstates';
 import Loading from '../../components/Loading.js';
 
 const textSearch = new ReactiveVar('');
-const stateFilter = new ReactiveVar('');
-const stepFilter = new ReactiveVar('');
+const statesFilter = new ReactiveVar([]);
+// const stepFilter = new ReactiveVar('');
 const areasIdsFilter = new ReactiveVar([]);
 const ideasFindLimit = new ReactiveVar(10);
 
@@ -22,8 +22,8 @@ const composer = ({ match }, onData) => {
 	const { areaId } = match.params;
 	const subscription = Meteor.subscribe('ideas.list',
 		textSearch.get(),
-		stateFilter.get(),
-		stepFilter.get(),
+		statesFilter.get(),
+		// stepFilter.get(),
 		areasIdsFilter.get(),
 		ideasFindLimit.get(),
 	);
@@ -33,18 +33,18 @@ const composer = ({ match }, onData) => {
 	const areasviewsub = Meteor.subscribe('areas.view', areaId || '');
 
 	if (subscription.ready() && areasviewsub.ready()) {
-		const state = stateFilter.get();
+		const states = statesFilter.get();
 
 		let ideas = Ideas.find({}, { sort: { date: -1}, limit: ideasFindLimit.get() }).fetch();
 
-		if (state) {
-			ideas = _.filter(ideas, (idea) => {
-				const last = _.last(idea.states);
-				return last && last.state === state;
-			})
-		}
+		// if (states) {
+		// 	ideas = _.filter(ideas, (idea) => {
+		// 		const last = _.last(idea.states);
+		// 		return last && last.state === _.find(states, state);
+		// 	})
+		// }
 
-		onData(null, { ideas, ideasstates, ideasFindLimit, textSearch, stateFilter, areasIdsFilter, params: match.params });
+		onData(null, { ideas, ideasstates, ideasFindLimit, textSearch, statesFilter, areasIdsFilter, params: match.params });
 	}
 };
 
