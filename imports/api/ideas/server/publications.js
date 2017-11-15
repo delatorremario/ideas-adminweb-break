@@ -35,7 +35,7 @@ Meteor.publish('ideas.list', (
 
     return Ideas.find(
       filters,
-      { sort: { createdAt: -1 }, limit });
+      { sort: { date: -1 }, limit });
 
   } else return;
 });

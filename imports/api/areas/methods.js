@@ -4,6 +4,7 @@ import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import Areas from './areas';
 import Persons from '../persons/persons';
 import rateLimit from '../../modules/rate-limit.js';
+import { check } from 'meteor/check';
 
 export const upsertArea = new ValidatedMethod({
     name: 'areas.upsert',
@@ -144,7 +145,11 @@ Meteor.methods({
         })
         console.log('---- END generate family --- ');
         return true;
-    }
+    },
+    'area.get': (areaId) => {
+        check(areaId, String);
+        return Areas.findOne(areaId)
+    },
 });
 
 rateLimit({
