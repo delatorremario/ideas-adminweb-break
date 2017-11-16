@@ -6,7 +6,12 @@
 
 li:hover { cursor: pointer;}
 
+li .state-info{
+    padding-left: 15px;
+}
+
 .state-selected {
     font-weight: bold;
+    text-shadow: 1px 1px #888888;
 }
 

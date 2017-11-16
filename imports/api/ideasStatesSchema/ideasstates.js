@@ -8,7 +8,7 @@ const ideasstates = [
     { code:'3A', step:'RECHAZADA', state:'YA EN INICIATIVA', description:'Idea rechazada por mejoramiento, ya considerada dentro de iniciativas existentes', color:'#cce6ff'},
     { code:'3B', step:'RECHAZADA', state:'REPETIDA', description:'Idea rechazada por mejoramiento, repetida dentro de "ideas 3.0"', color:'#cce6ff'},
     { code:'3C', step:'RECHAZADA', state:'NO FACTIBLE', description:'Idea no factible dadas las condiciones generales del área', color:'#cce6ff'},
-    { code:'4A', step:'STAND BY', state:'STAND BY', description:'', color:'#ffe6cc'},
+    { code:'4A', step:'STAND BY', state:'STAND BY', description:'Idea pasada a espera de nuevas condiciones para ser evaluada', color:'#ffe6cc'},
     { code:'5', step:'IDEA APROBADA', state:'APROBADA', description:'Idea aprobada a la espera de el Plan de Ejecución', color:'#ffe6cc'},
     { code:'5A', step:'IDEA APROBADA', state:'IMPACT JUST DO IT', description:'Idea entra a plataforma Impact como un Just Do It', color:'#e6ffcc'},
     { code:'5B', step:'IDEA APROBADA', state:'IMPACT INICIATIVA NUEVA', description:'Idea entra a plataforma Impact como una iniciativa nueva', color:'#e6ffcc'},

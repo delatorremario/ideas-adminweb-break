@@ -8,7 +8,7 @@ const StatesSelect = ({ ideasstates, selectState, statesCodesSelected }) => (
                 _.map(ideasstates, (state, index) => {
                     return (
                         <li className={_.includes(statesCodesSelected, state.code) && 'state-selected'} style={{ backgroundColor: state.color }} key={index} onClick={selectState(state).bind(this)}>
-                            {state.step} <small>{state.state}</small>
+                           <div className="state-info" > {state.step} <small>{state.state}</small></div>
                         </li>
                     )
                 })
