@@ -1,0 +1,30 @@
+
+
+.ideas-list {
+    .panel.panel-body{
+        display: flex;
+    }
+    
+    .panel-tabs {
+        margin-bottom:0px !important;
+    }
+
+    .btn-search {
+        margin-bottom: 20px !important;
+    }
+}
+
+@media all and (max-width:768px){
+    .ideas-list {
+        .panel.panel-body {
+            .btn-action {
+                width: 50%;
+            }
+        }
+        .btn-search {
+            width: 100% !important;
+            margin: 0 !important;
+            border-radius: 0 !important;
+        }
+    }
+}

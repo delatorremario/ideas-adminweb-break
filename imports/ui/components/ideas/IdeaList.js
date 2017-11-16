@@ -21,7 +21,10 @@ class IdeasList extends Component {
     state = {
         areaSelected: undefined,
         textSearch: '',
-        statesCodesSelected: []
+        statesCodesSelected: [],
+        showFilters: false,
+        showArea: true,
+        showList: true,
     }
 
 
@@ -103,21 +106,48 @@ class IdeasList extends Component {
         this.props.textSearch.set(text);
     }
 
+    showFilters = e => {
+        e.preventDefault();
+        const { showFilters } = this.state;
+        const { textSearch, statesCodesFilter, areasIdsFilter } = this.props
+        if (showFilters) {
+            textSearch.set('')
+            statesCodesFilter.set([])
+            areasIdsFilter.set([])
+        }
+
+        this.setState(prev => ({ showFilters: !prev.showFilters, showList: prev.showFilters }));
+    }
+
+    showArea = e => {
+        e.preventDefault();
+        this.setState(prev => ({ showArea: !prev.showArea }));
+    }
+
+    showList = e => {
+        e.preventDefault();
+        this.setState(prev => ({ showList: !prev.showList }));
+    }
+
     render() {
 
         const { history, ideas, ideasstates } = this.props;
         const { areaId } = this.props.params;
         const { stateSelected, textSearch, areaSelected, statesCodesSelected } = this.state;
+        const { showFilters, showArea, showList } = this.state;
 
-        console.log('this.state', this.state);
+        // console.log('this.state', this.state);
 
         return (
-            <div>
-                <div className="panel panel-body">
+            <div className='ideas-list'>
+                {/* <div className="panel panel-body">
                     <div role="grid" id="example_wrapper" className="dataTables_wrapper form-inline no-footer">
                         <div className="row table-top">
                             <div className="col-fixed" style={{ width: "115px" }}>
                                 <Link to="/ideas/new" className="btn btn-success"><i className="fa fa-plus"></i> Nuevo</Link>
+                            </div>
+                            <div className="col-fixed" style={{ width: "115px" }}>
+                                <button className="btn btn-success"><i className="fa fa-filter"></i> Filtros</button>
                             </div>
                             <div className="col-flex smart-searcher-container">
                                 <div id="example_filter" className="dataTables_filter">
@@ -126,36 +156,61 @@ class IdeasList extends Component {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> */}
                 <div className="panel panel-body">
-                    <div className="row">
+                    <Link to="/ideas/new" className="btn btn-success btn-trans btn-action"><i className="fa fa-plus"></i> Nuevo</Link>
+                    <button className={"btn btn-success btn-action " + (showFilters ? 'active' : 'btn-trans')} onClick={this.showFilters}><i className={"fa " + (showFilters && "fa-ban" || "fa-filter")}></i> Filtros</button>
+                </div>
 
-                        <div className="col-md-6"><AreasSearch {...this.props} selectArea={this.selectArea} /></div>
-
-                        <div className="col-md-6">
-                            <StatesSearch
-                                stateSelected={stateSelected}
-                                removeStateFilter={this.removeStateFilter}
-                                selectState={this.selectState}
-                                ideasstates={ideasstates}
-                                statesCodesSelected={statesCodesSelected}
+                {showFilters &&
+                    <div>
+                        {/* find input */}
+                        <div className="panel panel-body">
+                            <input type="search"
+                                value={textSearch}
+                                onChange={this.onChangeTextSearch.bind(this)}
+                                placeholder="Buscar por palabras claves en oportunidad o descripción o nombres ..."
+                                className="form-control input-sm"
                             />
                         </div>
-                    </div>
-
-                </div>
-                {
-                    ideas.length > 0 ?
-                        <div className="row cards-container">
-                            {_.map(ideas, (idea, index) => {
-                                let lap = index / 2;
-                                return <IdeaCard key={index} idea={idea} lap={lap} handleRemove={this.handleRemove} />
-                            })}
+                        <div className="panel panel-body panel-tabs">
+                            <button disabled={showArea} className={"btn btn-success btn-action " + (showArea ? 'active' : 'btn-trans')} onClick={this.showArea}><i className="fa fa-filter"></i> Areas</button>
+                            <button disabled={!showArea} className={"btn btn-success btn-action " + (!showArea ? 'active' : 'btn-trans')} onClick={this.showArea}><i className="fa fa-filter"></i> Estados</button>
                         </div>
-                        : <Alert bsStyle="warning">No ideas yet.</Alert>
+                        <div className="panel panel-body">
+                            {
+                                showArea &&
+                                <AreasSearch {...this.props} selectArea={this.selectArea} /> ||
+                                <StatesSearch stateSelected={stateSelected}
+                                    removeStateFilter={this.removeStateFilter}
+                                    selectState={this.selectState}
+                                    ideasstates={ideasstates}
+                                    statesCodesSelected={statesCodesSelected}
+                                />
+                            }
+                        </div>
+
+                        <button disabled={!showArea} className={"btn btn-success btn-trans btn-search"} onClick={this.showList.bind(this)}><i className="fa fa-search"></i> BUSCAR</button>
+                    </div>
                 }
 
-            </div>
+                {
+                    showList &&
+                    <div>
+                        {
+                            ideas.length > 0 ?
+                                <div className="row cards-container">
+                                    {_.map(ideas, (idea, index) => {
+                                        let lap = index / 2;
+                                        return <IdeaCard key={index} idea={idea} lap={lap} handleRemove={this.handleRemove} />
+                                    })}
+                                </div>
+                                : <Alert bsStyle="warning">No se encontraron datos.</Alert>
+                        }
+                    </div>
+                }
+
+            </div >
         )
     }
 }

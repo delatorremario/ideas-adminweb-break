@@ -28,7 +28,7 @@ class Header extends Component {
             <header id="header">
                 <div className="brand">
                     <Link to="/" className="logo">
-                        <span>Ideas 3.0</span> ADMIN
+                        <span>Ideas 3.0</span>
                     </Link>
                 </div>
                 <ul className="nav navbar-nav navbar-left">
