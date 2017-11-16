@@ -3,12 +3,12 @@ import React from 'react'
 import StatesSelect from './StatesSelect';
 import StateCard from './StateCard';
 
-const StatesSearch = ({ stateSelected, removeStateFilter, selectState, ideasstates }) =>
+const StatesSearch = ({ statesCodesSelected, removeStateFilter, selectState, ideasstates }) =>
     <div>
 
 
         <div style={{ marginTop: '10px' }}>
-            <StatesSelect ideasstates={ideasstates} selectState={selectState} />
+            <StatesSelect ideasstates={ideasstates} selectState={selectState} statesCodesSelected={statesCodesSelected} />
         </div>
 
 

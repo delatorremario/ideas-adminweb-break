@@ -21,19 +21,20 @@ class IdeasList extends Component {
     state = {
         areaSelected: undefined,
         textSearch: '',
+        statesCodesSelected: []
     }
 
 
     componentWillMount() {
         // reactVars
-        const { textSearch, statesFilter, areasIdsFilter } = this.props;
+        const { textSearch, statesCodesFilter, areasIdsFilter } = this.props;
 
         const { text, state, areaId } = this.props.params;
 
-        console.log('STATE',this.props.params && this.props.params.sate);
+        // console.log('STATE', this.props.params && this.props.params.sate);
 
         if (text) textSearch.set(text.trim())
-        if (state) statesFilter.set([state.trim()])
+        if (state) statesCodesFilter.set([state.trim()])
         if (areaId) {
             const area = Areas.findOne(areaId);
             this.setState({ areaSelected: area });
@@ -73,8 +74,11 @@ class IdeasList extends Component {
 
     selectState = state => e => {
         e.preventDefault();
-        this.setState({ stateSelected: state });
-        this.props.statesFilter.set(state.state)
+        const { statesCodesFilter } = this.props;
+        const statesCodes = statesCodesFilter.get()
+        statesCodes.push(state.code);
+        this.setState({ statesCodesSelected: statesCodes });
+        statesCodesFilter.set(statesCodes);
 
     }
 
@@ -102,7 +106,7 @@ class IdeasList extends Component {
 
         const { history, ideas, ideasstates } = this.props;
         const { areaId } = this.props.params;
-        const { stateSelected, textSearch, areaSelected } = this.state;
+        const { stateSelected, textSearch, areaSelected, statesCodesSelected } = this.state;
 
         console.log('this.state', this.state);
 
@@ -133,6 +137,7 @@ class IdeasList extends Component {
                                 removeStateFilter={this.removeStateFilter}
                                 selectState={this.selectState}
                                 ideasstates={ideasstates}
+                                statesCodesSelected={statesCodesSelected}
                             />
                         </div>
                     </div>

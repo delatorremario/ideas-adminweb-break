@@ -1,6 +1,12 @@
 .states-select {
     
     font-size: smaller
-    
-    
+   
 }
+
+li:hover { cursor: pointer;}
+
+.state-selected {
+    font-weight: bold;
+}
+
