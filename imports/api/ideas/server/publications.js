@@ -7,11 +7,14 @@ import Ideas from '../ideas';
 
 Meteor.publish('ideas.list', (
   textSearch,
-  statesFilter,
+  statesCodesFilter,
   areasIdsFilter,
   limit) => {
+
+    console.log('statesCodesFilter', statesCodesFilter);
+
   check(textSearch, String);
-  check(statesFilter, [String]);
+  check(statesCodesFilter, [String]);
   check(areasIdsFilter, [String]);
   check(limit, Number);
 
@@ -25,7 +28,7 @@ Meteor.publish('ideas.list', (
     };
 
     if (textSearch) _.extend(filters, { $text: { $search: textSearch } });
-    if (statesFilter.length > 0) _.extend(filters, { 'states.state': { $in: statesFilter } });
+    if (statesCodesFilter.length > 0) _.extend(filters, { 'states.code': { $in: statesCodesFilter } });
     if (areasIdsFilter.length > 0) _.extend(filters, { 'chief.areaId': { $in: areasIdsFilter } });
 
     // console.log('areasIdsFilter', areasIdsFilter);
