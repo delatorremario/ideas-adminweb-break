@@ -76,7 +76,8 @@ class IdeasList extends Component {
         e.preventDefault();
         const { statesCodesFilter } = this.props;
         const statesCodes = statesCodesFilter.get()
-        statesCodes.push(state.code);
+        if (_.includes(statesCodes, state.code)) _.remove(statesCodes, code => code === state.code)
+        else statesCodes.push(state.code);
         this.setState({ statesCodesSelected: statesCodes });
         statesCodesFilter.set(statesCodes);
 
@@ -89,11 +90,11 @@ class IdeasList extends Component {
 
     }
 
-    removeStateFilter = e => {
-        e.preventDefault();
-        this.setState({ stateSelected: {} });
-        this.props.stateFilter.set('')
-    }
+    // removeStateFilter = e => {
+    //     e.preventDefault();
+    //     this.setState({ stateSelected: {} });
+    //     this.props.stateFilter.set('')
+    // }
 
     onChangeTextSearch = e => {
         e.preventDefault();
