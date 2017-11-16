@@ -22,9 +22,9 @@ class IdeasList extends Component {
         areaSelected: undefined,
         textSearch: '',
         statesCodesSelected: [],
-        showFilters: false,
+        showFilters: true,
         showArea: true,
-        showList: true,
+        showList: false,
     }
 
 
@@ -81,16 +81,13 @@ class IdeasList extends Component {
         const statesCodes = statesCodesFilter.get()
         if (_.includes(statesCodes, state.code)) _.remove(statesCodes, code => code === state.code)
         else statesCodes.push(state.code);
-        this.setState({ statesCodesSelected: statesCodes });
+        this.setState({ statesCodesSelected: statesCodes, showList: false, });
         statesCodesFilter.set(statesCodes);
-
     }
 
     selectArea = area => {
-        console.log('AREA', area);
-        this.setState({ areaSelected: area });
+        this.setState({ areaSelected: area, showList: false });
         this.props.areasIdsFilter.set(area && area.family || [])
-
     }
 
     // removeStateFilter = e => {
@@ -126,7 +123,7 @@ class IdeasList extends Component {
 
     showList = e => {
         e.preventDefault();
-        this.setState(prev => ({ showList: !prev.showList }));
+        this.setState(prev => ({ showList: true }));
     }
 
     render() {
@@ -136,34 +133,18 @@ class IdeasList extends Component {
         const { stateSelected, textSearch, areaSelected, statesCodesSelected } = this.state;
         const { showFilters, showArea, showList } = this.state;
 
-        // console.log('this.state', this.state);
+        console.log('statesCodesSelected', statesCodesSelected.length > 0);
 
         return (
             <div className='ideas-list'>
-                {/* <div className="panel panel-body">
-                    <div role="grid" id="example_wrapper" className="dataTables_wrapper form-inline no-footer">
-                        <div className="row table-top">
-                            <div className="col-fixed" style={{ width: "115px" }}>
-                                <Link to="/ideas/new" className="btn btn-success"><i className="fa fa-plus"></i> Nuevo</Link>
-                            </div>
-                            <div className="col-fixed" style={{ width: "115px" }}>
-                                <button className="btn btn-success"><i className="fa fa-filter"></i> Filtros</button>
-                            </div>
-                            <div className="col-flex smart-searcher-container">
-                                <div id="example_filter" className="dataTables_filter">
-                                    <input type="search" value={textSearch} onChange={this.onChangeTextSearch.bind(this)} placeholder="Buscar por palabras claves en oportunidad o descripción o nombres ..." className="form-control input-sm" aria-controls="example" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> */}
+
                 <div className="panel panel-body">
                     <Link to="/ideas/new" className="btn btn-success btn-trans btn-action"><i className="fa fa-plus"></i> Nuevo</Link>
                     <button className={"btn btn-success btn-action " + (showFilters ? 'active' : 'btn-trans')} onClick={this.showFilters}><i className={"fa " + (showFilters && "fa-ban" || "fa-filter")}></i> Filtros</button>
                 </div>
 
                 {showFilters &&
-                    <div>
+                    <div className="show-filters">
                         {/* find input */}
                         <div className="panel panel-body">
                             <input type="search"
@@ -174,13 +155,13 @@ class IdeasList extends Component {
                             />
                         </div>
                         <div className="panel panel-body panel-tabs">
-                            <button disabled={showArea} className={"btn btn-success btn-action " + (showArea ? 'active' : 'btn-trans')} onClick={this.showArea}><i className="fa fa-filter"></i> Areas</button>
-                            <button disabled={!showArea} className={"btn btn-success btn-action " + (!showArea ? 'active' : 'btn-trans')} onClick={this.showArea}><i className="fa fa-filter"></i> Estados</button>
+                            <button disabled={showArea} className={"btn btn-success btn-action " + (showArea ? 'active' : 'btn-trans')} onClick={this.showArea}><i style={areaSelected && { color: 'red' }} className="fa fa-filter"></i> Areas</button>
+                            <button disabled={!showArea} className={"btn btn-success btn-action " + (!showArea ? 'active' : 'btn-trans')} onClick={this.showArea}><i style={statesCodesSelected.length > 0 ? { color: 'red' } : {} } className="fa fa-filter"></i> Estados</button>
                         </div>
                         <div className="panel panel-body">
                             {
                                 showArea &&
-                                <AreasSearch {...this.props} selectArea={this.selectArea} /> ||
+                                <AreasSearch {...this.props} selectArea={this.selectArea} areaSelected={areaSelected} /> ||
                                 <StatesSearch stateSelected={stateSelected}
                                     removeStateFilter={this.removeStateFilter}
                                     selectState={this.selectState}
@@ -190,7 +171,7 @@ class IdeasList extends Component {
                             }
                         </div>
 
-                        <button disabled={!showArea} className={"btn btn-success btn-trans btn-search"} onClick={this.showList.bind(this)}><i className="fa fa-search"></i> BUSCAR</button>
+                        {!showList && <button className={"btn btn-success btn-search"} onClick={this.showList.bind(this)}><i className="fa fa-search"></i> BUSCAR</button>}
                     </div>
                 }
 

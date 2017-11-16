@@ -1,8 +1,12 @@
 .area-selected {
     border-radius: 3px;
     border: 1px solid lightgray;
-    padding: 26px;
+    padding: 20px;
     margin-top: 3px; 
-  
-    
+    margin-bottom: 3px; 
+    display: flex;
+}
+
+.areas-search {
+    width: 100%;
 }

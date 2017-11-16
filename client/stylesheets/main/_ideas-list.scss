@@ -7,9 +7,12 @@
     
     .panel-tabs {
         margin-bottom:0px !important;
+        border-bottom-left-radius: 0px !important;
+        border-bottom-right-radius: 0px !important;
+        padding-bottom: 0px !important;
     }
 
-    .btn-search {
+    .show-filters{
         margin-bottom: 20px !important;
     }
 }

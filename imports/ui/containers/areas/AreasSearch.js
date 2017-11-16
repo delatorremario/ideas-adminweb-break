@@ -11,11 +11,11 @@ import Loading from '../../components/Loading.js';
 
 const textSearch = new ReactiveVar('');
 
-const composer = ({ selectArea, areaId }, onData) => {
+const composer = ({ selectArea, areaId, areaSelected }, onData) => {
 	const subscription = Meteor.subscribe('areas.search', textSearch.get());
 	if (subscription.ready()) {
 		const areas = Areas.find({}, { sort: { score: -1 } }).fetch();
-		onData(null, { textSearch, selectArea, areas, areaId });
+		onData(null, { textSearch, selectArea, areas, areaId, areaSelected });
 	}
 };
 

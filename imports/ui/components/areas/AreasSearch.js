@@ -11,6 +11,11 @@ class AreasSearch extends Component {
         text: '',
     }
 
+    componentDidMount() {
+        this.setState({ selected: this.props.areaSelected })
+    }
+
+
     onChangeSearch = e => {
         e.preventDefault();
         const text = e.target.value;
@@ -35,23 +40,20 @@ class AreasSearch extends Component {
         const { selected, text } = this.state;
         const { areas, selectArea } = this.props;
 
-        return <div>
-                {
-                    !selected &&
-                    <div className="form-group">
-                        <ControlLabel>Seleccione un Area</ControlLabel>
-                        <input id="search" type="text" className="form-control" value={text} placeholder="Buscar por Nombre de Area" onChange={this.onChangeSearch.bind(this)} />
+        return <div className='areas-search'>
+            {
+                !selected &&
+                <input type="search" className="form-control input-sm" value={text} placeholder="Buscar por Nombre de Area ..." onChange={this.onChangeSearch.bind(this)} />
+            }
+            {
+                selected &&
+                <div >
+                    <div className="area-selected">
+                        <h3>{selected.name} <span><a href="" onClick={this.removeFilter.bind(this)}><i className='fa fa-times' /></a></span></h3>
+
                     </div>
-                }
-                {
-                    selected &&
-                    <div >
-                        <button className="btn btn-defualt btn-sm" onClick={this.removeFilter.bind(this)}>Quitar Filtro</button>
-                        <div className="area-selected">
-                            <h1>{selected.name}</h1>
-                        </div>
-                    </div>
-                }
+                </div>
+            }
 
             {
                 !selected && areas && <div className="form-group">
