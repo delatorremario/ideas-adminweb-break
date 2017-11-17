@@ -32,7 +32,7 @@ Meteor.methods({
                 const employes = Persons.find({ areaId: { $in: area.family } }, { fields: { _id: 1 } }).fetch();
                 area.employes = employes.length;
                 const ideasAdded = Ideas.aggregate([
-                    { $match: { 'person.areaId': { $in: area.family } } },
+                    { $match: { 'chief.areaId': { $in: area.family } } },
                     {
                         $group: {
                             _id: '',
@@ -45,7 +45,7 @@ Meteor.methods({
                     { $match: { 'person.areaId': { $in: area.family } } },
                     {
                         $group: {
-                            _id: { person: '$person' },
+                            _id: { person: '$person._id' },
                             count: { $sum: 1 }
                         }
                     }]);
@@ -54,7 +54,7 @@ Meteor.methods({
 
 
                 const ideasByStep = Ideas.aggregate([
-                    { $match: { 'person.areaId': { $in: area.family } } },
+                    { $match: { 'chief.areaId': { $in: area.family } } },
                     {
                         $project:
                         {
