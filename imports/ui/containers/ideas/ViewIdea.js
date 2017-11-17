@@ -5,7 +5,7 @@ import ViewIdea from '../../pages/ideas/ViewIdea.js';
 import Loading from '../../components/Loading.js';
 
 const composer = ({ match }, onData) => {
-  console.log('match.params._id', match.params._id)
+  // console.log('match.params._id', match.params._id)
   const subscription = Meteor.subscribe('idea.view', match.params._id);
 
   if (subscription.ready()) {

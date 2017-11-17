@@ -18,7 +18,7 @@ const ideasFindLimit = new ReactiveVar(10);
 
 const composer = ({ match }, onData) => {
 
-	console.log('match', match);
+	// console.log('match', match);
 	const { areaId } = match.params;
 	const subscription = Meteor.subscribe('ideas.list',
 		textSearch.get(),
@@ -28,7 +28,7 @@ const composer = ({ match }, onData) => {
 		ideasFindLimit.get(),
 	);
 
-	console.log('areaID', areaId);
+	// console.log('areaID', areaId);
 
 	const areasviewsub = Meteor.subscribe('areas.view', areaId || '');
 
@@ -38,7 +38,7 @@ const composer = ({ match }, onData) => {
 		let ideas = Ideas.find({}, { sort: { date: -1}, limit: ideasFindLimit.get() }).fetch();
 
 		if (states.length>0) {
-			console.log('STATES', states);
+			// console.log('STATES', states);
 			 ideas = _.filter(ideas, (idea) => {
 			 	const last = _.last(idea.states);
 			 	return true // last && last.state === _.find(states, state);

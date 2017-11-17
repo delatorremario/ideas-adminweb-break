@@ -65,8 +65,8 @@ const DashboardCard = ({ area }) => {
 
                     <div className='head-dashboard-card'>
                         {
-                            _.map(headDash, head => {
-                                return (<div><h4><i className={head.icon} /> {head.concept}</h4><p>{head.value}</p></div>)
+                            _.map(headDash, (head,index) => {
+                                return (<div key={index}><h4><i className={head.icon} /> {head.concept}</h4><p>{head.value}</p></div>)
                             })
                         }
                     </div>
