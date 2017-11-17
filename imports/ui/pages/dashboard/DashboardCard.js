@@ -29,28 +29,28 @@ const DashboardCard = ({ area }) => {
 
     const headDash = [
         {
-            icon:'fa fa-users',
-            concept:'Personal',
+            icon: 'fa fa-users',
+            concept: 'Personal',
             value: employes,
         },
         {
-            icon:'fa fa-lightbulb-o',
-            concept:'Ideas Ingresadas',
+            icon: 'fa fa-lightbulb-o',
+            concept: 'Ideas Ingresadas',
             value: ideasAdded,
         },
         {
-            icon:'fa fa-user-o',
-            concept:'Generaron Ideas',
+            icon: 'fa fa-user-o',
+            concept: 'Generaron Ideas',
             value: ideasPersonAdded,
         },
         {
-            icon:'fa fa-star-o',
-            concept:'Participación del Area',
+            icon: 'fa fa-star-o',
+            concept: 'Participación del Area',
             value: participation.toFixed(1) + '%',
         },
         {
-            icon:'fa fa-user-o',
-            concept:'Ingresaron Ideas al Area',
+            icon: 'fa fa-user-o',
+            concept: 'Ingresaron Ideas al Area',
             value: extarnalPersons,
         },
     ]
@@ -64,11 +64,11 @@ const DashboardCard = ({ area }) => {
                 <div className="panel-body">
 
                     <div className='head-dashboard-card'>
-                       { 
-                           _.map(headDash, head =>{
-                               return (<div><h4><i className={head.icon}/> {head.concept}</h4><p>{head.value}</p></div>)
-                           })
-                       }
+                        {
+                            _.map(headDash, head => {
+                                return (<div><h4><i className={head.icon} /> {head.concept}</h4><p>{head.value}</p></div>)
+                            })
+                        }
                     </div>
                     <div className="row">
                         <Doughnut data={data}
@@ -76,17 +76,17 @@ const DashboardCard = ({ area }) => {
                                 maintainAspectRatio: true
                             }} />
                     </div>
-
-                    {
-
-                        _.map(ideasByStatus, (state, index) => <div key={index} className="link-status"  >
-                            <Link to={`/ideas/%20/${state.code}/%20/${area._id}/find`}>
-                                <div>{state.state}</div>
-                                <div style={{ backgroundColor: colors[_.random(0, 2)] }}>{state.count}</div>
-                            </Link>
-                        </div>
-                        )
-                    }
+                    <div className="link-status-container">
+                        {
+                            _.map(ideasByStatus, (state, index) => <div key={index} className="link-status"  >
+                                <Link to={`/ideas/%20/${state.code}/%20/${area._id}/find`}>
+                                    <div>{state.state}</div>
+                                    <div style={{ backgroundColor: colors[_.random(0, 2)] }}>{state.count}</div>
+                                </Link>
+                            </div>
+                            )
+                        }
+                    </div>
                 </div>
             </div>
         </div>
