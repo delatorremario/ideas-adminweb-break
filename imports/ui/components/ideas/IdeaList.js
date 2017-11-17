@@ -155,8 +155,8 @@ class IdeasList extends Component {
                             />
                         </div>
                         <div className="panel panel-body panel-tabs">
-                            <button disabled={showArea} className={"btn btn-success btn-action " + (showArea ? 'active' : 'btn-trans')} onClick={this.showArea}><i style={areaSelected && { color: 'red' }} className="fa fa-filter"></i> Areas</button>
-                            <button disabled={!showArea} className={"btn btn-success btn-action " + (!showArea ? 'active' : 'btn-trans')} onClick={this.showArea}><i style={statesCodesSelected.length > 0 ? { color: 'red' } : {} } className="fa fa-filter"></i> Estados</button>
+                            <button disabled={showArea} className={"btn btn-success btn-action " + (showArea ? 'active' : 'btn-trans')} onClick={this.showArea}>{areaSelected && <i className="fa fa-filter"></i>} Areas</button>
+                            <button disabled={!showArea} className={"btn btn-success btn-action " + (!showArea ? 'active' : 'btn-trans')} onClick={this.showArea}>{statesCodesSelected.length > 0 && <i className="fa fa-filter"></i>} Estados</button>
                         </div>
                         <div className="panel panel-body">
                             {
