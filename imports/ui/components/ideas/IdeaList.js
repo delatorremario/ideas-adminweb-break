@@ -22,9 +22,9 @@ class IdeasList extends Component {
         areaSelected: undefined,
         textSearch: '',
         statesCodesSelected: [],
-        showFilters: true,
+        showFilters: false,
         showArea: true,
-        showList: false,
+        showList: true,
     }
 
 
