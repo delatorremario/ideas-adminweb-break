@@ -1,6 +1,6 @@
 .panel {
     border: none;
-    @include roundBorders(0);
+    @include roundBorders(0 !important );
 }
 
 
@@ -47,10 +47,14 @@
     float:none;
 }
 
+.panel-heading {
+    border-radius: 0px !important;
+}
+
 .panel-default>.panel-heading {
     border-color: #eff2f7;
     background: #fff;
-    color: #767676
+    color: #767676;
 }
 
 .panel-default .actions i {

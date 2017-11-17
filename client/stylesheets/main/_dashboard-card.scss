@@ -29,3 +29,15 @@
     }
     
 }
+
+.head-dashboard-card {
+   div { 
+       display: flex; 
+       justify-content: space-between;
+       font-size: small;
+       h4 i {
+           width: 25px;
+           text-align: center;
+       }
+    }
+}

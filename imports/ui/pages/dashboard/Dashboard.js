@@ -17,7 +17,7 @@ const Dashboard = ({ data }) => (
             </div>
         </div>
         <section id="main-content">
-            <div className="row">
+            <div className="row cards-container">
                 {_.map(data, area =>
                     <DashboardCard key={area._id} area={area} />
                 )}

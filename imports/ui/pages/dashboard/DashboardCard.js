@@ -3,11 +3,11 @@ import { Doughnut } from 'react-chartjs-2';
 import { Link } from 'react-router-dom';
 import _ from 'lodash';
 
-const colors = ['#e65400','#fab636','#b3de68']
+const colors = ['#e65400', '#fab636', '#b3de68']
 
 const DashboardCard = ({ area }) => {
 
-    const { name, employes, ideasAdded, ideasByStep, ideasPersonAdded, participation, ideasByStatus } = area;
+    const { name, employes, ideasAdded, ideasByStep, ideasPersonAdded, participation, ideasByStatus, extarnalPersons } = area;
 
     const labels = [];
     const dataset = [];
@@ -27,31 +27,49 @@ const DashboardCard = ({ area }) => {
         }]
     };
 
+    const headDash = [
+        {
+            icon:'fa fa-users',
+            concept:'Personal',
+            value: employes,
+        },
+        {
+            icon:'fa fa-lightbulb-o',
+            concept:'Ideas Ingresadas',
+            value: ideasAdded,
+        },
+        {
+            icon:'fa fa-user-o',
+            concept:'Generaron Ideas',
+            value: ideasPersonAdded,
+        },
+        {
+            icon:'fa fa-star-o',
+            concept:'Participación del Area',
+            value: participation.toFixed(1) + '%',
+        },
+        {
+            icon:'fa fa-user-o',
+            concept:'Ingresaron Ideas al Area',
+            value: extarnalPersons,
+        },
+    ]
+
     return (
-        <div className="col-xs-12 col-sm-6 col-md-4">
+        <div className="col-xs-12 col-sm-6 col-md-4 cards-item">
             <div className="panel panel-default">
                 <div className="panel-heading">
                     <h4 className="panel-title"><small>{name}</small></h4>
                 </div>
                 <div className="panel-body">
-                    <small>
-                        <div className="row">
-                            <div className="col-sm-9">Personal</div>
-                            <div className="col-sm-3">{employes}</div>
-                        </div>
-                        <div className="row">
-                            <div className="col-sm-9">Ideas Ingresadas</div>
-                            <div className="col-sm-3">{ideasAdded}</div>
-                        </div>
-                        <div className="row">
-                            <div className="col-sm-9">Personas que Ingresaron Ideas</div>
-                            <div className="col-sm-3">{ideasPersonAdded}</div>
-                        </div>
-                        <div className="row">
-                            <div className="col-sm-9">Participación</div>
-                            <div className="col-sm-3">{participation.toFixed(1)}%</div>
-                        </div>
-                    </small>
+
+                    <div className='head-dashboard-card'>
+                       { 
+                           _.map(headDash, head =>{
+                               return (<div><h4><i className={head.icon}/> {head.concept}</h4><p>{head.value}</p></div>)
+                           })
+                       }
+                    </div>
                     <div className="row">
                         <Doughnut data={data}
                             options={{
@@ -61,15 +79,13 @@ const DashboardCard = ({ area }) => {
 
                     {
 
-                        _.map(ideasByStatus, (state, index) =>
-                            <div key={index} className="link-status"  >
-                                <Link to={`/ideas/%20/${state.state}/find`}>
-                                    <div>{state.state}</div> 
-                                    <div style={{backgroundColor:colors[_.random(0,2)]}}>{state.count}</div>
-                                </Link>
-                            </div>
+                        _.map(ideasByStatus, (state, index) => <div key={index} className="link-status"  >
+                            <Link to={`/ideas/%20/${state.code}/%20/${area._id}/find`}>
+                                <div>{state.state}</div>
+                                <div style={{ backgroundColor: colors[_.random(0, 2)] }}>{state.count}</div>
+                            </Link>
+                        </div>
                         )
-
                     }
                 </div>
             </div>

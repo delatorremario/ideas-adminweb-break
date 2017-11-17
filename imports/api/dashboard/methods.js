@@ -39,7 +39,18 @@ Meteor.methods({
                             count: { $sum: 1 }
                         }
                     }]);
-               
+                area.ideasAdded = (ideasAdded && ideasAdded[0] && ideasAdded[0].count) || 0;
+
+
+                const extarnalPersons = Ideas.aggregate([
+                    { $match: { 'chief.areaId': { $in: area.family } } },
+                    {
+                        $group: {
+                            _id: '$person',
+                            count: { $sum: 1 }
+                        }
+                    }]);
+                area.extarnalPersons = (extarnalPersons && extarnalPersons[0] && extarnalPersons[0].count) || 0;
 
                 const ideasPersonAdded = Ideas.aggregate([
                     { $match: { 'person.areaId': { $in: area.family } } },
@@ -49,7 +60,6 @@ Meteor.methods({
                             count: { $sum: 1 }
                         }
                     }]);
-                area.ideasAdded = (ideasAdded && ideasAdded[0] && ideasAdded[0].count) || 0;
                 area.ideasPersonAdded = (ideasPersonAdded && ideasPersonAdded[0] && ideasPersonAdded[0].count) || 0;
 
 
@@ -57,9 +67,9 @@ Meteor.methods({
                     { $match: { 'chief.areaId': { $in: area.family } } },
                     {
                         $project:
-                        {
-                            lastState: { $arrayElemAt: ["$states", -1] }
-                        }
+                            {
+                                lastState: { $arrayElemAt: ["$states", -1] }
+                            }
                     },
                     {
                         $group: {
@@ -77,28 +87,28 @@ Meteor.methods({
                 area.ideasByStep = ideasByStep;
 
                 const ideasByStatus = Ideas.aggregate([
-                    { $match: { 'person.areaId': { $in: area.family } } },
+                    { $match: { 'chief.areaId': { $in: area.family } } },
                     {
                         $project:
-                        {
-                            lastState: { $arrayElemAt: ["$states", -1] }
-                        }
+                            {
+                                lastState: { $arrayElemAt: ["$states", -1] }
+                            }
                     },
                     {
                         $group: {
-                            _id: '$lastState.state',
+                            _id: { state: '$lastState.state', code: '$lastState.code' },
                             count: { $sum: 1 },
                         }
                     },
-                    { $project: { state: '$_id', count: 1 } },
+                    { $project: { state: '$_id.state', code: '$_id.code', count: 1 } },
                 ]);
                 _.map(ideasByStatus, state => {
                     const ideastate = _.find(ideasstates, { state: state.state });
                     state.color = ideastate && ideastate.color || '#fff';
                     return state;
                 })
+              
                 area.ideasByStatus = ideasByStatus;
-
                 area.participation = area.ideasPersonAdded * 100 / area.employes;
             });
 

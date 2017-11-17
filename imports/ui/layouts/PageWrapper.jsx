@@ -36,7 +36,7 @@ const PageWrapper = () => (
             <Route exact path="/area/:_id/edit" component={EditArea} />
 
             {/* Ideas */}
-            <Route exact path="/ideas/:text?/:state?/:step?/:areaId?/find" component={Ideas} />
+            <Route exact path="/ideas/:text?/:stateCode?/:step?/:areaId?/find" component={Ideas} />
             <Route exact path="/ideas/new" component={EditIdea} />
             <Route exact path="/idea/:_id/edit" component={EditIdea} />
             

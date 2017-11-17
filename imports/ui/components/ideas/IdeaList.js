@@ -32,15 +32,21 @@ class IdeasList extends Component {
         // reactVars
         const { textSearch, statesCodesFilter, areasIdsFilter } = this.props;
 
-        const { text, state, areaId } = this.props.params;
+        const { text, stateCode, areaId } = this.props.params;
 
         // console.log('STATE', this.props.params && this.props.params.sate);
 
-        if (text) textSearch.set(text.trim())
-        if (state) statesCodesFilter.set([state.trim()])
+        if (text) {
+            textSearch.set(text.trim());
+            this.setState({ showFilters: true })
+        }
+        if (stateCode) {
+            statesCodesFilter.set([stateCode.trim()]);
+            this.setState({ statesCodesSelected: [stateCode.trim()], showFilters: true })
+        }
         if (areaId) {
             const area = Areas.findOne(areaId);
-            this.setState({ areaSelected: area });
+            this.setState({ areaSelected: area, showFilters: true });
             this.props.areasIdsFilter.set(area && area.family || [])
         }
 
@@ -108,9 +114,14 @@ class IdeasList extends Component {
         const { showFilters } = this.state;
         const { textSearch, statesCodesFilter, areasIdsFilter } = this.props
         if (showFilters) {
-            textSearch.set('')
-            statesCodesFilter.set([])
-            areasIdsFilter.set([])
+            textSearch.set('');
+            statesCodesFilter.set([]);
+            areasIdsFilter.set([]);
+            this.setState({
+                areaSelected: undefined,
+                textSearch: '',
+                statesCodesSelected: [],
+            })
         }
 
         this.setState(prev => ({ showFilters: !prev.showFilters, showList: prev.showFilters }));
