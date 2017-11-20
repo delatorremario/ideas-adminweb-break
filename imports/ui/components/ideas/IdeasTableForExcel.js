@@ -4,45 +4,46 @@ import Moment from 'react-moment';
 
 // style={{ display: 'none' }}
 
-const IdeasTableForExcel = ({ ideas }) =>
+const IdeasTableForExcel = ({ ideasFull }) =>
     <table id="ideas-to-xls" style={{ display: 'none' }}>
         <thead>
             <tr>
-                <th>Area</th>
-                <th>Encargado</th>
                 <th>Fecha</th>
+                <th>Persona</th>
+                <th>Area de la Persona</th>
+                <th>OneUp</th>
+                <th>Area Destino</th>
+                <th>Encargado</th>
                 <th>Oportunidad</th>
                 <th>Descripción</th>
                 <th>Origen</th>
+                <th>Estado Actual</th>
+                <th>Fecha Estado Actual</th>
                 <th>Drivers</th>
-                <th>Estados</th>
-                <th>Persona</th>
-                <th>OneUp</th>
             </tr>
         </thead>
         <tbody>
 
             {
-                _.map(ideas, (idea, index) => {
-                    console.log('AREA', idea.area);
+                _.map(ideasFull, (idea, index) => {
                     return (
                         <tr key={index}>
-                            <td>{idea && idea.area && idea.area.name || 'Area'}  </td>
+                            <td><Moment format="DD/MMM/YYYY" date={idea.date} /></td>
+                            <td>{idea.person.lastName}, {idea.person.firstName} {idea.person.secondName}</td>
+                            <td>{idea && idea.personarea && idea.personarea.name || 'Area'}  </td>
+                            <td>{idea.person.oneUp}</td>
+                            <td>{idea && idea.destinationarea && idea.destinationarea.name || 'Area'}  </td>
                             <td>{idea.chief.lastName} {idea.chief.firstName} {idea.chief.secondName}</td>
-                            <td><Moment format="DD MMM YYYY" date={idea.date} /></td>
                             <td>{idea.opportunity}</td>
                             <td>{idea.description}</td>
                             <td>{idea.origin}</td>
-                            <td>{_.map(idea.drivers, (driver, index) => <p key={index}>{driver}</p>)}</td>
-                            <td>{_.map(idea.states, (state, index) => <p key={index}>{state.step} {state.state} <small><Moment format="DD MM YYYY" date={state.createdAt} /></small> </p>)}</td>
-                            <td>{idea.person.lastName} {idea.person.firstName} {idea.person.secondName}</td>
-                            <td>{idea.person.oneUp}</td>
+                            {/* <td>{_.map(idea.states, (state, index) => <p key={index}>{state.step} {state.state} <small><Moment format="DD MM YYYY" date={state.createdAt} /></small> </p>)}</td> */}
+                            <td>{idea.states && _.last(idea.states).step} - {_.last(idea.states).state}</td>
+                            <td><Moment format="DD/MMM/YYYY" date={_.last(idea.states).createdAt} /></td>
+                            {_.map(idea.drivers, (driver, index) => <td key={index}>{driver}</td>)}
                         </tr>
                     )
-                  
-                }
-
-                )
+                })
             }
 
         </tbody>

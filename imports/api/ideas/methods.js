@@ -24,7 +24,7 @@ export const upsertIdea = new ValidatedMethod({
         drivers: { type: [String] },
         collaborators: { type: [PersonSchema], optional: true },
         states: { type: [IdeasStatesSchemas], optional: true },
-        
+
     }).validator(),
     run(idea) {
         return Ideas.upsert({ _id: idea._id }, { $set: idea });
@@ -49,3 +49,18 @@ rateLimit({
     limit: 5,
     timeRange: 1000,
 });
+
+Meteor.methods({
+    'getIdeasByIds': (ids) => {
+        check(ids, [String]);
+        if (!Meteor.isServer) return;
+        return Ideas.aggregate([
+            { $match: { _id: { $in: ids } } },
+            { $lookup: { from: 'areas', foreignField: '_id', localField: 'chief.areaId', as: 'destinationarea' } },
+            { $unwind: '$destinationarea' },
+            { $lookup: { from: 'areas', foreignField: '_id', localField: 'person.areaId', as: 'personarea' } },
+            { $unwind: '$personarea' },
+            { $sort: { date: 1 } },
+        ]);
+    }
+})

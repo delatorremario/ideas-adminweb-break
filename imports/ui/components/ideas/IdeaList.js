@@ -14,7 +14,7 @@ import IdeaCard from './IdeaCardContainer';
 import StatesSearch from './StatesSearch';
 import AreasSearch from '../../containers/areas/AreasSearch';
 import Areas from '../../../api/areas/areas';
-import IdeasTableForExcel from './IdeasTableForExcel';
+import IdeasTableForExcelContainer from './IdeasTableForExcelContainer';
 
 class IdeasList extends Component {
 
@@ -146,7 +146,7 @@ class IdeasList extends Component {
 
         return (
             <div className='ideas-list'>
-                <IdeasTableForExcel ideas={ideas} />
+                <IdeasTableForExcelContainer ideas={ideas} />
                 <div className="panel panel-body">
                     <Link to="/ideas/new" className="btn btn-success btn-trans btn-action"><i className="fa fa-plus"></i> Nuevo</Link>
                     <button className={"btn btn-success btn-action " + (showFilters ? 'active' : 'btn-trans')} onClick={this.showFilters}><i className={"fa " + (showFilters && "fa-ban" || "fa-filter")}></i> Filtros</button>
