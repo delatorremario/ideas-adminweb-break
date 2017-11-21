@@ -2,6 +2,8 @@ import React, { PropTypes } from 'react';
 import { Alert, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { Bert } from 'meteor/themeteorchef:bert';
+import Toggle from 'react-toggle'
+import "react-toggle/style.css"
 // import $ from 'jquery';
 // import swal from 'sweetalert2';
 
@@ -53,10 +55,16 @@ const ConfigsList = ({ history, corporations }) => (
             {
                 _.map(ideasstates, (state, index) =>
                     <div className='configs-row' key={index}>
-                        <div style={{ backgroundColor: state.color }} ></div>
-                        <div>{state.step}</div>
-                        <div>{state.state}</div>
-                        <div>SI-NO</div>
+                        <div className='state-color' style={{ backgroundColor: state.color }} ></div>
+                        <div className='state-step'>{state.step}</div>
+                        <div className='state-state'>{state.state}</div>
+                        <div className="state-select" >
+                          <Toggle
+                            id='state-select'
+                            defaultChecked={false}
+                            // onChange={this.handleCheeseChange}
+                             />
+                        </div>
                     </div>
                 )
             }

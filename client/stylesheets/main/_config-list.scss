@@ -13,21 +13,21 @@
         margin-bottom: 5px;
         padding: 5px;
 
-        div {
+        .state-step,
+        .state-state {
             padding-left: 5px;
             padding-right: 5px;
         }
 
-        div:first-child {
+        .state-color {
             width: 10px;
             padding: 0px;
             margin-top: -5px;
             margin-bottom: -5px;
         }
-
-        div:last-child {
+        
+        .state-select {
             margin-left: auto;
-            width: 70px;
         }
     }
   
