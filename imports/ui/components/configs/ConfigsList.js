@@ -1,10 +1,11 @@
 import React, { PropTypes } from 'react';
-import { Alert, Button } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
-import { Bert } from 'meteor/themeteorchef:bert'
-import { removeCorporation } from '../../../api/corporations/methods'
-import $ from 'jquery'
-import swal from 'sweetalert2'
+import { Alert, Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import { Bert } from 'meteor/themeteorchef:bert';
+// import $ from 'jquery';
+// import swal from 'sweetalert2';
+
+import ideasstates from '../../../api/ideasStatesSchema/ideasstates';
 
 const handleNav = (history, _id) => {
     history.push(`/corporation/${_id}`)
@@ -45,9 +46,21 @@ const ConfigsList = ({ history, corporations }) => (
             </div>
         </div>
 
-        <section id="main-content">
-         
-        </section>
+        <div className='config-list'>
+            <div className="configs-head">
+                <h2>Estados de Ideas</h2>
+            </div>
+            {
+                _.map(ideasstates, (state, index) =>
+                    <div className='configs-row' key={index}>
+                        <div style={{ backgroundColor: state.color }} ></div>
+                        <div>{state.step}</div>
+                        <div>{state.state}</div>
+                        <div>SI-NO</div>
+                    </div>
+                )
+            }
+        </div>
     </div>
 );
 
