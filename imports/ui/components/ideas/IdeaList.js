@@ -112,6 +112,9 @@ class IdeasList extends Component {
         const { showFilters } = this.state;
         const { textSearch, statesCodesFilter, areasIdsFilter } = this.props
         if (showFilters) {
+
+            const { text, stateCode, areaId } = this.props.params;
+
             textSearch.set('');
             statesCodesFilter.set([]);
             areasIdsFilter.set([]);
@@ -120,9 +123,15 @@ class IdeasList extends Component {
                 textSearch: '',
                 statesCodesSelected: [],
             })
+
+            if (text && stateCode && areaId) {
+                this.props.history.push('/ideas/find');
+                console.log('history');
+            }
         }
 
         this.setState(prev => ({ showFilters: !prev.showFilters, showList: prev.showFilters }));
+        
     }
 
     showArea = e => {
@@ -141,8 +150,6 @@ class IdeasList extends Component {
         const { areaId } = this.props.params;
         const { stateSelected, textSearch, areaSelected, statesCodesSelected } = this.state;
         const { showFilters, showArea, showList } = this.state;
-
-        console.log('statesCodesSelected', statesCodesSelected.length > 0);
 
         return (
             <div className='ideas-list'>
