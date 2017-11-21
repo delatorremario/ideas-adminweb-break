@@ -55,6 +55,12 @@ class SidebarPush extends Component {
                     iconClasses: ["fa", "fa-fw", "fa-envelope-o"],
                     collapsed: true,
                 },
+                {
+                    title: "Configuraciones",
+                    iconClasses: ["fa", "fa-fw", "fa-cogs"],
+                    path: "/configs",
+                    roles: ['SuperAdminHolos','Leader']
+                },
                 // {
                 //     title: "Ejemplo Componentes",
                 //     path: "/components-page",

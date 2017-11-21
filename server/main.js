@@ -10,7 +10,6 @@ import '../imports/startup/server/index.js';
 
 
 Meteor.startup(() => {
-  Start.start();
   if (Meteor.isDevelopment) {
     console.log('Meteor.isDevelopment');
     developmentEnv();
@@ -21,6 +20,9 @@ Meteor.startup(() => {
   }
 });
 
+Meteor.methods({
+  'start': Start.start
+})
 
 
 Accounts.onCreateUser = (options, user) => {

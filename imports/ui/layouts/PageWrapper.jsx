@@ -19,6 +19,10 @@ import Dashboard from '../containers/dashboard/Dashboard';
 import BlankPage from '../pages/BlankPage';
 import ComponentsPage from '../pages/ComponentsPage';
 
+// Configs
+
+import Configs from '../containers/configs/Configs';
+
 import SendInvitationPage from '../pages/singinup/SendInvitationPage';
 
 const PageWrapper = () => (
@@ -39,6 +43,11 @@ const PageWrapper = () => (
             <Route exact path="/ideas/:text?/:stateCode?/:step?/:areaId?/find" component={Ideas} />
             <Route exact path="/ideas/new" component={EditIdea} />
             <Route exact path="/idea/:_id/edit" component={EditIdea} />
+            
+            {/* Configs */}
+            <Route exact path="/configs" component={Configs} />
+            {/* <Route exact path="/ideas/new" component={EditIdea} /> */}
+            {/* <Route exact path="/idea/:_id/edit" component={EditIdea} /> */}
             
             <Route path="/sendinvitation" component={SendInvitationPage} />
             

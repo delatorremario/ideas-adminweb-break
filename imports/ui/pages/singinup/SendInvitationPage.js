@@ -21,6 +21,7 @@ export default class SendInvitationPage extends React.Component {
     const { loading } = this.state;
     return (
       <div>
+        
         <div className="pageheader">
           <h1>Enviar Invitación</h1>
           <div className="breadcrumb-wrapper hidden-xs">
@@ -30,7 +31,6 @@ export default class SendInvitationPage extends React.Component {
             </ol>
           </div>
         </div>
-
 
         <section id="main-content">
           <div className="row">
@@ -66,18 +66,7 @@ export default class SendInvitationPage extends React.Component {
           </div>
         </section>
 
-
-
-
-
-
-
-
-
       </div>
-
-
-
     );
   }
 }

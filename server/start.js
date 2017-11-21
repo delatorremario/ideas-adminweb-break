@@ -18,6 +18,7 @@ const createAccounts = () => {
 const initRoles = () => {
   if (_.includes(Roles.getAllRoles(), 'SuperAdminHolos')) Roles.createRole('SuperAdminHolos');
   if (_.includes(Roles.getAllRoles(), 'AdminGrupoNegocio')) Roles.createRole('AdminGrupoNegocio');
+  if (_.includes(Roles.getAllRoles(), 'Leader')) Roles.createRole('Leader');
 };
 
 const addMeToAdmin = () => {
@@ -30,16 +31,24 @@ const addMeToAdmin = () => {
   });
 };
 
-const addSomeCollections = () => {
-  
+const addLeaders = () => {
+  const leaders = ['mauricio.ma.rodriguez@bhpbilliton.com','delatorremario@gmail.com'];
+  _.map(leaders, (mail) => {
+    const user = Meteor.users.findOne({ 'emails.address': mail });
+    if (user && !Roles.userIsInRole(user, ['Leader'])) {
+      Roles.addUsersToRoles(user, ['Leader']);
+      console.log('user agreado a Leader', mail);
+    }
+  });
 };
+
 
 const Start = {
   start: () => {
     createAccounts();
     initRoles();
     addMeToAdmin();
-    addSomeCollections();
+    addLeaders();
   },
 };
 
