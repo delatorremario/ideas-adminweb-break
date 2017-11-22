@@ -22,6 +22,7 @@ import ComponentsPage from '../pages/ComponentsPage';
 // Configs
 
 import Configs from '../containers/configs/Configs';
+import EditConfig from '../containers/configs/EditConfig';
 
 import SendInvitationPage from '../pages/singinup/SendInvitationPage';
 
@@ -47,7 +48,7 @@ const PageWrapper = () => (
             {/* Configs */}
             <Route exact path="/configs" component={Configs} />
             {/* <Route exact path="/ideas/new" component={EditIdea} /> */}
-            {/* <Route exact path="/idea/:_id/edit" component={EditIdea} /> */}
+             <Route exact path="/config/:_id/edit" component={EditConfig} /> 
             
             <Route path="/sendinvitation" component={SendInvitationPage} />
             

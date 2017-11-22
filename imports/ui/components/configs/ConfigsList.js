@@ -67,7 +67,7 @@ const ConfigsList = ({ history, corporations, ideasstates }) => (
                             />
                         </div>
                         <div className="state-config">
-                            <Link to="/configs" className="btn btn-default btn-sm btn-trans"><i className="fa fa-cog"></i></Link>
+                            <Link to={`/config/${state._id}/edit`} className="btn btn-default btn-sm btn-trans"><i className="fa fa-cog"></i></Link>
                         </div>
                     </div>
                 )
