@@ -1,6 +1,8 @@
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 
 const IdeasStatesSchema = new SimpleSchema({
+  _id: { type: String, optional: true },
+  corporationId: { type: String, optional: true },
   userId: { type: String },
   createdAt: { type: Date },
   updatedAt: {

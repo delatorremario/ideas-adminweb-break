@@ -7,7 +7,9 @@ import "react-toggle/style.css"
 // import $ from 'jquery';
 // import swal from 'sweetalert2';
 
-import ideasstates from '../../../api/ideasStatesSchema/ideasstates';
+// import ideasstates from '../../../api/ideasStatesSchema/ideasstates';
+
+const ideasstates = [];
 
 const handleNav = (history, _id) => {
     history.push(`/corporation/${_id}`)

@@ -6,7 +6,7 @@ import Ideas from '../../../api/ideas/ideas';
 import EditIdea from '../../pages/ideas/EditIdea';
 import Loading from '../../components/Loading.js';
 import Persons from '../../../api/persons/persons';
-import ideasstates from '../../../api/ideasStatesSchema/ideasstates';
+import States from '../../../api/states/states';
 
 const textSearch = new ReactiveVar('');
 const textSearchLimit = new ReactiveVar(10);
@@ -27,9 +27,12 @@ const composer = ({ match }, onData) => {
   const subscription = Meteor.subscribe('ideas.view', docId);
 
   const subscriptionPersons = Meteor.subscribe('persons.search', textSearch.get(), textSearchLimit.get());
+  const statessub = Meteor.subscribe('states.list');
+  
   // const subscriptionAreas = Meteor.subscribe('areas.list');
 
-  if (subscription.ready() && subscriptionPersons.ready()) {
+  if (subscription.ready() && subscriptionPersons.ready() && statessub.ready()) {
+    const ideasstates = States.find().fetch();
     const persons = Persons.find({}, { sort: { score: -1 }, limit: textSearchLimit.get() }).fetch();
     let doc = Ideas.findOne(docId);
 

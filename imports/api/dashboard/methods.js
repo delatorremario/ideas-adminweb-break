@@ -3,7 +3,7 @@ import Areas from '../areas/areas';
 import { addChildNodes } from '../areas/methods';
 import Persons from '../persons/persons';
 import Ideas from '../ideas/ideas';
-import ideasstates from '../../api/ideasStatesSchema/ideasstates';
+import States from '../../api/states/states';
 
 const getIdsAreas = area => {
     const areaIds = []
@@ -16,11 +16,14 @@ const getIdsAreas = area => {
 
 Meteor.methods({
     'getDashboard': () => {
+
+
         if (!Meteor.isServer) return;
         const self = this.Meteor;
         const user = self.user();
         if (user) {
             const filters = { corporationId: (user.profile && user.profile.selectedCorporationId) || '' };
+            const ideasstates = States.find(filters).fetch();
 
             // buscar las Areas que se mostraran en el Dashboard
             const areasDashboard = Areas.find({ dashboard: true }).fetch();
@@ -107,7 +110,7 @@ Meteor.methods({
                     state.color = ideastate && ideastate.color || '#fff';
                     return state;
                 })
-              
+
                 area.ideasByStatus = ideasByStatus;
                 area.participation = area.ideasPersonAdded * 100 / area.employes;
             });

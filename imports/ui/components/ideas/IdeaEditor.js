@@ -46,7 +46,6 @@ export default class IdeaEditor extends Component {
         $(window).on("resize", () => {
             this.calculateIndicatorWidth();
         })
-        console.log('ideas states', this.props.ideasstates);
     }
 
     toggleStepReady = () => {

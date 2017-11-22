@@ -6,7 +6,8 @@ import { Meteor } from 'meteor/meteor';
 
 import Ideas from '../../../api/ideas/ideas';
 import IdeasList from '../../components/ideas/IdeaList';
-import ideasstates from '../../../api/ideasStatesSchema/ideasstates';
+import States from '../../../api/states/states';
+// import ideasstates from '../../../api/ideasStatesSchema/ideasstates';
 
 import Loading from '../../components/Loading.js';
 
@@ -31,8 +32,11 @@ const composer = ({ match }, onData) => {
 	// console.log('areaID', areaId);
 
 	const areasviewsub = Meteor.subscribe('areas.view', areaId || '');
+	const statessub = Meteor.subscribe('states.list');
 
-	if (subscription.ready() && areasviewsub.ready()) {
+	if (subscription.ready() && areasviewsub.ready() && statessub.ready()) {
+		const ideasstates = States.find().fetch();
+
 		const states = statesCodesFilter.get();
 
 		let ideas = Ideas.find({}, { sort: { date: -1}, limit: ideasFindLimit.get() }).fetch();

@@ -19,4 +19,6 @@ import '../../api/persons/server/publications';
 
 import '../../api/dashboard/methods';
 
+import '../../api/states/server/publications';
+
 // import '../../api/base/baseSchema';
