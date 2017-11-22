@@ -9,7 +9,7 @@ import "react-toggle/style.css"
 
 // import ideasstates from '../../../api/ideasStatesSchema/ideasstates';
 
-const ideasstates = [];
+
 
 const handleNav = (history, _id) => {
     history.push(`/corporation/${_id}`)
@@ -37,7 +37,7 @@ const handleRemove = (history, _id) => {
     })
 }
 
-const ConfigsList = ({ history, corporations }) => (
+const ConfigsList = ({ history, corporations, ideasstates }) => (
     <div>
 
         <div className="pageheader">
