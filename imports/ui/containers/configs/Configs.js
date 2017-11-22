@@ -10,7 +10,7 @@ const composer = ({ match }, onData) => {
     const statessub = Meteor.subscribe('states.list');
 
     if (statessub.ready()) {
-        const ideasstates = States.find().fetch();
+        const ideasstates = States.find({}, { sort: { code: 1 } }).fetch();
         onData(null, { ideasstates });
     }
 

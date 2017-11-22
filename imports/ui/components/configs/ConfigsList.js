@@ -2,8 +2,8 @@ import React, { PropTypes } from 'react';
 import { Alert, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { Bert } from 'meteor/themeteorchef:bert';
-import Toggle from 'react-toggle'
-import "react-toggle/style.css"
+import Toggle from 'react-toggle';
+import 'react-toggle/style.css';
 // import $ from 'jquery';
 // import swal from 'sweetalert2';
 

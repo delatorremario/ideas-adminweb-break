@@ -16,7 +16,7 @@ const EditConfig = (props) => {
                     <span className="label">Estás aquí:</span>
                     <ol className="breadcrumb">
                         <li>
-                            <Link to="/config">Config</Link>
+                            <Link to="/configs">Config</Link>
                         </li>
                         <li>Editar</li>
                         <li className="active">{doc && doc.step} {doc && doc.state}</li>
