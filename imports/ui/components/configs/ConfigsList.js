@@ -62,7 +62,7 @@ const ConfigsList = ({ history, corporations, ideasstates }) => (
                         <div className="state-select" >
                             <Toggle
                                 id='state-select'
-                                defaultChecked={false}
+                                checked={state.showInDashboard}
                             // onChange={this.handleCheeseChange}
                             />
                         </div>

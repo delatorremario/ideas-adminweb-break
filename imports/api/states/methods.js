@@ -4,6 +4,7 @@ import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import States from './states';
 import rateLimit from '../../modules/rate-limit.js';
 import { check } from 'meteor/check';
+import { Meteor } from 'meteor/meteor';
 
 export const upsertState = new ValidatedMethod({
     name: 'state.upsert',
@@ -36,5 +37,12 @@ rateLimit({
     timeRange: 1000,
 });
 
+Meteor.methods({
+    'state.showInDashboard': (_id, showInDashboard) => {
+        check(_id,String);
+        check(showInDashboard,Boolean);
 
+        States.update({ _id }, { $set: { showInDashboard } })
+    }
+})
 
