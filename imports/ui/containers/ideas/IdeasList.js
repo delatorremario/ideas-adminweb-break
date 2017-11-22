@@ -39,14 +39,13 @@ const composer = ({ match }, onData) => {
 
 		const states = statesCodesFilter.get();
 
-		let ideas = Ideas.find({}, { sort: { date: -1}, limit: ideasFindLimit.get() }).fetch();
+		let ideas = Ideas.find({}, { sort: { date: -1 }, limit: ideasFindLimit.get() }).fetch();
 
-		if (states.length>0) {
-			// console.log('STATES', states);
-			 ideas = _.filter(ideas, (idea) => {
-			 	const last = _.last(idea.states);
-			 	return true // last && last.state === _.find(states, state);
-			 })
+		if (states.length > 0) {
+			ideas = _.filter(ideas, (idea) => {
+				const last = _.last(idea.states);
+				return last && _.some(states, s => s === last.code);
+			})
 		}
 
 		onData(null, { ideas, ideasstates, ideasFindLimit, textSearch, statesCodesFilter, areasIdsFilter, params: match.params });

@@ -32,7 +32,7 @@ Meteor.publish('ideas.list', (
     if (areasIdsFilter.length > 0) _.extend(filters, { 'chief.areaId': { $in: areasIdsFilter } });
 
     // console.log('areasIdsFilter', areasIdsFilter);
-    console.log('FILTERS', filters);
+    // console.log('FILTERS', filters);
 
     return Ideas.find(
       filters,
