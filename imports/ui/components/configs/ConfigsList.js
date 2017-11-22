@@ -56,14 +56,16 @@ const ConfigsList = ({ history, corporations }) => (
                 _.map(ideasstates, (state, index) =>
                     <div className='configs-row' key={index}>
                         <div className='state-color' style={{ backgroundColor: state.color }} ></div>
-                        <div className='state-step'>{state.step}</div>
-                        <div className='state-state'>{state.state}</div>
+                        <div className='state-step'>{state.step} {state.state}</div>
                         <div className="state-select" >
-                          <Toggle
-                            id='state-select'
-                            defaultChecked={false}
+                            <Toggle
+                                id='state-select'
+                                defaultChecked={false}
                             // onChange={this.handleCheeseChange}
-                             />
+                            />
+                        </div>
+                        <div className="state-config">
+                            <Link to="/configs" className="btn btn-default btn-sm btn-trans"><i className="fa fa-cog"></i></Link>
                         </div>
                     </div>
                 )
