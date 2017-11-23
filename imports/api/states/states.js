@@ -27,6 +27,8 @@ States.schema = new SimpleSchema(
         corporationId: { type: String },
         showInDashboard: { type: Boolean, optional: true, defaultValue: true },
         config: { type: [Object], optional: true },
+        green: { type: Number, optional: true, defaultValue: 0 },
+        yellow: { type: Number, optional: true, defaultValue: 0 },
     },
 )
 

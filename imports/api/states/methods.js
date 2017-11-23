@@ -39,10 +39,17 @@ rateLimit({
 
 Meteor.methods({
     'state.showInDashboard': (_id, showInDashboard) => {
-        check(_id,String);
-        check(showInDashboard,Boolean);
+        check(_id, String);
+        check(showInDashboard, Boolean);
 
         States.update({ _id }, { $set: { showInDashboard } })
-    }
+    },
+    'state.semaphore': (_id, green, yellow) => {
+        check(_id, String);
+        check(green, Number);
+        check(yellow, Number);
+
+        States.update({ _id }, { $set: { green, yellow } })
+    },
 })
 

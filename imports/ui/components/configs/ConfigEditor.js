@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Button } from 'react-bootstrap';
 
 import configEditor from '../../../modules/configs/configs-editor';
 import { Meteor } from 'meteor/meteor';
@@ -27,6 +28,13 @@ export default class ConfigEditor extends Component {
 
     }
 
+    onChangeDoc = e => {
+        e.preventDefault();
+        this.setState({
+            doc: { ...this.state.doc, [e.target.name]: e.target.value }
+        });
+    };
+
     toggleSwitch = () => {
         const { _id, showInDashboard } = this.state.doc;
 
@@ -36,12 +44,17 @@ export default class ConfigEditor extends Component {
         });
     };
 
-    onChangeDoc = e => {
-        e.preventDefault();
-        this.setState({
-            doc: { ...this.state.doc, [e.target.name]: e.target.value }
+    saveSemaphore = () => {
+        const { _id, green, yellow } = this.state.doc;
+
+        Meteor.call('state.semaphore', _id, parseInt(green), parseInt(yellow), (err) => {
+            if (err) { Bert.alert(err.message, 'danger'); return; }
+            const confirmation = 'Datos actualizados correctamente';
+            Bert.alert(confirmation, 'success');
+            // this.setState((prev) => ({ doc: { ...prev.doc, showInDashboard: !prev.doc.showInDashboard } }));
         });
     };
+
 
     render() {
         const { _id, step, state, color, showInDashboard, green, yellow } = this.state.doc
@@ -58,31 +71,42 @@ export default class ConfigEditor extends Component {
                         </div>
                     </div>
                     <div className="panel-body">
-                    {
-                        showInDashboard &&
-                        <div className="lights">
-                            <div className="light">
-                                <div className="color" style={{ backgroundColor: colors[0] }} ></div>
-                                <div className="text">mayor a</div>
-                                <div className="value">
-                                    <input type="number" value={green} name="green" onChange={this.onChangeDoc} className="form-control input-sm" min="0" step="1" />
-                                </div>
+                        {
+                            showInDashboard && <div>
+                                <p>Configurar los días para mostrar el semáforo</p>
+                                <div className="lights">
+                                    <div className="light">
+                                        <div className="color" style={{ backgroundColor: colors[0] }} ></div>
+                                        <div className="text">mayor a</div>
+                                        <div className="value">
+                                            <input type="number" value={green} name="green" onChange={this.onChangeDoc} className="form-control input-sm" min="0" step="1" />
+                                        </div>
 
-                            </div>
-                            <div className="light">
-                                <div className="color" style={{ backgroundColor: colors[1] }} ></div>
-                                <div className="text">Entre {green} y </div>
-                                <div className="value">
-                                    <input type="number" value={yellow} name="yellow" onChange={this.onChangeDoc} className="form-control input-sm" min={green + 1} step="1" />
+                                    </div>
+                                    <div className="light">
+                                        <div className="color" style={{ backgroundColor: colors[1] }} ></div>
+                                        <div className="text">Entre {green} y </div>
+                                        <div className="value">
+                                            <input type="number" value={yellow} name="yellow" onChange={this.onChangeDoc} className="form-control input-sm" min={green + 1} step="1" />
+                                        </div>
+                                    </div>
+                                    <div className="light">
+                                        <div className="color" style={{ backgroundColor: colors[2] }} ></div>
+                                        <div className="text">mayor a</div>
+                                        <div className="value">{yellow}</div>
+                                    </div>
                                 </div>
+                                <Button
+                                    type='button'
+                                    bsStyle="success"
+                                    className="btn btn-sm pull-right"
+                                    onClick={this.saveSemaphore}
+                                >
+                                    <i className="fa fa-paper-plane"></i>
+                                    Guardar
+                                </Button>
                             </div>
-                            <div className="light">
-                                <div className="color" style={{ backgroundColor: colors[2] }} ></div>
-                                <div className="text">mayor a</div>
-                                <div className="value">{yellow}</div>
-                            </div>
-                        </div>
-                    }
+                        }
                     </div>
                 </div>
             </div>
