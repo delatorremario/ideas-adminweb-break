@@ -58,6 +58,8 @@ export default class ConfigEditor extends Component {
                         </div>
                     </div>
                     <div className="panel-body">
+                    {
+                        showInDashboard &&
                         <div className="lights">
                             <div className="light">
                                 <div className="color" style={{ backgroundColor: colors[0] }} ></div>
@@ -80,6 +82,7 @@ export default class ConfigEditor extends Component {
                                 <div className="value">{yellow}</div>
                             </div>
                         </div>
+                    }
                     </div>
                 </div>
             </div>
