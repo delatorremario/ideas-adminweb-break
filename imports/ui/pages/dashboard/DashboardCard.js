@@ -3,7 +3,7 @@ import { Doughnut } from 'react-chartjs-2';
 import { Link } from 'react-router-dom';
 import _ from 'lodash';
 
-const colors = ['#e65400', '#fab636', '#b3de68']
+import colors from '../../../api/dashboard/colors';
 
 const DashboardCard = ({ area }) => {
 
