@@ -3,14 +3,16 @@ import React, { Component } from 'react';
 import configEditor from '../../../modules/configs/configs-editor';
 import { Meteor } from 'meteor/meteor';
 import { Bert } from 'meteor/themeteorchef:bert';
-import Switch from 'react-toggle-switch'
-
+import Switch from 'react-toggle-switch';
+import colors from '../../../api/dashboard/colors';
 
 
 export default class ConfigEditor extends Component {
     state = {
         doc: {
-            showInDashboard:false,
+            showInDashboard: false,
+            green: 0,
+            yellow: 0,
         }
     }
 
@@ -18,9 +20,9 @@ export default class ConfigEditor extends Component {
         configEditor({ component: this });
         // setTimeout(() => { document.querySelector('[name="name"]').focus(); }, 0);
         if (this.props.doc) {
-            this.setState({
-                doc: this.props.doc
-            });
+            this.setState((prev) => ({
+                doc: { ...prev.doc, ...this.props.doc }
+            }));
         }
 
     }
@@ -34,8 +36,15 @@ export default class ConfigEditor extends Component {
         });
     };
 
+    onChangeDoc = e => {
+        e.preventDefault();
+        this.setState({
+            doc: { ...this.state.doc, [e.target.name]: e.target.value }
+        });
+    };
+
     render() {
-        const { _id, step, state, color, showInDashboard } = this.state.doc
+        const { _id, step, state, color, showInDashboard, green, yellow } = this.state.doc
         return (
             <div className="config-editor">
                 <div className="panel panel-default config-semaphore" >
@@ -49,6 +58,28 @@ export default class ConfigEditor extends Component {
                         </div>
                     </div>
                     <div className="panel-body">
+                        <div className="lights">
+                            <div className="light">
+                                <div className="color" style={{ backgroundColor: colors[0] }} ></div>
+                                <div className="text">mayor a</div>
+                                <div className="value">
+                                    <input type="number" value={green} name="green" onChange={this.onChangeDoc} className="form-control input-sm" min="0" step="1" />
+                                </div>
+
+                            </div>
+                            <div className="light">
+                                <div className="color" style={{ backgroundColor: colors[1] }} ></div>
+                                <div className="text">Entre {green} y </div>
+                                <div className="value">
+                                    <input type="number" value={yellow} name="yellow" onChange={this.onChangeDoc} className="form-control input-sm" min={green + 1} step="1" />
+                                </div>
+                            </div>
+                            <div className="light">
+                                <div className="color" style={{ backgroundColor: colors[2] }} ></div>
+                                <div className="text">mayor a</div>
+                                <div className="value">{yellow}</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -73,6 +73,7 @@
             padding: 15px;
             .color {
                 width: 25px;
+                min-width: 25px;
                 height: 25px;
                 border-radius: 50%;
             }
@@ -82,9 +83,12 @@
                 text-transform: uppercase;
                 font-size: small;
             }
-            input {
+            .value {
                 width: 60px;
                 text-align: center;
+                input { 
+                    text-align: center;
+                }
             }
         }
     }
@@ -117,6 +121,11 @@
         .lights {
             flex-direction: column;
             align-items: left;
+            .light {
+                .text {
+                    min-width: 110px;
+                }
+            }
         }
     }
 }
