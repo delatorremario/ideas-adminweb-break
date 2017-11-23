@@ -58,6 +58,8 @@ a {
 @import "main/panel-on-mobile";
 @import "main/config";
 
+@import "../../../node_modules/react-toggle-switch/dist/css/switch.min.css";
+
 // Own styles
 .login-box-container {
     background-color: #1966b1;

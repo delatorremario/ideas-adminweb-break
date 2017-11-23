@@ -2,8 +2,9 @@ import React, { PropTypes } from 'react';
 import { Alert, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { Bert } from 'meteor/themeteorchef:bert';
-import Toggle from 'react-toggle';
-import 'react-toggle/style.css';
+
+import Switch from 'react-toggle-switch'
+
 // import $ from 'jquery';
 // import swal from 'sweetalert2';
 
@@ -37,6 +38,16 @@ const handleRemove = (history, _id) => {
     })
 }
 
+
+const toggleSwitch = state => {
+    const { _id, showInDashboard } = state;
+
+    Meteor.call('state.showInDashboard', _id, !showInDashboard, (err) => {
+        if (err) { Bert.alert(err.message, 'danger'); return; }
+    })
+
+}
+
 const ConfigsList = ({ history, corporations, ideasstates }) => (
     <div>
 
@@ -58,13 +69,9 @@ const ConfigsList = ({ history, corporations, ideasstates }) => (
                 _.map(ideasstates, (state, index) =>
                     <div className='configs-row' key={index}>
                         <div className='state-color' style={{ backgroundColor: state.color }} ></div>
-                        <div className='state-step'>{state.step} {state.state}</div>
+                        <div className='state-step'><h4>{state.step + ' ' + state.state}</h4></div>
                         <div className="state-select" >
-                            <Toggle
-                                id='state-select'
-                                checked={state.showInDashboard}
-                            // onChange={this.handleCheeseChange}
-                            />
+                            <Switch onClick={toggleSwitch.bind(this, state)} on={state.showInDashboard} />
                         </div>
                         <div className="state-config">
                             <Link to={`/config/${state._id}/edit`} className="btn btn-default btn-sm btn-trans"><i className="fa fa-cog"></i></Link>
