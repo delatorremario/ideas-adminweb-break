@@ -5,7 +5,13 @@ import _ from 'lodash';
 
 
 
-const mails = ['mariodelatorre@holos.cl', 'ctomba@holos.cl', 'cbaiardi@holos.cl', 'rmarambio@holos.cl', 'asusel@holos.cl'];
+const mails = ['mariodelatorre@holos.cl', 
+'ctomba@holos.cl', 
+'cbaiardi@holos.cl', 
+'rmarambio@holos.cl', 
+'asusel@holos.cl',
+'dblazina@holos.cl'
+];
 
 const createAccounts = () => {
   _.map(mails, (mail) => {
