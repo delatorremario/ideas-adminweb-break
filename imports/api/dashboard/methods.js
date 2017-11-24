@@ -17,13 +17,13 @@ const getIdsAreas = area => {
 Meteor.methods({
     'getDashboard': () => {
 
-
         if (!Meteor.isServer) return;
         const self = this.Meteor;
         const user = self.user();
         if (user) {
             const filters = { corporationId: (user.profile && user.profile.selectedCorporationId) || '' };
             const ideasstates = States.find(filters).fetch();
+            // console.log('ideasstates', ideasstates);
 
             // buscar las Areas que se mostraran en el Dashboard
             const areasDashboard = Areas.find({ dashboard: true }).fetch();
@@ -89,22 +89,83 @@ Meteor.methods({
                 })
                 area.ideasByStep = ideasByStep;
 
+                // ***** ini by status ******
+
                 const ideasByStatus = Ideas.aggregate([
                     { $match: { 'chief.areaId': { $in: area.family } } },
                     {
                         $project:
                             {
-                                lastState: { $arrayElemAt: ["$states", -1] }
+                                lastState: { $arrayElemAt: ["$states", -1] },
                             }
                     },
                     {
+                        $project:
+                            {
+                                // lastState: 1,
+                                stateId: '$lastState._id',
+                                state: '$lastState.state',
+                                code: '$lastState.code',
+                                createdAt: '$lastState.createdAt',
+                                diff: {
+                                    "$trunc": {
+                                        '$divide': [
+                                            { '$subtract': [new Date(), "$lastState.createdAt"] },
+                                            86400000
+                                        ]
+                                    }
+                                }
+                            }
+                    },
+                    { $lookup: { from: 'states', foreignField: '_id', localField: 'stateId', as: 'State' } },
+                    { $unwind: '$State' },
+                    {
                         $group: {
-                            _id: { state: '$lastState.state', code: '$lastState.code' },
+                            _id: { state: '$state', code: '$code' },
+                            green: {
+                                "$sum": { "$cond": [{ "$lt": ['$diff', "$State.green"] }, 1, 0] }
+                            },
+                            yellow: {
+                                "$sum": {
+                                    "$cond": [{
+                                        '$and': [{
+                                            "$gte": [
+                                                '$diff',
+                                                "$State.green"
+                                            ]
+                                        },
+                                        {
+                                            "$lte": [
+                                                '$diff',
+                                                "$State.yellow"
+                                            ]
+                                        }
+                                        ]
+                                    }
+                                        , 1, 0
+                                    ]
+                                }
+                            },
+                            red: {
+                                "$sum": {
+                                    "$cond": [
+                                        {
+                                            "$gt": [
+                                                "$diff",
+                                                "$State.yellow"
+                                            ]
+                                        }, 1, 0
+                                    ]
+                                }
+                            },
                             count: { $sum: 1 },
                         }
                     },
-                    { $project: { state: '$_id.state', code: '$_id.code', count: 1 } },
+                    { $project: { state: '$_id.state', code: '$_id.code', count: 1, green: 1, yellow: 1, red: 1 } },
                 ]);
+
+                console.log('ideasByStatus', ideasByStatus);
+
                 _.map(ideasByStatus, state => {
                     const ideastate = _.find(ideasstates, { state: state.state });
                     state.color = ideastate && ideastate.color || '#fff';
@@ -112,6 +173,8 @@ Meteor.methods({
                 })
 
                 area.ideasByStatus = ideasByStatus;
+                // ***** end by status *****
+
                 area.participation = area.ideasPersonAdded * 100 / area.employes;
             });
 

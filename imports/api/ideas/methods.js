@@ -4,7 +4,7 @@ import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import Ideas from './ideas';
 import rateLimit from '../../modules/rate-limit.js';
 import PersonSchema from '../../api/persons/personSchema';
-import IdeasStatesSchemas from '../ideasStatesSchema/ideasStatesSchema';
+import States from '../../api/states/states';
 
 
 export const upsertIdea = new ValidatedMethod({
@@ -23,7 +23,7 @@ export const upsertIdea = new ValidatedMethod({
         opportunity: { type: String },
         drivers: { type: [String] },
         collaborators: { type: [PersonSchema], optional: true },
-        states: { type: [IdeasStatesSchemas], optional: true },
+        states: { type: [States.schema], optional: true },
 
     }).validator(),
     run(idea) {

@@ -131,7 +131,7 @@ export default class IdeaEditor extends Component {
     selectState = state => e => {
         e.preventDefault();
         state.userId = Meteor.userId();
-        state.createdAt = new Date();
+        state.createdAt = new Date(this.state.doc.date) || new Date();
         this.setState(prev => ({
             doc: { ...prev.doc, states: [state] }
         }));

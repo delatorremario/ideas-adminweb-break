@@ -59,6 +59,15 @@ const IdeaCard = ({ idea, lap, handleRemove }) => {
                                 </ul>
                             </div>
                         }
+
+                        <p>Estados</p>
+                        <ul>
+                            {
+                                _.map(states, (state, index) =>
+                                    <li key={index}> <small> <Moment format="DD MMM YY" date={state.createdAt}/> {state.step} {state.state} </small></li>
+                                )
+                            }
+                        </ul>
                     </div>
                 </small>
             </div>

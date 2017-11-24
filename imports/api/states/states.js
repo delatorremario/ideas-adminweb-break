@@ -19,13 +19,26 @@ States.deny({
 
 States.schema = new SimpleSchema(
     {
+        _id: { type: String, optional: true },
+        corporationId: { type: String, optional: true },
+        userId: { type: String },
+        createdAt: { type: Date },
+        updatedAt: {
+          type: Date,
+          index: true,
+          autoValue: function () {
+            if (this.isUpdate) return new Date
+          },
+          denyInsert: true,
+          optional: true,
+      
+        },
         code: { type: String },
         step: { type: String },
         state: { type: String },
         description: { type: String },
         color: { type: String },
-        corporationId: { type: String },
-        showInDashboard: { type: Boolean, optional: true, defaultValue: true },
+        showInDashboard: { type: Boolean, optional: true},
         config: { type: [Object], optional: true },
         green: { type: Number, optional: true, defaultValue: 0 },
         yellow: { type: Number, optional: true, defaultValue: 0 },

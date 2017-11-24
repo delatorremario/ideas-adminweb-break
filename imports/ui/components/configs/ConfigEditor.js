@@ -77,7 +77,7 @@ export default class ConfigEditor extends Component {
                                 <div className="lights">
                                     <div className="light">
                                         <div className="color" style={{ backgroundColor: colors[0] }} ></div>
-                                        <div className="text">mayor a</div>
+                                        <div className="text">menor a</div>
                                         <div className="value">
                                             <input type="number" value={green} name="green" onChange={this.onChangeDoc} className="form-control input-sm" min="0" step="1" />
                                         </div>
