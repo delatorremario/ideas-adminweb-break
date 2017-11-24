@@ -65,7 +65,7 @@ const DashboardCard = ({ area }) => {
 
                     <div className='head-dashboard-card'>
                         {
-                            _.map(headDash, (head,index) => {
+                            _.map(headDash, (head, index) => {
                                 return (<div key={index}><h4><i className={head.icon} /> {head.concept}</h4><p>{head.value}</p></div>)
                             })
                         }
@@ -81,7 +81,10 @@ const DashboardCard = ({ area }) => {
                             _.map(ideasByStatus, (state, index) => <div key={index} className="link-status"  >
                                 <Link to={`/ideas/%20/${state.code}/%20/${area._id}/find`}>
                                     <div>{state.state}</div>
-                                    <div style={{ backgroundColor: colors[_.random(0, 2)] }}>{state.count}</div>
+                                    {/* <div className="count">{state.count}</div> */}
+                                    <div className="count" style={{ backgroundColor: colors[0] }}>{state.green}</div>
+                                    <div className="count" style={{ backgroundColor: colors[1] }}>{state.yellow}</div>
+                                    <div className="count" style={{ backgroundColor: colors[2] }}>{state.red}</div>
                                 </Link>
                             </div>
                             )

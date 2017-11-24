@@ -23,7 +23,7 @@ Meteor.methods({
         if (user) {
             const filters = { corporationId: (user.profile && user.profile.selectedCorporationId) || '' };
             const ideasstates = States.find(filters).fetch();
-            // console.log('ideasstates', ideasstates);
+            const ideasstatesshowCodes = _.map(_.filter(ideasstates, { showInDashboard: true }), 'code');
 
             // buscar las Areas que se mostraran en el Dashboard
             const areasDashboard = Areas.find({ dashboard: true }).fetch();
@@ -65,7 +65,6 @@ Meteor.methods({
                     }]);
                 area.ideasPersonAdded = (ideasPersonAdded && ideasPersonAdded[0] && ideasPersonAdded[0].count) || 0;
 
-
                 const ideasByStep = Ideas.aggregate([
                     { $match: { 'chief.areaId': { $in: area.family } } },
                     {
@@ -92,7 +91,7 @@ Meteor.methods({
                 // ***** ini by status ******
 
                 const ideasByStatus = Ideas.aggregate([
-                    { $match: { 'chief.areaId': { $in: area.family } } },
+                    { $match: { 'chief.areaId': { $in: area.family }, 'states.code': { $in: ideasstatesshowCodes } } },
                     {
                         $project:
                             {
@@ -163,8 +162,6 @@ Meteor.methods({
                     },
                     { $project: { state: '$_id.state', code: '$_id.code', count: 1, green: 1, yellow: 1, red: 1 } },
                 ]);
-
-                console.log('ideasByStatus', ideasByStatus);
 
                 _.map(ideasByStatus, state => {
                     const ideastate = _.find(ideasstates, { state: state.state });
