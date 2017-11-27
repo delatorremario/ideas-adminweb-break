@@ -3,7 +3,7 @@ import { composeWithTracker } from 'react-komposer';
 
 import Loading from '../../components/Loading';
 
-import EditConfig  from '../../pages/configs/EditConfig'
+import EditConfig from '../../pages/configs/EditConfig'
 import States from '../../../api/states/states';
 
 

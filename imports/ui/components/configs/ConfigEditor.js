@@ -12,11 +12,12 @@ import ConfigEditorAlert from './ConfigEditorAlert';
 
 export default class ConfigEditor extends Component {
     state = {
-        key: 1,
+        key: 0,
         doc: {
             showInDashboard: false,
             green: 0,
             yellow: 0,
+            alerts: [],
         }
     }
 
@@ -25,7 +26,8 @@ export default class ConfigEditor extends Component {
         // setTimeout(() => { document.querySelector('[name="name"]').focus(); }, 0);
         if (this.props.doc) {
             this.setState((prev) => ({
-                doc: { ...prev.doc, ...this.props.doc }
+                doc: { ...prev.doc, ...this.props.doc },
+                key: 1,
             }));
         }
 
@@ -59,14 +61,29 @@ export default class ConfigEditor extends Component {
     };
 
     handleSelect = key => {
-        if (key === 0) {
-            console.log('agreagar nueva alerta');
-            const { _id } =this.state.doc;
-            Meteor.call('state.addAlert', _id, (err) => {
-                if (err) { Bert.alert(err.message, 'danger'); return }
-            });
-        } else
-            this.setState({ key });
+        this.setState({ key });
+    }
+
+    addAlert = () => {
+        const { alerts } = this.state.doc;
+        const alert = {
+            temporal: false,
+            stateChange: false,
+            delay: 1,
+            daily: false,
+            weekly: false,
+            sendEmail: false,
+            sendInbox: false,
+            employee: false,
+            lead: false,
+            oneUp: false,
+            message: '',
+        }
+        alerts.push(alert);
+        this.setState((prev) => ({
+            doc: { ...prev.doc, alerts: alerts },
+            key: alerts.length,
+        }))
     }
 
     render() {
@@ -82,6 +99,7 @@ export default class ConfigEditor extends Component {
                             <h4>Mostrar en Panel de Control</h4>
                             <Switch onClick={this.toggleSwitch} on={this.state.doc.showInDashboard} />
                         </div>
+
                     </div>
                     {
                         showInDashboard && <div>
@@ -129,16 +147,18 @@ export default class ConfigEditor extends Component {
                         <div className="title">
                             <h5>Configuración de Alertas</h5>
                         </div>
+                        <div className="show-in-dashboard">
+                            <button className="btn btn-default btn-sm" onClick={this.addAlert}>Agregar</button>
+                        </div>
                     </div>
                     <div className="panel-body">
                         <Tabs activeKey={this.state.key} onSelect={this.handleSelect} id="controlled-tab-example">
                             {
                                 _.map(alerts, (alert, index) => {
                                     const i = index + 1;
-                                    return <Tab key={index} eventKey={i} title={`Alerta ${i}`}><ConfigEditorAlert _id={_id} index={index} alert={alert} /></Tab>
+                                    return <Tab key={index} eventKey={i} title={`Alerta ${i}`}><ConfigEditorAlert saveAlerts={this.saveAlerts} index={index} alert={alert} _id={_id} /></Tab>
                                 })
                             }
-                            <Tab eventKey={0} title=' + Alerta'></Tab>
                         </Tabs>
                     </div>
                 </div>

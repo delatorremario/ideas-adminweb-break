@@ -15,7 +15,6 @@
         padding-top: 15px;
         padding-bottom: 15px;
     }
-
     .config-times {
         padding-top: 10px;
         display: flex; // justify-content: center;
@@ -25,18 +24,18 @@
             width: 100px;
         }
     }
-    .config-sends, .config-to, .config-message {
+    .config-sends,
+    .config-to,
+    .config-message {
         padding-top: 30px;
     }
     .config-message {
-        padding-bottom: 15px;        
+        padding-bottom: 15px;
         textarea {
             height: 100px !important;
         }
     }
 }
-
-
 
 @media all and (max-width:768px) {
     .config-editor-alert {

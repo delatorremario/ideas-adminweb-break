@@ -12,7 +12,6 @@ class ConfigEditorAlert extends Component {
     state = {
         loading: false,
         alert: {
-            number: 1,
             temporal: false,
             stateChange: false,
             delay: 1,
@@ -27,8 +26,8 @@ class ConfigEditorAlert extends Component {
         }
     }
     componentDidMount() {
-        console.log('this.props', this.props);
-
+        if (this.props.alert)
+            this.setState({ alert: this.props.alert  })
     }
 
     onChange = e => {
@@ -74,16 +73,19 @@ class ConfigEditorAlert extends Component {
     }
 
     saveAlert = () => {
-        this.setState({ loading: true })
-        const { alert } = this.state
-        const { _id } = this.props;
-
-        Meteor.call('state.addAlert', _id, [alert], (err, res) => {
-            if (err) { Bert.alert(err.message, 'danger') }
-            this.setState({ loading: false })
-        })
+        const { alert } = this.state;
+        const { _id, index} = this.props;
+        Meteor.call('state.saveAlert', _id, index, alert, (err) => {
+            if (err) { Bert.alert(err.message, 'danger'); return; }
+        });
     }
-
+    removeAlert = () => {
+        const { _id, index} = this.props;
+        
+        Meteor.call('state.removeAlert', _id, index, (err) => {
+            if (err) { Bert.alert(err.message, 'danger'); return; }
+        });
+    }
     render() {
         const { loading } = this.state;
         const { temporal, stateChange, delay, daily, weekly, sendEmail, sendInbox, employee, lead, oneUp, message } = this.state.alert;
@@ -173,6 +175,15 @@ class ConfigEditorAlert extends Component {
                             <i className="fa fa-paper-plane"></i>
                             Guardar
                         </Button>
+                        <Button
+                            type='button'
+                            bsStyle="default"
+                            className="btn btn-sm pull-right btn-trans"
+                            onClick={this.saveAlert}>
+                            <i className="fa fa-trash"></i>
+                            Eliminar
+                        </Button>
+                       
                     </div>
                 }
             </div>

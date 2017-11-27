@@ -53,7 +53,6 @@ Meteor.methods({
 
     },
     'state.addAlert': (_id) => {
-        console.log('addAlert', _id);
         check(_id, String);
 
         const alert = {
@@ -71,14 +70,14 @@ Meteor.methods({
         }
 
         States.update({ _id }, { $push: { alerts: alert } }, (err, data) => console.log('result add alert', err, data))
-        // States.update({ _id }, { $set: { alerts: [alert] } });
 
     },
 
-    'state.updateAlert': (_id, index, alert) => {
-        console.log('ALERT', _id, alert);
+    'state.saveAlert': (_id, index, alert) => {
+        console.log('ALERT', _id, index, alert);
         check(_id, String);
-        check(alert, [{
+        check(index, Number);
+        check(alert, {
             temporal: Boolean,
             stateChange: Boolean,
             delay: Match.Maybe(Number),
@@ -90,9 +89,20 @@ Meteor.methods({
             lead: Boolean,
             oneUp: Boolean,
             message: String,
-        }]);
+        });
 
-        States.update({ _id }, { $push: { alerts: { $each: alert } } }, (err, data) => console.log('result data', err, data))
+        const set = { [`alerts.${index}`]: alert }
+        console.log('SET', set);
+        States.update({ _id }, { $set: set }, (err, data) => console.log('result data', err, data))
+    },
+    'state.removeAlert': (_id, index) => {
+        check(_id, String);
+        check(index, Number);
+
+        const set = { [`alerts.${index}`]: 1 }
+        console.log('SET******* ', set);
+        States.update({ _id }, { $unset: set }, false, true, (err, data) => console.log('result data', err, data))
+        States.update({ _id }, { $$pull:{alerts:null}}, (err, data) => console.log('result data', err, data))
     },
 })
 
