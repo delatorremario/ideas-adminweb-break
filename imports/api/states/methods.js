@@ -96,13 +96,14 @@ Meteor.methods({
         States.update({ _id }, { $set: set }, (err, data) => console.log('result data', err, data))
     },
     'state.removeAlert': (_id, index) => {
+        if(Meteor.isClient) return;
         check(_id, String);
         check(index, Number);
 
         const set = { [`alerts.${index}`]: 1 }
-        console.log('SET******* ', set);
+        console.log('removeAlert ', set);
         States.update({ _id }, { $unset: set }, false, true, (err, data) => console.log('result data', err, data))
-        States.update({ _id }, { $$pull:{alerts:null}}, (err, data) => console.log('result data', err, data))
+        States.update({ _id }, { $pull:{alerts:null}}, (err, data) => console.log('result data', err, data))
     },
 })
 

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Tabs, Tab, Button } from 'react-bootstrap';
+import _ from 'lodash';
+
 
 
 import configEditor from '../../../modules/configs/configs-editor';
@@ -27,7 +29,7 @@ export default class ConfigEditor extends Component {
         if (this.props.doc) {
             this.setState((prev) => ({
                 doc: { ...prev.doc, ...this.props.doc },
-                key: 1,
+                key: 0,
             }));
         }
 
@@ -82,8 +84,20 @@ export default class ConfigEditor extends Component {
         alerts.push(alert);
         this.setState((prev) => ({
             doc: { ...prev.doc, alerts: alerts },
-            key: alerts.length,
+            key: alerts.length - 1,
         }))
+    }
+
+    removeAlert = (_id, index) => {
+        let { alerts } = this.state.doc;
+        _.pullAt(alerts, [index]);
+        this.setState((prev) => ({ doc: { ...prev.doc, alerts: alerts } }))
+
+        Meteor.call('state.removeAlert', _id, index, (err) => {
+            if (err) { Bert.alert(err.message, 'danger'); return; }
+            // console.log('ALERTS 2', alerts);
+            Bert.alert(`Alerta Eliminada ${index}`, 'success');
+        });
     }
 
     render() {
@@ -155,8 +169,8 @@ export default class ConfigEditor extends Component {
                         <Tabs activeKey={this.state.key} onSelect={this.handleSelect} id="controlled-tab-example">
                             {
                                 _.map(alerts, (alert, index) => {
-                                    const i = index + 1;
-                                    return <Tab key={index} eventKey={i} title={`Alerta ${i}`}><ConfigEditorAlert saveAlerts={this.saveAlerts} index={index} alert={alert} _id={_id} /></Tab>
+                                    // const i = index;
+                                    return <Tab key={index} eventKey={index} title={`Alerta ${index + 1}`}><ConfigEditorAlert removeAlert={this.removeAlert} saveAlerts={this.saveAlerts} index={index} alert={alert} _id={_id} /></Tab>
                                 })
                             }
                         </Tabs>

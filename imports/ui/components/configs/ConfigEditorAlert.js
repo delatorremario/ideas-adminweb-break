@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap'
 import { Bert } from 'meteor/themeteorchef:bert';
+import _ from 'lodash';
 
 
 import Switch from 'react-toggle-switch'
@@ -80,14 +81,13 @@ class ConfigEditorAlert extends Component {
         });
     }
     removeAlert = () => {
-        const { _id, index} = this.props;
-        
-        Meteor.call('state.removeAlert', _id, index, (err) => {
-            if (err) { Bert.alert(err.message, 'danger'); return; }
-        });
+        const { _id, index} = this.props;        
+        this.props.removeAlert(_id, index)
     }
+   
     render() {
         const { loading } = this.state;
+        const { _id, index} = this.props;        
         const { temporal, stateChange, delay, daily, weekly, sendEmail, sendInbox, employee, lead, oneUp, message } = this.state.alert;
         return (
             <div className="config-editor-alert">
@@ -179,7 +179,7 @@ class ConfigEditorAlert extends Component {
                             type='button'
                             bsStyle="default"
                             className="btn btn-sm pull-right btn-trans"
-                            onClick={this.saveAlert}>
+                            onClick={ this.removeAlert}>
                             <i className="fa fa-trash"></i>
                             Eliminar
                         </Button>
