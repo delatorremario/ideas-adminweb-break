@@ -12,6 +12,8 @@ class ConfigEditorAlert extends Component {
         delay: 1,
         daily: false,
         weekly: false,
+        sendEmail: false,
+        sendInbox: false,
     }
 
     onChange = e => {
@@ -31,12 +33,33 @@ class ConfigEditorAlert extends Component {
     toggleDailySwitch = () => {
         this.setState((prev) => ({ daily: !prev.daily }))
     }
+    
     toggleWeeklySwitch = () => {
         this.setState((prev) => ({ weekly: !prev.weekly }))
     }
 
+    toggleSendEmailSwitch = () => {
+        this.setState((prev) => ({ sendEmail: !prev.sendEmail }))
+    }
+
+    toggleSendInboxSwitch = () => {
+        this.setState((prev) => ({ sendInbox: !prev.sendInbox }))
+    }
+
+    toggleEmployeeSwitch = () => {
+        this.setState((prev) => ({ employee: !prev.employee }))
+    }
+
+    toggleLeadSwitch = () => {
+        this.setState((prev) => ({ lead: !prev.lead }))
+    }
+
+    toggleOneUpSwitch = () => {
+        this.setState((prev) => ({ oneUp: !prev.oneUp }))
+    }
+
     render() {
-        const { temporal, stateChange, delay, daily, weekly } = this.state;
+        const { temporal, stateChange, delay, daily, weekly, sendEmail, sendInbox, employee, lead, oneUp } = this.state;
         return (
             <div className="config-editor-alert">
                 <div className="alert-types">
@@ -75,8 +98,34 @@ class ConfigEditorAlert extends Component {
                     </div>
                 }
 
-                <div className="config-sends"></div>
-                <div className="config-to"></div>
+                <div className="config-sends">
+                    <div className="alert-types">
+                        <div className="alert-type">
+                            <div className="alert-type-text">enviar e-mail</div>
+                            <Switch onClick={this.toggleSendEmailSwitch.bind(this)} on={sendEmail} />
+                        </div>
+                        <div className="alert-type">
+                            <div className="alert-type-text">bandeja de mensajes</div>
+                            <Switch onClick={this.toggleSendInboxSwitch.bind(this)} on={sendInbox} />
+                        </div>
+                    </div>
+                </div>
+                <div className="config-to">
+                    <div className="alert-types">
+                        <div className="alert-type">
+                            <div className="alert-type-text">Creador de la Idea</div>
+                            <Switch onClick={this.toggleEmployeeSwitch.bind(this)} on={employee} />
+                        </div>
+                        <div className="alert-type">
+                            <div className="alert-type-text">lead</div>
+                            <Switch onClick={this.toggleLeadSwitch.bind(this)} on={lead} />
+                        </div>
+                        <div className="alert-type">
+                            <div className="alert-type-text">1 up</div>
+                            <Switch onClick={this.toggleOneUpSwitch.bind(this)} on={oneUp} />
+                        </div>
+                    </div>
+                </div>
                 <div className="config-message"></div>
 
             </div>

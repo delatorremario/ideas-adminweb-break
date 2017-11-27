@@ -15,17 +15,22 @@
         padding-top: 15px;
         padding-bottom: 15px;
     }
+
     .config-times {
-        padding-top: 15px;
-        display: flex; 
-        // justify-content: center;
+        padding-top: 10px;
+        display: flex; // justify-content: center;
         align-items: center;
         input {
-            margin-left:10px;
+            margin-left: 10px;
             width: 100px;
         }
     }
+    .config-sends, .config-to, .config-message {
+        padding-top: 30px;
+    }
 }
+
+
 
 @media all and (max-width:768px) {
     .config-editor-alert {
@@ -39,7 +44,7 @@
             }
         }
         .config-times {
-            input { 
+            input {
                 margin-left: auto;
             }
         }
