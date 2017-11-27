@@ -6,7 +6,7 @@ import { Meteor } from 'meteor/meteor';
 import { Bert } from 'meteor/themeteorchef:bert';
 import Switch from 'react-toggle-switch';
 import colors from '../../../api/dashboard/colors';
-
+import ConfigEditorAlerts from './ConfigEditorAlerts';
 
 export default class ConfigEditor extends Component {
     state = {
@@ -70,9 +70,9 @@ export default class ConfigEditor extends Component {
                             <Switch onClick={this.toggleSwitch} on={this.state.doc.showInDashboard} />
                         </div>
                     </div>
-                    <div className="panel-body">
-                        {
-                            showInDashboard && <div>
+                    {
+                        showInDashboard && <div>
+                            <div className="panel-body">
                                 <p>Configurar los días para mostrar el semáforo</p>
                                 <div className="lights">
                                     <div className="light">
@@ -106,7 +106,19 @@ export default class ConfigEditor extends Component {
                                     Guardar
                                 </Button>
                             </div>
-                        }
+                        </div>
+                    }
+
+                </div>
+
+                <div className="panel panel-default config-semaphore" >
+                    <div className="panel-heading" style={{ backgroundColor: color }}>
+                        <div className="title">
+                           <h5>Configuración de Alertas</h5>
+                        </div>
+                    </div>
+                    <div className="panel-body">
+                        <ConfigEditorAlerts />
                     </div>
                 </div>
             </div>

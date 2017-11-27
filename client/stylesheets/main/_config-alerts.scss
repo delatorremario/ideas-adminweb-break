@@ -1,0 +1,28 @@
+.config-editor-alert {
+    padding-top: 15px;
+    .alert-types {
+        display: flex;
+        .alert-type {
+            display: flex;
+            padding-right: 15px;
+            .alert-type-text {
+                padding-right: 15px;
+                text-transform: uppercase;
+            }
+        }
+    }
+}
+
+@media all and (max-width:768px) {
+    .config-editor-alert {
+        .alert-types {
+            flex-direction: column;
+            .alert-type {
+                padding-top: 5px;
+                .switch {
+                    margin-left: auto;
+                }
+            }
+        }
+    }
+}
