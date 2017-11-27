@@ -28,6 +28,12 @@
     .config-sends, .config-to, .config-message {
         padding-top: 30px;
     }
+    .config-message {
+        padding-bottom: 15px;        
+        textarea {
+            height: 100px !important;
+        }
+    }
 }
 
 

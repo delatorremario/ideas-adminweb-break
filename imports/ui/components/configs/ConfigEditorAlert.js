@@ -1,133 +1,180 @@
 import React, { Component } from 'react';
 import { FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap'
+import { Bert } from 'meteor/themeteorchef:bert';
+
 
 import Switch from 'react-toggle-switch'
+import { Meteor } from 'meteor/meteor';
 
 
 class ConfigEditorAlert extends Component {
 
     state = {
-        temporal: false,
-        stateChange: false,
-        delay: 1,
-        daily: false,
-        weekly: false,
-        sendEmail: false,
-        sendInbox: false,
+        loading: false,
+        alert: {
+            number: 1,
+            temporal: false,
+            stateChange: false,
+            delay: 1,
+            daily: false,
+            weekly: false,
+            sendEmail: false,
+            sendInbox: false,
+            employee: false,
+            lead: false,
+            oneUp: false,
+            message: '',
+        }
+    }
+    componentDidMount() {
+        console.log('this.props', this.props);
+
     }
 
     onChange = e => {
         this.setState(
-            { ...this.state, [e.target.name]: e.target.value }
+            { alert: { ...this.state.alert, [e.target.name]: e.target.value } }
         );
     }
 
     toggleTemporalSwitch = () => {
-        this.setState((prev) => ({ temporal: !prev.temporal }))
+        this.setState((prev) => ({ alert: { ...this.state.alert, temporal: !prev.alert.temporal } }))
     }
 
     toggleStateChangeSwitch = () => {
-        this.setState((prev) => ({ stateChange: !prev.stateChange }))
+        this.setState((prev) => ({ alert: { ...this.state.alert, stateChange: !prev.alert.stateChange } }))
     }
 
     toggleDailySwitch = () => {
-        this.setState((prev) => ({ daily: !prev.daily }))
+        this.setState((prev) => ({ alert: { ...this.state.alert, daily: !prev.alert.daily } }))
     }
-    
+
     toggleWeeklySwitch = () => {
-        this.setState((prev) => ({ weekly: !prev.weekly }))
+        this.setState((prev) => ({ alert: { ...this.state.alert, weekly: !prev.alert.weekly } }))
     }
 
     toggleSendEmailSwitch = () => {
-        this.setState((prev) => ({ sendEmail: !prev.sendEmail }))
+        this.setState((prev) => ({ alert: { ...this.state.alert, sendEmail: !prev.alert.sendEmail } }))
     }
 
     toggleSendInboxSwitch = () => {
-        this.setState((prev) => ({ sendInbox: !prev.sendInbox }))
+        this.setState((prev) => ({ alert: { ...this.state.alert, sendInbox: !prev.alert.sendInbox } }))
     }
 
     toggleEmployeeSwitch = () => {
-        this.setState((prev) => ({ employee: !prev.employee }))
+        this.setState((prev) => ({ alert: { ...this.state.alert, employee: !prev.alert.employee } }))
     }
 
     toggleLeadSwitch = () => {
-        this.setState((prev) => ({ lead: !prev.lead }))
+        this.setState((prev) => ({ alert: { ...this.state.alert, lead: !prev.alert.lead } }))
     }
 
     toggleOneUpSwitch = () => {
-        this.setState((prev) => ({ oneUp: !prev.oneUp }))
+        this.setState((prev) => ({ alert: { ...this.state.alert, oneUp: !prev.alert.oneUp } }))
+    }
+
+    saveAlert = () => {
+        this.setState({ loading: true })
+        const { alert } = this.state
+        const { _id } = this.props;
+
+        Meteor.call('state.addAlert', _id, [alert], (err, res) => {
+            if (err) { Bert.alert(err.message, 'danger') }
+            this.setState({ loading: false })
+        })
     }
 
     render() {
-        const { temporal, stateChange, delay, daily, weekly, sendEmail, sendInbox, employee, lead, oneUp } = this.state;
+        const { loading } = this.state;
+        const { temporal, stateChange, delay, daily, weekly, sendEmail, sendInbox, employee, lead, oneUp, message } = this.state.alert;
         return (
             <div className="config-editor-alert">
-                <div className="alert-types">
-                    <div className="alert-type">
-                        <div className="alert-type-text">cambio de estado</div>
-                        <Switch onClick={this.toggleStateChangeSwitch.bind(this)} on={stateChange} />
-                    </div>
-                    <div className="alert-type">
-                        <div className="alert-type-text">temporal</div>
-                        <Switch onClick={this.toggleTemporalSwitch.bind(this)} on={temporal} />
-                    </div>
-                </div>
                 {
-                    temporal && <div className="temporal">
+                    loading && <div> Loading ... </div> ||
+                    <div>
                         <div className="alert-types">
                             <div className="alert-type">
-                                <div className="alert-type-text">alerta diaria</div>
-                                <Switch onClick={this.toggleDailySwitch.bind(this)} on={daily} />
+                                <div className="alert-type-text">cambio de estado</div>
+                                <Switch onClick={this.toggleStateChangeSwitch.bind(this)} on={stateChange} />
                             </div>
                             <div className="alert-type">
-                                <div className="alert-type-text">alerta semanal</div>
-                                <Switch onClick={this.toggleWeeklySwitch.bind(this)} on={weekly} />
+                                <div className="alert-type-text">temporal</div>
+                                <Switch onClick={this.toggleTemporalSwitch.bind(this)} on={temporal} />
                             </div>
                         </div>
-                        <div className="config-times">
-                            <label>Días de Atraso</label>
-                            <input
+                        {
+                            temporal && <div className="temporal">
+                                <div className="alert-types">
+                                    <div className="alert-type">
+                                        <div className="alert-type-text">alerta diaria</div>
+                                        <Switch onClick={this.toggleDailySwitch.bind(this)} on={daily} />
+                                    </div>
+                                    <div className="alert-type">
+                                        <div className="alert-type-text">alerta semanal</div>
+                                        <Switch onClick={this.toggleWeeklySwitch.bind(this)} on={weekly} />
+                                    </div>
+                                </div>
+                                <div className="config-times">
+                                    <label>Días de Atraso</label>
+                                    <input
+                                        className="form-control input-sm"
+                                        min="1" step="1"
+                                        type="number"
+                                        name="delay"
+                                        value={delay}
+                                        onChange={this.onChange}
+                                    />
+                                </div>
+                            </div>
+                        }
+
+                        <div className="config-sends">
+                            <div className="alert-types">
+                                <div className="alert-type">
+                                    <div className="alert-type-text">enviar e-mail</div>
+                                    <Switch onClick={this.toggleSendEmailSwitch.bind(this)} on={sendEmail} />
+                                </div>
+                                <div className="alert-type">
+                                    <div className="alert-type-text">bandeja de mensajes</div>
+                                    <Switch onClick={this.toggleSendInboxSwitch.bind(this)} on={sendInbox} />
+                                </div>
+                            </div>
+                        </div>
+                        <div className="config-to">
+                            <div className="alert-types">
+                                <div className="alert-type">
+                                    <div className="alert-type-text">Creador de la Idea</div>
+                                    <Switch onClick={this.toggleEmployeeSwitch.bind(this)} on={employee} />
+                                </div>
+                                <div className="alert-type">
+                                    <div className="alert-type-text">lead</div>
+                                    <Switch onClick={this.toggleLeadSwitch.bind(this)} on={lead} />
+                                </div>
+                                <div className="alert-type">
+                                    <div className="alert-type-text">1 up</div>
+                                    <Switch onClick={this.toggleOneUpSwitch.bind(this)} on={oneUp} />
+                                </div>
+                            </div>
+                        </div>
+                        <div className="config-message">
+                            <label>Mensaje</label>
+                            <textarea
                                 className="form-control input-sm"
-                                min="1" step="1"
-                                type="number"
-                                name="delay"
-                                value={delay}
+                                name="message"
+                                value={message}
                                 onChange={this.onChange}
                             />
                         </div>
+                        <Button
+                            type='button'
+                            bsStyle="success"
+                            className="btn btn-sm pull-right"
+                            onClick={this.saveAlert}>
+                            <i className="fa fa-paper-plane"></i>
+                            Guardar
+                        </Button>
                     </div>
                 }
-
-                <div className="config-sends">
-                    <div className="alert-types">
-                        <div className="alert-type">
-                            <div className="alert-type-text">enviar e-mail</div>
-                            <Switch onClick={this.toggleSendEmailSwitch.bind(this)} on={sendEmail} />
-                        </div>
-                        <div className="alert-type">
-                            <div className="alert-type-text">bandeja de mensajes</div>
-                            <Switch onClick={this.toggleSendInboxSwitch.bind(this)} on={sendInbox} />
-                        </div>
-                    </div>
-                </div>
-                <div className="config-to">
-                    <div className="alert-types">
-                        <div className="alert-type">
-                            <div className="alert-type-text">Creador de la Idea</div>
-                            <Switch onClick={this.toggleEmployeeSwitch.bind(this)} on={employee} />
-                        </div>
-                        <div className="alert-type">
-                            <div className="alert-type-text">lead</div>
-                            <Switch onClick={this.toggleLeadSwitch.bind(this)} on={lead} />
-                        </div>
-                        <div className="alert-type">
-                            <div className="alert-type-text">1 up</div>
-                            <Switch onClick={this.toggleOneUpSwitch.bind(this)} on={oneUp} />
-                        </div>
-                    </div>
-                </div>
-                <div className="config-message"></div>
-
             </div>
         )
     }

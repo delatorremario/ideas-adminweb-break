@@ -50,6 +50,49 @@ Meteor.methods({
         check(yellow, Number);
 
         States.update({ _id }, { $set: { green, yellow } })
+
+    },
+    'state.addAlert': (_id) => {
+        console.log('addAlert', _id);
+        check(_id, String);
+
+        const alert = {
+            temporal: false,
+            stateChange: false,
+            delay: 1,
+            daily: false,
+            weekly: false,
+            sendEmail: false,
+            sendInbox: false,
+            employee: false,
+            lead: false,
+            oneUp: false,
+            message: '',
+        }
+
+        States.update({ _id }, { $push: { alerts: alert } }, (err, data) => console.log('result add alert', err, data))
+        // States.update({ _id }, { $set: { alerts: [alert] } });
+
+    },
+
+    'state.updateAlert': (_id, index, alert) => {
+        console.log('ALERT', _id, alert);
+        check(_id, String);
+        check(alert, [{
+            temporal: Boolean,
+            stateChange: Boolean,
+            delay: Match.Maybe(Number),
+            daily: Match.Maybe(Boolean),
+            weekly: Match.Maybe(Boolean),
+            sendEmail: Boolean,
+            sendInbox: Boolean,
+            employee: Boolean,
+            lead: Boolean,
+            oneUp: Boolean,
+            message: String,
+        }]);
+
+        States.update({ _id }, { $push: { alerts: { $each: alert } } }, (err, data) => console.log('result data', err, data))
     },
 })
 

@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
-import { Button } from 'react-bootstrap';
+import { Tabs, Tab, Button } from 'react-bootstrap';
+
 
 import configEditor from '../../../modules/configs/configs-editor';
 import { Meteor } from 'meteor/meteor';
 import { Bert } from 'meteor/themeteorchef:bert';
 import Switch from 'react-toggle-switch';
 import colors from '../../../api/dashboard/colors';
-import ConfigEditorAlerts from './ConfigEditorAlerts';
+import ConfigEditorAlert from './ConfigEditorAlert';
+
 
 export default class ConfigEditor extends Component {
     state = {
+        key: 1,
         doc: {
             showInDashboard: false,
             green: 0,
@@ -55,9 +58,19 @@ export default class ConfigEditor extends Component {
         });
     };
 
+    handleSelect = key => {
+        if (key === 0) {
+            console.log('agreagar nueva alerta');
+            const { _id } =this.state.doc;
+            Meteor.call('state.addAlert', _id, (err) => {
+                if (err) { Bert.alert(err.message, 'danger'); return }
+            });
+        } else
+            this.setState({ key });
+    }
 
     render() {
-        const { _id, step, state, color, showInDashboard, green, yellow } = this.state.doc
+        const { _id, step, state, color, showInDashboard, green, yellow, alerts } = this.state.doc
         return (
             <div className="config-editor">
                 <div className="panel panel-default config-semaphore" >
@@ -114,11 +127,19 @@ export default class ConfigEditor extends Component {
                 <div className="panel panel-default config-semaphore" >
                     <div className="panel-heading" style={{ backgroundColor: color }}>
                         <div className="title">
-                           <h5>Configuración de Alertas</h5>
+                            <h5>Configuración de Alertas</h5>
                         </div>
                     </div>
                     <div className="panel-body">
-                        <ConfigEditorAlerts />
+                        <Tabs activeKey={this.state.key} onSelect={this.handleSelect} id="controlled-tab-example">
+                            {
+                                _.map(alerts, (alert, index) => {
+                                    const i = index + 1;
+                                    return <Tab key={index} eventKey={i} title={`Alerta ${i}`}><ConfigEditorAlert _id={_id} index={index} alert={alert} /></Tab>
+                                })
+                            }
+                            <Tab eventKey={0} title=' + Alerta'></Tab>
+                        </Tabs>
                     </div>
                 </div>
             </div>
