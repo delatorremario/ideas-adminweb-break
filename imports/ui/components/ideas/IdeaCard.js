@@ -1,25 +1,30 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import Moment from 'react-moment';
+import 'moment/locale/es';
 import { Link } from 'react-router-dom';
 import _ from 'lodash';
 
 import Areas from '../../../api/areas/areas';
 
 const IdeaCard = ({ idea, lap, handleRemove }) => {
-
     const { userId, person, chief, description, opportunity, collaborators, drivers, origin, createdAt, date, states } = idea;
     const createdUser = Meteor.users.findOne(userId);
+    const color = states && _.last(states).color || 'black';
     // const userName = `${createdUser.profile && createdUser.profile.name && createdUser.profile.name.first} ${createdUser.profile && createdUser.profile.name && createdUser.profile.name.last}`;
 
     return <div className="col-sm-6 col-lg-4 cards-item">
-        <div className="panel panel-default">
-            <div className="panel-heading" style={{ backgroundColor: states && _.last(states).color }}>
+        <div className="panel panel-default" style={{ borderColor: color }}>
+            <div className="panel-heading" style={{ borderColor: color, boxShadow: `0px 0px 10px ${color} !important` }}>
                 <h5 className="panel-title">
-                    <small> <Moment format="DD MMM YYYY" date={date} /></small> {person.lastName} <small>{person.firstName} {person.secondName}</small> <br></br>
-                    {states && <div> <small>{_.last(states).step} - {_.last(states).state}</small> hace <Moment fromNow ago>{_.last(states).createdAt}</Moment></div>}
+                    <div style={{borderBottom: `1px solid ${color}`}}>
+                        <small style={{borderRight: `1px solid ${color}`}}> <Moment format="DD MMM YYYY" date={date} /> </small> <b>&nbsp;{person.lastName} </b> {person.firstName} {person.secondName}
+                    </div>
+                    <br></br>
+                    {states && <div> <small className="label" style={{ backgroundColor: color }}>{_.last(states).step} - {_.last(states).state}</small> <small>hace <Moment fromNow ago locale="es">{_.last(states).createdAt}</Moment></small></div>}
+                    <br></br>
                     {
-                        idea.area && <label className="label label-default label-sm" style={{ marginTop: '8px' }}>{idea.area.name}</label>
+                        idea.area && <label className="label label-default label-sm">{idea.area.name}</label>
                     }
                 </h5>
 
@@ -39,14 +44,15 @@ const IdeaCard = ({ idea, lap, handleRemove }) => {
                         <p>Oportunidad: <b>{opportunity}</b></p>
                         <p>Descripción: <b>{description}</b></p>
                         <p>Medio de Captura: <b>{origin}</b></p>
-                        <p>
-                            {
-                                _.map(drivers, (driver, index) =>
-                                    <small key={index}><label className='label label-default'>{driver}</label></small>
-                                )
-                            }
-                        </p>
-
+                        <div>
+                            <p>
+                                {
+                                    _.map(drivers, (driver, index) =>
+                                        <small key={index} className='label-tag'><label className='label label-default label-valor'>{driver}</label></small>
+                                    )
+                                }
+                            </p>
+                        </div>
                         {
                             collaborators && <div>
                                 <p>Colaboradores</p>
@@ -64,7 +70,7 @@ const IdeaCard = ({ idea, lap, handleRemove }) => {
                         <ul>
                             {
                                 _.map(states, (state, index) =>
-                                    <li key={index}> <small> <Moment format="DD MMM YY" date={state.createdAt}/> {state.step} {state.state} </small></li>
+                                    <li key={index}> <small> <Moment format="DD MMM YY" date={state.createdAt} /> {state.step} {state.state} </small></li>
                                 )
                             }
                         </ul>

@@ -1,15 +1,90 @@
-
+* {
+    transition: all 0.4s ease-in-out 0s;
+}
 
 .ideas-list {
-    .panel.panel-body{
+    .panel.panel-body {
         display: flex;
     }
+    .cards-item {
+        .panel-default {
+            box-shadow: inset 0px 0px 0px white !important;
+            border-style: solid;
+            border-width: 0px;
+            @media all and (min-width:769px) {
+                border-width: 1px !important;
+                border-radius: 5px !important;
+            }
+            @media all and (max-width:768px) {
+                border-bottom-width: 2px !important;
+            }
+            .panel-heading {
+                border: 1px solid;
+                box-shadow: 0px 2px 10px rgb(216, 214, 214) !important;
+                @media all and (max-width:768px) {
+                    border-left: none !important;
+                    border-right: none !important;
+                    border-width: 2px 0px 1px 0px;
+                }
+                .panel-title {
+                    @media all and (min-width:769px) {
+                        border-radius: 5px;
+                    }
+                    .small {
+                        white-space: nowrap;
+                        min-width: fit-content;
+                    }
+                    .label-sm {
+                        text-align: right;
+                        margin-top: 100px !important;
+                    }
+                }
+            }
+            .panel-heading:hover {
+                box-shadow: 0px 2px 10px rgb(177, 176, 176) !important;
+            }
+            .panel-body {
+                margin: 0;
+                width: 100%;
+                @media all and (max-width:768px) {
+                    box-shadow: 0px 2px 10px rgb(190, 190, 190) !important;
+                }
+                small {
+                    .panel-body-description {
+                        div {
+                            display: block;
+                            float: left;
+                            width: 100%;
+                            margin: 0px 0px 10px 0px;
+                            p {
+                                white-space: normal;
+                                width: 100%;
+                                .label-tag {
+                                    width: content;
+                                    display: block;
+                                    float: left;
+                                    margin: 5px 2px 5px 2px;
+                                    .label-valor {
+                                        font-size: 11px;
+                                        box-shadow: 2px 2px 5px rgb(230, 230, 230) !important;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .panel-default:hover {
+            box-shadow: inset 0px 2px 20px rgb(216, 214, 214) !important;
+        }
     
-    .panel-tabs {
-        margin-bottom:0px !important;
-        border-bottom-left-radius: 0px !important;
-        border-bottom-right-radius: 0px !important;
-        padding-bottom: 0px !important;
+        .panel-tabs {
+            margin-bottom:0px !important;
+            border-bottom-left-radius: 0px !important;
+            border-bottom-right-radius: 0px !important;
+            padding-bottom: 0px !important;
+        }
     }
 
     .show-filters{
