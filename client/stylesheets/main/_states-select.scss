@@ -1,7 +1,38 @@
+* {
+    transition: all 0.4s ease-in-out 0s;
+}
+
 .states-select {
-    
-    font-size: smaller
-   
+    font-size: smaller;
+
+    .state-row {
+        display: flex;
+        // border: 1px solid black;
+        padding: 5px;;
+        .state-color {
+            width: 10px; // padding: 0px;
+            margin-left: -5px;
+            margin-top: -5px;
+            margin-bottom: -5px;
+        }      
+        .state-info {
+            display: flex;
+            align-items: center;   
+            padding-left: 10px;
+            div {
+                padding-right: 5px;
+            }
+
+            div:first-child {
+                min-width: 25px;
+            }
+        }
+    }
+
+    .state-row:hover {
+        cursor: pointer;
+        background-color:rgb(235, 235, 235);
+    }
 }
 
 li:hover { cursor: pointer;}

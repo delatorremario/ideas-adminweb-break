@@ -17,7 +17,7 @@ const IdeasStep5 = ({ data, selectState, ideasstates }) =>
                     <div className="col-xs-12">
                         <div className="form-group">
                             <h2>Seleccione el estado de la Idea</h2>
-                            <StatesSelect ideasstates={ideasstates} selectState={selectState} />
+                            <StatesSelect ideasstates={ideasstates} selectState={selectState} statesCodesSelected={[data && data.states && data.states[0] && data.states[0].code]} />
                         </div>
                     </div>
                 </div>
