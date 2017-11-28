@@ -50,7 +50,6 @@ a {
 
 @import "main/_theme-ideas-orange";
 @import "main/main";
-
 @import "main/dashboard-card";
 @import "main/areas-search";
 @import "main/states-select";
@@ -58,6 +57,7 @@ a {
 @import "main/panel-on-mobile";
 @import "main/config";
 @import "main/config-alerts";
+@import "main/media-queries.scss";
 
 @import "../../../node_modules/react-toggle-switch/dist/css/switch.min.css";
 
