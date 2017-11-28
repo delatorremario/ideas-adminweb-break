@@ -18,9 +18,9 @@ class Login extends React.Component {
 
         <div className="login-box">
           <div className="modal-header">
-            <h1 className="page-header">Login</h1>
+            <h2 className="page-header">Bienvenido a la plataforma de Ideas</h2>
           </div>
-          <hr />
+          {/* <hr /> */}
           <form
             ref={form => (this.loginForm = form)}
             className="login"
@@ -38,19 +38,19 @@ class Login extends React.Component {
             </FormGroup>
             <FormGroup>
               <ControlLabel>
-                <span>Password</span>
+                <span>Contraseña</span>
               </ControlLabel>
               <i className="fa fa-key"></i>
               <FormControl
                 type="password"
                 ref="password"
                 name="password"
-                placeholder="Password"
+                placeholder="Contraseña"
               />
             </FormGroup>
-            <Button type="submit" bsStyle="primary" className="btn-lg btn-3d btn-block">Login</Button>
+            <Button type="submit" bsStyle="primary" className="btn-lg btn-3d btn-block">Iniciar Sesión</Button>
             <p className="already-account">
-              <a className="col-halfpad-right" href="/recover-password">Fogot your password?</a> | <a class="col-halfpad-left" href="/signup">Create an account</a>
+              <a className="col-halfpad-right" href="/recover-password">Recuperar Contraseña</a> | <a className="col-halfpad-left" href="/signup">Crear una cuenta</a>
             </p>
           </form>
         </div>

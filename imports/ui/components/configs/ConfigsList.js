@@ -63,7 +63,6 @@ const ConfigsList = ({ history, corporations, ideasstates }) => (
 
         <div className='config-list'>
             <div className="configs-head">
-                <h2>Estados de Ideas</h2>
             </div>
             {
                 _.map(ideasstates, (state, index) =>

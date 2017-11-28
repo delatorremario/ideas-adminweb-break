@@ -53,6 +53,7 @@
     .panel-heading {
         display: flex;
         align-items: center;
+        border: 1px solid;
         .show-in-dashboard {
             margin-left: auto;
             display: flex;
@@ -60,6 +61,13 @@
             font-size: small;
             h4 {
                 padding-right: 8px;
+            }
+        }
+        .title-config {
+            display: flex;
+            align-items: center;
+            button {
+                margin-left: auto;
             }
         }
     }
@@ -84,7 +92,7 @@
                 font-size: small;
             }
             .value {
-                width: 60px;
+                width: 80px;
                 text-align: center;
                 input { 
                     text-align: center;
@@ -95,17 +103,20 @@
     .forms-bottom-panel {
         margin-right: 0px !important;
     }
+    
 }
 
 @media all and (max-width:768px) {
     .config-editor {
         .config-semaphore {
-            margin-top: -15px;
+            margin-top: -16px;
             margin-left: -16px;
             margin-right: -16px;
             border: 0;
             .panel-heading {
                 flex-direction: column;
+                border-left: none;
+                border-right: none;
                 .title,
                 .show-in-dashboard {
                     width: 100%;

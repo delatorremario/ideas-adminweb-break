@@ -4,7 +4,8 @@ import { Factory } from 'meteor/dburles:factory';
 
 import BaseSchema from '../base/baseSchema';
 import PersonSchema from '../persons/personSchema';
-import IdeasStateSchema from '../ideasStatesSchema/ideasStatesSchema';
+// import IdeasStateSchema from '../ideasStatesSchema/ideasStatesSchema';
+import States from '../../api/states/states';
 
 const Ideas = new Mongo.Collection('ideas');
 export default Ideas;
@@ -31,7 +32,7 @@ Ideas.schema = new SimpleSchema([
     { opportunity: { type: String } },
     { drivers: { type: [String] } },
     { collaborators: { type: [PersonSchema], optional: true } },
-    { states: { type: [IdeasStateSchema] } },
+    { states: { type: [States.schema] } },
 
 ]);
 

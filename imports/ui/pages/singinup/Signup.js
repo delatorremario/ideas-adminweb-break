@@ -18,7 +18,7 @@ export default class Signup extends React.Component {
       <div className="login-box-container">
         <div className="login-box">
           <div className="modal-header">
-            <h1 className="page-header">Sign Up</h1>
+            <h1 className="page-header">Crear Cuenta</h1>
           </div>
           <hr />
          
@@ -27,44 +27,44 @@ export default class Signup extends React.Component {
               onSubmit={this.handleSubmit}
             >
               <FormGroup>
-                <ControlLabel>First Name</ControlLabel>
+                <ControlLabel>Nombre</ControlLabel>
                 <FormControl
                   type="text"
                   ref="firstName"
                   name="firstName"
-                  placeholder="First Name"
+                  placeholder="Nombre"
                 />
               </FormGroup>
               <FormGroup>
-                <ControlLabel>Last Name</ControlLabel>
+                <ControlLabel>Apellido</ControlLabel>
                 <FormControl
                   type="text"
                   ref="lastName"
                   name="lastName"
-                  placeholder="Last Name"
+                  placeholder="Apellido"
                 />
               </FormGroup>
               <FormGroup>
-                <ControlLabel>Email Address</ControlLabel>
+                <ControlLabel>Email</ControlLabel>
                 <FormControl
                   type="text"
                   ref="emailAddress"
                   name="emailAddress"
-                  placeholder="Email Address"
+                  placeholder="Email"
                 />
               </FormGroup>
               <FormGroup>
-                <ControlLabel>Password</ControlLabel>
+                <ControlLabel>Contraseña</ControlLabel>
                 <FormControl
                   type="password"
                   ref="password"
                   name="password"
-                  placeholder="Password"
+                  placeholder="Contraseña"
                 />
               </FormGroup>
-              <Button type="submit" className="btn btn-success btn-lg btn-block">Sign Up</Button>
+              <Button type="submit" className="btn btn-success btn-lg btn-block">Crear Cuenta</Button>
             </form>
-            <p> <span> <Link to="/login"> Already have an account? Log In.</Link></span></p>
+            <p> <span> <Link to="/login">¿Ya tienes una cuenta? Iniciar sesión.</Link></span></p>
           
         </div>
       </div>

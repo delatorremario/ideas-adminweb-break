@@ -39,10 +39,72 @@ rateLimit({
 
 Meteor.methods({
     'state.showInDashboard': (_id, showInDashboard) => {
-        check(_id,String);
-        check(showInDashboard,Boolean);
+        check(_id, String);
+        check(showInDashboard, Boolean);
 
         States.update({ _id }, { $set: { showInDashboard } })
-    }
+    },
+    'state.semaphore': (_id, green, yellow) => {
+        check(_id, String);
+        check(green, Number);
+        check(yellow, Number);
+
+        States.update({ _id }, { $set: { green, yellow } })
+
+    },
+    'state.addAlert': (_id) => {
+        check(_id, String);
+
+        const alert = {
+            temporal: false,
+            stateChange: false,
+            delay: 1,
+            daily: false,
+            weekly: false,
+            sendEmail: false,
+            sendInbox: false,
+            employee: false,
+            lead: false,
+            oneUp: false,
+            message: '',
+        }
+
+        States.update({ _id }, { $push: { alerts: alert } }, (err, data) => console.log('result add alert', err, data))
+
+    },
+
+    'state.saveAlert': (_id, index, alert) => {
+        console.log('ALERT', _id, index, alert);
+        check(_id, String);
+        check(index, Number);
+        check(alert, {
+            temporal: Boolean,
+            stateChange: Boolean,
+            delay: Match.Maybe(Number),
+            daily: Match.Maybe(Boolean),
+            weekly: Match.Maybe(Boolean),
+            sendEmail: Boolean,
+            sendInbox: Boolean,
+            employee: Boolean,
+            lead: Boolean,
+            oneUp: Boolean,
+            chief: Boolean,
+            message: String,
+        });
+
+        const set = { [`alerts.${index}`]: alert }
+        console.log('SET', set);
+        States.update({ _id }, { $set: set }, (err, data) => console.log('result data', err, data))
+    },
+    'state.removeAlert': (_id, index) => {
+        if(Meteor.isClient) return;
+        check(_id, String);
+        check(index, Number);
+
+        const set = { [`alerts.${index}`]: 1 }
+        console.log('removeAlert ', set);
+        States.update({ _id }, { $unset: set }, false, true, (err, data) => console.log('result data', err, data))
+        States.update({ _id }, { $pull:{alerts:null}}, (err, data) => console.log('result data', err, data))
+    },
 })
 
