@@ -3,17 +3,22 @@ import _ from 'lodash';
 
 const StatesSelect = ({ ideasstates, selectState, statesCodesSelected }) => (
     <div className="states-select">
-        <ul>
-            {
-                _.map(ideasstates, (state, index) => {
-                    return (
-                        <li className={_.includes(statesCodesSelected, state.code) && 'state-selected'} style={{ backgroundColor: state.color }} key={index} onClick={selectState(state).bind(this)}>
-                           <div className="state-info" > {state.step} <small>{state.state}</small></div>
-                        </li>
-                    )
-                })
-            }
-        </ul>
+        {
+            _.map(ideasstates, (state, index) => {
+                return (
+                    <div className='state-row' key={index} onClick={selectState(state).bind(this)}>
+                        <div className='state-color' style={{ backgroundColor: state.color }} ></div>
+                        {
+                            _.includes(statesCodesSelected, state.code) &&
+                            <div className='state-color' style={{ backgroundColor: state.color }} ></div>
+                        }
+                        <div className="state-info" >
+                            <div>{state.code}</div> <div>{state.step}</div> <small>{state.state}</small>
+                        </div>
+                    </div>
+                )
+            })
+        }
     </div>
 );
 
