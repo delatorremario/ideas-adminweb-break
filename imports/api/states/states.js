@@ -55,6 +55,7 @@ States.schema = new SimpleSchema(
         'alerts.$.employee': { type: Boolean },
         'alerts.$.lead': { type: Boolean },
         'alerts.$.oneUp': { type: Boolean },
+        'alerts.$.chief': { type: Boolean },
         'alerts.$.message': { type: String, optional: true },
 
 

@@ -79,6 +79,7 @@ export default class ConfigEditor extends Component {
             employee: false,
             lead: false,
             oneUp: false,
+            chief: false,
             message: '',
         }
         alerts.push(alert);
@@ -105,7 +106,7 @@ export default class ConfigEditor extends Component {
         return (
             <div className="config-editor">
                 <div className="panel panel-default config-semaphore" >
-                    <div className="panel-heading" style={{ backgroundColor: color }}>
+                    <div className="panel-heading" style={{ borderColor: color }}>
                         <div className="title">
                             <h5>{step + ' ' + state}</h5>
                         </div>
@@ -157,7 +158,7 @@ export default class ConfigEditor extends Component {
                 </div>
 
                 <div className="panel panel-default config-semaphore" >
-                    <div className="panel-heading" style={{ backgroundColor: color }}>
+                    <div className="panel-heading" style={{ borderColor: color }}>
                         <div className="title">
                             <h5>Configuración de Alertas</h5>
                         </div>

@@ -88,6 +88,7 @@ Meteor.methods({
             employee: Boolean,
             lead: Boolean,
             oneUp: Boolean,
+            chief: Boolean,
             message: String,
         });
 
