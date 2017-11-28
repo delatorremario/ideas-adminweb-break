@@ -13,6 +13,7 @@ $sidesPadding: 15px;
     margin-top: 10px;
     line-height: 16px;
 }
+
 .label-left .control-label {
     font-size: 0.9em;
     width: 100%;
@@ -25,8 +26,8 @@ $sidesPadding: 15px;
 .input-group-btn button {
     padding: 8px 10px 8px 10px !important;
     border-radius: 0 2px 2px 0;
-    height: 37px;    
-    margin-bottom: 0 
+    height: 37px;
+    margin-bottom: 0
 }
 
 .col-flex {
@@ -37,6 +38,7 @@ $sidesPadding: 15px;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
+
 .col-fixed {
     display: flex;
     width: 200px;
@@ -45,10 +47,10 @@ $sidesPadding: 15px;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
+
 // .form-group {
 //     overflow: hidden;
 // }
-
 form label.error {
     color: #FFFFFF !important;
     font-size: 0.9em;
@@ -59,12 +61,12 @@ form label.error {
 .input-group-btn {
     vertical-align: top !important
 }
+
 .btn.reset-icon i {
     padding-left: 0 !important;
 }
 
 // Own styles
-
 .login-box input {
     height: 43px;
     padding: 10px 16px 10px 52px !important;
@@ -72,6 +74,7 @@ form label.error {
     background-color: #eee;
     border: none !important;
 }
+
 .login-box .form-group i {
     color: #979797;
     top: 21px;
@@ -81,21 +84,21 @@ form label.error {
     padding: 0 18px;
 }
 
+
 /* Change Autocomplete styles in Chrome */
+
 input:-webkit-autofill,
-input:-webkit-autofill:hover, 
-input:-webkit-autofill:focus
-input:-webkit-autofill, 
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus input:-webkit-autofill,
 textarea:-webkit-autofill,
-textarea:-webkit-autofill:hover
-textarea:-webkit-autofill:focus,
+textarea:-webkit-autofill:hover textarea:-webkit-autofill:focus,
 select:-webkit-autofill,
 select:-webkit-autofill:hover,
 select:-webkit-autofill:focus {
-  border: none;
-  -webkit-text-fill-color: #232833;
-  -webkit-box-shadow: 0 0 0px 1000px #eee inset;
-  transition: background-color 5000s ease-in-out 0s;
+    border: none;
+    -webkit-text-fill-color: #232833;
+    -webkit-box-shadow: 0 0 0px 1000px #eee inset;
+    transition: background-color 5000s ease-in-out 0s;
 }
 
 .sidebar-profile .profile-body .title {
@@ -113,6 +116,7 @@ select:-webkit-autofill:focus {
 .table * {
     font-size: 0.95em
 }
+
 .table .actions button,
 .table .actions a {
     width: 26px;
@@ -120,41 +124,50 @@ select:-webkit-autofill:focus {
     padding: 0;
     margin: 0 2px;
 }
+
 .table .actions button i,
 .table .actions a i {
     line-height: 26px;
     margin: 0;
     padding: 0 7px;
 }
+
 .table .actions {
     text-align: center;
     position: relative;
     right: auto;
     top: auto;
 }
+
 .table tbody .actions {
     padding: 5px 8px;
 }
+
 .control-bottom {
     margin-top: 15px
 }
+
 .table-top {
     display: flex;
     align-items: center;
     font-size: 12px;
 }
+
 .table-top .dataTables_length select {
     display: inline-block;
     width: auto
 }
+
 .table-top button,
 .table-top .dataTables_length label {
     margin-bottom: 0
 }
+
 .table-top .col-flex input {
     transition: all 0.3s ease-in;
     width: 100%
 }
+
 .searcherDisplayed {
     top: 30px;
     left: 0;
@@ -178,6 +191,7 @@ select:-webkit-autofill:focus {
     line-height: 24px;
     transition: all 0.3s ease-in
 }
+
 .main-list li p {
     flex: 1;
     white-space: nowrap;
@@ -201,16 +215,17 @@ select:-webkit-autofill:focus {
     height: 24px;
     border-radius: 2px
 }
+
 .main-list li span.btn i {
     padding: 0;
     line-height: 23px;
 }
 
-
 // Animation and CSStransitions
 .listItem-enter {
     animation: itemIn ease 300ms;
 }
+
 .listItem-leave {
     animation: itemOut ease 300ms;
 }
@@ -225,6 +240,7 @@ select:-webkit-autofill:focus {
         transform: translate3d(0, 0, 0)
     }
 }
+
 @keyframes itemOut {
     0% {
         opacity: 1;
@@ -253,9 +269,11 @@ select:-webkit-autofill:focus {
     flex-direction: column;
     flex-flow: row wrap
 }
+
 .cards-item {
     display: flex;
 }
+
 .cards-item .panel-default {
     width: 100%
 }
@@ -269,7 +287,7 @@ select:-webkit-autofill:focus {
     height: 65px;
     margin: auto;
     border-radius: 50%;
-    border: 4px solid rgba(255,255,255,0.3);
+    border: 4px solid rgba(255, 255, 255, 0.3);
     h2 {
         font-size: 2em !important;
         font-weight: normal;
@@ -277,7 +295,8 @@ select:-webkit-autofill:focus {
         padding: 0;
         color: #FFFFFF !important;
         text-transform: uppercase
-    };
+    }
+    ;
     i {
         position: absolute !important;
         background: red !important;
@@ -290,11 +309,11 @@ select:-webkit-autofill:focus {
     }
 }
 
-
 input,
 input:-webkit-autofill {
     color: #232833
 }
+
 input:-webkit-autofill::-webkit-input-placeholder {
     -webkit-text-fill-color: #a1a1a1;
 }
@@ -319,9 +338,7 @@ input:-webkit-autofill::-webkit-input-placeholder {
 @media all and (max-width: 767px) {
     .label-right .control-label {
         text-align: left !important;
-    }
-
-    // Login
+    } // Login
     .login-box-container {
         background-color: #FFFFFF;
         align-items: flex-start;
@@ -336,9 +353,7 @@ input:-webkit-autofill::-webkit-input-placeholder {
     }
     .login-box .modal-header h1 {
         font-size: 2.2em !important;
-    }
-
-    // Cards
+    } // Cards
     .cards-container {
         display: block;
     }
@@ -347,9 +362,10 @@ input:-webkit-autofill::-webkit-input-placeholder {
 // formsSteps
 .formTransition-enter {
     width: 100%;
-    margin-top:0;
+    margin-top: 0;
     animation: itemIn ease 1000ms;
 }
+
 .formTransition-leave {
     position: absolute !important;
     top: 0;
@@ -364,6 +380,7 @@ input:-webkit-autofill::-webkit-input-placeholder {
         transform: translate3d(0, 0, 0)
     }
 }
+
 @keyframes itemOut {
     0% {
         opacity: 1;
@@ -375,11 +392,10 @@ input:-webkit-autofill::-webkit-input-placeholder {
     }
 }
 
-
 .stepIndicator {
     position: relative;
     margin-top: 18px;
-    ul {  
+    ul {
         position: relative;
         z-index: 15000;
         height: 20px;
@@ -415,7 +431,7 @@ input:-webkit-autofill::-webkit-input-placeholder {
                     height: 28px;
                     top: -4px;
                     left: -4px;
-                    border:  4px solid rgba(38, 180, 173, 0.3);
+                    border: 4px solid rgba(38, 180, 173, 0.3);
                     border-radius: 50%;
                 }
             }
@@ -444,6 +460,7 @@ input:-webkit-autofill::-webkit-input-placeholder {
     position: relative;
     overflow: hidden;
 }
+
 .form-steps {
     position: relative;
     background-color: #FFFFFF;
@@ -456,7 +473,7 @@ input:-webkit-autofill::-webkit-input-placeholder {
     .form-group label {
         margin-bottom: 1px;
         margin-left: 15px;
-        color: #979797;        
+        color: #979797;
         font-size: 0.8em
     }
     .form-group input {
@@ -473,8 +490,6 @@ input:-webkit-autofill::-webkit-input-placeholder {
     }
 }
 
-
-
 .forms-bottom-panel {
     display: block;
     margin-top: 25px;
@@ -486,17 +501,17 @@ input:-webkit-autofill::-webkit-input-placeholder {
     }
 }
 
-
 .card-single {
     display: flex;
     background-color: #f9f9f9;
     padding: 15px;
     .state-color {
         width: 10px; // padding: 0px;
+        min-width: 10px; // padding: 0px;
         margin-left: -5px;
         margin-top: -5px;
         margin-bottom: -5px;
-    }      
+    }
     .close-card {
         position: absolute;
         top: -5px;
@@ -514,9 +529,9 @@ input:-webkit-autofill::-webkit-input-placeholder {
             top: 0 !important;
             left: 0 !important;
         }
-        :hover {
+         :hover {
             background-color: $dangerColorHover;
-            border-radius: 50%;        
+            border-radius: 50%;
         }
     }
     h2 {
@@ -531,7 +546,7 @@ input:-webkit-autofill::-webkit-input-placeholder {
             font-size: 1em;
         }
     }
-    small{
+    small {
         margin-bottom: 15px !important;
         padding-left: 23px;
         font-size: 0.9em;
@@ -545,5 +560,12 @@ input:-webkit-autofill::-webkit-input-placeholder {
     p {
         margin-bottom: 0px !important;
         padding-left: 23px;
+    }
+}
+
+@media all and (max-width:768px) {
+    .card-single {
+        margin-left: -45px;
+        margin-right: -45px;
     }
 }
