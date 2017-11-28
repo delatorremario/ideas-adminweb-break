@@ -11,13 +11,10 @@ Meteor.publish('ideas.list', (
   areasIdsFilter,
   limit) => {
 
-    console.log('statesCodesFilter', statesCodesFilter);
-
   check(textSearch, String);
   check(statesCodesFilter, [String]);
   check(areasIdsFilter, [String]);
   check(limit, Number);
-
 
   const self = this.Meteor;
   const user = self.user();
