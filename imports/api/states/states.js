@@ -21,8 +21,8 @@ States.schema = new SimpleSchema(
     {
         _id: { type: String, optional: true },
         corporationId: { type: String, optional: true },
-        userId: { type: String },
-        createdAt: { type: Date },
+        userId: { type: String, optional: true  },
+        createdAt: { type: Date, optional: true },
         updatedAt: {
             type: Date,
             index: true,
