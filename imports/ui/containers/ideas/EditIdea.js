@@ -28,11 +28,11 @@ const composer = ({ match }, onData) => {
 
   const subscriptionPersons = Meteor.subscribe('persons.search', textSearch.get(), textSearchLimit.get());
   const statessub = Meteor.subscribe('states.list');
-  
+
   // const subscriptionAreas = Meteor.subscribe('areas.list');
 
   if (subscription.ready() && subscriptionPersons.ready() && statessub.ready()) {
-    const ideasstates = States.find().fetch();
+    const ideasstates = States.find({}, { sort: { code: 1 } }).fetch();
     const persons = Persons.find({}, { sort: { score: -1 }, limit: textSearchLimit.get() }).fetch();
     let doc = Ideas.findOne(docId);
 

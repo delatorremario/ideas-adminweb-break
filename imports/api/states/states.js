@@ -21,8 +21,8 @@ States.schema = new SimpleSchema(
     {
         _id: { type: String, optional: true },
         corporationId: { type: String, optional: true },
-        userId: { type: String },
-        createdAt: { type: Date },
+        userId: { type: String, optional: true  },
+        createdAt: { type: Date, optional: true },
         updatedAt: {
             type: Date,
             index: true,
@@ -55,6 +55,7 @@ States.schema = new SimpleSchema(
         'alerts.$.employee': { type: Boolean },
         'alerts.$.lead': { type: Boolean },
         'alerts.$.oneUp': { type: Boolean },
+        'alerts.$.chief': { type: Boolean },
         'alerts.$.message': { type: String, optional: true },
 
 

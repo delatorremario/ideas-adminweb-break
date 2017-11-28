@@ -4,13 +4,28 @@ import { Accounts } from 'meteor/accounts-base';
 import _ from 'lodash';
 
 
+const Start = {
+  start: () => {
+    createAccounts();
+    initRoles();
+    addMeToAdmin();
+    addLeaders();
+  },
+};
+
+Meteor.methods({
+  'start': Start.start
+})
+
+
 
 const mails = ['mariodelatorre@holos.cl', 
 'ctomba@holos.cl', 
 'cbaiardi@holos.cl', 
 'rmarambio@holos.cl', 
 'asusel@holos.cl',
-'dblazina@holos.cl'
+'dblazina@holos.cl',
+'martingonzalez@holos.cl'
 ];
 
 const createAccounts = () => {
@@ -49,13 +64,6 @@ const addLeaders = () => {
 };
 
 
-const Start = {
-  start: () => {
-    createAccounts();
-    initRoles();
-    addMeToAdmin();
-    addLeaders();
-  },
-};
 
-export default Start;
+
+// export default Start;

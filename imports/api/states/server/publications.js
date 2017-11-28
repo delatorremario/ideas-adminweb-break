@@ -13,7 +13,7 @@ Meteor.publish('states.list', () => {
     const filters = {
       corporationId: (user.profile && user.profile.selectedCorporationId) || '',
     };
-    return States.find(filters);
+    return States.find(filters, { sort: { code: 1 } });
   } else return;
 });
 

@@ -23,6 +23,7 @@ class ConfigEditorAlert extends Component {
             employee: false,
             lead: false,
             oneUp: false,
+            chief: false,
             message: '',
         }
     }
@@ -74,6 +75,9 @@ class ConfigEditorAlert extends Component {
     toggleOneUpSwitch = () => {
         this.setState((prev) => ({ alert: { ...this.state.alert, oneUp: !prev.alert.oneUp } }))
     }
+    toggleChiefSwitch = () => {
+        this.setState((prev) => ({ alert: { ...this.state.alert, chief: !prev.alert.chief } }))
+    }
 
     saveAlert = () => {
         const { alert } = this.state;
@@ -90,7 +94,7 @@ class ConfigEditorAlert extends Component {
     render() {
         const { loading } = this.state;
         const { _id, index } = this.props;
-        const { temporal, stateChange, delay, daily, weekly, sendEmail, sendInbox, employee, lead, oneUp, message } = this.state.alert;
+        const { temporal, stateChange, delay, daily, weekly, sendEmail, sendInbox, employee, lead, oneUp, chief, message } = this.state.alert;
         return (
             <div className="config-editor-alert">
                 {
@@ -157,6 +161,10 @@ class ConfigEditorAlert extends Component {
                                 <div className="alert-type">
                                     <div className="alert-type-text">1 up</div>
                                     <Switch onClick={this.toggleOneUpSwitch.bind(this)} on={oneUp} />
+                                </div>
+                                <div className="alert-type">
+                                    <div className="alert-type-text">Encargado de Area</div>
+                                    <Switch onClick={this.toggleChiefSwitch.bind(this)} on={chief} />
                                 </div>
                             </div>
                         </div>

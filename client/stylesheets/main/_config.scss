@@ -53,6 +53,7 @@
     .panel-heading {
         display: flex;
         align-items: center;
+        border: 1px solid;
         .show-in-dashboard {
             margin-left: auto;
             display: flex;
@@ -108,12 +109,14 @@
 @media all and (max-width:768px) {
     .config-editor {
         .config-semaphore {
-            margin-top: -15px;
+            margin-top: -16px;
             margin-left: -16px;
             margin-right: -16px;
             border: 0;
             .panel-heading {
                 flex-direction: column;
+                border-left: none;
+                border-right: none;
                 .title,
                 .show-in-dashboard {
                     width: 100%;

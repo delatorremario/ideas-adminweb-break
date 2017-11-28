@@ -15,9 +15,9 @@ Meteor.methods({
             _.map(ideasstates, ideastate => {
 
                 const { code, step, state, description, color } = ideastate;
-                const update = { code, step, state, description, color, corporationId: corp._id };
+                const update = { code, step, state, description, color, corporationId: corp._id, showInDashboard: false };
 
-                States.update({ code: state.code, corporationId: corp._id  },
+                States.update({ code, corporationId: corp._id },
                     { $set: update }, { upsert: true }
                 )
             })

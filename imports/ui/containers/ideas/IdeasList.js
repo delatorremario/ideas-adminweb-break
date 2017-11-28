@@ -35,7 +35,7 @@ const composer = ({ match }, onData) => {
 	const statessub = Meteor.subscribe('states.list');
 
 	if (subscription.ready() && areasviewsub.ready() && statessub.ready()) {
-		const ideasstates = States.find().fetch();
+		const ideasstates = States.find({},{}).fetch();
 
 		const states = statesCodesFilter.get();
 
