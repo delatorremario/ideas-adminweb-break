@@ -28,12 +28,14 @@ class ConfigEditorAlert extends Component {
     }
     componentDidMount() {
         if (this.props.alert)
-            this.setState({ alert: this.props.alert  })
+            this.setState({ alert: this.props.alert })
     }
 
     onChange = e => {
+        console.log('e', e.target.type);
+        const value = e.target.type === 'number' && parseInt(e.target.value) || e.target.value;
         this.setState(
-            { alert: { ...this.state.alert, [e.target.name]: e.target.value } }
+            { alert: { ...this.state.alert, [e.target.name]: value } }
         );
     }
 
@@ -75,19 +77,19 @@ class ConfigEditorAlert extends Component {
 
     saveAlert = () => {
         const { alert } = this.state;
-        const { _id, index} = this.props;
+        const { _id, index } = this.props;
         Meteor.call('state.saveAlert', _id, index, alert, (err) => {
             if (err) { Bert.alert(err.message, 'danger'); return; }
         });
     }
     removeAlert = () => {
-        const { _id, index} = this.props;        
+        const { _id, index } = this.props;
         this.props.removeAlert(_id, index)
     }
-   
+
     render() {
         const { loading } = this.state;
-        const { _id, index} = this.props;        
+        const { _id, index } = this.props;
         const { temporal, stateChange, delay, daily, weekly, sendEmail, sendInbox, employee, lead, oneUp, message } = this.state.alert;
         return (
             <div className="config-editor-alert">
@@ -179,11 +181,11 @@ class ConfigEditorAlert extends Component {
                             type='button'
                             bsStyle="default"
                             className="btn btn-sm pull-right btn-trans"
-                            onClick={ this.removeAlert}>
+                            onClick={this.removeAlert}>
                             <i className="fa fa-trash"></i>
                             Eliminar
                         </Button>
-                       
+
                     </div>
                 }
             </div>
