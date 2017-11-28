@@ -16,7 +16,7 @@ const IdeaCard = ({ idea, lap, handleRemove }) => {
         <div className="panel panel-default">
             <div className="panel-heading" style={{ backgroundColor: states && _.last(states).color }}>
                 <h5 className="panel-title">
-                    <small> <Moment format="DD MMM YYYY" date={date} /></small> {person.lastName} <small>{person.firstName} {person.lastName}</small> <br></br>
+                    <small> <Moment format="DD MMM YYYY" date={date} /></small> {person.lastName} <small>{person.firstName} {person.secondName}</small> <br></br>
                     {states && <div> <small>{_.last(states).step} - {_.last(states).state}</small> hace <Moment fromNow ago>{_.last(states).createdAt}</Moment></div>}
                     {
                         idea.area && <label className="label label-default label-sm" style={{ marginTop: '8px' }}>{idea.area.name}</label>
