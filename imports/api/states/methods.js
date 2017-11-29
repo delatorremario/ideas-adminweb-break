@@ -96,5 +96,15 @@ Meteor.methods({
 
         States.update({ _id }, update);
     },
+    'state.alert.value': (_id, index, name, value) => {
+        check(_id, String);
+        check(name, String);
+        check(value, Boolean);
+        check(index, Number);
+        
+        const update = { $set: { [`alerts.${index}.${name}`]: value } };
+        
+        States.update({ _id }, update)
+    },
 })
 
