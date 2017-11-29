@@ -8,8 +8,8 @@ import PersonSearch from './PersonSearch';
 
 const IdeasStep1 = ({ onChangeForm, data, handleChangeDate, onChangeSearchPerson, persons, selectPerson, origins, selectOrigin }) => (
 
-    <div className="row form-steps step-one">
-        <div className="col-md-6">
+    <div className="row panel-body form-steps step-one">
+        <div className="col-md-6 datePicker">
             <FormGroup>
                 <ControlLabel>Fecha de Creación</ControlLabel>
                 <i className="fa fa-calendar"></i>
@@ -26,7 +26,7 @@ const IdeasStep1 = ({ onChangeForm, data, handleChangeDate, onChangeSearchPerson
             </FormGroup>
         </div>
 
-        <div className="col-xs-12">
+        <div className="col-xs-12 medioCaptura">
             <div className="form-group">
                 <ControlLabel>Medio de Captura la Idea</ControlLabel>
                 <div>
@@ -42,10 +42,10 @@ const IdeasStep1 = ({ onChangeForm, data, handleChangeDate, onChangeSearchPerson
 
 
         {
-            data && data.person && <PersonCard person={data.person} removePerson={selectPerson} />
+            data && data.person && <PersonCard className="personCard" person={data.person} removePerson={selectPerson} />
         }
         {
-            data && !data.person && <PersonSearch persons={persons} onChangeSearchPerson={onChangeSearchPerson} selectPerson={selectPerson} />
+            data && !data.person && <PersonSearch className="personSearch" persons={persons} onChangeSearchPerson={onChangeSearchPerson} selectPerson={selectPerson} />
         }
 
 

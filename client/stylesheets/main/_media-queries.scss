@@ -10,14 +10,28 @@
             width: 100% !important;
             text-align: center !important;
             height: 90px !important;
-            border-radius: 3px !important;
+            border-radius: 0px !important;
             margin: 2px 0px !important;
-            // .close-card {
-            // }
+            background-color: rgb(238, 238, 238);
+            .close-card {
+                margin: 0px !important;
+                padding: 0px !important;
+                display: flex !important;
+                position: absolute !important;
+                top: 2px !important;
+                right: 15px !important;
+                border-top-left-radius: 0px !important;
+                border-top-right-radius: 0px !important;
+                border-bottom-left-radius: 3px !important;
+                border-bottom-right-radius: 0px !important;
+                opacity: 0.8;
+            }
             h2 {
                 display: block !important;
                 float: left !important;
                 width: 90% !important;
+                padding: 0px !important;
+                margin: 1px 5% 0px 5% !important;
                 height: 50% !important;
                 text-align: center !important;
                 font-size: 1em !important;
@@ -28,16 +42,18 @@
                 width: 100% !important;
                 height: 1px !important;
                 border-color: white !important;
+                border-width: 3px;
             }
             small {
                 display: block !important;
                 float: left !important;
-                width: 50% !important;
+                width: 90% !important;
+                padding: 0px !important;
+                margin: 3px 5% 0px 5% !important;
                 height: 10% !important;
                 text-align: center !important;
                 word-wrap: none !important;
                 font-size: 0.8em !important;
-                margin-top: 1px !important;
             }
             h3 {
                 display: block !important;
@@ -48,5 +64,42 @@
                 font-size: 0.7em !important;
             }
         }
+    }
+
+    .panel-body {
+        margin: 0px !important;
+        padding: 10px 0px 0px 0px !important;
+        width: 100% !important;
+        .datePicker {
+            padding: 0px !important;
+            width: 90% !important;
+            margin: 0px 5% !important;
+        }
+        .medioCaptura {
+            padding: 0px !important;
+            width: 90% !important;
+            margin: 0px 5% !important;
+            .form-group {
+                div {
+                    margin: 5px 5% !important;
+                    width: 90% !important;
+                    button {
+                        margin: 5px 7px !important;
+                        font-size: 1em;
+                    }
+                }
+            }
+        }
+        .person-card {
+            margin: 0px !important;
+        }
+        .personSearch {
+            width: 100% !important;
+            margin: 10px !important;
+        }
+    }
+
+    .forms-bottom-panel {
+        margin: 15px 20px !important;
     }
 }
