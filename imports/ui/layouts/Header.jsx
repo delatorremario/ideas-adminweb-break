@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link , Redirect} from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
 
 const handleLogout = () => {
@@ -10,13 +10,13 @@ const userName = () => {
     const user = Meteor.user();
     const name = user && user.profile ? user.profile.name : '';
     return user ? `${name.first} ${name.last}` : '';
-  };
+};
 
 class Header extends Component {
-      sidebarPush = () => {
+    sidebarPush = () => {
         var bodyEl = $('#main-wrapper');
-        ($(window).width() > 767) ? $(bodyEl).toggleClass('sidebar-mini'): $(bodyEl).toggleClass('sidebar-opened');
-      }
+        ($(window).width() > 767) ? $(bodyEl).toggleClass('sidebar-mini') : $(bodyEl).toggleClass('sidebar-opened');
+    }
 
     // sidebarOverlay = () => {
     //     $('#sidebar-right').toggleClass('sidebar-right-open');
@@ -28,7 +28,8 @@ class Header extends Component {
             <header id="header">
                 <div className="brand">
                     <Link to="/" className="logo">
-                        <span>Ideas 3.0</span>
+                        <img src="/logo.png" alt="I" />
+                        <span>Plataforma Ideas 3.0</span>
                     </Link>
                 </div>
                 <ul className="nav navbar-nav navbar-left">

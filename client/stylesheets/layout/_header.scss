@@ -20,9 +20,16 @@
     .logo img {
         margin-right: 6px;
         margin-top: -4px;
+        height: 40px !important;
+        width: 40px !important;
+        min-height: 40px !important;
+        max-width: 40px !important;
+        max-height: 40px !important;
+        min-width: 40px !important;
     }
     .logo span {
-        font-weight: 700;
+        // font-weight: 700;
+        font-size: 0.7em;
     }
     .navbar-nav {
         margin: 0;
@@ -46,7 +53,7 @@
         padding: 20px;
         cursor: pointer;
         float: left;
-        background-color: transparent;
+        // background-color: transparent;
         border-radius: none;
         border: none;
     }
