@@ -7,6 +7,7 @@
         display: flex;
     }
     .cards-item {
+        margin: 15px 0px -10px 0px !important;
         .panel-default {
             box-shadow: inset 0px 0px 0px white !important;
             border-style: solid;
@@ -20,7 +21,6 @@
             }
             .panel-heading {
                 border: 1px solid;
-                box-shadow: 0px 2px 10px rgb(216, 214, 214) !important;
                 @media all and (max-width:768px) {
                     border-left: none !important;
                     border-right: none !important;
@@ -30,18 +30,26 @@
                     @media all and (min-width:769px) {
                         border-radius: 5px;
                     }
+                    .title-name {
+                        padding: 0px;
+                        margin: 3px 0px;
+                        font-size: 1.2em;
+                    }
                     .small {
                         white-space: nowrap;
-                        min-width: fit-content;
+                        width: 100%;
+                    }
+                    .label {
+                        margin: 100px 0px !important;
                     }
                     .label-sm {
-                        text-align: right;
-                        margin-top: 100px !important;
+                        margin-top: 10px 0px !important;
+                    }
+                    .time-ago {
+                        padding: 8px 0px 11px 0px !important;
+                        font-size: 0.8em !important;
                     }
                 }
-            }
-            .panel-heading:hover {
-                box-shadow: 0px 2px 10px rgb(177, 176, 176) !important;
             }
             .panel-body {
                 margin: 0;
@@ -75,8 +83,10 @@
                 }
             }
         }
-        .panel-default:hover {
-            box-shadow: inset 0px 2px 20px rgb(216, 214, 214) !important;
+        @media all and (min-width: 769) {
+            .panel-default:hover {
+                box-shadow: inset 0px 2px 20px rgb(216, 214, 214) !important;
+            }
         }
     
         .panel-tabs {

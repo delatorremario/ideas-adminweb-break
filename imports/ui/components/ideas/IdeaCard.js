@@ -18,11 +18,17 @@ const IdeaCard = ({ idea, lap, handleRemove }) => {
             <div className="panel-heading" style={{ borderColor: color, boxShadow: `0px 0px 10px ${color} !important` }}>
                 <h5 className="panel-title">
                     <div style={{borderBottom: `1px solid ${color}`}}>
-                        <small style={{borderRight: `1px solid ${color}`}}> <Moment format="DD MMM YYYY" date={date} /> </small> <b>&nbsp;{person.lastName} </b> {person.firstName} {person.secondName}
+                        <small> <Moment format="DD MMM YYYY" date={date} /> </small>
+                        <div className="title-name">
+                            <b>&nbsp;{person.lastName} </b>{person.firstName} {person.secondName}
+                        </div>
                     </div>
                     <br></br>
-                    {states && <div> <small className="label" style={{ backgroundColor: color }}>{_.last(states).step} - {_.last(states).state}</small> <small>hace <Moment fromNow ago locale="es">{_.last(states).createdAt}</Moment></small></div>}
-                    <br></br>
+                    {
+                        states && <div> <small className="label" style={{ backgroundColor: color }}>{_.last(states).step} - {_.last(states).state}</small>
+                        <br></br>
+                        <div className="time-ago">hace <Moment fromNow ago locale="es">{_.last(states).createdAt}</Moment></div></div>
+                    }
                     {
                         idea.area && <label className="label label-default label-sm">{idea.area.name}</label>
                     }
