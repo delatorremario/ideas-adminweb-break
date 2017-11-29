@@ -61,17 +61,16 @@ Meteor.methods({
             delay: 1,
             daily: false,
             weekly: false,
-            sendEmail: false,
+            sendEmail: true,
             sendInbox: false,
             employee: false,
-            lead: false,
+            lead: true,
             oneUp: false,
+            chief: false,
             message: '',
         }
 
-        States.update({ _id },
-            { $addToSet: { alerts: { $each: [alert] } } }
-            , (err, data) => console.log('result add alert', err, data))
+        States.update({ _id }, { $addToSet: { alerts: alert } })
 
     },
 
