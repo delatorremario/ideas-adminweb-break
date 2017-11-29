@@ -21,7 +21,7 @@ States.schema = new SimpleSchema(
     {
         _id: { type: String, optional: true },
         corporationId: { type: String, optional: true },
-        userId: { type: String, optional: true  },
+        userId: { type: String, optional: true },
         createdAt: { type: Date, optional: true },
         updatedAt: {
             type: Date,
@@ -43,23 +43,26 @@ States.schema = new SimpleSchema(
         green: { type: Number, optional: true, defaultValue: 0 },
         yellow: { type: Number, optional: true, defaultValue: 0 },
 
-        'alerts': { type: Array, optional: true },
-        'alerts.$': { type: Object, optional: true },
-        'alerts.$.temporal': { type: Boolean },
-        'alerts.$.stateChange': { type: Boolean, optional: true, defaultValue: false },
-        'alerts.$.delay': { type: Number, optional: true, defaultValue: 1 },
-        'alerts.$.daily': { type: Boolean, optional: true, defaultValue: false },
-        'alerts.$.weekly': { type: Boolean, optional: true, defaultValue: false },
-        'alerts.$.sendEmail': { type: Boolean },
-        'alerts.$.sendInbox': { type: Boolean },
-        'alerts.$.employee': { type: Boolean },
-        'alerts.$.lead': { type: Boolean },
-        'alerts.$.oneUp': { type: Boolean },
-        'alerts.$.chief': { type: Boolean },
-        'alerts.$.message': { type: String, optional: true },
+        alerts: { type: [AlertSchema], optional: true },
+
 
 
     },
 )
 
 States.attachSchema(States.schema);
+
+const AlertSchema = new SimpleSchema({
+    temporal: { type: Boolean },
+    stateChange: { type: Boolean, optional: true, defaultValue: false },
+    delay: { type: Number, optional: true, defaultValue: 1 },
+    daily: { type: Boolean, optional: true, defaultValue: false },
+    weekly: { type: Boolean, optional: true, defaultValue: false },
+    sendEmail: { type: Boolean, defaultValue: true },
+    sendInbox: { type: Boolean },
+    employee: { type: Boolean },
+    lead: { type: Boolean, defaultValue: true },
+    oneUp: { type: Boolean },
+    chief: { type: Boolean },
+    message: { type: String, optional: true },
+})
