@@ -11,7 +11,7 @@
             text-align: center !important;
             height: 90px !important;
             border-radius: 0px !important;
-            margin: 2px 0px !important;
+            margin: 3px 0px !important;
             background-color: rgb(238, 238, 238) !important;
             .close-card {
                 margin: 0px !important;
@@ -42,7 +42,7 @@
                 width: 100% !important;
                 height: 1px !important;
                 border-color: white !important;
-                border-width: 3px;
+                border-width: 2px;
             }
             small {
                 display: block !important;
@@ -97,11 +97,17 @@
             width: 100% !important;
             margin: 10px !important;
         }
-
         .stepH2 {
             widows: 90% !important;
             margin: 20px 5% !important;
             font-size: 1em !important;
+        }
+        .form-group {
+            .states-select {
+                margin: 0px !important;
+                padding: 0px !important;
+                width: 100% !important;
+            }
         }
     }
 
