@@ -20,12 +20,13 @@ class PersonCard extends Component {
         const { area } = this.state;
 
         return (
-            <div className="col-md-6" style={{ display: "flex" }}>
+            <div className="col-md-6 person-card" style={{ display: "flex" }}>
                 <div className="card-single" style={{ width: "100%" }}>
                     <div className="close-card" onClick={removePerson(person).bind(this)} ><i className="fa fa-times"></i></div>
                     <h2><i className="fa fa-user title-icon"></i> {person.lastName}, {person.firstName} {person.secondName}</h2>
-                    <small>{person.email}</small>
-                    <h3>{area && area.name}</h3>
+                    <hr className="nonePM"></hr>
+                    <small className="">{person.email}</small>
+                    <h3 className="">{area && area.name}</h3>
                     {/* <p>Escondida - NPI & Conc. Handling Operations</p>
                             <p>NPI Mtto</p> */}
                 </div>

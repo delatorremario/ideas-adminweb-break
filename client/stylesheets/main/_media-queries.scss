@@ -1,6 +1,52 @@
 @media all and (max-width: 768px) {
-    .card-single {
-        margin-left: -45px;
-        margin-right: -45px;
+    .person-card {
+        display: block !important;
+        float: left !important;
+        width: 100% !important;
+        text-align: center !important;
+        .card-single {
+            display: block !important;
+            float: left !important;
+            width: 100% !important;
+            text-align: center !important;
+            height: 90px !important;
+            border-radius: 3px !important;
+            margin: 2px 0px !important;
+            // .close-card {
+            // }
+            h2 {
+                display: block !important;
+                float: left !important;
+                width: 90% !important;
+                height: 50% !important;
+                text-align: center !important;
+                font-size: 1em !important;
+            }
+            hr {
+                display: block !important;
+                float: left !important;
+                width: 100% !important;
+                height: 1px !important;
+                border-color: white !important;
+            }
+            small {
+                display: block !important;
+                float: left !important;
+                width: 50% !important;
+                height: 10% !important;
+                text-align: center !important;
+                word-wrap: none !important;
+                font-size: 0.8em !important;
+                margin-top: 1px !important;
+            }
+            h3 {
+                display: block !important;
+                float: left !important;
+                width: 90% !important;
+                height: 10% !important;
+                text-align: center !important;
+                font-size: 0.7em !important;
+            }
+        }
     }
 }
