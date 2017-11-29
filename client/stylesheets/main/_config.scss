@@ -100,26 +100,7 @@
                     text-align: center;
                 }
             }
-            .up-down-btn {
-                display: flex;
-                padding: 0px 10px;
-                button {
-                    border-radius: 50% !important;
-                    margin: 2px;
-                }
-
-                // .up-down {
-                //     display: flex;
-                //     justify-content: center;
-                //     align-items: center;
-                // }
-            }
-            .up-down-btn:hover {
-                cursor: pointer;
-            }
-            .up-down-btn:focus {
-                background-color:red;
-            }
+           
         }
     }
     .forms-bottom-panel {
@@ -127,6 +108,25 @@
     }
     
 }
+
+.up-down-btn {
+    display: flex;
+    padding: 0px 10px;
+    button {
+        border-radius: 50% !important;
+        margin: 2px;
+    }
+
+    // .up-down {
+    //     display: flex;
+    //     justify-content: center;
+    //     align-items: center;
+    // }
+}
+.up-down-btn:hover {
+    cursor: pointer;
+}
+
 
 @media all and (max-width:768px) {
     .config-editor {

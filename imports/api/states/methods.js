@@ -66,15 +66,15 @@ Meteor.methods({
 
     },
 
-    'state.removeAlert': (_id, index) => {
+    'state.removeAlert': (_id, alert) => {
         if (Meteor.isClient) return;
         check(_id, String);
-        check(index, Number);
+        check(alert, Object);
 
-        const set = { [`alerts.${index}`]: 1 }
-        console.log('removeAlert ', set);
-        States.update({ _id }, { $unset: set }, false, true, (err, data) => console.log('result data', err, data))
-        States.update({ _id }, { $pull: { alerts: null } }, (err, data) => console.log('result data', err, data))
+        // const set = { [`alerts.${index}`]: 1 }
+        // console.log('removeAlert ', set);
+        // States.update({ _id }, { $unset: set }, false, true, (err, data) => console.log('result data', err, data))
+        States.update({ _id }, { $pull: { alerts: alert } }, (err, data) => console.log('result data', err, data))
     },
     'state.updownValue': (_id, name, up) => {
         check(_id, String);
@@ -83,6 +83,16 @@ Meteor.methods({
 
         const value = up && 1 || -1;
         const update = { $inc: { [name]: value } };
+
+        States.update({ _id }, update);
+    },
+    'state.updownDelay': (_id, up, index) => {
+        check(_id, String);
+        check(up, Boolean);
+        check(index, Number);
+
+        const value = up && 1 || -1;
+        const update = { $inc: { [`alerts.${index}.delay`]: value } };
 
         States.update({ _id }, update);
     },
