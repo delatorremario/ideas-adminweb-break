@@ -12,7 +12,7 @@
             height: 90px !important;
             border-radius: 0px !important;
             margin: 2px 0px !important;
-            background-color: rgb(238, 238, 238);
+            background-color: rgb(238, 238, 238) !important;
             .close-card {
                 margin: 0px !important;
                 padding: 0px !important;
@@ -24,7 +24,7 @@
                 border-top-right-radius: 0px !important;
                 border-bottom-left-radius: 3px !important;
                 border-bottom-right-radius: 0px !important;
-                opacity: 0.8;
+                opacity: 0.8 !important;
             }
             h2 {
                 display: block !important;
@@ -85,17 +85,23 @@
                     width: 90% !important;
                     button {
                         margin: 5px 7px !important;
-                        font-size: 1em;
+                        font-size: 1em !important;
                     }
                 }
             }
         }
-        .person-card {
+        .person-card, row .person-card {
             margin: 0px !important;
         }
-        .personSearch {
+        .personSearch, row .person-card {
             width: 100% !important;
             margin: 10px !important;
+        }
+
+        .stepH2 {
+            widows: 90% !important;
+            margin: 20px 5% !important;
+            font-size: 1em !important;
         }
     }
 
