@@ -40,8 +40,8 @@ States.schema = new SimpleSchema(
         color: { type: String },
         showInDashboard: { type: Boolean, optional: true },
         config: { type: [Object], optional: true },
-        green: { type: Number, optional: true, defaultValue: 0 },
-        yellow: { type: Number, optional: true, defaultValue: 0 },
+        green: { type: Number, optional: true, defaultValue: 1, min:0 },
+        yellow: { type: Number, optional: true, defaultValue: 2, min: 0 },
 
         alerts: { type: [AlertSchema], optional: true },
 

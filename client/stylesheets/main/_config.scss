@@ -79,7 +79,7 @@
         .light {
             display: flex;
             align-items: center;
-            padding: 15px;
+            padding: 5px;
             .color {
                 width: 25px;
                 min-width: 25px;
@@ -87,17 +87,38 @@
                 border-radius: 50%;
             }
             .text {
-                padding-left: 12px;
-                padding-right: 12px;
+                padding-left: 5px;
+                padding-right: 5px;
                 text-transform: uppercase;
                 font-size: small;
             }
             .value {
-                width: 80px;
+                width: 60px;
+                min-width: 60px;
                 text-align: center;
                 input { 
                     text-align: center;
                 }
+            }
+            .up-down-btn {
+                display: flex;
+                padding: 0px 10px;
+                button {
+                    border-radius: 50% !important;
+                    margin: 2px;
+                }
+
+                // .up-down {
+                //     display: flex;
+                //     justify-content: center;
+                //     align-items: center;
+                // }
+            }
+            .up-down-btn:hover {
+                cursor: pointer;
+            }
+            .up-down-btn:focus {
+                background-color:red;
             }
         }
     }

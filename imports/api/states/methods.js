@@ -108,5 +108,15 @@ Meteor.methods({
         States.update({ _id }, { $unset: set }, false, true, (err, data) => console.log('result data', err, data))
         States.update({ _id }, { $pull: { alerts: null } }, (err, data) => console.log('result data', err, data))
     },
+    'state.updownValue': (_id, name, up) => {
+        check(_id, String);
+        check(name, String);
+        check(up, Boolean);
+
+        const value = up && 1 || -1;
+        const update = { $inc: { [name]: value } };
+
+        States.update({ _id }, update);
+    },
 })
 
