@@ -75,7 +75,7 @@
             width: 90% !important;
             margin: 0px 5% !important;
         }
-        .medioCaptura {
+        .labelPicker {
             padding: 0px !important;
             width: 90% !important;
             margin: 0px 5% !important;
@@ -83,10 +83,10 @@
                 div {
                     margin: 5px 5% !important;
                     width: 90% !important;
-                    button {
-                        margin: 5px 7px !important;
-                        font-size: 1em !important;
-                    }
+                }
+                button, div button {
+                    margin: 5px 7px !important;
+                    font-size: 0.8em !important;
                 }
             }
         }

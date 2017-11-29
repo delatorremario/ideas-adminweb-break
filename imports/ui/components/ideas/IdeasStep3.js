@@ -5,7 +5,7 @@ import _ from 'lodash';
 const IdeasStep3 = ({ onChangeForm, data, driversArray, selectDriver }) =>
 
     (
-        <div className="row form-steps step-three">
+        <div className="row panel-body form-steps step-three">
             <div className="col-md-6">
                 <FormGroup>
                     <ControlLabel>Oportunidad</ControlLabel>
@@ -30,7 +30,7 @@ const IdeasStep3 = ({ onChangeForm, data, driversArray, selectDriver }) =>
                 </FormGroup>
             </div>
 
-            <div className="col-md-12">
+            <div className="col-md-12 labelPicker">
                 <div className="form-group">
                     <ControlLabel>Drivers de Valor</ControlLabel>
                     {_.map(driversArray, (driver, index) =>

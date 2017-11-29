@@ -26,7 +26,7 @@ const IdeasStep1 = ({ onChangeForm, data, handleChangeDate, onChangeSearchPerson
             </FormGroup>
         </div>
 
-        <div className="col-xs-12 medioCaptura">
+        <div className="col-xs-12 labelPicker">
             <div className="form-group">
                 <ControlLabel>Medio de Captura la Idea</ControlLabel>
                 <div>
