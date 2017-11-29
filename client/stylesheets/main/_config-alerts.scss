@@ -19,9 +19,6 @@
         padding-top: 10px;
         display: flex; // justify-content: center;
         align-items: center;
-        .up-down-btn {
-            margin-left: auto;
-        }
     }
     .config-sends,
     .config-to,
@@ -48,7 +45,7 @@
             }
         }
         .config-times {
-            input {
+            .up-down-btn {
                 margin-left: auto;
             }
         }
