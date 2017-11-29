@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
+import { Meteor } from 'meteor/meteor';
 import { FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap'
 import { Bert } from 'meteor/themeteorchef:bert';
 import _ from 'lodash';
 import swal from 'sweetalert2'
-
-
-
 import Switch from 'react-toggle-switch'
-import { Meteor } from 'meteor/meteor';
 
 const removeAlert = (_id, alert) => {
 
@@ -28,7 +25,7 @@ const removeAlert = (_id, alert) => {
 }
 
 const stateAlertValue = (_id, index, name, value) => {
-    Meteor.call('state.alert.value', _id, index, name, value, (err) => {
+    Meteor.call('state.alert.boolean', _id, index, name, value, (err) => {
         if (err) { Bert.alert(err.message, 'danger'); return; }
     })
 }
@@ -38,6 +35,12 @@ const updownDelay = (_id, up, index) => e => {
     Meteor.call('state.updownDelay', _id, up, index, (err) => {
         if (err) { Bert.alert(err.message, 'danger'); return; }
     });
+}
+
+const onChangeMessage = (_id, index) => e => {
+    Meteor.call('state.alert.string', _id, index, 'message', e.target.value, (err) => {
+        if (err) { Bert.alert(err.message, 'danger'); return; }
+    })
 }
 
 const ConfigEditorAlert = ({ _id, index, alert }) => {
@@ -117,7 +120,7 @@ const ConfigEditorAlert = ({ _id, index, alert }) => {
                     className="form-control input-sm"
                     name="message"
                     defaultValue={message}
-                // onChange={onChange}
+                    onChange={onChangeMessage(_id, index).bind(this)}
                 />
             </div>
 

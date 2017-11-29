@@ -5,6 +5,7 @@ import States from './states';
 import rateLimit from '../../modules/rate-limit.js';
 import { check } from 'meteor/check';
 import { Meteor } from 'meteor/meteor';
+import { Stream } from 'stream';
 
 export const upsertState = new ValidatedMethod({
     name: 'state.upsert',
@@ -96,10 +97,20 @@ Meteor.methods({
 
         States.update({ _id }, update);
     },
-    'state.alert.value': (_id, index, name, value) => {
+    'state.alert.boolean': (_id, index, name, value) => {
         check(_id, String);
         check(name, String);
         check(value, Boolean);
+        check(index, Number);
+        
+        const update = { $set: { [`alerts.${index}.${name}`]: value } };
+        
+        States.update({ _id }, update)
+    },
+    'state.alert.string': (_id, index, name, value) => {
+        check(_id, String);
+        check(name, String);
+        check(value, String);
         check(index, Number);
         
         const update = { $set: { [`alerts.${index}.${name}`]: value } };
