@@ -19,11 +19,6 @@ const updownValue = (_id, up) => e => {
     });
 }
 
-const addAlert = (_id) => {
-    Meteor.call('state.addAlert', _id, (err) => {
-        if (err) { Bert.alert(err.message, 'danger'); return; }
-    });
-}
 
 class ConfigEditor extends Component {
 
@@ -32,7 +27,12 @@ class ConfigEditor extends Component {
     handleSelect = key => {
         this.setState({ key });
     }
-
+    addAlert = (_id) => {
+        Meteor.call('state.addAlert', _id, (err) => {
+            if (err) { Bert.alert(err.message, 'danger'); return; }
+            this.setState(prev => ({ key: prev.key + 1 }))
+        });
+    }
     render() {
         const { _id, step, state, color, showInDashboard, green, yellow, alerts } = this.props.doc;
         const { key } = this.state;
@@ -90,14 +90,14 @@ class ConfigEditor extends Component {
                             <h5>Configuración de Alertas</h5>
                         </div>
                         <div className="show-in-dashboard">
-                            <button className="btn btn-default btn-sm" onClick={addAlert.bind(this, _id)}>Agregar</button>
+                            <button className="btn btn-default btn-sm" onClick={this.addAlert.bind(this, _id)}>Agregar</button>
                         </div>
                     </div>
                     <div className="panel-body">
                         <Tabs activeKey={key} onSelect={this.handleSelect} id="controlled-tab-example">
                             {
                                 _.map(alerts, (alert, index) => {
-                                    return <Tab key={index} eventKey={index + 1} title={`Alerta ${index + 1}`}><ConfigEditorAlert index={index} alert={alert} _id={_id} /></Tab>
+                                    return <Tab key={index} eventKey={index + 1} title={`Alerta ${index + 1}`}><ConfigEditorAlert index={index} handleSelect={this.handleSelect} alert={alert} _id={_id} /></Tab>
                                 })
                             }
                         </Tabs>

@@ -6,7 +6,7 @@ import _ from 'lodash';
 import swal from 'sweetalert2'
 import Switch from 'react-toggle-switch'
 
-const removeAlert = (_id, alert) => {
+const removeAlert = (_id, alert, handleSelect) => {
 
     swal({
         title: 'Eliminar Alerta',
@@ -20,6 +20,7 @@ const removeAlert = (_id, alert) => {
             if (err) { Bert.alert(err.message, 'danger'); return; }
             // console.log('ALERTS 2', alerts);
             Bert.alert(`Alerta Eliminada`, 'success');
+            handleSelect(0);
         });
     }, (dismiss) => { console.log(dismiss) })
 }
@@ -43,7 +44,7 @@ const onChangeMessage = (_id, index) => e => {
     })
 }
 
-const ConfigEditorAlert = ({ _id, index, alert }) => {
+const ConfigEditorAlert = ({ _id, index, alert, handleSelect }) => {
 
     const { temporal, stateChange, delay, daily, weekly, sendEmail, sendInbox, employee, lead, oneUp, chief, message } = alert;
     return (
@@ -92,6 +93,7 @@ const ConfigEditorAlert = ({ _id, index, alert }) => {
                     </div>
                 </div>
             </div>
+
             <div className="config-to">
                 <div className="alert-types">
                     <div className="alert-type">
@@ -113,7 +115,6 @@ const ConfigEditorAlert = ({ _id, index, alert }) => {
                 </div>
             </div>
 
-
             <div className="config-message">
                 <label>Mensaje</label>
                 <textarea
@@ -128,15 +129,12 @@ const ConfigEditorAlert = ({ _id, index, alert }) => {
                 type='button'
                 bsStyle="default"
                 className="btn btn-sm pull-right btn-trans"
-                onClick={removeAlert.bind(this, _id, alert)}>
+                onClick={removeAlert.bind(this, _id, alert, handleSelect)}>
                 <i className="fa fa-trash"></i>
                 Eliminar
             </Button>
-
-
         </div>
     )
-
 }
 
 export default ConfigEditorAlert;
