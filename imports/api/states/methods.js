@@ -44,14 +44,6 @@ Meteor.methods({
 
         States.update({ _id }, { $set: { showInDashboard } })
     },
-    'state.semaphore': (_id, green, yellow) => {
-        check(_id, String);
-        check(green, Number);
-        check(yellow, Number);
-
-        States.update({ _id }, { $set: { green, yellow } })
-
-    },
     'state.addAlert': (_id) => {
         check(_id, String);
 
@@ -74,29 +66,6 @@ Meteor.methods({
 
     },
 
-    'state.saveAlert': (_id, index, alert) => {
-        console.log('ALERT', _id, index, alert);
-        check(_id, String);
-        check(index, Number);
-        check(alert, {
-            temporal: Boolean,
-            stateChange: Boolean,
-            delay: Match.Maybe(Number),
-            daily: Match.Maybe(Boolean),
-            weekly: Match.Maybe(Boolean),
-            sendEmail: Boolean,
-            sendInbox: Boolean,
-            employee: Boolean,
-            lead: Boolean,
-            oneUp: Boolean,
-            chief: Boolean,
-            message: String,
-        });
-
-        const set = { [`alerts.${index}`]: alert }
-        console.log('SET', set);
-        States.update({ _id }, { $set: set }, (err, data) => console.log('result data', err, data))
-    },
     'state.removeAlert': (_id, index) => {
         if (Meteor.isClient) return;
         check(_id, String);

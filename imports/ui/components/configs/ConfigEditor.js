@@ -25,6 +25,8 @@ const addAlert = (_id) => {
     });
 }
 
+
+
 const ConfigEditor = ({ doc }) => {
     // console.log('DOC', doc);
     const { _id, step, state, color, showInDashboard, green, yellow, alerts } = doc;
@@ -90,7 +92,7 @@ const ConfigEditor = ({ doc }) => {
                     <Tabs activeKey={key} onSelect={() => console.log('click')} id="controlled-tab-example">
                         {
                             _.map(alerts, (alert, index) => {
-                                return <Tab key={index} eventKey={index} title={`Alerta ${index + 1}`}><ConfigEditorAlert removeAlert={() => console.log('click')} saveAlerts={() => console.log('click')} index={index} alert={alert} _id={_id} /></Tab>
+                                return <Tab key={index} eventKey={index} title={`Alerta ${index + 1}`}><ConfigEditorAlert index={index} alert={alert} _id={_id} /></Tab>
                             })
                         }
                     </Tabs>
