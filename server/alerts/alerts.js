@@ -38,7 +38,6 @@ Meteor.methods({
                 }
             }).fetch();
             _.each(ideas, idea => {
-                console.log('*** Idea:', idea._id);
                 const last = _.last(idea.states);
                 // console.log('last:', last.code);
                 // console.log('delay:', moment(last.createdAt).format('DD MMM YYYY'));
@@ -53,10 +52,12 @@ Meteor.methods({
                         
                         console.log('** :D ALEEEERT **');
                         
-                        const to = ['delatorremario@gmail.com']
-                        const from = 'no-replay@ideas.e-captum.com';
+                        const to = ['mauricio.ma.rodriguez@bhpbilliton.com','dblazina@holos.cl ','mariodelatorre@holos.cl']
+                      
+                        const from = 'Ideas 3.0 <no-replay@ideas.e-captum.com>';
                         const subject = 'Alerta!!';
-                        const text = alert.message || 'Alerta';
+                        const text = (alert.message || '' ) + `. La idea de ${idea.person.lastName}, ${idea.person.firstName} ${idea.person.secondName} tiene un atraso de ${diff} días`;
+                        
 
                         Email.send({ to, from, subject, text });
                     
