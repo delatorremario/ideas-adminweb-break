@@ -33,6 +33,12 @@ class ConfigEditor extends Component {
             this.setState(prev => ({ key: prev.key + 1 }))
         });
     }
+    sendAlerts = () => {
+        Meteor.call('sendAlerts', (err) => {
+            if (err) { Bert.alert(err.message, 'danger'); return; }
+            Bert.alert('Alertas Testeadas', 'success');
+        });
+    }
     render() {
         const { _id, step, state, color, showInDashboard, green, yellow, alerts } = this.props.doc;
         const { key } = this.state;
@@ -91,6 +97,7 @@ class ConfigEditor extends Component {
                         </div>
                         <div className="show-in-dashboard">
                             <button className="btn btn-default btn-sm" onClick={this.addAlert.bind(this, _id)}>Agregar</button>
+                            <button className="btn btn-default btn-sm" onClick={this.sendAlerts}>Testear</button>
                         </div>
                     </div>
                     <div className="panel-body">
