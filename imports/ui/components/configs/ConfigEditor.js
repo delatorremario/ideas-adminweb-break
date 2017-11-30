@@ -97,7 +97,7 @@ class ConfigEditor extends Component {
                         </div>
                         <div className="show-in-dashboard">
                             <button className="btn btn-default btn-sm" onClick={this.addAlert.bind(this, _id)}>Agregar</button>
-                            <button className="btn btn-default btn-sm" onClick={this.sendAlerts}>Testear</button>
+                            <button className="btn btn-default btn-sm" onClick={this.sendAlerts}>Testear Temporal</button>
                         </div>
                     </div>
                     <div className="panel-body">

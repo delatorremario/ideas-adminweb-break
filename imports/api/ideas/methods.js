@@ -32,18 +32,25 @@ export const upsertIdea = new ValidatedMethod({
             if (err) { console.log('ERROR', err); return; }
             if (Meteor.isServer) {
                 const ideastate = _.last(idea.states);
-                const state = States.findOne({ _id: ideastate._id, 'alerts.stateChange': true });
-                if (state) {
-                    const to = ['mauricio.ma.rodriguez@bhpbilliton.com', 'dblazina@holos.cl ', 'mariodelatorre@holos.cl']
-
-                    const from = 'Ideas 3.0 <no-replay@ideas.e-captum.com>';
-                    const subject = `Cambio al estado ${state.step} ${state.state}`;
-                    const text = `La idea de ${idea.person.lastName}, ${idea.person.firstName} ${idea.person.secondName} cambió de estado`;
-
-                    Email.send({ to, from, subject, text });
-                    console.log('Email enviado ***');
-
-                }
+                const states = States.find({ _id: ideastate._id, 'alerts.stateChange': true }).fetch();
+                
+                _.each(states, state => {
+                    _.each(state.alerts, alert =>{
+                        if (alert.stateChange) {
+                            const to = ['mauricio.ma.rodriguez@bhpbilliton.com', 'dblazina@holos.cl ', 'mariodelatorre@holos.cl']
+        
+                            const from = 'Ideas 3.0 <no-replay@ideas.e-captum.com>';
+                            const subject = `Cambio al estado ${state.step} ${state.state}`;
+                            const text = `${alert.message}. La idea de ${idea.person.lastName}, ${idea.person.firstName} ${idea.person.secondName} cambió de estado`;
+        
+                            Email.send({ to, from, subject, text });
+                            console.log('Email enviado ***', alert.message);
+        
+                        }
+                    })
+                   
+                })
+               
             }
         });
     },

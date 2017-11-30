@@ -18,7 +18,6 @@ const removeAlert = (_id, alert, handleSelect) => {
     }).then(() => {
         Meteor.call('state.removeAlert', _id, alert, (err) => {
             if (err) { Bert.alert(err.message, 'danger'); return; }
-            // console.log('ALERTS 2', alerts);
             Bert.alert(`Alerta Eliminada`, 'success');
             handleSelect(0);
         });

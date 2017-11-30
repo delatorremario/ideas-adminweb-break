@@ -102,9 +102,17 @@ Meteor.methods({
         check(name, String);
         check(value, Boolean);
         check(index, Number);
-        
-        const update = { $set: { [`alerts.${index}.${name}`]: value } };
-        
+
+        let update = {};
+
+        if (name === 'temporal') value = !value;
+        if (name === 'temporal' || name === 'stateChange') {
+            update = { $set: { [`alerts.${index}.stateChange`]: value, [`alerts.${index}.temporal`]: !value, } };
+        }
+        else {
+            update = { $set: { [`alerts.${index}.${name}`]: value } };
+        }
+
         States.update({ _id }, update)
     },
     'state.alert.string': (_id, index, name, value) => {
@@ -112,9 +120,9 @@ Meteor.methods({
         check(name, String);
         check(value, String);
         check(index, Number);
-        
+
         const update = { $set: { [`alerts.${index}.${name}`]: value } };
-        
+
         States.update({ _id }, update)
     },
 })
