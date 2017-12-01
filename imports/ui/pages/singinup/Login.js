@@ -2,8 +2,14 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap';
 import handleLogin from '../../../modules/login';
+import IdeasLogo from '../../components/IdeasLogo';
 
 class Login extends React.Component {
+
+  state = {
+    fontSize: '10em'
+  }
+
   componentDidMount() {
     handleLogin({ component: this });
   }
@@ -13,14 +19,15 @@ class Login extends React.Component {
   }
 
   render() {
+    const { fontSize } = this.state;
     return (
       <div className="login-box-container">
 
         <div className="login-box">
-          <div className="modal-header">
-            <h2 className="page-header">Bienvenido a la plataforma de Ideas</h2>
+          <div className="login-logo">
+            <IdeasLogo fontSize={fontSize} />
           </div>
-          {/* <hr /> */}
+          <hr />
           <form
             ref={form => (this.loginForm = form)}
             className="login"

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
+import IdeasLogo from '../components/IdeasLogo'
 
 const handleLogout = () => {
     Meteor.logout();
@@ -27,10 +28,7 @@ class Header extends Component {
         return (
             <header id="header">
                 <div className="brand">
-                    <Link to="/" className="logo">
-                        <img src="/logo.png" alt="I" />
-                        <span>Plataforma Ideas 3.0</span>
-                    </Link>
+                    <IdeasLogo />
                 </div>
                 <ul className="nav navbar-nav navbar-left">
                     <li className="toggle-navigation toggle-left">
