@@ -57,11 +57,17 @@ a {
 @import "main/panel-on-mobile";
 @import "main/config";
 @import "main/config-alerts";
-@import "main/media-queries.scss";
+@import "main/media-queries";
+
+@import "components/ideasLogo";
 
 @import "../../../node_modules/react-toggle-switch/dist/css/switch.min.css";
 
 // Own styles
+body {
+    min-width: 360px;
+}
+
 .login-box-container {
     background-color: #1966b1;
     width: 100vw;
@@ -119,7 +125,6 @@ a {
     }
 }
 .login-box a {
-    font-size: 0.9em;
     display: block;
     margin-top: 25px;
     width: 100% !important;
