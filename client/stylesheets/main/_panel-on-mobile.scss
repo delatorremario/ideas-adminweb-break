@@ -1,22 +1,20 @@
-
-@media all and (max-width:768px){
-
+@media all and (max-width:768px) {
     #main-content {
         padding: 0px !important;
-    }
-    // .row {
+    } // .row {
     //     margin-left: 0;
     //     margin-right: 0;
-        
     //     &> div {
     //         padding-left: 0px;
     //         padding-right: 0px;
     //     }
     // }
-
+    .config-editor {
+        padding: 20px !important;
+    }
     .panel {
         // margin-bottom: 3px !important;
         border-radius: 0px !important;
         box-shadow: none !important;
     }
-} 
+}

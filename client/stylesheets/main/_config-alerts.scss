@@ -19,10 +19,6 @@
         padding-top: 10px;
         display: flex; // justify-content: center;
         align-items: center;
-        input {
-            margin-left: 10px;
-            width: 100px;
-        }
     }
     .config-sends,
     .config-to,
@@ -49,7 +45,7 @@
             }
         }
         .config-times {
-            input {
+            .up-down-btn {
                 margin-left: auto;
             }
         }

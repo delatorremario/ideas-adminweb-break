@@ -2,6 +2,21 @@ import { Mongo } from 'meteor/mongo';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Factory } from 'meteor/dburles:factory';
 
+const AlertSchema = new SimpleSchema({
+    temporal: { type: Boolean },
+    stateChange: { type: Boolean, optional: true, defaultValue: false },
+    delay: { type: Number, optional: true, defaultValue: 1 },
+    daily: { type: Boolean, optional: true, defaultValue: false },
+    weekly: { type: Boolean, optional: true, defaultValue: false },
+    sendEmail: { type: Boolean, defaultValue: true },
+    sendInbox: { type: Boolean },
+    employee: { type: Boolean },
+    lead: { type: Boolean, defaultValue: true },
+    oneUp: { type: Boolean },
+    chief: { type: Boolean },
+    message: { type: String, optional: true },
+})
+
 const States = new Mongo.Collection('states');
 export default States
 
@@ -40,29 +55,12 @@ States.schema = new SimpleSchema(
         color: { type: String },
         showInDashboard: { type: Boolean, optional: true },
         config: { type: [Object], optional: true },
-        green: { type: Number, optional: true, defaultValue: 0 },
-        yellow: { type: Number, optional: true, defaultValue: 0 },
+        green: { type: Number, optional: true, defaultValue: 1, min:0 },
+        yellow: { type: Number, optional: true, defaultValue: 2, min: 0 },
 
         alerts: { type: [AlertSchema], optional: true },
-
-
-
     },
 )
 
 States.attachSchema(States.schema);
 
-const AlertSchema = new SimpleSchema({
-    temporal: { type: Boolean },
-    stateChange: { type: Boolean, optional: true, defaultValue: false },
-    delay: { type: Number, optional: true, defaultValue: 1 },
-    daily: { type: Boolean, optional: true, defaultValue: false },
-    weekly: { type: Boolean, optional: true, defaultValue: false },
-    sendEmail: { type: Boolean, defaultValue: true },
-    sendInbox: { type: Boolean },
-    employee: { type: Boolean },
-    lead: { type: Boolean, defaultValue: true },
-    oneUp: { type: Boolean },
-    chief: { type: Boolean },
-    message: { type: String, optional: true },
-})

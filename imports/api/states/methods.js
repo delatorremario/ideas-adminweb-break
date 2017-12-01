@@ -5,6 +5,7 @@ import States from './states';
 import rateLimit from '../../modules/rate-limit.js';
 import { check } from 'meteor/check';
 import { Meteor } from 'meteor/meteor';
+import { Stream } from 'stream';
 
 export const upsertState = new ValidatedMethod({
     name: 'state.upsert',
@@ -44,14 +45,6 @@ Meteor.methods({
 
         States.update({ _id }, { $set: { showInDashboard } })
     },
-    'state.semaphore': (_id, green, yellow) => {
-        check(_id, String);
-        check(green, Number);
-        check(yellow, Number);
-
-        States.update({ _id }, { $set: { green, yellow } })
-
-    },
     'state.addAlert': (_id) => {
         check(_id, String);
 
@@ -61,52 +54,76 @@ Meteor.methods({
             delay: 1,
             daily: false,
             weekly: false,
-            sendEmail: false,
+            sendEmail: true,
             sendInbox: false,
             employee: false,
-            lead: false,
+            lead: true,
             oneUp: false,
+            chief: false,
             message: '',
         }
 
-        States.update({ _id },
-            { $addToSet: { alerts: { $each: [alert] } } }
-            , (err, data) => console.log('result add alert', err, data))
+        States.update({ _id }, { $addToSet: { alerts: alert } })
 
     },
 
-    'state.saveAlert': (_id, index, alert) => {
-        console.log('ALERT', _id, index, alert);
-        check(_id, String);
-        check(index, Number);
-        check(alert, {
-            temporal: Boolean,
-            stateChange: Boolean,
-            delay: Match.Maybe(Number),
-            daily: Match.Maybe(Boolean),
-            weekly: Match.Maybe(Boolean),
-            sendEmail: Boolean,
-            sendInbox: Boolean,
-            employee: Boolean,
-            lead: Boolean,
-            oneUp: Boolean,
-            chief: Boolean,
-            message: String,
-        });
-
-        const set = { [`alerts.${index}`]: alert }
-        console.log('SET', set);
-        States.update({ _id }, { $set: set }, (err, data) => console.log('result data', err, data))
-    },
-    'state.removeAlert': (_id, index) => {
+    'state.removeAlert': (_id, alert) => {
         if (Meteor.isClient) return;
         check(_id, String);
+        check(alert, Object);
+
+        // const set = { [`alerts.${index}`]: 1 }
+        // console.log('removeAlert ', set);
+        // States.update({ _id }, { $unset: set }, false, true, (err, data) => console.log('result data', err, data))
+        States.update({ _id }, { $pull: { alerts: alert } }, (err, data) => console.log('result data', err, data))
+    },
+    'state.updownValue': (_id, name, up) => {
+        check(_id, String);
+        check(name, String);
+        check(up, Boolean);
+
+        const value = up && 1 || -1;
+        const update = { $inc: { [name]: value } };
+
+        States.update({ _id }, update);
+    },
+    'state.updownDelay': (_id, up, index) => {
+        check(_id, String);
+        check(up, Boolean);
         check(index, Number);
 
-        const set = { [`alerts.${index}`]: 1 }
-        console.log('removeAlert ', set);
-        States.update({ _id }, { $unset: set }, false, true, (err, data) => console.log('result data', err, data))
-        States.update({ _id }, { $pull: { alerts: null } }, (err, data) => console.log('result data', err, data))
+        const value = up && 1 || -1;
+        const update = { $inc: { [`alerts.${index}.delay`]: value } };
+
+        States.update({ _id }, update);
+    },
+    'state.alert.boolean': (_id, index, name, value) => {
+        check(_id, String);
+        check(name, String);
+        check(value, Boolean);
+        check(index, Number);
+
+        let update = {};
+
+        if (name === 'temporal') value = !value;
+        if (name === 'temporal' || name === 'stateChange') {
+            update = { $set: { [`alerts.${index}.stateChange`]: value, [`alerts.${index}.temporal`]: !value, } };
+        }
+        else {
+            update = { $set: { [`alerts.${index}.${name}`]: value } };
+        }
+
+        States.update({ _id }, update)
+    },
+    'state.alert.string': (_id, index, name, value) => {
+        check(_id, String);
+        check(name, String);
+        check(value, String);
+        check(index, Number);
+
+        const update = { $set: { [`alerts.${index}.${name}`]: value } };
+
+        States.update({ _id }, update)
     },
 })
 

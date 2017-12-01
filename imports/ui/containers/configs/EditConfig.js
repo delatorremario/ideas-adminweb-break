@@ -13,9 +13,9 @@ const composer = ({ match }, onData) => {
     const subscription = Meteor.subscribe('states.view', docId);
 
     if (subscription.ready()) {
-        let doc = States.findOne(docId);
+        const doc = States.findOne(docId);
         onData(null, { doc });
-    }
+   }
 };
 
 export default composeWithTracker(composer, Loading)(EditConfig);
