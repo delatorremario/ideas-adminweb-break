@@ -8,7 +8,7 @@ import StateCard from './StateCard';
 const IdeasStep5 = ({ data, selectState, ideasstates }) =>
 
     (
-        <div className="row panel-body form-steps step-two">
+        <div className="row panel-body panel-body-mobile form-steps step-two">
             <div className="col-xs-12">
                 {
                     data && data.states && data.states[0] && <StateCard state={data.states[0]} />

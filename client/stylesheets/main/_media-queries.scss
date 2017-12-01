@@ -1,4 +1,9 @@
 @media all and (max-width: 768px) {
+
+    #main-wrapper {
+        padding: 0px 0px 50px 0px !important;
+    }
+
     .person-card {
         display: block !important;
         float: left !important;
@@ -67,8 +72,8 @@
     }
 
     .panel-body {
+        padding: 10px 0px 0px 0px;
         margin: 0px !important;
-        // padding: 10px 0px 0px 0px !important;
         width: 100% !important;
         .datePicker {
             padding: 0px !important;
@@ -103,12 +108,18 @@
             font-size: 1em !important;
         }
         .form-group {
+            margin: 0px !important;
+            padding: 0px !important;
             .states-select {
                 margin: 0px !important;
                 padding: 0px !important;
                 width: 100% !important;
             }
         }
+    }
+
+    .dashboardPanel {
+        padding: 0px 15px 15px 10px;
     }
 
     .forms-bottom-panel {

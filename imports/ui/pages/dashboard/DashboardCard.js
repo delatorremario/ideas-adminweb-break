@@ -57,7 +57,7 @@ const DashboardCard = ({ area }) => {
 
     return (
         <div className="col-xs-12 col-sm-6 col-md-4 cards-item">
-            <div className="panel panel-default">
+            <div className="panel panel-default dashboardPanel">
                 <div className="panel-heading">
                     <h4 className="panel-title"><small>{name}</small></h4>
                 </div>
