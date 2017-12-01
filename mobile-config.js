@@ -1,12 +1,13 @@
 // This section sets up some basic app metadata, the entire section is optional.
 
 App.info({
-    id: 'cl.holos.ideas',
-    name: 'cl.holos.ideas',
+    id: 'com.ecaptum.ideas',
+    name: 'Ideas 3.0',
     description: 'Relevamiento de Ideas',
     author: 'Holos Develops',
     email: 'desarrollo@holos.cl',
-    website: 'http://holos.cl/'
+    website: 'http://holos.cl/',
+    version: "0.0.1",
 });
 
 // Set up resources such as icons and launch screens.
