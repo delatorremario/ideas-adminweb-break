@@ -18,17 +18,17 @@ class Footer extends Component {
             <footer id="footer">
                 <div className="footer-item">
                     <button className="footer-button" onClick={handleLogout} >
-                        <i className="fa fa-sign-out"></i>
+                        <i className="fa fa-fw fa-lightbulb-o"></i>
                     </button>
                 </div>
                 <div className="footer-item">
                     <button className="footer-button" onClick={handleLogout} >
-                        <i className="fa fa-sign-out"></i>
+                        <i className="fa fa-fw fa-envelope-o"></i>
                     </button>
                 </div>
                 <div className="footer-item">
                     <button className="footer-button" onClick={handleLogout} >
-                        <i className="fa fa-sign-out"></i>
+                        <i className="fa fa fa-bell"></i>
                     </button>
                 </div>
                 <div className="footer-item">

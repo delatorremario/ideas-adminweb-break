@@ -10,13 +10,17 @@
     left: 0px;
     height: 40px;
     width: 100%;
-    background: gray;
+    background: #dddddd;
+    box-shadow: inset 0px 1px 1px rgb(197, 197, 197);
     .footer-item {
         height: 100%;
         width: 25%;
+        background: none;
         .footer-button {
             height: 100%;
             width: 100%;
+            border: none;
+            background: none;
         }
     }
 }

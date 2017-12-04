@@ -224,8 +224,10 @@
 }
 .sidebar-opened .sidebar-left {
     display: block;
-    top: 0px;
-    left: 0;
+    top: 0px !important;
+    left: 0px !important;
+    bottom: 40px !important;
+    padding-bottom: 40px;
     position: fixed;
 }
 @media (max-width: 767px) {

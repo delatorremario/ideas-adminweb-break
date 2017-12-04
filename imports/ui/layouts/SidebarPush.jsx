@@ -116,7 +116,8 @@ class SidebarPush extends Component {
     }
 
     setHeightScrollbar() {
-        let windowHeight = $(window).height();
+        let windowHeight = $(window).height() - 200;
+        console.log('WH', windowHeight)
         $('.sidebar.sidebar-left').css({ height: windowHeight });
     }
 
