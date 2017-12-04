@@ -120,6 +120,14 @@
 
     .dashboardPanel {
         padding: 0px 15px 15px 10px;
+        .panel-heading {
+            margin: 0px -15px 0px -10px !important;
+        }
+        .link-status {
+            margin: 0px -30px -30px -30px !important;
+            border-left-width: 0px;
+            border-right-width: 0px;
+        }
     }
 
     .forms-bottom-panel {
