@@ -5,7 +5,7 @@ import _ from 'lodash';
 const IdeasStep3 = ({ onChangeForm, data, driversArray, selectDriver }) =>
 
     (
-        <div className="row panel-body form-steps step-three">
+        <div className="row panel-body panel-body-mobile form-steps step-three">
             <div className="col-md-6">
                 <FormGroup>
                     <ControlLabel>Oportunidad</ControlLabel>

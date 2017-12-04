@@ -60,12 +60,13 @@ a {
 @import "main/media-queries";
 
 @import "components/ideasLogo";
+@import "components/footer";
 
 @import "../../../node_modules/react-toggle-switch/dist/css/switch.min.css";
 
 // Own styles
 body {
-    min-width: 360px;
+    min-width: 320px;
 }
 
 .login-box-container {

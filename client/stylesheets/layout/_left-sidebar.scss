@@ -1,6 +1,5 @@
 .sidebar {
     position: absolute;
-    ;
     min-height: 100%;
     width: 240px;
     padding-top: 60px;
@@ -223,13 +222,15 @@
         top: 0;
     }
 }
+.sidebar-opened .sidebar-left {
+    display: block;
+    top: 0px;
+    left: 0;
+    position: fixed;
+}
 @media (max-width: 767px) {
     .sidebar {
         left: -240px;
-    }
-    .sidebar-opened .sidebar-left {
-        display: block;
-        left: 0;
     }
     .sidebar-opened .sidebar-left+.main-content-wrapper {
         left: 240px;

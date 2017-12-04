@@ -3,6 +3,7 @@ import { Meteor } from 'meteor/meteor';
 import Header from './Header';
 import SidebarPush from './SidebarPush'
 import PageWrapper from './PageWrapper'
+import Footer from './Footer'
 
 const MainWrapper = ({ user, location }) => (
     
@@ -10,6 +11,7 @@ const MainWrapper = ({ user, location }) => (
             <Header />
             <SidebarPush user={user} match={location} />
             <PageWrapper />
+            <Footer />
         </div>
     
     )

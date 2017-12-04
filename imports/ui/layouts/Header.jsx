@@ -3,10 +3,6 @@ import { Link, Redirect } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
 import IdeasLogo from '../components/IdeasLogo'
 
-const handleLogout = () => {
-    Meteor.logout();
-}
-
 const userName = () => {
     const user = Meteor.user();
     const name = user && user.profile ? user.profile.name : '';
@@ -42,13 +38,6 @@ class Header extends Component {
                             <i className="fa fa-search"></i>
                         </button>
                     </li> */}
-                </ul>
-                <ul className="nav navbar-nav navbar-right">
-                    <li className="toggle-navigation toggle-right">
-                        <button className="sidebar-toggle" onClick={handleLogout} >
-                            <i className="fa fa-sign-out"></i>
-                        </button>
-                    </li>
                 </ul>
             </header>
         );

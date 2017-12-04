@@ -20,6 +20,9 @@ import {
 import ColoredAvatar from '../components/ColoredAvatar';
 import $ from 'jquery';
 import { Roles } from 'meteor/alanning:roles';
+import '../../../node_modules/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar'
+
+require('malihu-custom-scrollbar-plugin')($);
 
 class SidebarPush extends Component {
     constructor(props, context) {
@@ -59,7 +62,7 @@ class SidebarPush extends Component {
                     title: "Configuraciones",
                     iconClasses: ["fa", "fa-fw", "fa-cogs"],
                     path: "/configs",
-                    roles: ['SuperAdminHolos','Leader']
+                    roles: ['SuperAdminHolos', 'Leader']
                 },
                 // {
                 //     title: "Ejemplo Componentes",
@@ -67,7 +70,7 @@ class SidebarPush extends Component {
                 //     iconClasses: ["fa", "fa-fw", "fa-bar-chart-o"],
                 //     collapsed: true,
                 // },
-               
+
                 // {
                 //     title: "Sublevels",
                 //     path: false,
@@ -101,12 +104,20 @@ class SidebarPush extends Component {
     }
 
     componentDidMount() {
+        $('.sidebar.sidebar-left').mCustomScrollbar();
         let bodyEl = $('#main-wrapper');
         $(window).on('resize', () => {
             if ($(window).width() < 767) {
                 $(bodyEl).removeClass('sidebar-mini');
             }
+            this.setHeightScrollbar();
         })
+        this.setHeightScrollbar();
+    }
+
+    setHeightScrollbar() {
+        let windowHeight = $(window).height();
+        $('.sidebar.sidebar-left').css({ height: windowHeight });
     }
 
     sidebarPushMobile = () => {
@@ -194,7 +205,6 @@ class SidebarPush extends Component {
 
     render() {
         const { user } = this.props;
-
         return (
             <aside className="sidebar sidebar-left">
                 <div className="sidebar-profile">
@@ -258,9 +268,7 @@ class SidebarPush extends Component {
                 <nav className="sidebarNav">
                     <h5 className="sidebar-header">Navigation</h5>
                     <ul className="nav nav-pills nav-stacked">
-
                         {this.renderNavigation()}
-
                     </ul>
                 </nav>
             </aside>

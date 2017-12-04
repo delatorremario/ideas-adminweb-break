@@ -9,7 +9,7 @@ const IdeasStep4 = ({ data, onChangeSearchPerson, persons, selectCollaborator })
     const { collaborators } = data;
 
     return (
-        <div className="row panel-body form-steps step-four">
+        <div className="row panel-body panel-body-mobile form-steps step-four">
             <div className="col-xs-12">
                 <h2 className="stepH2">Selección de Colaboradores</h2>
                 <div className="row">

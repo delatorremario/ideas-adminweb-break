@@ -8,7 +8,7 @@ import PersonSearch from './PersonSearch';
 
 const IdeasStep1 = ({ onChangeForm, data, handleChangeDate, onChangeSearchPerson, persons, selectPerson, origins, selectOrigin }) => (
 
-    <div className="row panel-body form-steps step-one">
+    <div className="row panel-body panel-body-mobile form-steps step-one">
         <div className="col-md-6 datePicker">
             <FormGroup>
                 <ControlLabel>Fecha de Creación</ControlLabel>

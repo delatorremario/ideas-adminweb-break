@@ -8,7 +8,7 @@ import StateCard from './StateCard';
 const IdeasStep2 = ({ onChangeForm, data, onChangeSearchPerson, persons, selectChief, selectState, ideasstates }) =>
 
     (
-        <div className="row panel-body form-steps step-two">
+        <div className="row panel-body panel-body-mobile form-steps step-two">
             <div className="col-xs-12">
                 <h2 className="stepH2">Selección de Encargado de Área de Destino</h2>
                 <div className="row" style={{ display: "flex" }}>

@@ -1,0 +1,22 @@
+#footer {
+    @media all and (min-width: 769px) {
+        display: none !important;
+    }
+    display: -ms-flex;
+    display: flex;
+    position: fixed;
+    justify-content: space-around;
+    bottom: 0px;
+    left: 0px;
+    height: 40px;
+    width: 100%;
+    background: gray;
+    .footer-item {
+        height: 100%;
+        width: 25%;
+        .footer-button {
+            height: 100%;
+            width: 100%;
+        }
+    }
+}
