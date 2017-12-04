@@ -1,5 +1,4 @@
 #header {
-    z-index: 200;
     height: 60px;
     position: fixed;
     top: 0px;
@@ -7,6 +6,7 @@
     width: 100%;
     margin-right: 0;
     z-index: 1000000;
+    box-shadow: 1px 1px 0.1em #6e8795 !important;
      .brand {
         float: left;
         width: 240px;

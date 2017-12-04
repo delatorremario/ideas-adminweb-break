@@ -122,7 +122,7 @@ class SidebarPush extends Component {
             windowHeight -= 200;
             // console.log('WHM', windowHeight)
         } else {
-            windowHeight += 100;
+            windowHeight += 200;
             // console.log('WHD', windowHeight)
         }
         $('.sidebar.sidebar-left').css({ height: windowHeight });
