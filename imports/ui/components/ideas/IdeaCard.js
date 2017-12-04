@@ -15,7 +15,7 @@ const IdeaCard = ({ idea, lap, handleRemove }) => {
 
     return <div className="col-sm-6 col-lg-4 cards-item">
         <div className="panel panel-default" style={{ borderColor: color }}>
-            <div className="panel-heading" style={{ borderColor: color }}>
+            <div className="panel-heading" style={{ borderColor: color, backgroundColor: color+'05' }}>
                 <h5 className="panel-title">
                     <div style={{ borderBottom: `1px solid ${color}` }}>
                         <small> <Moment format="DD MMM YYYY" date={date} /> </small>
