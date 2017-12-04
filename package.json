@@ -1,6 +1,6 @@
 {
   "name": "Ideas 3.0",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Aplicación para el relevamiento de Ideas.",
   "scripts": {
     "start": "meteor --settings settings-development.json",

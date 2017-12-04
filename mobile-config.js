@@ -15,12 +15,21 @@ App.icons({
     // 'iphone_2x': 'icons/icon-60@2x.png',
     'iphone_2x': 'public/app/iPhone/ideas.appiconset/iphone-appicon@2x.png',
     'iphone_3x': 'public/app/iPhone/ideas.appiconset/iphone-appicon@3x.png',
+    'ios_settings_2x': 'public/app/iPhone/ideas.appiconset/iphone-settings@2x.png',
+    'ios_settings_3x': 'public/app/iPhone/ideas.appiconset/iphone-settings@3x.png',
+    'ios_spotlight_2x': 'public/app/iPhone/ideas.appiconset/iphone-spotlight@2x.png',
+    'ios_spotlight_3x': 'public/app/iPhone/ideas.appiconset/iphone-spotlight@3x.png',
+    'notification_2x': 'public/app/iPhone/ideas.appiconset/iphone-notification@2x.png',
+    'notification_3x': 'public/app/iPhone/ideas.appiconset/iphone-notification@3x.png',
+  
     // More screen sizes and platforms...
 });
 App.launchScreens({
-    'iphone_2x': 'public/app/iPhone/ideas.launchimage/iphone_portrait@2x.png', //  splash/Default@2x~iphone.png',
-    'iphone5': 'public/app/iPhone/ideas.launchimage/iphone_portrait@2x.png', //  splash/Default@2x~iphone.png',
-    // 'iphone5': 'splash/Default~iphone5.png',
+
+    'iphoneX_portrait': 'public/app/iPhone/ideas.launchimage/iphone_portrait@2x.png', 
+    'iphone_2x': 'public/app/iPhone/ideas.launchimage/iphone_portrait@2x.png', 
+    'iphone5': 'public/app/iPhone/ideas.launchimage/iphone_portrait@2x.png', 
+
     // More screen sizes and platforms...
 });
 
