@@ -57,6 +57,7 @@ export default class SendInvitationPage extends React.Component {
                         placeholder="Email Address"
                       />
                     </FormGroup>
+                    <br />
                     <Button type="submit" className="btn btn-success btn-lg btn-block">Enviar Invitación</Button>
                   </form>
 

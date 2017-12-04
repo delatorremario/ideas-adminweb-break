@@ -563,6 +563,13 @@ input:-webkit-autofill::-webkit-input-placeholder {
     }
 }
 
+.recover-password {
+    text-align: center;
+    .btn.btn-success.btn-lg.btn-block.btn.btn-default {
+        margin: 0px;
+    }
+}
+
 .nonePM {
     margin: 0px !important;
     padding: 0px !important;
