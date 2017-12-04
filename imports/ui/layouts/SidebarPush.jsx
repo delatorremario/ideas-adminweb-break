@@ -117,7 +117,7 @@ class SidebarPush extends Component {
 
     setHeightScrollbar() {
         let windowHeight = $(window).height() - 200;
-        console.log('WH', windowHeight)
+        // console.log('WH', windowHeight)
         $('.sidebar.sidebar-left').css({ height: windowHeight });
     }
 
@@ -160,6 +160,7 @@ class SidebarPush extends Component {
     renderNavigation() {
         let links = ``;
         const { navLinks } = this.state
+        // console.log('NavLinks', navLinks)
 
         links = navLinks.map((link, index) => {
 
