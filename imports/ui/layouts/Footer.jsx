@@ -25,8 +25,8 @@ class Footer extends Component {
                 </div>
                 <div className="footer-item">
                     <button className="footer-button">
-                        <Link className="footer-button" to="/" >
-                            <i className="fa fa-fw fa-envelope-o"></i>
+                        <Link className="footer-button" to="/ideas/find" >
+                            <i className="fa fa-fw fa-envelope"></i>
                         </Link>
                     </button>
                 </div>

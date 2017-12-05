@@ -15,7 +15,7 @@ const IdeaCard = ({ idea, lap, handleRemove }) => {
 
     return <div className="col-sm-6 col-lg-4 cards-item">
         <div className="panel panel-default" style={{ borderColor: color }}>
-            <div className="panel-heading" style={{ borderColor: color, backgroundColor: color+'05' }}>
+            <div className="panel-heading" style={{ borderColor: color, backgroundColor: color + '05' }}>
                 <h5 className="panel-title">
                     <div style={{ borderBottom: `1px solid ${color}` }}>
                         <small> <Moment format="DD MMM YYYY" date={date} /> </small>
@@ -36,6 +36,10 @@ const IdeaCard = ({ idea, lap, handleRemove }) => {
 
                 <div className="actions pull-right">
                     <Link to={`/idea/${idea._id}/edit`}><i className="fa fa-pencil"></i></Link>
+                    {/* Implementar */}
+                    <Link to={`/ideas/find`}>
+                        <i className="fa fa-comment"></i>
+                    </Link>
                     <i className="fa fa-trash" onClick={handleRemove(idea._id).bind(this)}></i>
                 </div>
             </div>
