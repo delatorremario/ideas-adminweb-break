@@ -134,11 +134,38 @@
         margin: 15px 20px !important;
     }
     
-    .login-box {
-        width: 100% !important;
-        margin: 0px !important;
-        .already-account {
-            font-size: 0.8em !important;
+    .login-box-container {
+        .login-box {
+            width: 100% !important;
+            margin: 0px 0px 0px 0px !important;
+            padding: 5px auto 0px auto !important;
+            .modal-header {
+                padding: -20px 0px 0px 0px !important;
+                .page-header {
+                    padding: -20px 0px 0px 0px !important;
+                    text-align: center !important;
+                    font-size: 2em !important;
+                    padding: 0px !important;
+                }
+            }
+            .btn {
+                margin: 0px !important;
+                padding: 5px !important;
+                text-align: center !important
+            }
+            .already-account {
+                margin: 20px 0px -20px 0px !important;
+                padding: 5px !important;
+                text-align: center !important;
+                font-size: 0.8em !important;
+            }
+            .signup {
+                FormGroup {
+                    padding: 0px !important;
+                    margin: 0px !important;
+                    text-align: center !important;
+                }
+            }
         }
     }
 
