@@ -18,7 +18,7 @@ module.exports = {
 
   meteor: {
     // TODO: change app name and path
-    name: 'ideas-webadmin',
+    name: 'ideas',
     path: '../.',
 
     servers: {
@@ -41,14 +41,15 @@ module.exports = {
       // If you are using ssl, it needs to start with https://
       ROOT_URL: `https://${url}`,
       MONGO_URL: 'mongodb://ideas:ideas@ds129053.mlab.com:29053/ideas-dev',
-      PORT: 5001
+      PORT: 5010
     },
 
     
 
     docker: {
       // change to 'kadirahq/meteord' if your app is not using Meteor 1.4
-      image: 'abernix/meteord:base',
+      // image: 'abernix/meteord:base',
+      image: 'abernix/meteord:node-8.4.0-base',
       // imagePort: 80, // (default: 80, some images EXPOSE different ports)
     },
 
