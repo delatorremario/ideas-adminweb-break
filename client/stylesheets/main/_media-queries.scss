@@ -137,9 +137,18 @@
     .login-box {
         width: 100% !important;
         margin: 0px !important;
+        .already-account {
+            font-size: 0.8em !important;
+        }
     }
 
     .isDesktop {
+        display: none;
+    }
+}
+
+@media all and (min-width: 769px) {
+    .isMobile {
         display: none;
     }
 }
