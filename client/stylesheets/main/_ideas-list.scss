@@ -102,6 +102,10 @@
 @media all and (max-width:768px){
     .ideas-list {
         .panel.panel-body {
+            padding: 0px !important;
+            .btn {
+                margin: 5px !important;
+            }
             .btn-action {
                 width: 50%;
             }
