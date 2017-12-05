@@ -102,6 +102,8 @@
 @media all and (max-width:768px){
     .ideas-list {
         .panel.panel-body {
+            border: 1px solid rgb(223, 223, 223);
+            border-width: 1px 0px !important;
             padding: 0px !important;
             .btn {
                 margin: 5px !important;
