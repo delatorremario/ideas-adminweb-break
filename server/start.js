@@ -25,7 +25,8 @@ const mails = ['mariodelatorre@holos.cl',
 'rmarambio@holos.cl', 
 'asusel@holos.cl',
 'dblazina@holos.cl',
-'martingonzalez@holos.cl'
+'martingonzalez@holos.cl',
+'demo@holos.cl'
 ];
 
 const createAccounts = () => {
