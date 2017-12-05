@@ -54,7 +54,6 @@ const DashboardCard = ({ area }) => {
             value: extarnalPersons,
         },
     ]
-
     return (
         <div className="col-xs-12 col-sm-6 col-md-4 cards-item">
             <div className="panel panel-default dashboardPanel">
@@ -71,10 +70,12 @@ const DashboardCard = ({ area }) => {
                         }
                     </div>
                     <div className="row">
-                        <Doughnut data={data}
-                            options={{
-                                maintainAspectRatio: true
-                            }} />
+                        {
+                            data && <Doughnut data={data}
+                                options={{
+                                    maintainAspectRatio: true
+                                }} />
+                        }
                     </div>
                     <div className="link-status-container">
                         {

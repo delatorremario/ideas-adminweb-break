@@ -6,7 +6,9 @@
     width: 100%;
     margin-right: 0;
     z-index: 1000000;
-    box-shadow: 1px 1px 0.1em #6e8795 !important;
+    @media all and (min-width: 768px) {
+        box-shadow: 1px 1px 0.1em #6e8795 !important;
+    }
      .brand {
         float: left;
         width: 240px;
