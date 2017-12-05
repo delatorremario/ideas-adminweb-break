@@ -40,7 +40,7 @@ class Login extends React.Component {
                 type="email"
                 ref="emailAddress"
                 name="emailAddress"
-                placeholder="Email Address"
+                placeholder="Email"
               />
             </FormGroup>
             <FormGroup>
