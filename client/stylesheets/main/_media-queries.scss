@@ -125,6 +125,20 @@
         }
     }
 
+    .ideas-list {
+        .show-filters {
+            .panel.panel-body {
+                div {
+                    div {
+                        .states-select {
+                            margin-left: 0px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     .dashboardPanel {
         padding: 0px 15px 15px 10px;
         .panel-heading {
