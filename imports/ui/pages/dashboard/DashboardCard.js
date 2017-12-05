@@ -82,9 +82,9 @@ const DashboardCard = ({ area }) => {
                                 <Link to={`/ideas/%20/${state.code}/%20/${area._id}/find`}>
                                     <div>{state.state}</div>
                                     {/* <div className="count">{state.count}</div> */}
-                                    <div className="count" style={{ backgroundColor: colors[0] }}>{state.green}</div>
-                                    <div className="count" style={{ backgroundColor: colors[1] }}>{state.yellow}</div>
-                                    <div className="count" style={{ backgroundColor: colors[2] }}>{state.red}</div>
+                                    <div className="count" style={{ backgroundColor: state.green == 0 ? 'none' : colors[0] }}>{state.green}</div>
+                                    <div className="count" style={{ backgroundColor: state.yellow == 0 ? 'none' : colors[1] }}>{state.yellow}</div>
+                                    <div className="count" style={{ backgroundColor: state.red == 0 ? 'none' : colors[2] }}>{state.red}</div>
                                 </Link>
                             </div>
                             )
