@@ -37,9 +37,9 @@ const IdeaCard = ({ idea, lap, handleRemove }) => {
                 <div className="actions pull-right">
                     <Link to={`/idea/${idea._id}/edit`}><i className="fa fa-pencil"></i></Link>
                     {/* Implementar */}
-                    <Link to={`/ideas/find`}>
+                    {/* <Link to={`/ideas/find`}>
                         <i className="fa fa-comment"></i>
-                    </Link>
+                    </Link> */}
                     <i className="fa fa-trash" onClick={handleRemove(idea._id).bind(this)}></i>
                 </div>
             </div>

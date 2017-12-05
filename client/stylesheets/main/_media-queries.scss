@@ -1,4 +1,4 @@
-@media all and (max-width: 768px) {
+@media all and (max-width: 767px) {
 
     #main-wrapper {
         padding: 0px 0px 40px 0px !important;
@@ -14,10 +14,11 @@
             float: left !important;
             width: 100% !important;
             text-align: center !important;
-            height: 90px !important;
+            height: 80px !important;
             border-radius: 0px !important;
             margin: 3px 0px !important;
             background-color: rgb(238, 238, 238) !important;
+            padding: 5px !important;
             .close-card {
                 margin: 0px !important;
                 padding: 0px !important;
@@ -34,12 +35,12 @@
             h2 {
                 display: block !important;
                 float: left !important;
-                width: 90% !important;
+                width: 80% !important;
                 padding: 0px !important;
-                margin: 1px 5% 0px 5% !important;
+                margin: 0px 10% 1px 10% !important;
                 height: 50% !important;
                 text-align: center !important;
-                font-size: 1em !important;
+                font-size: 0.9em !important;
             }
             hr {
                 display: block !important;
@@ -54,11 +55,11 @@
                 float: left !important;
                 width: 90% !important;
                 padding: 0px !important;
-                margin: 3px 5% 0px 5% !important;
+                margin: 5px 5% 0px 5% !important;
                 height: 10% !important;
                 text-align: center !important;
                 word-wrap: none !important;
-                font-size: 0.8em !important;
+                font-size: 0.7em !important;
             }
             h3 {
                 display: block !important;
@@ -71,7 +72,7 @@
         }
     }
 
-    .panel-body {
+    .panel-body.ng-binding {
         padding: 10px 0px 0px 0px;
         margin: 0px !important;
         width: 100% !important;
@@ -102,6 +103,9 @@
             width: 100% !important;
             margin: 10px !important;
         }
+        .list-group-item {
+            font-size: 0.9em !important;
+        }
         .stepH2 {
             widows: 90% !important;
             margin: 20px 5% !important;
@@ -114,6 +118,9 @@
                 margin: 0px !important;
                 padding: 0px !important;
                 width: 100% !important;
+                .state-row {
+                    font-size: 0.8em !important;
+                }
             }
         }
     }
@@ -174,7 +181,7 @@
     }
 }
 
-@media all and (min-width: 769px) {
+@media all and (min-width: 768px) {
     .isMobile {
         display: none;
     }
