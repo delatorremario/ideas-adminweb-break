@@ -1,8 +1,9 @@
 import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
 import { Accounts } from 'meteor/accounts-base';
+import Persons from '../imports/api/persons/persons';
+import Corporations from '../imports/api/corporations/corporations';
 import _ from 'lodash';
-
 
 const Start = {
   start: () => {
@@ -11,6 +12,7 @@ const Start = {
     addSuperAdminHolos();
     addLeaders();
     addEmployees();
+    setProfile();
   },
 };
 
@@ -20,21 +22,28 @@ Meteor.methods({
 
 
 
-const mails = ['mariodelatorre@holos.cl', 
-'ctomba@holos.cl', 
-'cbaiardi@holos.cl', 
-'rmarambio@holos.cl', 
-'asusel@holos.cl',
-'dblazina@holos.cl',
-'martingonzalez@holos.cl',
-'demo@holos.cl',
-'usuario@holos.cl'
+const admins = ['mariodelatorre@holos.cl',
+  'ctomba@holos.cl',
+  'cbaiardi@holos.cl',
+  'rmarambio@holos.cl',
+  'asusel@holos.cl',
+  'dblazina@holos.cl',
+  'martingonzalez@holos.cl',
 ];
 
+const leaders = ['mauricio.ma.rodriguez@bhpbilliton.com', 'delatorremario@gmail.com', 'demo@holos.cl',];
+
+const employees = ['usuario@holos.cl', 'neftali.a.herrera@bhpbilliton.com'];
+
 const createAccounts = () => {
-  _.map(mails, (mail) => {
+  _.map(_.union(admins, leaders), (mail) => {
     if (!Meteor.users.findOne({ 'emails.address': mail })) {
       Accounts.createUser({ email: mail, password: 'Holos123' });
+    }
+  });
+  _.map(employees, (mail) => {
+    if (!Meteor.users.findOne({ 'emails.address': mail })) {
+      Accounts.createUser({ email: mail, password: '123456' });
     }
   });
 };
@@ -49,14 +58,7 @@ const initRoles = () => {
 };
 
 const addSuperAdminHolos = () => {
-  const admins = ['mariodelatorre@holos.cl', 
-  'ctomba@holos.cl', 
-  'cbaiardi@holos.cl', 
-  'rmarambio@holos.cl', 
-  'asusel@holos.cl',
-  'dblazina@holos.cl',
-  'martingonzalez@holos.cl',
-  ];
+
   _.map(admins, (mail) => {
     const user = Meteor.users.findOne({ 'emails.address': mail });
     if (user && !Roles.userIsInRole(user, ['SuperAdminHolos'])) {
@@ -67,7 +69,6 @@ const addSuperAdminHolos = () => {
 };
 
 const addLeaders = () => {
-  const leaders = ['mauricio.ma.rodriguez@bhpbilliton.com','delatorremario@gmail.com','demo@holos.cl',];
   _.map(leaders, (mail) => {
     const user = Meteor.users.findOne({ 'emails.address': mail });
     if (user && !Roles.userIsInRole(user, ['Leader'])) {
@@ -77,7 +78,6 @@ const addLeaders = () => {
   });
 };
 const addEmployees = () => {
-  const employees = ['usuario@holos.cl'];
   _.map(employees, (mail) => {
     const user = Meteor.users.findOne({ 'emails.address': mail });
     if (user && !Roles.userIsInRole(user, ['Employee'])) {
@@ -87,6 +87,27 @@ const addEmployees = () => {
   });
 };
 
+const setProfile = () => {
+
+
+  _.map(_.union(admins, leaders, employees), (mail) => {
+    const user = Meteor.users.findOne({ 'emails.address': mail })
+    if (user) {
+
+      let profile = Persons.findOne({ 'email': mail });
+      if (!profile) {
+        const corporation = Corporations.findOne();
+        profile = corporation && { corporationId: corporation._id }
+      }
+
+      Meteor.users.update({ _id: user._id }, { $set: { profile } });
+      console.log('set profile', user._id);
+    }
+  });
+
+
+
+}
 
 
 

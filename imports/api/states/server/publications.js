@@ -11,7 +11,7 @@ Meteor.publish('states.list', () => {
   const user = self.user();
   if (user) {
     const filters = {
-      corporationId: (user.profile && user.profile.selectedCorporationId) || '',
+      corporationId: (user.profile && user.profile.corporationId) || '',
     };
     return States.find(filters, { sort: { code: 1 } });
   } else return;

@@ -21,7 +21,7 @@ Meteor.publish('ideas.list', (
 
   if (user) {
     const filters = {
-      corporationId: (user.profile && user.profile.selectedCorporationId) || '',
+      corporationId: (user.profile && user.profile.corporationId) || '',
     };
 
     if (textSearch) _.extend(filters, { $text: { $search: textSearch } });

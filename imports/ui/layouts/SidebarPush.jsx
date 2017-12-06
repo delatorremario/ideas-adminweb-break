@@ -146,8 +146,9 @@ class SidebarPush extends Component {
     }
 
     renderUserName() {
-        let userName = "";
-        userName = this.props.user.emails[0].address.split("@")[0];
+        const { user } = this.props;
+        const userName = user && user.profile && user.profile.firstName && user.profile.lastName && (user.profile.firstName + ' ' + user.profile.lastName) || 
+                         user && user.emails[0].address.split("@")[0];
         return userName
     }
 
@@ -226,7 +227,8 @@ class SidebarPush extends Component {
                     }
                     <div className="profile-body dropdown">
                         <a href="javascript:void(0);" className="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                            <h4>{this.renderUserName()}<span className="caret"></span>
+                            <h4>{this.renderUserName()}
+                                {/* <span className="caret"></span> */}
                             </h4>
                         </a>
                         <p className="title">{user && user.roles && user.roles.map((rol, index) => (

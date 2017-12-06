@@ -23,7 +23,7 @@ Meteor.methods({
     // buscar los estados configurados
         
         const filters = {
-            // corporationId: (user.profile && user.profile.selectedCorporationId) || '',
+            // corporationId: (user.profile && user.profile.corporationId) || '',
             'alerts.temporal': true,
         };
 

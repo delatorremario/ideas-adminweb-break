@@ -36,7 +36,7 @@ export const selectByUser = new ValidatedMethod({
     run() {
         const filters = { adminsEmails: { $in: _.map(Meteor.user().emails, 'address') } };
         const corporation = Corporations.findOne(filters);
-        if (corporation) Meteor.users.update(this.userId, { $set: { 'profile.selectedCorporationId': corporation._id } });
+        if (corporation) Meteor.users.update(this.userId, { $set: { 'profile.corporationId': corporation._id } });
     },
 });
 

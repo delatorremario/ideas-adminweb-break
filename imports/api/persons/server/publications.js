@@ -14,7 +14,7 @@ Meteor.publish('persons.search', (text, limit) => {
   const user = self.user();
 
   if (user) {
-    const filters = { $text: { $search: text }, corporationId: (user.profile && user.profile.selectedCorporationId) || '' };
+    const filters = { $text: { $search: text }, corporationId: (user.profile && user.profile.corporationId) || '' };
     const persons = Persons.find(
       filters,
       { fields: { score: { $meta: 'textScore' } } }, { sort: { score: -1 }, limit: limit });

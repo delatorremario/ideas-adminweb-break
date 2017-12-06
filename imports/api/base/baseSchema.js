@@ -26,7 +26,7 @@ const BaseSchema = new SimpleSchema({
     index: true,
     autoValue: function () {
       const user = Meteor.user();
-      return this.isFromTrustedCode && this.value || user && user.profile && user.profile && user.profile.selectedCorporationId
+      return this.isFromTrustedCode && this.value || user && user.profile && user.profile && user.profile.corporationId
     }
   },
 

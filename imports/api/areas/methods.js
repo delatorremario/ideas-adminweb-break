@@ -95,7 +95,7 @@ Meteor.methods({
         const self = this.Meteor;
         const user = self.user();
         if (user) {
-            const filters = { corporationId: (user.profile && user.profile.selectedCorporationId) || '' };
+            const filters = { corporationId: (user.profile && user.profile.corporationId) || '' };
             const firstnodes = Areas.aggregate(
                 [
                     { $lookup: { from: 'typesareas', foreignField: '_id', localField: 'typeAreaId', as: 'TypeArea' } },

@@ -20,11 +20,4 @@ Meteor.startup(() => {
   }
 });
 
-Accounts.onCreateUser = (options, user) => {
-    console.log('onCreated', options, user);
-    // user.roles = ['Empleado'];
-    if (options.profile) {
-        user.profile = options.profile;
-    }
-    return user;
-}
+

@@ -10,7 +10,7 @@ Meteor.publish('typesareastructure.list', () => {
   const user = self.user();
 
   if (user) {
-    const filters = { corporationId: (user.profile && user.profile.selectedCorporationId) || '' };
+    const filters = { corporationId: (user.profile && user.profile.corporationId) || '' };
     return TypesAreaStructure.find(filters);
   } else return;
 });

@@ -21,7 +21,7 @@ Meteor.methods({
         const self = this.Meteor;
         const user = self.user();
         if (user) {
-            const filters = { corporationId: (user.profile && user.profile.selectedCorporationId) || '' };
+            const filters = { corporationId: (user.profile && user.profile.corporationId) || '' };
             const ideasstates = States.find(filters).fetch();
             const ideasstatesshowCodes = _.map(_.filter(ideasstates, { showInDashboard: true }), 'code');
 
