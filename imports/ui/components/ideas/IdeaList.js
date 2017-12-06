@@ -9,6 +9,8 @@ import $ from 'jquery';
 import swal from 'sweetalert2';
 import _ from 'lodash';
 import ReactHTMLTableToExcel from 'react-html-table-to-excel';
+import { Roles } from 'meteor/alanning:roles';
+
 
 import IdeaCard from './IdeaCardContainer';
 import StatesSearch from './StatesSearch';
@@ -150,12 +152,14 @@ class IdeasList extends Component {
         const { areaId } = this.props.params;
         const { stateSelected, textSearch, areaSelected, statesCodesSelected } = this.state;
         const { showFilters, showArea, showList } = this.state;
+        const user = Meteor.user();
+        console.log('user', user);
 
         return (
             <div className='ideas-list'>
                 <IdeasTableForExcelContainer ideas={ideas} />
                 <div className="panel panel-body">
-                    <Link to="/ideas/new" className="btn btn-success btn-trans btn-action"><i className="fa fa-plus"></i> Nuevo</Link>
+                    <Link to={ Roles.userIsInRole(user._id,['Employee']) && "/ideas/new_user" || "/ideas/new"  } className="btn btn-success btn-trans btn-action"><i className="fa fa-plus"></i> Nuevo</Link>
                     <button className={"btn btn-success btn-action " + (showFilters ? 'active' : 'btn-trans')} onClick={this.showFilters}><i className={"fa " + (showFilters && "fa-ban" || "fa-filter")}></i> Filtros</button>
                     <ReactHTMLTableToExcel
                         id="ideas-xls-button"

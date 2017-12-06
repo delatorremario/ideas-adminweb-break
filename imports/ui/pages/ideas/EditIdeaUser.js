@@ -16,7 +16,7 @@ const EditIdeaUser = (props) => {
                         <li>
                             <Link to="/">Area</Link>
                         </li>
-                        <li>Editar</li>
+                        <li>Editar del Usuario</li>
                         <li className="active">{doc && doc.origin}</li>
                     </ol>
                 </div>

@@ -12,9 +12,9 @@ import Persons from '../../../api/persons/persons';
 
 // Step components
 import StepIndicator from '../../components/StepIndicator';
-import IdeasStep1 from './IdeasStep1'
+import IdeasUserStep1 from './IdeasUserStep1'
 import IdeasStep2 from './IdeasStep2'
-import IdeasStep3 from './IdeasStep3'
+import IdeasUserStep3 from './IdeasUserStep3'
 import IdeasStep4 from './IdeasStep4'
 import IdeasStep5 from './IdeasStep5'
 
@@ -30,12 +30,13 @@ export default class IdeaUserEditor extends Component {
             opportunity: '',
             drivers: [],
             collaborators: [],
-            states: []
+            states: [],
+            area: {},
         },
     }
 
     componentDidMount() {
-        ideaUserEditor({ component: this });
+        ideaEditor({ component: this });
         // setTimeout(() => { document.querySelector('[name="name"]').focus(); }, 0);
         if (this.props.doc) {
             this.setState({
@@ -50,12 +51,12 @@ export default class IdeaUserEditor extends Component {
 
     toggleStepReady = () => {
         const { formStep } = this.state;
-        const { origin, person, chief, description, opportunity, drivers, states } = this.state.doc;
-        return (formStep === 1 && origin && person) ||
-            (formStep === 2 && origin && person && chief) ||
-            (formStep === 3 && origin && person && chief && description && opportunity && drivers && drivers.length > 0) ||
-            (formStep === 4 && origin && person && chief && description && opportunity && drivers && drivers.length > 0) ||
-            (formStep === 5 && origin && person && chief && states && description && opportunity && drivers && drivers.length > 0)
+        const { origin, person, chief, description, opportunity, drivers, states, area } = this.state.doc;
+        return (formStep === 1 && area) ||
+            (formStep === 2 && description && opportunity && drivers && drivers.length > 0) ||
+            (formStep === 3) ||
+            (formStep === 4 && description && opportunity && drivers && drivers.length > 0 && false)
+        // (formStep === 5 && origin && person && chief && states && description && opportunity && drivers && drivers.length > 0)
     }
 
 
@@ -175,16 +176,21 @@ export default class IdeaUserEditor extends Component {
     //     console.log(hiddenInputElement.value); // ISO String, ex: "2016-11-19T12:00:00.000Z" 
     //     console.log(hiddenInputElement.getAttribute('data-formattedvalue')) // Formatted String, ex: "11/19/2016" 
     //   },
+
+    selectArea = area => {
+        this.setState(prev => ({ doc: { ...prev.doc, area } }))
+    }
+
     render() {
 
-        const formMaxStep = 5;
+        const formMaxStep = 4;
 
         const { persons, driversArray, origins, ideasstates } = this.props;
 
         const { formStep } = this.state;
         const { doc } = this.state;
-        const { origin, _id } = this.state.doc;
-        // console.log('DOC', doc);
+        const { origin, _id, area } = this.state.doc;
+        console.log('area', area);
 
         return (
             <div className="row">
@@ -199,28 +205,18 @@ export default class IdeaUserEditor extends Component {
                         onSubmit={event => event.preventDefault()}>
 
                         {formStep === 1 &&
-                            <IdeasStep1 onChangeForm={this.onChangeDoc}
-                                data={doc}
-                                onChangeSearchPerson={this.onChangeSearchPerson}
-                                persons={persons}
-                                selectPerson={this.selectPerson}
-                                origins={origins}
-                                selectOrigin={this.selectOrigin}
-                                handleChangeDate={this.handleChangeDate}
-                            />}
-                        {formStep === 2 &&
-                            <IdeasStep2 onChangeForm={this.onChangeDoc}
-                                data={doc}
-                                onChangeSearchPerson={this.onChangeSearchPerson}
-                                persons={persons}
-                                selectChief={this.selectChief}
-                            />}
-                        {formStep === 3 &&
+                            <IdeasUserStep1 {...this.props} selectArea={this.selectArea} areaSelected={area} />
+                        }
+                        {formStep === 2 && // mismo que step 3 de administrador
                             <IdeasStep3 onChangeForm={this.onChangeDoc}
                                 data={doc}
                                 driversArray={driversArray}
                                 selectDriver={this.selectDriver}
                             />}
+                        {formStep === 3 && // foto y archivos
+                            <IdeasUserStep3 {...this.props} />
+                        }
+
                         {formStep === 4 &&
                             <IdeasStep4
                                 data={doc}
@@ -228,12 +224,7 @@ export default class IdeaUserEditor extends Component {
                                 persons={persons}
                                 selectCollaborator={this.selectCollaborator}
                             />}
-                        {formStep === 5 &&
-                            <IdeasStep5
-                                data={doc}
-                                ideasstates={ideasstates}
-                                selectState={this.selectState}
-                            />}
+
                         <div className="row forms-bottom-panel">
                             {
                                 formStep === formMaxStep &&

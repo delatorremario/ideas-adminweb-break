@@ -1,0 +1,28 @@
+.files {
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    .file {
+
+        width: 70px;
+        height: 70px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-size: x-large;
+        margin: 10px;
+        border-radius: 50%;
+
+    }
+
+    .attachFile {
+        background-color: #018982;
+    }
+
+    .addPhoto {
+        background-color: #f67b2f;
+    }
+}

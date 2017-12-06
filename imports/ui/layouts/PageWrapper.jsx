@@ -49,7 +49,7 @@ const PageWrapper = () => (
             <Route exact path="/idea/:_id/edit" component={EditIdea} />
             
             {/* Ideas Usuario */}
-            <Route exact path="/ideas/new_user" component={EditIdea} />
+            <Route exact path="/ideas/new_user" component={EditIdeaUser} />
 
 
             {/* Configs */}
