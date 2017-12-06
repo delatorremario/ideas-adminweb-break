@@ -35,7 +35,7 @@ export default class IdeaUserEditor extends Component {
     }
 
     componentDidMount() {
-        ideaEditor({ component: this });
+        ideaUserEditor({ component: this });
         // setTimeout(() => { document.querySelector('[name="name"]').focus(); }, 0);
         if (this.props.doc) {
             this.setState({

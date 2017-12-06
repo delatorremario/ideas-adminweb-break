@@ -15,6 +15,9 @@ import EditArea from '../containers/areas/EditArea';
 import Ideas from '../pages/ideas/Ideas';
 import EditIdea from '../containers/ideas/EditIdea';
 
+// ideas new user
+import EditIdeaUser from '../containers/ideas/EditIdeaUser';
+
 import Dashboard from '../containers/dashboard/Dashboard';
 import BlankPage from '../pages/BlankPage';
 import ComponentsPage from '../pages/ComponentsPage';
@@ -45,6 +48,10 @@ const PageWrapper = () => (
             <Route exact path="/ideas/new" component={EditIdea} />
             <Route exact path="/idea/:_id/edit" component={EditIdea} />
             
+            {/* Ideas Usuario */}
+            <Route exact path="/ideas/new_user" component={EditIdea} />
+
+
             {/* Configs */}
             <Route exact path="/configs" component={Configs} />
             {/* <Route exact path="/ideas/new" component={EditIdea} /> */}
