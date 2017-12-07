@@ -26,7 +26,7 @@ export default class Signup extends React.Component {
             ref={form => (this.signupForm = form)}
             onSubmit={this.handleSubmit}
           >
-            <FormGroup>
+            {/* <FormGroup>
               <ControlLabel>Nombre</ControlLabel>
               <FormControl
                 type="text"
@@ -43,7 +43,7 @@ export default class Signup extends React.Component {
                 name="lastName"
                 placeholder="Apellido"
               />
-            </FormGroup>
+            </FormGroup> */}
             <FormGroup>
               <ControlLabel>Email</ControlLabel>
               <FormControl

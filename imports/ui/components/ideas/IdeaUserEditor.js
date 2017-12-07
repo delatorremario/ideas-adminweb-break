@@ -13,10 +13,9 @@ import Persons from '../../../api/persons/persons';
 // Step components
 import StepIndicator from '../../components/StepIndicator';
 import IdeasUserStep1 from './IdeasUserStep1'
-import IdeasStep2 from './IdeasStep2'
+import IdeasStep3 from './IdeasStep3'
 import IdeasUserStep3 from './IdeasUserStep3'
 import IdeasStep4 from './IdeasStep4'
-import IdeasStep5 from './IdeasStep5'
 
 export default class IdeaUserEditor extends Component {
     state = {

@@ -9,12 +9,12 @@ let component;
 const getUserData = () => ({
   email: document.querySelector('[name="emailAddress"]').value,
   password: document.querySelector('[name="password"]').value,
-  profile: {
-    name: {
-      first: document.querySelector('[name="firstName"]').value,
-      last: document.querySelector('[name="lastName"]').value,
-    },
-  },
+  // profile: {
+  //   name: {
+  //     first: document.querySelector('[name="firstName"]').value,
+  //     last: document.querySelector('[name="lastName"]').value,
+  //   },
+  // },
 });
 
 const signup = () => {
@@ -25,7 +25,7 @@ const signup = () => {
     if (error) {
       Bert.alert(error.reason, 'danger');
     } else {
-      Bert.alert('Welcome!', 'success');
+      Bert.alert('Bienvenido!', 'success');
       history.push('/');
     }
   });
@@ -34,12 +34,12 @@ const signup = () => {
 const validate = () => {
   $(component.signupForm).validate({
     rules: {
-      firstName: {
-        required: true,
-      },
-      lastName: {
-        required: true,
-      },
+      // firstName: {
+      //   required: true,
+      // },
+      // lastName: {
+      //   required: true,
+      // },
       emailAddress: {
         required: true,
         email: true,
@@ -50,19 +50,19 @@ const validate = () => {
       },
     },
     messages: {
-      firstName: {
-        required: 'First name?',
-      },
-      lastName: {
-        required: 'Last name?',
-      },
+      // firstName: {
+      //   required: 'First name?',
+      // },
+      // lastName: {
+      //   required: 'Last name?',
+      // },
       emailAddress: {
-        required: 'Need an email address here.',
-        email: 'Is this email address legit?',
+        required: 'Debe ingresar un e-mail',
+        email: 'No tiene formato de email',
       },
       password: {
-        required: 'Need a password here.',
-        minlength: 'Use at least six characters, please.',
+        required: 'Debe ingresar una contraseña',
+        minlength: 'Mínimo 6 caracteres',
       },
     },
     submitHandler() { signup(); },
