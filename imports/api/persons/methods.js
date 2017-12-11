@@ -25,6 +25,11 @@ export const removePerson = new ValidatedMethod({
     },
 });
 
+export const joinUserPerson = ( user ) => {
+    console.log('USER', user);
+    return `hola ${user._id}`
+}
+
 rateLimit({
     methods: [
         upsertPerson,

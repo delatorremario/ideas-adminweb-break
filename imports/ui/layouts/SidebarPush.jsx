@@ -53,6 +53,11 @@ class SidebarPush extends Component {
                     path: "/ideas/find",
                 },
                 {
+                    title: "Profile",
+                    iconClasses: ["fa", "fa-fw", "fa-user-circle-o"],
+                    path: "/profile",
+                },
+                {
                     title: "Enviar Invitación",
                     path: "/sendinvitation",
                     iconClasses: ["fa", "fa-fw", "fa-envelope-o"],

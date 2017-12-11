@@ -21,12 +21,13 @@ const signup = () => {
   const { history } = component.props;
   const user = getUserData();
 
+
+
   Accounts.createUser(user, (error) => {
     if (error) {
       Bert.alert(error.reason, 'danger');
     } else {
-      Bert.alert('Bienvenido!', 'success');
-      history.push('/');
+      history.push('/profile');
     }
   });
 };

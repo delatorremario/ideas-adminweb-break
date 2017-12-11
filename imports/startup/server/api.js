@@ -22,4 +22,6 @@ import '../../api/dashboard/methods';
 import '../../api/states/server/publications';
 import '../../api/states/methods';
 
+import '../../api/profile/methods';
+
 // import '../../api/base/baseSchema';

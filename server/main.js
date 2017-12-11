@@ -1,15 +1,5 @@
 import { Meteor } from 'meteor/meteor';
-import { Accounts } from 'meteor/accounts-base';
 import { developmentEnv, productionEnv } from './env';
-
-Accounts.onCreateUser = (options, user) => {
-    console.log("server on create user triggered", options, user);
-    // user.roles = ['Empleado'];
-    if (options.profile) {
-        user.profile = options.profile;
-    }
-    return user;
-}
 
 //import '../imports/startup/server/accounts/email-templates';
 //import '../imports/startup/server/accounts/default-roles';

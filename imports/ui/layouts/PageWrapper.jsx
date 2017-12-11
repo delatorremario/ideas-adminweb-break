@@ -22,6 +22,9 @@ import Dashboard from '../containers/dashboard/Dashboard';
 import BlankPage from '../pages/BlankPage';
 import ComponentsPage from '../pages/ComponentsPage';
 
+// Profile
+import EditProfile from '../containers/profile/EditProfile';
+
 // Configs
 
 import Configs from '../containers/configs/Configs';
@@ -50,6 +53,9 @@ const PageWrapper = () => (
             
             {/* Ideas Usuario */}
             <Route exact path="/ideas/new_user" component={EditIdeaUser} />
+            
+            {/* Profile */}
+            <Route exact path="/profile" component={EditProfile} />
 
 
             {/* Configs */}

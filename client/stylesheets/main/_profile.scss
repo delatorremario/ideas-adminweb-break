@@ -1,0 +1,13 @@
+#main-wrapper {
+    overflow: visible !important;
+}
+
+.header-profile {
+    display: flex;
+}
+
+@media all and (max-width:768px){
+    .header-profile {
+        flex-direction: column;
+    }
+}
