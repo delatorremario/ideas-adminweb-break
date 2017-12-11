@@ -105,6 +105,7 @@ export default class ProfileEditor extends Component {
         const oneUp = profile && profile.oneUp || '';
         const emailChief = profile && profile.emailChief || '';
         const area = profile && profile.area || '';
+        const oneText = company === "MEL" ? 'One Up' : 'Jefe Directo'
         console.log('person', person)
         return (
             <div>
@@ -266,7 +267,7 @@ export default class ProfileEditor extends Component {
                     <FormGroup>
                         <div className="col-sm-4">
                             <ControlLabel>
-                                {_.isEmpty(person) && 'Jefe Directo' || 'One Up'}
+                                {oneText}
                             </ControlLabel>
                         </div>
                         <div className="col-sm-6">
@@ -275,13 +276,13 @@ export default class ProfileEditor extends Component {
                                 name="oneUp"
                                 value={oneUp}
                                 onChange={this.onChangeProfile}
-                                placeholder={_.isEmpty(person) && 'Jefe Directo' || 'One Up'}
+                                placeholder={oneText}
                             />
                         </div>
                     </FormGroup>
                     <FormGroup>
                         <div className="col-sm-4">
-                            <ControlLabel>Email {_.isEmpty(person) && 'Jefe Directo' || 'One Up'}</ControlLabel>
+                            <ControlLabel>Email {oneText}</ControlLabel>
                         </div>
                         <div className="col-sm-6">
                             <FormControl
@@ -289,7 +290,7 @@ export default class ProfileEditor extends Component {
                                 name="emailChief"
                                 value={emailChief}
                                 onChange={this.onChangeProfile}
-                                placeholder={_.isEmpty(person) && 'Email Jefe Directo' || 'Email One Up'}
+                                placeholder={'Email ' + oneText}
                             />
                         </div>
                     </FormGroup>
