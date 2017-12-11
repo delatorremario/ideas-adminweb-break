@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
+import { Meteor } from 'meteor/meteor';
 
 // Corporaciones
 import Corporations from '../pages/corporations/Corporations';
@@ -32,42 +33,59 @@ import EditConfig from '../containers/configs/EditConfig';
 
 import SendInvitationPage from '../pages/singinup/SendInvitationPage';
 
+const completedProfile = () => {
+    console.log('USER', user);
+    const user = Meteor.user()
+    return user && user.profile
+        && user.profile.firstName
+        && user.profile.lastName
+        && user.profile.oneUp
+        && user.profile.area
+}
+
 const PageWrapper = () => (
-        <section className="main-content-wrapper">
-            <Route exact path="/" component={Dashboard} />
-            <Route path="/dashboard" component={Dashboard} />
-            {/* Corporaciones */}
-            <Route exact path="/corporations" component={Corporations} />
-            <Route exact path="/corporations/new" component={NewCorporation} />
-            <Route exact path="/corporation/:_id/edit" component={EditCorporation} />
-            
-            {/* Areas */}
-            <Route exact path="/areas" component={Areas} />
-            <Route exact path="/areas/new" component={NewArea} />
-            <Route exact path="/area/:_id/edit" component={EditArea} />
-
-            {/* Ideas */}
-            <Route exact path="/ideas/:text?/:stateCode?/:step?/:areaId?/find" component={Ideas} />
-            <Route exact path="/ideas/new" component={EditIdea} />
-            <Route exact path="/idea/:_id/edit" component={EditIdea} />
-            
-            {/* Ideas Usuario */}
-            <Route exact path="/ideas/new_user" component={EditIdeaUser} />
-            
-            {/* Profile */}
-            <Route exact path="/profile" component={EditProfile} />
+    <section className="main-content-wrapper">
 
 
-            {/* Configs */}
-            <Route exact path="/configs" component={Configs} />
-            {/* <Route exact path="/ideas/new" component={EditIdea} /> */}
-             <Route exact path="/config/:_id/edit" component={EditConfig} /> 
-            
-            <Route path="/sendinvitation" component={SendInvitationPage} />
-            
-            <Route path="/blank-page" component={BlankPage} />
-            <Route path="/components-page" component={ComponentsPage} />
-        </section>
-    );
+        {
+            !completedProfile() && <Route path="/" component={EditProfile} /> ||
+            <div>
+                <Route exact path="/" component={Dashboard} />
+                <Route path="/dashboard" component={Dashboard} />
+                {/* Corporaciones */}
+                <Route exact path="/corporations" component={Corporations} />
+                <Route exact path="/corporations/new" component={NewCorporation} />
+                <Route exact path="/corporation/:_id/edit" component={EditCorporation} />
+
+                {/* Areas */}
+                <Route exact path="/areas" component={Areas} />
+                <Route exact path="/areas/new" component={NewArea} />
+                <Route exact path="/area/:_id/edit" component={EditArea} />
+
+                {/* Ideas */}
+                <Route exact path="/ideas/:text?/:stateCode?/:step?/:areaId?/find" component={Ideas} />
+                <Route exact path="/ideas/new" component={EditIdea} />
+                <Route exact path="/idea/:_id/edit" component={EditIdea} />
+
+                {/* Ideas Usuario */}
+                <Route exact path="/ideas/new_user" component={EditIdeaUser} />
+
+                {/* Profile */}
+                <Route exact path="/profile" component={EditProfile} />
+
+
+                {/* Configs */}
+                <Route exact path="/configs" component={Configs} />
+                {/* <Route exact path="/ideas/new" component={EditIdea} /> */}
+                <Route exact path="/config/:_id/edit" component={EditConfig} />
+
+                <Route path="/sendinvitation" component={SendInvitationPage} />
+
+                <Route path="/blank-page" component={BlankPage} />
+                <Route path="/components-page" component={ComponentsPage} />
+            </div>
+        }
+    </section>
+);
 
 export default PageWrapper;

@@ -6,14 +6,6 @@ import BlankPage from '../BlankPage';
 import Loading from '../../components/Loading';
 import EditProfile from '../../containers/profile/EditProfile';
 
-const completedProfile = (user) => {
-  console.log('USER', user);
-  return user && user.profile
-    && user.profile.firstName
-    && user.profile.lastName
-    && user.profile.oneUp
-    && user.profile.area
-}
 
 const Authenticated = ({ loggingIn, authenticated, component, ...rest }) => {
   const pathname = location && location.pathname;
@@ -36,7 +28,6 @@ const Authenticated = ({ loggingIn, authenticated, component, ...rest }) => {
     <Route {...rest} render={(props) => {
       if (loggingIn) return <Loading style="loader-container-fixed" />;
       if (authenticated && !roleAutherized) return <BlankPage />;
-      if (authenticated && !completedProfile(user)) return <EditProfile {...props} />;
       return (
         authenticated &&
         React.createElement(component, { ...props, loggingIn, authenticated }))
