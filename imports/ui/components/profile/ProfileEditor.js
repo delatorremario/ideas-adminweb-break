@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { FormGroup, ControlLabel, FormControl, Button, Radio } from 'react-bootstrap'
+import { FormGroup, ControlLabel, FormControl, Button, Radio, Alert } from 'react-bootstrap'
 import profileEditor from '../../../modules/profile/profile-editor';
 import CSSTransitionGroup from 'react-addons-css-transition-group'
 import MainList from '../MainList'
@@ -9,6 +9,13 @@ import DatePicker from 'react-bootstrap-date-picker';
 
 const companies = ['MEL', 'BHP', 'Contratista']
 
+const completedProfile = (user) => {
+    return user && user.profile
+        && user.profile.firstName
+        && user.profile.lastName
+        && user.profile.oneUp
+        && user.profile.area
+}
 export default class ProfileEditor extends Component {
     state = {
         user: {
@@ -89,7 +96,7 @@ export default class ProfileEditor extends Component {
     }
 
     render() {
-        const { person } = this.state;
+        const { user, person } = this.state;
         const { _id, emails, profile } = this.state.user;
         const rut = profile && profile.rut || '';
         const firstName = profile && profile.firstName || '';
@@ -106,9 +113,15 @@ export default class ProfileEditor extends Component {
         const emailChief = profile && profile.emailChief || '';
         const area = profile && profile.area || '';
         const oneText = company === "MEL" ? 'One Up' : 'Jefe Directo'
-        console.log('person', person)
         return (
             <div>
+
+                {
+                    !completedProfile(user) &&
+                    <Alert bsStyle="warning">
+                        Debe completar su perfil para continuar
+                    </Alert>
+                }
                 <div className="col-sm-12 header-profile">
                     <div>
                         {
