@@ -102,8 +102,10 @@ export default class ProfileEditor extends Component {
         const contactPhone = profile && profile.contactPhone || '';
         const address = profile && profile.address || '';
         const company = profile && profile.company || '';
-        console.log('company', company)
-        console.log('profile', profile)
+        const oneUp = profile && profile.oneUp || '';
+        const emailChief = profile && profile.emailChief || '';
+        const area = profile && profile.area || '';
+        console.log('person', person)
         return (
             <div>
                 <div className="col-sm-12 header-profile">
@@ -257,6 +259,49 @@ export default class ProfileEditor extends Component {
                                 value={company}
                                 onChange={this.onChangeProfile}
                                 placeholder="Empresa"
+                                disabled={ !_.isEmpty(person) }
+                            />
+                        </div>
+                    </FormGroup>
+                    <FormGroup>
+                        <div className="col-sm-4">
+                            <ControlLabel>Jefe Directo</ControlLabel>
+                        </div>
+                        <div className="col-sm-6">
+                            <FormControl
+                                type="text"
+                                name="oneUp"
+                                value={oneUp}
+                                onChange={this.onChangeProfile}
+                                placeholder="One Up"
+                            />
+                        </div>
+                    </FormGroup>
+                    <FormGroup>
+                        <div className="col-sm-4">
+                            <ControlLabel>Email Jefe Directo</ControlLabel>
+                        </div>
+                        <div className="col-sm-6">
+                            <FormControl
+                                type="text"
+                                name="emailChief"
+                                value={emailChief}
+                                onChange={this.onChangeProfile}
+                                placeholder="Email Jefe Directo"
+                            />
+                        </div>
+                    </FormGroup>
+                    <FormGroup>
+                        <div className="col-sm-4">
+                            <ControlLabel>Area de Trabajo</ControlLabel>
+                        </div>
+                        <div className="col-sm-6">
+                            <FormControl
+                                type="text"
+                                name="area"
+                                value={area}
+                                onChange={this.onChangeProfile}
+                                placeholder="Area"
                                 disabled={ !_.isEmpty(person) }
                             />
                         </div>

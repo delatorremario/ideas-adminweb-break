@@ -29,6 +29,7 @@ const admins = ['mariodelatorre@holos.cl',
   'asusel@holos.cl',
   'dblazina@holos.cl',
   'martingonzalez@holos.cl',
+  'cguinez@holos.cl',
 ];
 
 const leaders = ['mauricio.ma.rodriguez@bhpbilliton.com', 'delatorremario@gmail.com', 'demo@holos.cl',];

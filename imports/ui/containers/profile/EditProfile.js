@@ -4,6 +4,7 @@ import { ReactiveVar } from 'meteor/reactive-var';
 
 import Loading from '../../components/Loading.js';
 import Persons from '../../../api/persons/persons';
+import Areas from '../../../api/areas/areas';
 
 import EditProfile from '../../pages/profile/EditProfile';
 
@@ -17,7 +18,15 @@ const composer = ({ match }, onData) => {
 
   if (subscription.ready()) {
     const person = Persons.findOne({ email });
-    onData(null, { user, person });
+    const areaId = person && person.areaId || ''
+    const subsArea = Meteor.subscribe('areas.view', areaId);
+
+    if (subsArea.ready()) {
+      const area = Areas.findOne({ _id: areaId })
+      console.log('area', area);
+      if(area) _.extend(person, ({ area: area.name }))
+      onData(null, { user, person });
+    }
   }
 
 };
