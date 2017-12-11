@@ -8,7 +8,8 @@ import '../../../node_modules/malihu-custom-scrollbar-plugin/jquery.mCustomScrol
 import '../../../node_modules/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js';
 import App from '../../ui/layouts/App.js';
 
-Bert.defaults.style = 'growl-top-right';
+if (Meteor.isCordova) { Bert.defaults.style = 'fixed-bottom'; }
+else { Bert.defaults.style = 'growl-bottom-right'; }
 
 Meteor.startup(() => {
   render(<App />, document.getElementById('react-root'));

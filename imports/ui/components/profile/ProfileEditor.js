@@ -21,7 +21,7 @@ export default class ProfileEditor extends Component {
                 lastName: '',
                 secondLastName: '',
                 nationality: '',
-                enterprise: '',
+                company: '',
                 oneUp: {
                     email: '',
                     name: '',
@@ -38,13 +38,7 @@ export default class ProfileEditor extends Component {
         profileEditor({ component: this });
         const { user, person } = this.props;
 
-        if (user) {
-            this.setState({ user });
-        }
-
-        if (person) {
-            this.setState({ person });
-        }
+        this.setState({ person, user: { ...user, profile: { ...user.profile, company: 'MEL' } } });
 
     }
 
@@ -90,7 +84,7 @@ export default class ProfileEditor extends Component {
     }
 
     setDatosMel = () => {
-        this.setState(prev => ({ user: { ...prev.user, profile: prev.person } }))
+        this.setState(prev => ({ user: { ...prev.user, profile: { ...prev.profile, ...prev.person, company: 'MEL' } } }))
         Bert.alert("Datos actualizados desde MEL. Guarde los cambios antes de salir para mantenerlos.", 'warning');
     }
 
@@ -104,11 +98,11 @@ export default class ProfileEditor extends Component {
         const secondLastName = profile && profile.secondLastName || '';
         const birthdate = profile && profile.birthdate || '';
         const nationality = profile && profile.nationality || '';
-        const enterprise = profile && profile.enterprise || '';
+        // const enterprise = profile && profile.enterprise || '';
         const contactPhone = profile && profile.contactPhone || '';
         const address = profile && profile.address || '';
-        const company = profile && profile.company || person && 'MEL' || '';
-        console.log('person', person)
+        const company = profile && profile.company || '';
+        console.log('company', company)
         console.log('profile', profile)
         return (
             <div>
@@ -259,10 +253,11 @@ export default class ProfileEditor extends Component {
                         <div className="col-sm-6">
                             <FormControl
                                 type="text"
-                                name="enterprise"
-                                value={enterprise}
+                                name="company"
+                                value={company}
                                 onChange={this.onChangeProfile}
                                 placeholder="Empresa"
+                                disabled={ !_.isEmpty(person) }
                             />
                         </div>
                     </FormGroup>
