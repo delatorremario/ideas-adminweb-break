@@ -23,7 +23,6 @@ const composer = ({ match }, onData) => {
 
     if (subsArea.ready()) {
       const area = Areas.findOne({ _id: areaId })
-      console.log('area', area);
       if(area) _.extend(person, ({ area: area.name }))
       onData(null, { user, person });
     }

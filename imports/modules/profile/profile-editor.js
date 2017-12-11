@@ -7,16 +7,14 @@ let component;
 const handleUpsert = () => {
     const { user } = component.state;
 
-    console.log('user', user)
-
     Meteor.call('updateProfile', user, (error, response) => {
         if (error) {
             Bert.alert(error.reason, 'danger');
             console.log(error);
         } else {
             Bert.alert('Datos actualizados correctamente', 'success');
-            // component.props.history.push('/');
-            // history.pushState(state, url, param)
+            component.props.history.push('/profile');
+            /// history.pushState(state, url, param)
         }
     });
 };
@@ -24,8 +22,18 @@ const handleUpsert = () => {
 
 const validate = () => {
     $(component.profileEditorForm).validate({
-        rules: {},
-        messages: {},
+        rules: {
+            firstName: { required: true },
+            lastName: { required: true },
+            oneUp: { required: true },
+            area: { required: true },
+        },
+        messages: {
+            firstName: { required: 'Ingrese el Primer Nombre' },
+            lastName: { required: 'Ingrese el Apellido' },
+            oneUp: { required: 'Ingrese un Nombre' },
+            area: { required: 'Ingrese un Area' },
+        },
         submitHandler() { handleUpsert(); },
     });
 };

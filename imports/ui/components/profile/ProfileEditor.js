@@ -259,13 +259,15 @@ export default class ProfileEditor extends Component {
                                 value={company}
                                 onChange={this.onChangeProfile}
                                 placeholder="Empresa"
-                                disabled={ !_.isEmpty(person) }
+                                disabled={!_.isEmpty(person)}
                             />
                         </div>
                     </FormGroup>
                     <FormGroup>
                         <div className="col-sm-4">
-                            <ControlLabel>Jefe Directo</ControlLabel>
+                            <ControlLabel>
+                                {_.isEmpty(person) && 'Jefe Directo' || 'One Up'}
+                            </ControlLabel>
                         </div>
                         <div className="col-sm-6">
                             <FormControl
@@ -273,13 +275,13 @@ export default class ProfileEditor extends Component {
                                 name="oneUp"
                                 value={oneUp}
                                 onChange={this.onChangeProfile}
-                                placeholder="One Up"
+                                placeholder={_.isEmpty(person) && 'Jefe Directo' || 'One Up'}
                             />
                         </div>
                     </FormGroup>
                     <FormGroup>
                         <div className="col-sm-4">
-                            <ControlLabel>Email Jefe Directo</ControlLabel>
+                            <ControlLabel>Email {_.isEmpty(person) && 'Jefe Directo' || 'One Up'}</ControlLabel>
                         </div>
                         <div className="col-sm-6">
                             <FormControl
@@ -287,7 +289,7 @@ export default class ProfileEditor extends Component {
                                 name="emailChief"
                                 value={emailChief}
                                 onChange={this.onChangeProfile}
-                                placeholder="Email Jefe Directo"
+                                placeholder={_.isEmpty(person) && 'Email Jefe Directo' || 'Email One Up'}
                             />
                         </div>
                     </FormGroup>
@@ -302,7 +304,7 @@ export default class ProfileEditor extends Component {
                                 value={area}
                                 onChange={this.onChangeProfile}
                                 placeholder="Area"
-                                disabled={ !_.isEmpty(person) }
+                                disabled={!_.isEmpty(person)}
                             />
                         </div>
                     </FormGroup>
