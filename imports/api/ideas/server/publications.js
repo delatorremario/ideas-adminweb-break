@@ -20,10 +20,14 @@ Meteor.publish('ideas.list', (
   const user = self.user();
 
   if (user) {
+
     const filters = {
       corporationId: (user.profile && user.profile.corporationId) || '',
     };
 
+    if (!Roles.userIsInRole(user._id, ['SuperAdminHolos','Leader'])) {
+      _.extend(filters, { 'person._id': user && user.profile._id })
+    }
     if (textSearch) _.extend(filters, { $text: { $search: textSearch } });
     if (statesCodesFilter.length > 0) _.extend(filters, { 'states.code': { $in: statesCodesFilter } });
     if (areasIdsFilter.length > 0) _.extend(filters, { 'chief.areaId': { $in: areasIdsFilter } });
