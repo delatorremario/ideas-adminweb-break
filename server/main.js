@@ -6,7 +6,6 @@ import { developmentEnv, productionEnv } from './env';
 
 import '../imports/startup/server/index.js';
 
-
 Meteor.startup(() => {
   if (Meteor.isDevelopment) {
     console.log('Meteor.isDevelopment');
@@ -16,6 +15,9 @@ Meteor.startup(() => {
     console.log('Meteor.isProduction');
     productionEnv();
   }
+  // e.g., BrowserPolicy.content.allowOriginForAll( 's3.amazonaws.com' );
+  BrowserPolicy.content.allowFontOrigin("data:");
+  BrowserPolicy.content.allowOriginForAll("blob:");
 });
 
 

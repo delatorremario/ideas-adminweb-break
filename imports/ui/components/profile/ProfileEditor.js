@@ -6,6 +6,7 @@ import MainList from '../MainList'
 import _ from 'lodash'
 
 import DatePicker from 'react-bootstrap-date-picker';
+import FileUpload from '../files/FileUpload';
 
 const companies = ['MEL', 'BHP', 'Contratista']
 
@@ -359,6 +360,8 @@ export default class ProfileEditor extends Component {
                     </div>
 
                 </form>
+
+                <FileUpload />
 
 
             </div>
