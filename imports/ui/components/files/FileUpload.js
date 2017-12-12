@@ -16,12 +16,12 @@ class FileUploadComponent extends Component {
     }
 
     componentDidMount() {
-        $('#fileinput').on('change',() => {
-            $('#inputval p').text( $('#fileinput').val());
+        $('#fileinput').on('change', () => {
+            $('#inputval p').text($('#fileinput').val());
             console.log($('#fileinput'))
-          });
+        });
     }
-    
+
     uploadIt = e => {
         // "use strict";
         e.preventDefault();
@@ -44,7 +44,7 @@ class FileUploadComponent extends Component {
                     },
                     streams: 'dynamic',
                     chunkSize: 'dynamic',
-                    allowWebWorkers: true // If you see issues with uploads, change this to false
+                    allowWebWorkers: false // If you see issues with uploads, change this to false
                 }, false);
 
                 self.setState({
@@ -54,10 +54,11 @@ class FileUploadComponent extends Component {
 
                 // These are the event functions, don't need most of them, it shows where we are in the process
                 uploadInstance.on('start', function () {
-                    // console.log('Starting');
+                     console.log('Starting');
                 });
 
                 uploadInstance.on('end', function (error, fileObj) {
+                    console.log('ERRRRRRROR macho', error)
                     self.props.saveData(fileObj._id, fileObj.name);
                     Bert.alert(`El archivo ${fileObj.name}, se subió correctamente.`, 'success');
                 });
@@ -74,11 +75,11 @@ class FileUploadComponent extends Component {
                         progress: 0,
                         inProgress: false
                     });
-                    $('#inputval p').text( "Archivo subido correctamente");
+                    $('#inputval p').text("Archivo subido correctamente");
                 });
 
                 uploadInstance.on('error', function (error, fileObj) {
-                    console.log('Error during upload: ' + error);
+                    console.log('Error during upload TE tengo: ' + error);
                 });
 
                 uploadInstance.on('progress', function (progress, fileObj) {
@@ -120,10 +121,10 @@ class FileUploadComponent extends Component {
         // Run through each file that the user has stored
         // (make sure the subscription only sends files owned by this user)
         //let display = _.map(docs, (aFile, key) => {
-            // console.log('A file: ', aFile.link(), aFile.get('name'));
-            // let link = Files.findOne({ _id: aFile._id }).link();  //The "view/download" link
+        // console.log('A file: ', aFile.link(), aFile.get('name'));
+        // let link = Files.findOne({ _id: aFile._id }).link();  //The "view/download" link
 
-            // Send out components that show details of each file
+        // Send out components that show details of each file
         //     return <div key={'file' + key}>
         //         <IndividualFile
         //             fileName={aFile.name}

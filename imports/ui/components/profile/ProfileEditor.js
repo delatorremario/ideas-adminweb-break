@@ -361,8 +361,7 @@ export default class ProfileEditor extends Component {
 
                 </form>
 
-                <FileUpload />
-
+                <FileUpload saveData={(id,filename, err)=>{ console.log('id', id); console.log('filename', filename); console.log('err', err); }} />
 
             </div>
         )
