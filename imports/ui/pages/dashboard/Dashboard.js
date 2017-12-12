@@ -18,8 +18,8 @@ const Dashboard = ({ data }) => (
         </div>
         <section id="main-content">
             <div className="row cards-container">
-                {_.map(data, area =>
-                    <DashboardCard key={area._id} area={area} />
+                {_.map(data, (area, index) =>
+                    <DashboardCard key={index} area={area} />
                 )}
             </div>
         </section>

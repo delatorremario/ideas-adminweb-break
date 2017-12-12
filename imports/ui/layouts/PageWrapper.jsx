@@ -34,7 +34,6 @@ import EditConfig from '../containers/configs/EditConfig';
 import SendInvitationPage from '../pages/singinup/SendInvitationPage';
 
 const completedProfile = () => {
-    console.log('USER', user);
     const user = Meteor.user()
     return user && user.profile
         && user.profile.firstName

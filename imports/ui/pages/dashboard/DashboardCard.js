@@ -46,7 +46,7 @@ const DashboardCard = ({ area }) => {
         {
             icon: 'fa fa-star-o',
             concept: 'Participación del Area',
-            value: participation.toFixed(1) + '%',
+            value: participation && participation.toFixed(1) + '%' || null,
         },
         {
             icon: 'fa fa-user-o',
@@ -65,7 +65,7 @@ const DashboardCard = ({ area }) => {
                     <div className='head-dashboard-card'>
                         {
                             _.map(headDash, (head, index) => {
-                                return (<div key={index}><h4><i className={head.icon} /> {head.concept}</h4><p>{head.value}</p></div>)
+                                return head.value && <div key={index}><h4><i className={head.icon} /> {head.concept}</h4><p>{head.value}</p></div>
                             })
                         }
                     </div>

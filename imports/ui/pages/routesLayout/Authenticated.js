@@ -20,14 +20,13 @@ const Authenticated = ({ loggingIn, authenticated, component, ...rest }) => {
     default:
       roleAutherized = true;
   }
-
   return (
     !_.includes(pathname, 'recover-password') &&
     !_.includes(pathname, 'reset-password') &&
     !_.includes(pathname, 'signup') &&
     <Route {...rest} render={(props) => {
       if (loggingIn) return <Loading style="loader-container-fixed" />;
-      if (authenticated && !roleAutherized) return <BlankPage />;
+      if (authenticated && !roleAutherized) return <Redirect to="/" />;
       return (
         authenticated &&
         React.createElement(component, { ...props, loggingIn, authenticated }))
