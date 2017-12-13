@@ -116,52 +116,71 @@ export default class ProfileEditor extends Component {
         const oneText = company === "MEL" ? 'One Up' : 'Jefe Directo'
         return (
             <div>
-
-                {
-                    !completedProfile(user) &&
-                    <Alert bsStyle="warning">
-                        Debe completar su perfil para continuar
-                    </Alert>
-                }
-                <div className="col-sm-12 header-profile">
-                    <div>
-                        {
-                            _.map(emails, (email, index) => (
-                                <p key={index}>{email.address}</p>
-                            ))
-
-                        }
-                    </div>
-                    <div>
-                        {
-                            !_.isEmpty(person) &&
-                            <button className="btn btn-primary btn-trans btn-xs" onClick={this.setDatosMel}>Copiar Datos de MEL</button>
-                        }
-                    </div>
-                </div>
-
                 <form
                     className="label-left"
                     noValidate
                     ref={form => (this.profileEditorForm = form)}
                     onSubmit={event => event.preventDefault()}>
-                    {
-                        _.isEmpty(person) &&
-                        <FormGroup>
-                            <div className="col-sm-12">
-                                {
-                                    _.map(companies, (inc, index) =>
-                                        <Radio key={index} name="company" value={inc} checked={inc == company}
-                                            // onChange={this.onChangeProfile} 
-                                            onChange={(e) => this.onChangeInc(inc)}
-                                            inline>
-                                            {inc}
-                                        </Radio>
-                                    )
-                                }
+
+                    <section className="panel">
+                        <div className="panel-body profile-wrapper">
+                            <div className="col-md-3">
+                                <div className="profile-pic text-center">
+                                    <div className="img-circle-container">
+                                        <img src="/img/avatar1.png" alt="" className="img-circle" />
+                                        <div className="fileupload-container">
+                                            <FileUpload saveData={(id, filename, err) => { console.log('id', id); console.log('filename', filename); console.log('err', err); }} />
+                                        </div>
+                                    </div>
+
+                                </div>
                             </div>
-                        </FormGroup>
-                    }
+                            <div className="col-md-9">
+                                <div className="profile-info">
+                                    <h1>{firstName} {secondName} {lastName} {secondLastName}</h1>
+                                    <span className="text-muted">
+                                        {
+                                            _.map(emails, (email, index) => (
+                                                <p key={index}>{email.address}</p>
+                                            ))
+                                        }
+                                    </span>
+                                    {
+                                        !completedProfile(user) &&
+                                        <Alert bsStyle="warning">
+                                            Debe completar su perfil para continuar
+                                        </Alert>
+                                    }
+                                    {
+                                        _.isEmpty(person) &&
+                                        <FormGroup>
+                                            <div className="col-sm-12">
+                                                {
+                                                    _.map(companies, (inc, index) =>
+                                                        <Radio key={index} name="company" value={inc} checked={inc == company}
+                                                            // onChange={this.onChangeProfile} 
+                                                            onChange={(e) => this.onChangeInc(inc)}
+                                                            inline>
+                                                            {inc}
+                                                        </Radio>
+                                                    )
+                                                }
+                                            </div>
+                                        </FormGroup>
+                                    }
+
+                                    {
+                                        !_.isEmpty(person) &&
+                                        <div className="connect">
+                                            <button className="btn btn-primary btn-trans btn-xs" onClick={this.setDatosMel}>Copiar Datos de MEL</button>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+
 
                     <FormGroup>
                         <div className="col-sm-4">
@@ -360,9 +379,6 @@ export default class ProfileEditor extends Component {
                     </div>
 
                 </form>
-
-                <FileUpload saveData={(id,filename, err)=>{ console.log('id', id); console.log('filename', filename); console.log('err', err); }} />
-
             </div>
         )
     }

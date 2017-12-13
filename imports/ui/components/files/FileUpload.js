@@ -135,26 +135,19 @@ class FileUploadComponent extends Component {
         //     </div>
         // });
 
-        return (
-            <div>
-                {/* {display} */}
-                <div className="row">
-                    <div className="col-md-12 file-loader-container">
-                        <label htmlFor="fileinput" className="file-label">
-                            <i className="fa fa-folder-open"></i>
-                            <div id="inputval" className="input-value"><p>No hay archivos seleccionados</p></div>
-                        </label>
-                        <input
-                            type="file"
-                            name="fileinput"
-                            id="fileinput"
-                            disabled={this.state.inProgress} ref="fileinput"
-                            onChange={this.uploadIt} />
-                        {this.showUploads()}
-                    </div>
+        return  <div>
+                    
+                    <label htmlFor="fileinput" className="file attachFile"><i className="fa fa-paperclip" /></label>
+
+                    <input
+                        type="file"
+                        name="fileinput"
+                        id="fileinput"
+                        disabled={this.state.inProgress} ref="fileinput"
+                        onChange={this.uploadIt} />
+                    {this.showUploads()}
                 </div>
-            </div>
-        )
+        
     }
 };
 
