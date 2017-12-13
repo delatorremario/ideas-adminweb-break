@@ -152,8 +152,8 @@ class SidebarPush extends Component {
 
     renderUserName() {
         const { user } = this.props;
-        const userName = user && user.profile && user.profile.firstName && user.profile.lastName && (user.profile.firstName + ' ' + user.profile.lastName) || 
-                         user && user.emails[0].address.split("@")[0];
+        const userName = user && user.profile && user.profile.firstName && user.profile.lastName && (user.profile.firstName + ' ' + user.profile.lastName) ||
+            user && user.emails[0].address.split("@")[0];
         return userName
     }
 
@@ -220,15 +220,17 @@ class SidebarPush extends Component {
 
     render() {
         const { user } = this.props;
+        const imagePath = user && user.profile && user.profile.imagePath
         return (
             <aside className="sidebar sidebar-left">
                 <div className="sidebar-profile">
-                    {user.imageUrl ?
-                        <div className="avatar">
-                            <img className="img-circle profile-image" src="img/profile.jpg" />
-                            <i className="on border-dark animated bounceIn"></i>
-                        </div>
-                        : <ColoredAvatar color={user.profile && user.profile.color} userName={user && user.name ? user.name : user.emails[0].address} />
+                    {
+                        imagePath ?
+                            <div className="avatar">
+                                <img className="img-circle profile-image" src={imagePath} />
+                                <i className="on border-dark animated bounceIn"></i>
+                            </div>
+                            : <ColoredAvatar color={user.profile && user.profile.color} userName={user && user.name ? user.name : user.emails[0].address} />
                     }
                     <div className="profile-body dropdown">
                         <a href="javascript:void(0);" className="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
