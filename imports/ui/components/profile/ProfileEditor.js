@@ -92,11 +92,20 @@ export default class ProfileEditor extends Component {
     }
 
     setDatosMel = () => {
-        this.setState(prev => ({ user: { ...prev.user, profile: { ...prev.profile, ...prev.person, company: 'MEL' } } }))
+        this.setState(prev => ({ user: { ...prev.user, profile: { ...prev.user.profile, ...prev.person, company: 'MEL' } } }))
         Bert.alert("Datos actualizados desde MEL. Guarde los cambios antes de salir para mantenerlos.", 'warning');
     }
 
+    setProfileImage = (fileObj) => {
+        const imagePath = `/cdn/storage/Files/${fileObj._id}/original/${fileObj._id}.${fileObj.ext}`
+        this.setState(prev => ({ user: { ...prev.user, profile: { ...prev.user.profile, imagePath } } }))
+        Meteor.call('profile.setImage', imagePath, (err, data) => {
+            if (err) { Bert.alert(err.message, 'danger') }
+        })
+    }
+
     render() {
+
         const { user, person } = this.state;
         const { _id, emails, profile } = this.state.user;
         const rut = profile && profile.rut || '';
@@ -113,9 +122,13 @@ export default class ProfileEditor extends Component {
         const oneUp = profile && profile.oneUp || '';
         const emailChief = profile && profile.emailChief || '';
         const area = profile && profile.area || '';
-        const oneText = company === "MEL" ? 'One Up' : 'Jefe Directo'
+        const oneText = company === "MEL" ? 'One Up' : 'Jefe Directo';
+        const imagePath = profile && profile.imagePath && `url(${profile.imagePath})` || '';
+
+
         return (
             <div>
+
                 <form
                     className="label-left"
                     noValidate
@@ -126,13 +139,11 @@ export default class ProfileEditor extends Component {
                         <div className="panel-body profile-wrapper">
                             <div className="col-md-3">
                                 <div className="profile-pic text-center">
-                                    <div className="img-circle-container">
-                                        <img src="/img/avatar1.png" alt="" className="img-circle" />
+                                    <div className="img-circle-container" style={{ backgroundImage: imagePath }} >
                                         <div className="fileupload-container">
-                                            <FileUpload saveData={(id, filename, err) => { console.log('id', id); console.log('filename', filename); console.log('err', err); }} />
+                                            <FileUpload saveData={this.setProfileImage} />
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
                             <div className="col-md-9">
@@ -172,7 +183,7 @@ export default class ProfileEditor extends Component {
                                     {
                                         !_.isEmpty(person) &&
                                         // <div className="connect">
-                                            <button className="btn btn-primary btn-trans btn-xs" onClick={this.setDatosMel}>Copiar Datos de MEL</button>
+                                        <button className="btn btn-primary btn-trans btn-xs" onClick={this.setDatosMel}>Copiar Datos de MEL</button>
                                         // </div>
                                     }
                                 </div>

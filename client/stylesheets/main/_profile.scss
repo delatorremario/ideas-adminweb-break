@@ -9,6 +9,15 @@
 .img-circle-container {
     display: inline-block;
     position: relative;
+    max-width: 174px;
+    max-height: 174px;
+    width: 174px;
+    height: 174px;
+    border: 7px solid #e5e6ea;
+    border-radius: 50%;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 // profile
@@ -25,6 +34,7 @@
 .profile-info {
     margin-top: 10px;
 }
+
 
 @media all and (max-width:991px){
     .header-profile {

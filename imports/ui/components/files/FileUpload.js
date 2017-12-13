@@ -59,7 +59,7 @@ class FileUploadComponent extends Component {
 
                 uploadInstance.on('end', function (error, fileObj) {
                     if (error) { console.log('Error', error); return; }
-                    self.props.saveData(fileObj._id, fileObj.name);
+                    self.props.saveData(fileObj);
                     Bert.alert(`El archivo ${fileObj.name}, se subió correctamente.`, 'success');
                 });
 

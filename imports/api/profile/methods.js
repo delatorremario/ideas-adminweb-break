@@ -7,9 +7,14 @@ import rateLimit from '../../modules/rate-limit.js';
 
 Meteor.methods(
     {
-        updateProfile: (user) =>{
+        updateProfile: (user) => {
             check(user, Object);
             return Meteor.users.update({ _id: user._id }, { $set: { profile: user.profile } });
+        },
+        'profile.setImage': (imagePath) => {
+            check(imagePath, String)
+            const user = Meteor.user();
+            return Meteor.users.update({ _id: user._id }, { $set: { 'profile.imagePath': imagePath } });
         }
     }
 )
