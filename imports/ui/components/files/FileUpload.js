@@ -44,7 +44,7 @@ class FileUploadComponent extends Component {
                     },
                     streams: 'dynamic',
                     chunkSize: 'dynamic',
-                    allowWebWorkers: false // If you see issues with uploads, change this to false
+                    allowWebWorkers: true // If you see issues with uploads, change this to false
                 }, false);
 
                 self.setState({
@@ -54,11 +54,11 @@ class FileUploadComponent extends Component {
 
                 // These are the event functions, don't need most of them, it shows where we are in the process
                 uploadInstance.on('start', function () {
-                     console.log('Starting');
+                    console.log('Starting');
                 });
 
                 uploadInstance.on('end', function (error, fileObj) {
-                    console.log('ERRRRRRROR macho', error)
+                    if (error) { console.log('Error', error); return; }
                     self.props.saveData(fileObj._id, fileObj.name);
                     Bert.alert(`El archivo ${fileObj.name}, se subió correctamente.`, 'success');
                 });
@@ -79,7 +79,7 @@ class FileUploadComponent extends Component {
                 });
 
                 uploadInstance.on('error', function (error, fileObj) {
-                    console.log('Error during upload TE tengo: ' + error);
+                    Bert.alert(`${error}`, 'danger');
                 });
 
                 uploadInstance.on('progress', function (progress, fileObj) {

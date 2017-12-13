@@ -9,7 +9,7 @@ const Files = new FilesCollection({
       console.log('se puede subir FILE', file);
       return true;
     } else {
-      return 'Please upload png, with size equal or less than 10MB';
+      return 'Por favor suba un archivo png, jpg o jpeg con un tamaño igual o menor a 10MB';
     }
   }
 });
