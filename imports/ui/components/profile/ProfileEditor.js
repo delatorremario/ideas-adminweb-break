@@ -171,9 +171,9 @@ export default class ProfileEditor extends Component {
 
                                     {
                                         !_.isEmpty(person) &&
-                                        <div className="connect">
+                                        // <div className="connect">
                                             <button className="btn btn-primary btn-trans btn-xs" onClick={this.setDatosMel}>Copiar Datos de MEL</button>
-                                        </div>
+                                        // </div>
                                     }
                                 </div>
                             </div>

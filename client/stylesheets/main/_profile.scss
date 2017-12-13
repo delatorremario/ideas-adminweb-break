@@ -14,17 +14,23 @@
 // profile
 .fileupload-container {
     position: absolute;
-    bottom: 1px;
-    right: 1px;
+    bottom: -4px;
+    right: -4px;
     .file {
-        width: 36px;
-        height: 36px;
+        width: 40px;
+        height: 40px;
         font-size: large;
     }
 }
+.profile-info {
+    margin-top: 10px;
+}
 
-@media all and (max-width:768px){
+@media all and (max-width:991px){
     .header-profile {
         flex-direction: column;
+    }
+    .profile-info {
+        text-align: center;
     }
 }
