@@ -8,15 +8,15 @@ const PersonSchema = new SimpleSchema([
     { createdAt: { type: Date, optional: true } },
     { updatedAt: { type: Date, optional: true } },
 
-    { lastName: { type: String } },
-    { firstName: { type: String } },
+    { lastName: { type: String, optional: true } },
+    { firstName: { type: String, optional: true } },
     { secondName: { type: String, optional: true } },
     { rut: { type: String, optional: true } },
-    { email: { type: String } },
+    { email: { type: String, optional: true } },
     { oneUp: { type: String, optional: true } },
-    { areaId: { type: String, optional: true } },
+    { areaId: { type: String } },
     { masterArea: { type: String, optional: true } },
-    { corporationId: { type: String } },
+    { corporationId: { type: String, optional: true } },
 ]);
 
 export default PersonSchema;
