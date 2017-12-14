@@ -3,6 +3,7 @@ import React from 'react';
 import { composeWithTracker } from 'react-komposer';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { Meteor } from 'meteor/meteor';
+import { Roles } from 'meteor/alanning:roles';
 
 import Ideas from '../../../api/ideas/ideas';
 import IdeasList from '../../components/ideas/IdeaList';
@@ -48,7 +49,11 @@ const composer = ({ match }, onData) => {
 			})
 		}
 
-		onData(null, { ideas, ideasstates, ideasFindLimit, textSearch, statesCodesFilter, areasIdsFilter, params: match.params });
+		const user = Meteor.user();
+		const showEdit = Roles.userIsInRole(user._id,['SuperAdminHolos','Leader']) 
+		
+
+		onData(null, { ideas, ideasstates, ideasFindLimit, textSearch, statesCodesFilter, areasIdsFilter, params: match.params, user, showEdit });
 	}
 };
 

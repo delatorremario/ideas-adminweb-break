@@ -7,11 +7,10 @@ import _ from 'lodash';
 
 import Areas from '../../../api/areas/areas';
 
-const IdeaCard = ({ idea, lap, handleRemove }) => {
+const IdeaCard = ({ idea, lap, handleRemove, showEdit }) => {
     const { userId, person, chief, description, opportunity, collaborators, drivers, origin, createdAt, date, states } = idea;
     const createdUser = Meteor.users.findOne(userId);
     const color = states && _.last(states).color || 'white';
-    // const userName = `${createdUser.profile && createdUser.profile.name && createdUser.profile.name.first} ${createdUser.profile && createdUser.profile.name && createdUser.profile.name.last}`;
 
     return <div className="col-sm-6 col-lg-4 cards-item">
         <div className="panel panel-default" style={{ borderColor: color }}>
@@ -35,12 +34,18 @@ const IdeaCard = ({ idea, lap, handleRemove }) => {
                 </h5>
 
                 <div className="actions pull-right">
-                    <Link to={`/idea/${idea._id}/edit`}><i className="fa fa-pencil"></i></Link>
+                    {
+                        showEdit &&
+                        <Link to={`/idea/${idea._id}/edit`}><i className="fa fa-pencil"></i></Link>
+                    }
                     {/* Implementar */}
                     <Link to={`/ideas/find`}>
                         <i className="fa fa-comment"></i>
                     </Link>
-                    <i className="fa fa-trash" onClick={handleRemove(idea._id).bind(this)}></i>
+                    {
+                        showEdit &&
+                        <i className="fa fa-trash" onClick={handleRemove(idea._id).bind(this)}></i>
+                    }
                 </div>
             </div>
             <div className="row panel-body">

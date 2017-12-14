@@ -148,13 +148,11 @@ class IdeasList extends Component {
 
     render() {
 
-        const { history, ideas, ideasstates } = this.props;
+        const { history, ideas, ideasstates,showEdit, user } = this.props;
         const { areaId } = this.props.params;
         const { stateSelected, textSearch, areaSelected, statesCodesSelected } = this.state;
         const { showFilters, showArea, showList } = this.state;
-        const user = Meteor.user();
-        console.log('user', user);
-
+    
         return (
             <div className='ideas-list'>
                 <IdeasTableForExcelContainer ideas={ideas} />
@@ -210,7 +208,7 @@ class IdeasList extends Component {
                                 <div className="row cards-container">
                                     {_.map(ideas, (idea, index) => {
                                         let lap = index / 2;
-                                        return <IdeaCard key={index} idea={idea} lap={lap} handleRemove={this.handleRemove} />
+                                        return <IdeaCard key={index} idea={idea} lap={lap} handleRemove={this.handleRemove} showEdit={showEdit} />
                                     })}
                                 </div>
                                 : <Alert bsStyle="warning">No se encontraron datos.</Alert>

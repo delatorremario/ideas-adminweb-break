@@ -30,8 +30,8 @@ export default class IdeaUserEditor extends Component {
             drivers: [],
             collaborators: [],
             states: [],
-            area: {},
         },
+        area: undefined,
     }
 
     componentDidMount() {
@@ -49,12 +49,12 @@ export default class IdeaUserEditor extends Component {
     }
 
     toggleStepReady = () => {
-        const { formStep } = this.state;
-        const { origin, person, chief, description, opportunity, drivers, states, area } = this.state.doc;
-        return (formStep === 1 && area) ||
+        const { formStep, area } = this.state;
+        const { origin, person, chief, description, opportunity, drivers, states } = this.state.doc;
+        return (formStep === 1 && chief) ||
             (formStep === 2 && description && opportunity && drivers && drivers.length > 0) ||
             (formStep === 3) ||
-            (formStep === 4 && description && opportunity && drivers && drivers.length > 0 && false)
+            (formStep === 4 && chief && description && opportunity && drivers && drivers.length > 0 )
         // (formStep === 5 && origin && person && chief && states && description && opportunity && drivers && drivers.length > 0)
     }
 
@@ -167,17 +167,9 @@ export default class IdeaUserEditor extends Component {
             doc: { ...prev.doc, date }  // ISO String, ex: "2016-11-19T12:00:00.000Z" 
         }));
     }
-    //formattedValue: formattedValue // Formatted String, ex: "11/19/2016" 
-
-    //   componentDidUpdate: function(){
-    //     // Access ISO String and formatted values from the DOM. 
-    //     var hiddenInputElement = document.getElementById("example-datepicker");
-    //     console.log(hiddenInputElement.value); // ISO String, ex: "2016-11-19T12:00:00.000Z" 
-    //     console.log(hiddenInputElement.getAttribute('data-formattedvalue')) // Formatted String, ex: "11/19/2016" 
-    //   },
 
     selectArea = area => {
-        this.setState(prev => ({ doc: { ...prev.doc, area } }))
+        this.setState(prev => ({ doc: { ...prev.doc, chief: { areaId: area._id } }, area }))
     }
 
     render() {
@@ -186,10 +178,11 @@ export default class IdeaUserEditor extends Component {
 
         const { persons, driversArray, origins, ideasstates } = this.props;
 
-        const { formStep } = this.state;
+        const { formStep, area } = this.state;
         const { doc } = this.state;
-        const { origin, _id, area } = this.state.doc;
-        console.log('area', area);
+        const { origin, _id } = this.state.doc;
+
+        console.log('DOC', doc);
 
         return (
             <div className="row">
