@@ -6,5 +6,5 @@ Meteor.methods({
     removeFile: (_id) => {
         check(_id, String);
         Files.remove(_id);
-    }
+    },
 })

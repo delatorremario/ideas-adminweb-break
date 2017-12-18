@@ -9,6 +9,7 @@ import StatesSelect from './StatesSelect';
 import StateCard from './StateCard';
 import AreasSearch from '../../containers/areas/AreasSearch';
 import FileUpload from '../files/FileUpload';
+import Photo from '../photo/photo';
 
 
 const IdeasUserStep3 = ({ images, attachImage, removeImage }) =>
@@ -20,12 +21,9 @@ const IdeasUserStep3 = ({ images, attachImage, removeImage }) =>
                     <div className="file attachFile">
                         <FileUpload saveData={attachImage} />
                     </div>
-                    <div className="file addPhoto"><i className="fa fa-camera" /></div>
-
+                    <Photo saveData={attachImage} />
                 </div>
             </div>
-
-
         </div>
         <div className="images-list">
 

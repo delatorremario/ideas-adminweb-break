@@ -177,19 +177,15 @@ export default class IdeaUserEditor extends Component {
     attachImage = (fileObj) => {
         const imagePath = `/cdn/storage/Files/${fileObj._id}/original/${fileObj._id}.${fileObj.ext}`
         const images = _.union(this.state.doc.images, [imagePath]);
-
         this.setState(prev => ({ doc: { ...prev.doc, images } }))
     }
 
     removeImage = (imagePath) => e => {
-        console.log('IMAGE PATH xxx', _.split(imagePath, '/')[4]);
-
         const images = _.pull(this.state.doc.images, imagePath);
         this.setState(prev => ({ doc: { ...prev.doc, images } }))
         Meteor.call('removeFile', _.split(imagePath, '/')[4], (err) => {
             if (err) { Bert.alert(err.message, 'danger'); return }
         })
-
     }
 
     render() {
