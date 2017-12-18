@@ -33,6 +33,7 @@ Ideas.schema = new SimpleSchema([
     { drivers: { type: [String] } },
     { collaborators: { type: [PersonSchema], optional: true } },
     { states: { type: [States.schema] } },
+    { images: { type: [String], optional: true } },
 
 ]);
 

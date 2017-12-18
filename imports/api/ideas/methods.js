@@ -25,6 +25,7 @@ export const upsertIdea = new ValidatedMethod({
         drivers: { type: [String] },
         collaborators: { type: [PersonSchema], optional: true },
         states: { type: [States.schema], optional: true },
+        images: { type: [String], optional: true },
 
     }).validator(),
     run(idea) {

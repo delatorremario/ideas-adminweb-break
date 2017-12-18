@@ -30,6 +30,7 @@ export default class IdeaUserEditor extends Component {
             drivers: [],
             collaborators: [],
             states: [],
+            images: [],
         },
         area: undefined,
     }
@@ -54,7 +55,7 @@ export default class IdeaUserEditor extends Component {
         return (formStep === 1 && chief) ||
             (formStep === 2 && description && opportunity && drivers && drivers.length > 0) ||
             (formStep === 3) ||
-            (formStep === 4 && chief && description && opportunity && drivers && drivers.length > 0 )
+            (formStep === 4 && chief && description && opportunity && drivers && drivers.length > 0)
         // (formStep === 5 && origin && person && chief && states && description && opportunity && drivers && drivers.length > 0)
     }
 
@@ -172,6 +173,14 @@ export default class IdeaUserEditor extends Component {
         this.setState(prev => ({ doc: { ...prev.doc, chief: { areaId: area._id } }, area }))
     }
 
+    attachImage = (fileObj) => {
+        const imagePath = `/cdn/storage/Files/${fileObj._id}/original/${fileObj._id}.${fileObj.ext}`
+        const images = _.union(this.state.doc.images, [imagePath]);
+        
+        console.log('IMAGES', images)
+        this.setState(prev => ({ doc: { ...prev.doc, images } }))
+    }
+
     render() {
 
         const formMaxStep = 4;
@@ -180,7 +189,7 @@ export default class IdeaUserEditor extends Component {
 
         const { formStep, area } = this.state;
         const { doc } = this.state;
-        const { origin, _id } = this.state.doc;
+        const { origin, _id, images } = this.state.doc;
 
         console.log('DOC', doc);
 
@@ -206,7 +215,7 @@ export default class IdeaUserEditor extends Component {
                                 selectDriver={this.selectDriver}
                             />}
                         {formStep === 3 && // foto y archivos
-                            <IdeasUserStep3 {...this.props} />
+                            <IdeasUserStep3 images={images} attachImage={this.attachImage} {...this.props} />
                         }
 
                         {formStep === 4 &&
