@@ -9,6 +9,7 @@ import $ from 'jquery';
 
 // collections
 import Persons from '../../../api/persons/persons';
+import Files from '../../../api/files/files';
 
 // Step components
 import StepIndicator from '../../components/StepIndicator';
@@ -176,9 +177,19 @@ export default class IdeaUserEditor extends Component {
     attachImage = (fileObj) => {
         const imagePath = `/cdn/storage/Files/${fileObj._id}/original/${fileObj._id}.${fileObj.ext}`
         const images = _.union(this.state.doc.images, [imagePath]);
-        
-        console.log('IMAGES', images)
+
         this.setState(prev => ({ doc: { ...prev.doc, images } }))
+    }
+
+    removeImage = (imagePath) => e => {
+        console.log('IMAGE PATH xxx', _.split(imagePath, '/')[4]);
+
+        const images = _.pull(this.state.doc.images, imagePath);
+        this.setState(prev => ({ doc: { ...prev.doc, images } }))
+        Meteor.call('removeFile', _.split(imagePath, '/')[4], (err) => {
+            if (err) { Bert.alert(err.message, 'danger'); return }
+        })
+
     }
 
     render() {
@@ -215,7 +226,7 @@ export default class IdeaUserEditor extends Component {
                                 selectDriver={this.selectDriver}
                             />}
                         {formStep === 3 && // foto y archivos
-                            <IdeasUserStep3 images={images} attachImage={this.attachImage} {...this.props} />
+                            <IdeasUserStep3 images={images} attachImage={this.attachImage} removeImage={this.removeImage} {...this.props} />
                         }
 
                         {formStep === 4 &&

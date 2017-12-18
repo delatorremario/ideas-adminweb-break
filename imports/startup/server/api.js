@@ -24,4 +24,6 @@ import '../../api/states/methods';
 
 import '../../api/profile/methods';
 
+import '../../api/files/methods';
+
 // import '../../api/base/baseSchema';
