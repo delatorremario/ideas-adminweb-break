@@ -8,7 +8,7 @@ import _ from 'lodash';
 import Areas from '../../../api/areas/areas';
 
 const IdeaCard = ({ idea, lap, handleRemove, showEdit }) => {
-    const { userId, person, chief, description, opportunity, collaborators, drivers, origin, createdAt, date, states } = idea;
+    const { userId, person, chief, description, opportunity, collaborators, drivers, origin, createdAt, date, states, images } = idea;
     const createdUser = Meteor.users.findOne(userId);
     const color = states && _.last(states).color || 'white';
 
@@ -89,6 +89,13 @@ const IdeaCard = ({ idea, lap, handleRemove, showEdit }) => {
                                 )
                             }
                         </ul>
+                        <div className="images-list">
+
+                            {_.map(images, (imagePath, index) =>
+                                <div key={index} className="image-container" style={{ backgroundImage: `url(${imagePath})` }}></div>
+                            )}
+
+                        </div>
                     </div>
                 </small>
             </div>
