@@ -5,11 +5,11 @@ import SidebarPush from './SidebarPush'
 import PageWrapper from './PageWrapper'
 import Footer from './Footer'
 
-const MainWrapper = ({ user, location }) => (
+const MainWrapper = ({ user, userImg, location }) => (
     
         <div id="main-wrapper" className="theme-green">
             <Header />
-            <SidebarPush user={user} match={location} />
+            <SidebarPush user={user} userImg={userImg} match={location} />
             <PageWrapper />
             <Footer />
         </div>
