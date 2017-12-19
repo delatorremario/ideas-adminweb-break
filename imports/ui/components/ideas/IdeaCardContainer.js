@@ -10,7 +10,7 @@ import Loading from '../../components/Loading';
 
 const composer = ({ idea, lap, handleRemove, showEdit }, onData) => {
 
-    const subsFiles = Meteor.subscribe('files.list', idea.images || [])
+    const subsFiles = Meteor.subscribe('files.list', idea.images || [''])
 
     if (subsFiles.ready()) {
         Meteor.call('area.get', idea.chief.areaId, (err, area) => {

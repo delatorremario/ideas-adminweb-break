@@ -6,7 +6,7 @@ import Files from '../../api/files/files';
 
 const composer = ({ match }, onData) => {
     const user = Meteor.user();
-    const imageId = user && user.profile && user.profile.imageId;
+    const imageId = user && user.profile && user.profile.imageId || '';
     const subsFiles = Meteor.subscribe('files.list', [imageId]);
 
     if (user && subsFiles.ready()) {
