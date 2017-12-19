@@ -42,7 +42,7 @@ export default class IdeaUserEditor extends Component {
         const { doc } = this.props;
         if (doc) {
             this.setState(prev => ({
-                doc: { ...prev.doc, doc}
+                doc: { ...prev.doc, doc }
             }));
         }
         this.calculateIndicatorWidth();
@@ -181,12 +181,13 @@ export default class IdeaUserEditor extends Component {
         this.setState(prev => ({ doc: { ...prev.doc, images } }))
     }
 
-    removeImage = (imageId) => e => {
-        const images = _.pull(this.state.doc.images, imageId);
+    removeImage = (fileObj) => e => {
+        const images = _.pull(this.state.doc.images, fileObj._id);
         this.setState(prev => ({ doc: { ...prev.doc, images } }))
-        Meteor.call('removeFile', imageId, (err) => {
-            if (err) { Bert.alert(err.message, 'danger'); return }
-        })
+        console.log('fileObj', fileObj);
+        fileObj.remove((err) => {
+           if(err) Bert.alert(err.message, 'danger');
+        });
     }
 
     render() {
@@ -198,7 +199,7 @@ export default class IdeaUserEditor extends Component {
         const { formStep, area } = this.state;
         const { doc } = this.state;
         const { origin, _id, images } = this.state.doc;
-       
+
         console.log('doc.images', images);
 
         return (
