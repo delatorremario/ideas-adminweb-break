@@ -7,9 +7,9 @@ import IdeasUserStep3 from '../../components/ideas/IdeasUserStep3';
 import Loading from '../../components/Loading';
 
 const composer = ({ imagesIds, attachImage, removeImage }, onData) => {
-    const subsFiles = Meteor.subscribe('files.list', imagesIds)
+    const subsFiles = Meteor.subscribe('files.list', imagesIds || [])
     if (subsFiles.ready()) {
-        const images = Files.find({ _id: { $in: imagesIds } }).each();
+        const images = Files.find({ _id: { $in: imagesIds || [] } }).each();
         onData(null, { images, attachImage, removeImage });
     }
 };

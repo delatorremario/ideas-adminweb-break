@@ -46,6 +46,7 @@ const composer = ({ match }, onData) => {
 
       const state = States.findOne({}, { sort: { code: 1 } });
       const person = Persons.findOne({ email });
+      console.log('PERSON', person);
       _.extend(doc, { person, states: [state] })
 
     }

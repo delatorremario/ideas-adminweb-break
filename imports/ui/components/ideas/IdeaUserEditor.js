@@ -42,7 +42,7 @@ export default class IdeaUserEditor extends Component {
         const { doc } = this.props;
         if (doc) {
             this.setState(prev => ({
-                doc: { ...prev.doc, doc }
+                ...prev.doc, doc
             }));
         }
         this.calculateIndicatorWidth();
@@ -200,7 +200,7 @@ export default class IdeaUserEditor extends Component {
         const { doc } = this.state;
         const { origin, _id, images } = this.state.doc;
 
-        console.log('doc.images', images);
+        console.log('__doc__', doc);
 
         return (
             <div className="row">
