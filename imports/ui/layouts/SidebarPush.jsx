@@ -219,15 +219,14 @@ class SidebarPush extends Component {
     }
 
     render() {
-        const { user } = this.props;
-        const imagePath = user && user.profile && user.profile.imagePath
+        const { user, userImg } = this.props;
         return (
             <aside className="sidebar sidebar-left">
                 <div className="sidebar-profile">
                     {
-                        imagePath ?
+                        userImg ?
                             <div className="avatar">
-                                <img className="img-circle profile-image" src={imagePath} />
+                                <img className="img-circle profile-image" src={userImg && userImg.link()} />
                                 <i className="on border-dark animated bounceIn"></i>
                             </div>
                             : <ColoredAvatar color={user.profile && user.profile.color} userName={user && user.name ? user.name : user.emails[0].address} />
