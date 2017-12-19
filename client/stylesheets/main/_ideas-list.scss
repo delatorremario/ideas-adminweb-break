@@ -97,6 +97,10 @@
     .show-filters{
         margin-bottom: 20px !important;
     }
+    .ideas-buttons {
+        display: flex;
+        flex-flow: wrap;
+    }
 }
 
 @media all and (max-width:768px){

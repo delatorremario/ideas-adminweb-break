@@ -133,7 +133,7 @@ class IdeasList extends Component {
         }
 
         this.setState(prev => ({ showFilters: !prev.showFilters, showList: prev.showFilters }));
-        
+
     }
 
     showArea = e => {
@@ -148,24 +148,30 @@ class IdeasList extends Component {
 
     render() {
 
-        const { history, ideas, ideasstates,showEdit, user } = this.props;
+        const { history, ideas, ideasstates, showEdit, user } = this.props;
         const { areaId } = this.props.params;
         const { stateSelected, textSearch, areaSelected, statesCodesSelected } = this.state;
         const { showFilters, showArea, showList } = this.state;
-    
+
         return (
             <div className='ideas-list'>
                 <IdeasTableForExcelContainer ideas={ideas} />
                 <div className="panel panel-body">
-                    <Link to={ Roles.userIsInRole(user._id,['Employee']) && "/ideas/new_user" || "/ideas/new"  } className="btn btn-success btn-trans btn-action"><i className="fa fa-plus"></i> Nuevo</Link>
-                    <button className={"btn btn-success btn-action " + (showFilters ? 'active' : 'btn-trans')} onClick={this.showFilters}><i className={"fa " + (showFilters && "fa-ban" || "fa-filter")}></i> Filtros</button>
-                    <ReactHTMLTableToExcel
-                        id="ideas-xls-button"
-                        className="btn btn-success btn-trans btn-action btn-ideas-excel"
-                        table="ideas-to-xls"
-                        filename={"ideas-" + new Date().toLocaleDateString()}
-                        sheet="ideas"
-                        buttonText="Xls" />
+                    <div className="ideas-buttons">
+                        {
+                            !Roles.userIsInRole(user._id, ['Employee']) &&
+                            <Link to="/ideas/new" className="btn btn-success btn-trans btn-action"><i className="fa fa-plus"></i> Nueva de Tercero</Link>
+                        }
+                        <Link to="/ideas/new_user" className="btn btn-success btn-trans btn-action"><i className="fa fa-plus"></i> Nueva Idea Mia</Link>
+                        <div className={"btn btn-success btn-action " + (showFilters ? 'active' : 'btn-trans')} onClick={this.showFilters}><i className={"fa " + (showFilters && "fa-ban" || "fa-filter")}></i> Filtros</div>
+                        <ReactHTMLTableToExcel
+                            id="ideas-xls-button"
+                            className="btn btn-success btn-trans btn-action btn-ideas-excel"
+                            table="ideas-to-xls"
+                            filename={"ideas-" + new Date().toLocaleDateString()}
+                            sheet="ideas"
+                            buttonText="Xls" />
+                    </div>
                 </div>
 
                 {showFilters &&
