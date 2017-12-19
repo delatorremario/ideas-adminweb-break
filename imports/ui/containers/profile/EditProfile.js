@@ -8,23 +8,27 @@ import Areas from '../../../api/areas/areas';
 
 import EditProfile from '../../pages/profile/EditProfile';
 
+const imageIdVar = new ReactiveVar('');
 
 const composer = ({ match }, onData) => {
   const user = Meteor.user();
+  imageIdVar.set(user && user.profile && user.profile.imageId || '');
   const email = user && user.emails && user.emails[0] && user.emails[0].address || '';
 
   // buscar en personas para ver si existe el perfil
   const subscription = Meteor.subscribe('persons.email', email);
+  const subsFiles = Meteor.subscribe('files.list', [imageIdVar.get()]);
 
-  if (subscription.ready()) {
+
+  if (subscription.ready() && subsFiles.ready()) {
     const person = Persons.findOne({ email });
-    const areaId = person && person.areaId || ''
+    const areaId = person && person.areaId || '';
     const subsArea = Meteor.subscribe('areas.view', areaId);
 
     if (subsArea.ready()) {
-      const area = Areas.findOne({ _id: areaId })
-      if(area) _.extend(person, ({ area: area.name }))
-      onData(null, { user, person });
+      const area = Areas.findOne({ _id: areaId });
+      if (area) _.extend(person, ({ area: area.name }));
+      onData(null, { user, person, imageIdVar });
     }
   }
 

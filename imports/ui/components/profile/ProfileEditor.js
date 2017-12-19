@@ -7,6 +7,8 @@ import _ from 'lodash'
 
 import DatePicker from 'react-bootstrap-date-picker';
 import FileUpload from '../files/FileUpload';
+import Files from '../../../api/files/files';
+
 
 const companies = ['MEL', 'BHP', 'Contratista']
 
@@ -97,9 +99,10 @@ export default class ProfileEditor extends Component {
     }
 
     setProfileImage = (fileObj) => {
-        const imagePath = `/cdn/storage/Files/${fileObj._id}/original/${fileObj._id}.${fileObj.ext}`
-        this.setState(prev => ({ user: { ...prev.user, profile: { ...prev.user.profile, imagePath } } }))
-        Meteor.call('profile.setImage', imagePath, (err, data) => {
+        // const imagePath = `/cdn/storage/Files/${fileObj._id}/original/${fileObj._id}.${fileObj.ext}`
+        this.setState(prev => ({ user: { ...prev.user, profile: { ...prev.user.profile, imageId: fileObj._id } } }))
+        this.props.imageIdVar.set(fileObj._id);
+        Meteor.call('profile.setImage', fileObj._id, (err, data) => {
             if (err) { Bert.alert(err.message, 'danger') }
         })
     }
@@ -123,8 +126,8 @@ export default class ProfileEditor extends Component {
         const emailChief = profile && profile.emailChief || '';
         const area = profile && profile.area || '';
         const oneText = company === "MEL" ? 'One Up' : 'Jefe Directo';
-        const imagePath = profile && profile.imagePath && `url(${profile.imagePath})` || '';
-
+        const imageId = profile && profile.imageId || '';
+        const image = Files.findOne({_id:imageId});
 
         return (
             <div>
@@ -139,7 +142,7 @@ export default class ProfileEditor extends Component {
                         <div className="panel-body profile-wrapper">
                             <div className="col-md-3">
                                 <div className="profile-pic text-center">
-                                    <div className="img-circle-container" style={{ backgroundImage: imagePath }} >
+                                    <div className="img-circle-container" style={{ backgroundImage: `url(${image && image.link()})` }} >
                                         <div className="fileupload-container">
                                             <FileUpload saveData={this.setProfileImage} />
                                         </div>

@@ -18,7 +18,7 @@ class FileUploadComponent extends Component {
     componentDidMount() {
         $('#fileinput').on('change', () => {
             $('#inputval p').text($('#fileinput').val());
-            console.log($('#fileinput'))
+            // console.log($('#fileinput'))
         });
     }
 

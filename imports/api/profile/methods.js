@@ -11,10 +11,10 @@ Meteor.methods(
             check(user, Object);
             return Meteor.users.update({ _id: user._id }, { $set: { profile: user.profile } });
         },
-        'profile.setImage': (imagePath) => {
-            check(imagePath, String)
+        'profile.setImage': (imageId) => {
+            check(imageId, String)
             const user = Meteor.user();
-            return Meteor.users.update({ _id: user._id }, { $set: { 'profile.imagePath': imagePath } });
+            return Meteor.users.update({ _id: user._id }, { $set: { 'profile.imageId': imageId } });
         }
     }
 )
