@@ -15,7 +15,7 @@ import Files from '../../../api/files/files';
 import StepIndicator from '../../components/StepIndicator';
 import IdeasUserStep1 from './IdeasUserStep1'
 import IdeasStep3 from './IdeasStep3'
-import IdeasUserStep3 from './IdeasUserStep3'
+import IdeasUserStep3Container from './IdeasUserStep3Container'
 import IdeasStep4 from './IdeasStep4'
 
 export default class IdeaUserEditor extends Component {
@@ -39,10 +39,11 @@ export default class IdeaUserEditor extends Component {
     componentDidMount() {
         ideaEditor({ component: this });
         // setTimeout(() => { document.querySelector('[name="name"]').focus(); }, 0);
-        if (this.props.doc) {
-            this.setState({
-                doc: this.props.doc
-            });
+        const { doc } = this.props;
+        if (doc) {
+            this.setState(prev => ({
+                doc: { ...prev.doc, doc}
+            }));
         }
         this.calculateIndicatorWidth();
         $(window).on("resize", () => {
@@ -175,15 +176,15 @@ export default class IdeaUserEditor extends Component {
     }
 
     attachImage = (fileObj) => {
-        const imagePath = `/cdn/storage/Files/${fileObj._id}/original/${fileObj._id}.${fileObj.ext}`
-        const images = _.union(this.state.doc.images, [imagePath]);
+        const imageId = `/cdn/storage/Files/${fileObj._id}/original/${fileObj._id}.${fileObj.ext}`
+        const images = _.union(this.state.doc.images, [fileObj._id]);
         this.setState(prev => ({ doc: { ...prev.doc, images } }))
     }
 
-    removeImage = (imagePath) => e => {
-        const images = _.pull(this.state.doc.images, imagePath);
+    removeImage = (imageId) => e => {
+        const images = _.pull(this.state.doc.images, imageId);
         this.setState(prev => ({ doc: { ...prev.doc, images } }))
-        Meteor.call('removeFile', _.split(imagePath, '/')[4], (err) => {
+        Meteor.call('removeFile', imageId, (err) => {
             if (err) { Bert.alert(err.message, 'danger'); return }
         })
     }
@@ -197,8 +198,8 @@ export default class IdeaUserEditor extends Component {
         const { formStep, area } = this.state;
         const { doc } = this.state;
         const { origin, _id, images } = this.state.doc;
-
-        console.log('DOC', doc);
+       
+        console.log('doc.images', images);
 
         return (
             <div className="row">
@@ -222,7 +223,7 @@ export default class IdeaUserEditor extends Component {
                                 selectDriver={this.selectDriver}
                             />}
                         {formStep === 3 && // foto y archivos
-                            <IdeasUserStep3 images={images} attachImage={this.attachImage} removeImage={this.removeImage} {...this.props} />
+                            <IdeasUserStep3Container imagesIds={images} attachImage={this.attachImage} removeImage={this.removeImage} {...this.props} />
                         }
 
                         {formStep === 4 &&

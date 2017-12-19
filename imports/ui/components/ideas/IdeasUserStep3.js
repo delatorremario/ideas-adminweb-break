@@ -27,11 +27,12 @@ const IdeasUserStep3 = ({ images, attachImage, removeImage }) =>
         </div>
         <div className="images-list">
 
-            {_.map(images, (imagePath, index) =>
-                <div key={index} className="image-container" style={{ backgroundImage: `url(${imagePath})` }}>
-                    <div className='image-remove' onClick={removeImage(imagePath).bind(this)}>
+            {_.map(images, (image, index) =>
+                <div key={index} className="image-container">
+                    <div className='image-remove' onClick={removeImage(image).bind(this)}>
                         <div className='fa fa-trash'></div>
                     </div>
+                    <img style={{border:"4px solid red"}} src={image.link()} />
                 </div>
             )}
 
