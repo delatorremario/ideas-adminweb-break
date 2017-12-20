@@ -53,6 +53,12 @@ class SidebarPush extends Component {
                     path: "/ideas/find",
                 },
                 {
+                    title: "Gestionar Ideas",
+                    iconClasses: ["fa", "fa-fw", "fa-suitcase"],
+                    path: "/manage-ideas",
+                    roles: ['SuperAdminHolos', 'Leader', 'Approver']
+                },
+                {
                     title: "Profile",
                     iconClasses: ["fa", "fa-fw", "fa-user-circle-o"],
                     path: "/profile",

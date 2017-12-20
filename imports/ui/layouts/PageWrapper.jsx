@@ -16,6 +16,10 @@ import EditArea from '../containers/areas/EditArea';
 import Ideas from '../pages/ideas/Ideas';
 import EditIdea from '../containers/ideas/EditIdea';
 
+//manage ideas
+
+import ManageContainer from '../containers/manage/ManageContainer';
+
 // ideas new user
 import EditIdeaUser from '../containers/ideas/EditIdeaUser';
 
@@ -32,6 +36,7 @@ import Configs from '../containers/configs/Configs';
 import EditConfig from '../containers/configs/EditConfig';
 
 import SendInvitationPage from '../pages/singinup/SendInvitationPage';
+
 
 const completedProfile = () => {
     const user = Meteor.user()
@@ -60,6 +65,9 @@ const PageWrapper = () => (
                 <Route exact path="/areas" component={Areas} />
                 <Route exact path="/areas/new" component={NewArea} />
                 <Route exact path="/area/:_id/edit" component={EditArea} />
+
+                {/* Menage Ideas */}
+                <Route exact path="/manage-ideas" component={ManageContainer} />
 
                 {/* Ideas */}
                 <Route exact path="/ideas/:text?/:stateCode?/:step?/:areaId?/find" component={Ideas} />
