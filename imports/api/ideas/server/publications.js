@@ -25,7 +25,7 @@ Meteor.publish('ideas.list', (
       corporationId: (user.profile && user.profile.corporationId) || '',
     };
 
-    if (!Roles.userIsInRole(user._id, ['SuperAdminHolos','Leader'])) {
+    if (!Roles.userIsInRole(user._id, ['SuperAdminHolos', 'Leader'])) {
       _.extend(filters, { 'person._id': user && user.profile._id })
     }
     if (textSearch) _.extend(filters, { $text: { $search: textSearch } });
@@ -48,8 +48,8 @@ Meteor.publish('ideas.view', (_id) => {
 });
 
 
-Meteor.publish('ideas.state.list', (limit) => {
-
+Meteor.publish('ideas.state.list', (filter, limit) => {
+  check(filter, Object);
   check(limit, Number);
 
   const self = this.Meteor;
@@ -57,9 +57,8 @@ Meteor.publish('ideas.state.list', (limit) => {
 
   if (user) {
 
-    const filters = {
-      corporationId: (user.profile && user.profile.corporationId) || '',
-    };
+    _.extend(filter, { corporationId: (user.profile && user.profile.corporationId) || '' });
+
 
     // if (!Roles.userIsInRole(user._id, ['SuperAdminHolos','Leader'])) {
     //   _.extend(filters, { 'person._id': user && user.profile._id })
@@ -69,11 +68,9 @@ Meteor.publish('ideas.state.list', (limit) => {
     // if (areasIdsFilter.length > 0) _.extend(filters, { 'chief.areaId': { $in: areasIdsFilter } });
 
     // console.log('areasIdsFilter', areasIdsFilter);
-    // console.log('FILTERS', filters);
+    console.log('__FILTER__', filter);
 
-    return Ideas.find(
-      filters,
-      { sort: { date: -1 }, limit });
+    return Ideas.find(filter, { sort: { date: -1 }, limit });
 
   } else return;
 });

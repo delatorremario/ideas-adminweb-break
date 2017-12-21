@@ -59,6 +59,8 @@ States.schema = new SimpleSchema(
         yellow: { type: Number, optional: true, defaultValue: 2, min: 0 },
 
         alerts: { type: [AlertSchema], optional: true },
+        title : { type: String, optional: true},
+        roles : { type: [String], optional: true},
     },
 )
 

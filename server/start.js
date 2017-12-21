@@ -12,6 +12,7 @@ const Start = {
     addSuperAdminHolos();
     addLeaders();
     addEmployees();
+    addExecutives();
     setProfile();
   },
 };
@@ -33,7 +34,7 @@ const admins = ['mariodelatorre@holos.cl',
 ];
 
 const leaders = ['mauricio.ma.rodriguez@bhpbilliton.com', 'delatorremario@gmail.com', 'demo@holos.cl',];
-
+const executives = ['felipte.f.duery@bhpbilliton.com', 'felipe.fs.aguilera@bhpbilliton.com']
 const employees = ['usuario@holos.cl', 'neftali.a.herrera@bhpbilliton.com'];
 
 const createAccounts = () => {
@@ -42,7 +43,7 @@ const createAccounts = () => {
       Accounts.createUser({ email: mail, password: 'Holos123' });
     }
   });
-  _.map(employees, (mail) => {
+  _.map(_.union(employees, executives), (mail) => {
     if (!Meteor.users.findOne({ 'emails.address': mail })) {
       Accounts.createUser({ email: mail, password: '123456' });
     }
@@ -54,7 +55,7 @@ const initRoles = () => {
   if (_.includes(Roles.getAllRoles(), 'AdminGrupoNegocio')) Roles.createRole('AdminGrupoNegocio');
   if (_.includes(Roles.getAllRoles(), 'Leader')) Roles.createRole('Leader');
   if (_.includes(Roles.getAllRoles(), 'Employee')) Roles.createRole('Employee');
-  if (_.includes(Roles.getAllRoles(), 'Approver')) Roles.createRole('Approver');
+  if (_.includes(Roles.getAllRoles(), 'Executive')) Roles.createRole('Executive');
   if (_.includes(Roles.getAllRoles(), 'Reporter')) Roles.createRole('Reporter');
 };
 
@@ -87,6 +88,15 @@ const addEmployees = () => {
     }
   });
 };
+const addExecutives = () => {
+  _.map(executives, (mail) => {
+    const user = Meteor.users.findOne({ 'emails.address': mail });
+    if (user && !Roles.userIsInRole(user, ['Executive'])) {
+      Roles.addUsersToRoles(user, ['Executive']);
+      console.log('user agreado a Executive', mail);
+    }
+  });
+};
 
 const setProfile = () => {
 
@@ -114,7 +124,7 @@ const setProfile = () => {
 Accounts.onLogin((data) => {
   console.log('Login complete!');
   const user = data.user;
-  if (user && !Roles.userIsInRole(user, ['SuperAdminHolos', 'AdminGrupoNegocio', 'Leader', 'Employee', 'Approver', 'Reporter'])) {
+  if (user && !Roles.userIsInRole(user, ['SuperAdminHolos', 'AdminGrupoNegocio', 'Leader', 'Employee', 'Executive', 'Reporter'])) {
     Roles.addUsersToRoles(user, ['Employee']);
   }
 });

@@ -2,6 +2,7 @@ import React from 'react';
 import { Alert } from 'react-bootstrap'
 
 import ManageIdeasCardContainer from './ManageIdeaCardContainer';
+import IdeaCard from '../../components/ideas/IdeaCardContainer';
 
 const ManageIdeasListComponent = ({ ideas }) => {
     return (
@@ -9,7 +10,7 @@ const ManageIdeasListComponent = ({ ideas }) => {
             <div className="row cards-container">
                 {_.map(ideas, (idea, index) => {
                     let lap = index / 2;
-                    return <ManageIdeasCardContainer key={index} idea={idea} lap={lap} handleRemove={this.handleRemove} showEdit={false} />
+                    return <IdeaCard key={index} idea={idea} lap={lap} handleRemove={this.handleRemove} showEdit={false} />
                 })}
             </div>
             : <Alert bsStyle="warning">No se encontraron datos.</Alert>

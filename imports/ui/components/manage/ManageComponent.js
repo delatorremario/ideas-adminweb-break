@@ -7,13 +7,12 @@ import ManageIdeasListContainer from './ManageIdeasListContainer';
 
 const ManageComponent = ({ listStates }) => {
     console.log('listStates', listStates);
-
     return (
         <Accordion>
             {
                 _.map(listStates, (state, index) => 
-                    <Panel header={state.title} eventKey={index} key={index}>
-                        <ManageIdeasListContainer />
+                    <Panel header={state.title + ` (${state.count})`} eventKey={index} key={index}>
+                        <ManageIdeasListContainer state={state} />
                     </Panel>
                 )
             }
