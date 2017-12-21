@@ -10,7 +10,7 @@ const ManageIdeasListComponent = ({ ideas }) => {
             <div className="row cards-container">
                 {_.map(ideas, (idea, index) => {
                     let lap = index / 2;
-                    return <IdeaCard key={index} idea={idea} lap={lap} handleRemove={this.handleRemove} showEdit={false} />
+                    return <IdeaCard key={index} idea={idea} lap={lap} handleRemove={this.handleRemove} showEdit={false} showNext={true} />
                 })}
             </div>
             : <Alert bsStyle="warning">No se encontraron datos.</Alert>

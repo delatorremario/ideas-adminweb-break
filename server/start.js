@@ -1,9 +1,12 @@
 import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
 import { Accounts } from 'meteor/accounts-base';
+import _ from 'lodash';
+
 import Persons from '../imports/api/persons/persons';
 import Corporations from '../imports/api/corporations/corporations';
-import _ from 'lodash';
+import States from '../imports/api/states/states';
+import Ideas from '../imports/api/ideas/ideas';
 
 const Start = {
   start: () => {
@@ -14,6 +17,7 @@ const Start = {
     addEmployees();
     addExecutives();
     setProfile();
+    fixStates()
   },
 };
 
@@ -120,6 +124,55 @@ const setProfile = () => {
 
 }
 
+const fixStates = () => {
+
+  /* state2A 2B */
+
+  const arrNext2A =  [
+    {
+      "title": "No Corresponde a mi Area",
+      "code": "2C",
+      "color": "#ffa500"
+    },
+    {
+      "title": "Corresponde a mi área, pero la decisión es de otro líder de área",
+      "code": "2B",
+      "color": "#ffa500"
+    },
+    {
+      "title": "La decisión si me corresponde",
+      "code": "2D",
+      "color": "#ffa500"
+    }
+  ] 
+  const arrRoles2A = [ 'Executive' ];
+  const title2A = "Ideas Nuevas"
+  _.each(['2A', '2B'], code => {
+
+
+    States.update({ "code": code }, {
+      $set: {
+        "title": title2A,
+        "roles": arrRoles2A,
+        "nexts": arrNext2A
+      }
+    }, { multi: true });
+
+
+    Ideas.update({ "states.code": code }, {
+      $set: {
+        'states.$.title': title2A,
+        "states.$.roles": arrRoles2A,
+        "states.$.nexts": arrNext2A
+      }
+    }
+      , { multi: true }
+    )
+  })
+  /* END state2A */
+
+
+}
 
 Accounts.onLogin((data) => {
   console.log('Login complete!');

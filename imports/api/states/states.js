@@ -32,6 +32,12 @@ States.deny({
     remove: () => true,
 })
 
+const NextSchema = new SimpleSchema({
+    title: { type: String, optional: true },
+    code: { type: String, optional: true },
+    color: { type: String, optional: true },
+})
+
 States.schema = new SimpleSchema(
     {
         _id: { type: String, optional: true },
@@ -55,12 +61,13 @@ States.schema = new SimpleSchema(
         color: { type: String },
         showInDashboard: { type: Boolean, optional: true },
         config: { type: [Object], optional: true },
-        green: { type: Number, optional: true, defaultValue: 1, min:0 },
+        green: { type: Number, optional: true, defaultValue: 1, min: 0 },
         yellow: { type: Number, optional: true, defaultValue: 2, min: 0 },
 
         alerts: { type: [AlertSchema], optional: true },
-        title : { type: String, optional: true},
-        roles : { type: [String], optional: true},
+        title: { type: String, optional: true },
+        roles: { type: [String], optional: true },
+        nexts: { type: [NextSchema], optional: true }
     },
 )
 

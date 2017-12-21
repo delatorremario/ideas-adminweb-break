@@ -7,10 +7,11 @@ import _ from 'lodash';
 
 import Areas from '../../../api/areas/areas';
 
-const IdeaCard = ({ idea, imagesCursor, lap, handleRemove, showEdit }) => {
+const IdeaCard = ({ idea, imagesCursor, lap, handleRemove, showEdit, showNext }) => {
     const { userId, person, chief, description, opportunity, collaborators, drivers, origin, createdAt, date, states, images } = idea;
     const createdUser = Meteor.users.findOne(userId);
     const color = states && _.last(states).color || 'white';
+    const nexts = states && _.last(states).nexts || [];
 
     return <div className="col-sm-6 col-lg-4 cards-item">
         <div className="panel panel-default" style={{ borderColor: color }}>
@@ -96,6 +97,20 @@ const IdeaCard = ({ idea, imagesCursor, lap, handleRemove, showEdit }) => {
                             )}
 
                         </div>
+
+                        {
+                            showNext && nexts && <div>
+                               
+                                    {
+                                        _.map(nexts, (next, index) =>
+                                            <button className='btn btn-default btn-sm btn-trans' key={index}> {next.title} {next.code}</button>
+                                        )
+                                    }
+                                
+                            </div>
+                        }
+
+
                     </div>
                 </small>
             </div>
