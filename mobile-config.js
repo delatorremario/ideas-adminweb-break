@@ -21,16 +21,38 @@ App.icons({
     'ios_spotlight_3x': 'public/app/iPhone/ideas.appiconset/iphone-spotlight@3x.png',
     'notification_2x': 'public/app/iPhone/ideas.appiconset/iphone-notification@2x.png',
     'notification_3x': 'public/app/iPhone/ideas.appiconset/iphone-notification@3x.png',
-  
+    
     // More screen sizes and platforms...
+    
+    'android_mdpi': 'public/app/android/res/drawable-mdpi/appicon.png',
+    'android_hdpi': 'public/app/android/res/drawable-hdpi/appicon.png',
+    'android_xhdpi': 'public/app/android/res/drawable-xhdpi/appicon.png',
+    'android_xxhdpi': 'public/app/android/res/drawable-xxhdpi/appicon.png',
+    'android_xxxhdpi': 'public/app/android/res/drawable-xxxhdpi/appicon.png',
+    
 });
 App.launchScreens({
-
+    
     'iphoneX_portrait': 'public/app/iPhone/ideas.launchimage/iphone_portrait@2x.png', 
     'iphone_2x': 'public/app/iPhone/ideas.launchimage/iphone_portrait@2x.png', 
     'iphone5': 'public/app/iPhone/ideas.launchimage/iphone_portrait@2x.png', 
-
+    
     // More screen sizes and platforms...
+    'android_mdpi_portrait': 'public/app/android/res/drawable-mdpi/background.9.png',
+    'android_mdpi_landscape': 'public/app/android/res/drawable-mdpi/background.9.png',
+
+    'android_hdpi_portrait': 'public/app/android/res/drawable-hdpi/background.9.png',
+    'android_hdpi_landscape': 'public/app/android/res/drawable-hdpi/background.9.png',
+    
+    'android_xhdpi_portrait': 'public/app/android/res/drawable-xhdpi/background.9.png',
+    'android_xhdpi_landscape': 'public/app/android/res/drawable-xhdpi/background.9.png',
+    
+    'android_xxhdpi_portrait': 'public/app/android/res/drawable-xxhdpi/background.9.png',
+    'android_xxhdpi_landscape': 'public/app/android/res/drawable-xxhdpi/background.9.png',
+
+    'android_xxxhdpi_portrait': 'public/app/android/res/drawable-xxxhdpi/background.9.png',
+    'android_xxxhdpi_landscape': 'public/app/android/res/drawable-xxxhdpi/background.9.png',
+
 });
 
 // Set PhoneGap/Cordova preferences.
