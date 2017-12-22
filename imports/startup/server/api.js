@@ -19,8 +19,8 @@ import '../../api/persons/server/publications';
 
 import '../../api/dashboard/methods';
 
-import '../../api/states/server/publications';
 import '../../api/states/methods';
+import '../../api/states/server/publications';
 
 import '../../api/profile/methods';
 

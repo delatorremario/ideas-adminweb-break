@@ -20,3 +20,9 @@ Meteor.publish('states.view', (_id) => {
   check(_id, String);
   return States.find(_id);
 });
+
+Meteor.publish('states.viewByCode', (code) => {
+  console.log('publish states.viewByCode');
+  check(code, String);
+  return States.find({ code });
+});

@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import _ from 'lodash';
 
 import Areas from '../../../api/areas/areas';
+import SetStateComponent from '../../components/set-state/SetStateComponent';
 
 const IdeaCard = ({ idea, imagesCursor, lap, handleRemove, showEdit, showNext }) => {
     const { userId, person, chief, description, opportunity, collaborators, drivers, origin, createdAt, date, states, images } = idea;
@@ -100,13 +101,13 @@ const IdeaCard = ({ idea, imagesCursor, lap, handleRemove, showEdit, showNext })
 
                         {
                             showNext && nexts && <div>
-                               
-                                    {
-                                        _.map(nexts, (next, index) =>
-                                            <button className='btn btn-default btn-sm btn-trans' key={index}> {next.title} {next.code}</button>
-                                        )
-                                    }
-                                
+
+                                {
+                                    _.map(nexts, (next, index) => <div className='btn-next-container' key={index}  >
+                                        <Link to={`/set-state/${idea._id}/${next.code}`} className="btn-next" style={{ backgroundColor: next.color }} >{next.title} ({next.code})</Link>
+                                    </div>)
+                                }
+
                             </div>
                         }
 

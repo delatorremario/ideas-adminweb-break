@@ -19,6 +19,7 @@ import EditIdea from '../containers/ideas/EditIdea';
 //manage ideas
 
 import ManageContainer from '../containers/manage/ManageContainer';
+import SetStateContainer from '../containers/set-state/SetStateContainer';
 
 // ideas new user
 import EditIdeaUser from '../containers/ideas/EditIdeaUser';
@@ -68,6 +69,7 @@ const PageWrapper = () => (
 
                 {/* Menage Ideas */}
                 <Route exact path="/manage-ideas" component={ManageContainer} />
+                <Route exact path="/set-state/:ideaId/:code" component={SetStateContainer} />
 
                 {/* Ideas */}
                 <Route exact path="/ideas/:text?/:stateCode?/:step?/:areaId?/find" component={Ideas} />

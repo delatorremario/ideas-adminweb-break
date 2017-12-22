@@ -43,6 +43,7 @@ Meteor.publish('ideas.list', (
 });
 
 Meteor.publish('ideas.view', (_id) => {
+  console.log('publish ideas.view');
   check(_id, String);
   return Ideas.find(_id);
 });

@@ -6,7 +6,6 @@ import Loading from '../../components/Loading';
 import ManageIdeasListContainer from './ManageIdeasListContainer';
 
 const ManageComponent = ({ listStates }) => {
-    console.log('listStates', listStates);
     return (
         <Accordion>
             {
