@@ -20,18 +20,20 @@ const setState = (props) => e => {
 const SetStateComponent = (props) => {
     const { state, idea } = props;
     return <div>
-        <FormGroup>
-            <ControlLabel>Motivo</ControlLabel>
-            <FormControl componentClass="textarea"
-                name="description"
-                // onChange={onChangeForm}
-                // value={data.description}
-                placeholder='Motivo'
-            />
-        </FormGroup>
-        <StateCard state={state} />
-        <div className='set-state-button-container'>
-            <button onClick={setState(props).bind(this)} className='btn btn-success btn-trans'>Confirmar</button>
+        <div>
+            <FormGroup>
+                <ControlLabel>Motivo</ControlLabel>
+                <FormControl componentClass="textarea"
+                    name="description"
+                    // onChange={onChangeForm}
+                    // value={data.description}
+                    placeholder='Motivo'
+                />
+            </FormGroup>
+            {/* <StateCard state={state} /> */}
+            <div className='set-state-button-container'>
+                <button onClick={setState(props).bind(this)} className='btn btn-success btn-trans'>Confirmar</button>
+            </div>
         </div>
         <IdeaCardContainer
             // key={index} 

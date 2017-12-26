@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { composeWithTracker } from 'react-komposer';
+import _ from 'lodash';
 
 import Loading from '../../components/Loading.js';
 
@@ -15,7 +16,10 @@ const composer = ({ match }, onData) => {
     if (ideaSub.ready() && stateSub.ready()) {
         const idea = Ideas.findOne({ _id: ideaId });
         const state = States.findOne({ code: code })
-        onData(null, { idea, state });
+        const last = _.last(idea.states);
+        const next = _.find(last.nexts, { code })
+
+        onData(null, { idea, state, next });
     }
 };
 

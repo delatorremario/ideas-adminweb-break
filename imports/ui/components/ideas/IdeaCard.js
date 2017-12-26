@@ -104,7 +104,8 @@ const IdeaCard = ({ idea, imagesCursor, lap, handleRemove, showEdit, showNext })
 
                                 {
                                     _.map(nexts, (next, index) => <div className='btn-next-container' key={index}  >
-                                        <Link to={`/set-state/${idea._id}/${next.code}`} className="btn-next" style={{ backgroundColor: next.color }} >{next.title} ({next.code})</Link>
+                                        <Link to={`/set-state/${idea._id}/${next.code}`} 
+                                        className="btn-next" style={{ backgroundColor: next.color }}>{next.title} ({next.code})</Link>
                                     </div>)
                                 }
 
