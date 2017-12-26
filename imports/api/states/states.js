@@ -36,6 +36,7 @@ const NextSchema = new SimpleSchema({
     title: { type: String, optional: true },
     code: { type: String, optional: true },
     color: { type: String, optional: true },
+    action: { type: String, optional: true },
 })
 const toChangeSchema = new SimpleSchema({
     text: { type: Boolean, optional: true },
@@ -73,7 +74,8 @@ States.schema = new SimpleSchema(
         title: { type: String, optional: true },
         roles: { type: [String], optional: true },
         nexts: { type: [NextSchema], optional: true },
-        toChanges: { type: [toChangeSchema], optional: true }
+        toChanges: { type: [toChangeSchema], optional: true },
+        action: { type: String, optional: true },
     },
 )
 

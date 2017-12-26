@@ -18,10 +18,10 @@ class SetStateComponent extends React.Component {
 
     handlerState = e => {
         e.preventDefault();
-        const { state, idea, history } = this.props;
+        const { state, idea, history, next } = this.props;
         const { toChanges } = this.state;
 
-        _.extend(state, { changes: toChanges });
+        _.extend(state, { changes: toChanges, action: next.title });
         
         // console.log('state', state);
         Meteor.call('idea.setState', idea._id, state, (err) => {

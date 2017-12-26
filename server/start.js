@@ -132,22 +132,25 @@ const fixStates = () => {
     {
       "title": "No Corresponde a mi Area",
       "code": "2C",
-      "color": "#ffa500"
+      "color": "orange",
+      "action":"Devolver Idea",
     },
     {
       "title": "Corresponde a mi área, pero la decisión es de otro líder de área",
       "code": "2B",
-      "color": "#ffa500"
+      "color": "grey",
+      "action":"Derivar Idea",
     },
     {
       "title": "La decisión si me corresponde",
       "code": "2D",
-      "color": "#ffa500"
+      "color": "green",
+      "action":"Revisada",
     }
   ]
   const arrRoles2A = ['Executive'];
   const title2A = "Ideas Nuevas"
-  _.each(['2C', '2B'], code => {
+  _.each(['2A', '2B'], code => {
     const toChange = [];
     States.update({ "code": code }, {
       $set: {
@@ -173,16 +176,16 @@ const fixStates = () => {
 
   /******* init 1A *******/
 
-  const arrNext1A = []
-  const arrRoles1A = [];
-  const title1A = "1A"
-  _.each(['1A'], code => {
+  const arrNext2C = []
+  const arrRoles2C = [];
+  const title2C = "2C"
+  _.each(['2C'], code => {
     const toChanges = [{ text: true, label: 'Motivo' }]
     States.update({ "code": code }, {
       $set: {
-        "title": title1A,
-        "roles": arrRoles1A,
-        "nexts": arrNext1A,
+        "title": title2C,
+        "roles": arrRoles2C,
+        "nexts": arrNext2C,
         toChanges,
       }
     }, { multi: true });
@@ -190,9 +193,9 @@ const fixStates = () => {
 
     Ideas.update({ "states.code": code }, {
       $set: {
-        'states.$.title': title1A,
-        "states.$.roles": arrRoles1A,
-        "states.$.nexts": arrNext1A,
+        'states.$.title': title2A,
+        "states.$.roles": arrRoles2A,
+        "states.$.nexts": arrNext2A,
       }
     }
       , { multi: true }

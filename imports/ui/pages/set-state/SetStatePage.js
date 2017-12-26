@@ -7,9 +7,10 @@ import SetStateComponent from '../../components/set-state/SetStateComponent';
 
 const SetStatePage = (props) => {
     const { next } = props;
+    console.log('next', next);
     return <div>
         <div className="pageheader">
-            <h1>{next && next.title}</h1>
+            <h1>{next && next.action}</h1>
             <div className="breadcrumb-wrapper hidden-xs">
                 <span className="label"></span>
                 <ol className="breadcrumb">

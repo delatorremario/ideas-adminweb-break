@@ -87,7 +87,15 @@ const IdeaCard = ({ idea, imagesCursor, lap, handleRemove, showEdit, showNext })
                         <ul>
                             {
                                 _.map(states, (state, index) =>
-                                    <li key={index}> <small> <Moment format="DD MMM YY" date={state.createdAt} /> {state.step} {state.state} </small></li>
+                                    <li key={index}>
+                                        <small> <Moment format="DD MMM YY" date={state.createdAt} /> {state.step} {state.state} </small>
+                                        <h4>{state.action}</h4>
+                                        {
+                                            _.map(state.toChanges, (toChange, i) => {
+                                                if (toChange.value) return <h5 key={i}>{toChange.label}: {toChange.value}</h5>
+                                            })
+                                        }
+                                    </li>
                                 )
                             }
                         </ul>
@@ -104,8 +112,8 @@ const IdeaCard = ({ idea, imagesCursor, lap, handleRemove, showEdit, showNext })
 
                                 {
                                     _.map(nexts, (next, index) => <div className='btn-next-container' key={index}  >
-                                        <Link to={`/set-state/${idea._id}/${next.code}`} 
-                                        className="btn-next" style={{ backgroundColor: next.color }}>{next.title} ({next.code})</Link>
+                                        <Link to={`/set-state/${idea._id}/${next.code}`}
+                                            className="btn-next" style={{ backgroundColor: next.color }}>{next.title} ({next.code})</Link>
                                     </div>)
                                 }
 
