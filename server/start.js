@@ -173,12 +173,4 @@ const fixStates = () => {
 
 
 }
-
-Accounts.onLogin((data) => {
-  console.log('Login complete!');
-  const user = data.user;
-  if (user && !Roles.userIsInRole(user, ['SuperAdminHolos', 'AdminGrupoNegocio', 'Leader', 'Employee', 'Executive', 'Reporter'])) {
-    Roles.addUsersToRoles(user, ['Employee']);
-  }
-});
 // export default Start;
