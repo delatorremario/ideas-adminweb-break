@@ -48,7 +48,7 @@ export default class ProfileEditor extends Component {
         profileEditor({ component: this });
         const { user, person } = this.props;
 
-        this.setState({ person, user: { ...user, profile: { ...user.profile, company: 'MEL' } } });
+        this.setState({ person, user: { ...user, profile: { ...user.profile } } });
 
     }
 
@@ -127,7 +127,7 @@ export default class ProfileEditor extends Component {
         const area = profile && profile.area || '';
         const oneText = company === "MEL" ? 'One Up' : 'Jefe Directo';
         const imageId = profile && profile.imageId || '';
-        const image = Files.findOne({_id:imageId});
+        const image = Files.findOne({ _id: imageId });
 
         return (
             <div>
@@ -165,30 +165,30 @@ export default class ProfileEditor extends Component {
                                             Debe completar su perfil para continuar
                                         </Alert>
                                     }
-                                    {
-                                        _.isEmpty(person) &&
-                                        <FormGroup>
-                                            <div className="col-sm-12">
-                                                {
-                                                    _.map(companies, (inc, index) =>
-                                                        <Radio key={index} name="company" value={inc} checked={inc == company}
-                                                            // onChange={this.onChangeProfile} 
-                                                            onChange={(e) => this.onChangeInc(inc)}
-                                                            inline>
-                                                            {inc}
-                                                        </Radio>
-                                                    )
-                                                }
-                                            </div>
-                                        </FormGroup>
-                                    }
+                                    {/* {
+                                        _.isEmpty(person) && */}
+                                    <FormGroup>
+                                        <div className="col-sm-12">
+                                            {
+                                                _.map(companies, (inc, index) =>
+                                                    <Radio key={index} name="company" value={inc} checked={inc == company}
+                                                        // onChange={this.onChangeProfile} 
+                                                        onChange={(e) => this.onChangeInc(inc)}
+                                                        inline>
+                                                        {inc}
+                                                    </Radio>
+                                                )
+                                            }
+                                        </div>
+                                    </FormGroup>
+                                    {/* } */}
 
-                                    {
-                                        !_.isEmpty(person) &&
-                                        // <div className="connect">
+                                    {/* {
+                                        !_.isEmpty(person) && */}
+                                    <div className="connect">
                                         <button className="btn btn-primary btn-trans btn-xs" onClick={this.setDatosMel}>Copiar Datos de MEL</button>
-                                        // </div>
-                                    }
+                                    </div>
+                                    {/* } */}
                                 </div>
                             </div>
                         </div>
