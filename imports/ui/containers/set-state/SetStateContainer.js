@@ -4,7 +4,7 @@ import _ from 'lodash';
 
 import Loading from '../../components/Loading.js';
 
-import SetStatePage from '../../pages/set-state/SetStatePege';
+import SetStatePage from '../../pages/set-state/SetStatePage';
 import Ideas from '../../../api/ideas/ideas';
 import States from '../../../api/states/states';
 

@@ -19,7 +19,6 @@ const composer = ({ idea, lap, handleRemove, showEdit, showNext }, onData) => {
             const imagesCursor = Files.find({ _id: { $in: idea.images || [] } }).each();
             if (showNext) {
                 const lastState = _.last(idea.states);
-                console.log('__LAST__', lastState);
             }
 
             onData(null, { idea, imagesCursor, lap, handleRemove, showEdit, showNext });

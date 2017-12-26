@@ -6,9 +6,7 @@ import _ from 'lodash';
 import SetStateComponent from '../../components/set-state/SetStateComponent';
 
 const SetStatePage = (props) => {
-   
     const { next } = props;
-
     return <div>
         <div className="pageheader">
             <h1>{next.title}</h1>
