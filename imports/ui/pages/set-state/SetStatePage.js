@@ -9,7 +9,7 @@ const SetStatePage = (props) => {
     const { next } = props;
     return <div>
         <div className="pageheader">
-            <h1>{next.title}</h1>
+            <h1>{next && next.title}</h1>
             <div className="breadcrumb-wrapper hidden-xs">
                 <span className="label"></span>
                 <ol className="breadcrumb">

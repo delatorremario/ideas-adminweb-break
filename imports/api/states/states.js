@@ -40,6 +40,7 @@ const NextSchema = new SimpleSchema({
 const toChangeSchema = new SimpleSchema({
     text: { type: Boolean, optional: true },
     label: { type: String, optional: true },
+    value: { type: String, optional: true },
 })
 
 States.schema = new SimpleSchema(

@@ -23,39 +23,20 @@ class SetStateComponent extends React.Component {
 
         _.extend(state, { changes: toChanges });
         
-        console.log('state', state);
-        // Meteor.call('idea.setState', idea._id, state, (err) => {
-        //     if (err) { Bert.alert(error.reason, 'danger'); return; }
-        //     history.push('/manage-ideas');
-        // });
+        // console.log('state', state);
+        Meteor.call('idea.setState', idea._id, state, (err) => {
+            if (err) { Bert.alert(error.reason, 'danger'); return; }
+            history.push('/manage-ideas');
+        });
 
     }
 
     onChangeChange = index => e => {
         e.preventDefault();
         const { name, value } = e.target;
-        // console.log('index', index);
-        // console.log('name', name);
-        // console.log('value', value);
         const { toChanges } = this.state;
-        toChanges[index].value = value;
+        toChanges[index].value = value.toString();
         this.setState({ toChanges });
-    }
-    onChangeDoc = e => {
-        e.preventDefault();
-
-
-        _.map(toChanges, toChange)
-
-        this.setState({
-            doc: { ...this.state.doc, [e.target.name]: e.target.value }
-        });
-    }
-    onChange = e => {
-        e.preventDefault();
-        this.setState(
-            { ...this.state, [e.target.name]: e.target.value }
-        );
     }
 
     render() {
