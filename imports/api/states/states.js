@@ -43,6 +43,11 @@ const toChangeSchema = new SimpleSchema({
     label: { type: String, optional: true },
     value: { type: String, optional: true },
 })
+const RoleStateSchema = new SimpleSchema({
+    role:{type:String, optional:true},
+    title:{type:String, optional:true},
+}) 
+
 
 States.schema = new SimpleSchema(
     {
@@ -71,8 +76,7 @@ States.schema = new SimpleSchema(
         yellow: { type: Number, optional: true, defaultValue: 2, min: 0 },
 
         alerts: { type: [AlertSchema], optional: true },
-        title: { type: String, optional: true },
-        roles: { type: [String], optional: true },
+        roles: { type: [RoleStateSchema], optional: true },
         nexts: { type: [NextSchema], optional: true },
         toChanges: { type: [toChangeSchema], optional: true },
         action: { type: String, optional: true },

@@ -124,68 +124,32 @@ const setProfile = () => {
 
 }
 
-const fixStates = () => {
-
-  /* state2A 2B */
-
-  const arrNext2A = [
-    {
-      "title": "No Corresponde a mi Area",
-      "code": "2C",
-      "color": "orange",
-      "action":"Devolver Idea",
-    },
-    {
-      "title": "Corresponde a mi área, pero la decisión es de otro líder de área",
-      "code": "2B",
-      "color": "grey",
-      "action":"Derivar Idea",
-    },
-    {
-      "title": "La decisión si me corresponde",
-      "code": "2D",
-      "color": "green",
-      "action":"Revisada",
-    }
-  ]
-  const arrRoles2A = ['Executive'];
-  const title2A = "Ideas Nuevas"
-  _.each(['2A', '2B'], code => {
-    const toChange = [];
+const state1A = () => {
+  const arrRoles = [{ role: 'Leader', title: 'Ideas Nuevas' }];
+  const arrNext = [{
+    "title": "Dar Continuidad",
+    "code": "2A",
+    "color": "green",
+    "action": "Dar Respuesta",
+  },
+  {
+    "title": "Derivar a otro Lider",
+    "code": "2B",
+    "color": "grey",
+    "action": "Derivar a otro Lider",
+  },
+  {
+    "title": "Rechazar",
+    "code": "3A",
+    "color": "orange",
+    "action": "Rechazar Idea",
+  }]
+  _.each(['1A'], code => {
+    const toChanges = []
     States.update({ "code": code }, {
       $set: {
-        "title": title2A,
-        "roles": arrRoles2A,
-        "nexts": arrNext2A,
-        toChange
-      }
-    }, { multi: true });
-
-
-    Ideas.update({ "states.code": code }, {
-      $set: {
-        'states.$.title': title2A,
-        "states.$.roles": arrRoles2A,
-        "states.$.nexts": arrNext2A
-      }
-    }
-      , { multi: true }
-    )
-  })
-  /* END state2A */
-
-  /******* init 1A *******/
-
-  const arrNext2C = []
-  const arrRoles2C = [];
-  const title2C = "2C"
-  _.each(['2C'], code => {
-    const toChanges = [{ text: true, label: 'Motivo' }]
-    States.update({ "code": code }, {
-      $set: {
-        "title": title2C,
-        "roles": arrRoles2C,
-        "nexts": arrNext2C,
+        "roles": arrRoles,
+        "nexts": arrNext,
         toChanges,
       }
     }, { multi: true });
@@ -193,17 +157,92 @@ const fixStates = () => {
 
     Ideas.update({ "states.code": code }, {
       $set: {
-        'states.$.title': title2A,
-        "states.$.roles": arrRoles2A,
-        "states.$.nexts": arrNext2A,
+        "states.$.roles": arrRoles,
+        "states.$.nexts": arrNext,
       }
     }
       , { multi: true }
     )
   })
+}
+
+const fixStates = () => {
+
+  state1A();
+
+  /* state2A 2B */
+
+  // const arrNext2A = [
+  //   {
+  //     "title": "No Corresponde a mi Area",
+  //     "code": "2C",
+  //     "color": "orange",
+  //     "action": "Devolver Idea",
+  //   },
+  //   {
+  //     "title": "Corresponde a mi área, pero la decisión es de otro líder de área",
+  //     "code": "2B",
+  //     "color": "grey",
+  //     "action": "Derivar Idea",
+  //   },
+  //   {
+  //     "title": "La decisión si me corresponde",
+  //     "code": "2D",
+  //     "color": "green",
+  //     "action": "Revisada",
+  //   }
+  // ]
+  // const arrRoles2A = [{ role: 'Executive', title: 'Ideas Nuevas' }, { role: 'Leader', title: 'Ideas por Derivar' }];
+  // _.each(['2A', '2B'], code => {
+  //   const toChange = [];
+  //   States.update({ "code": code }, {
+  //     $set: {
+  //       "roles": arrRoles2A,
+  //       "nexts": arrNext2A,
+  //       toChange
+  //     }
+  //   }, { multi: true });
 
 
-  /******* END 1A ********/
+  //   Ideas.update({ "states.code": code }, {
+  //     $set: {
+  //       "states.$.roles": arrRoles2A,
+  //       "states.$.nexts": arrNext2A
+  //     }
+  //   }
+  //     , { multi: true }
+  //   )
+  // })
+  /* END state2A */
+
+  /******* init 2C *******/
+
+  // const arrNext2C = []
+  // const arrRoles2C = [];
+  // const title2C = "2C"
+  // _.each(['2C'], code => {
+  //   const toChanges = [{ text: true, label: 'Motivo' }]
+  //   States.update({ "code": code }, {
+  //     $set: {
+  //       "roles": arrRoles2C,
+  //       "nexts": arrNext2C,
+  //       toChanges,
+  //     }
+  //   }, { multi: true });
+
+
+  //   Ideas.update({ "states.code": code }, {
+  //     $set: {
+  //       "states.$.roles": arrRoles2C,
+  //       "states.$.nexts": arrNext2C,
+  //     }
+  //   }
+  //     , { multi: true }
+  //   )
+  // })
+
+
+  /******* END 2C ********/
 
 }
 // export default Start;
