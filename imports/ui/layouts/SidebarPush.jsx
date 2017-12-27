@@ -21,7 +21,6 @@ import ColoredAvatar from '../components/ColoredAvatar';
 import $ from 'jquery';
 import { Roles } from 'meteor/alanning:roles';
 import '../../../node_modules/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar'
-
 require('malihu-custom-scrollbar-plugin')($);
 
 class SidebarPush extends Component {
