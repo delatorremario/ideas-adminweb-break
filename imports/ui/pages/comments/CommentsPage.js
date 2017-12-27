@@ -2,9 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import NotFound from '../NotFound';
 import CommentsComponent from '../../components/comments/CommentsComponent';
+import moment from 'moment';
 
 const ManagePage = (props) => {
-    console.log('CP Props', props);
     let { ideas } = props;
     return <div>
         <div className="pageheader">
