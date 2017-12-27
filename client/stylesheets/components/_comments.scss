@@ -1,0 +1,36 @@
+.ci-item {
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+    background-color: #ffffff;
+    .ci-item-list {
+        width: 100%;
+        padding: 0px;
+        margin: 0px;
+        background-color: #ffffff;
+        .ci-comment {
+            box-sizing: border-box;
+            margin-bottom: 20px;
+            width: 100%;
+            border-bottom: 1px solid #dadaff;
+            max-height: 50px;
+            overflow: hidden;
+            .ci-comment-text {
+                box-sizing: border-box;
+                padding-bottom: 3px;
+                margin: 0px;
+                width: 100%;
+                .ci-comment-user {
+                    color: #365899;
+                }
+            }
+            .ci-comment-info {
+                color: #7c7c7c;
+                box-sizing: border-box;
+                padding: 0px;
+                margin: 0px;
+                text-align: right;
+            }
+        }
+    }
+}

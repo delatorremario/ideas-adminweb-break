@@ -59,6 +59,11 @@ class SidebarPush extends Component {
                     roles: ['SuperAdminHolos', 'Leader', 'Executive']
                 },
                 {
+                    title: "Comentarios",
+                    iconClasses: ["fa", "fa-fw", "fa-comment-o"],
+                    path: "/comments",
+                },
+                {
                     title: "Profile",
                     iconClasses: ["fa", "fa-fw", "fa-user-circle-o"],
                     path: "/profile",
