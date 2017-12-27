@@ -76,4 +76,24 @@
             }
         }
     }
+    .ci-item-new {
+        display: flex;
+        flex: initial auto initial;
+        width: 100%;
+        .ci-item-new-icon {
+            margin: 0px 15px;
+            cursor: pointer;
+        }
+        .ci-item-new-input {
+            transition: all 0.3s ease-in-out 0s;
+            width: 100%;
+            outline: none;
+            border: 0px solid black !important;
+            border-bottom: 1px solid #DBDBDB !important;
+        }
+        .ci-item-new-input:focus {
+            outline: none;
+            border-bottom: 1px solid rgb(40, 84, 167) !important;
+        }
+    }
 }

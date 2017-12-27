@@ -7,7 +7,7 @@ import moment from 'moment';
 const composer = ({ match }, onData) => {
     moment.locale('es');
     let comment1 = 'A mi me parece que lo que vos pedís no tiene sentido alguno.',
-        comment2 = 'Cuando será el día que dejes de tirar ideas inútiles vieja? Cambiá la actitud man!',
+        comment2 = 'Cuando será el día que dejes de tirar ideas inútiles vieja? Cambiá la actitud!',
         comment3 = 'Hola comment 3', comment4 = 'Hola comment 4',
         viewer1 = { userId: '1', view: true }, viewer2 = { userId: '2', view: false },
         viewer3 = { userId: '3', view: true }, viewer4 = { userId: '4', view: true };

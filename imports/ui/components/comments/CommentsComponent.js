@@ -47,6 +47,13 @@ const CommentsComponent = (ideas) => {
                                 })
                             }
                         </div>
+                        <div className="ci-item-new">
+                            <label htmlFor="newComment">
+                                <i className="ci-item-new-icon fa fa-comment-o"></i>
+                            </label>
+                            <input type="text" id="newComment" className="ci-item-new-input" placeholder="Comentar"></input>
+                            <i className="ci-item-new-icon fa fa-send-o"></i>
+                        </div>
                     </Panel>
                 })
             }
