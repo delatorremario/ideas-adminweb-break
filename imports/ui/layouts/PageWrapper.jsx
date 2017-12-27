@@ -16,14 +16,15 @@ import EditArea from '../containers/areas/EditArea';
 import Ideas from '../pages/ideas/Ideas';
 import EditIdea from '../containers/ideas/EditIdea';
 
-//manage ideas
+// Comments
+import CommentsContainer from '../containers/comments/CommentsContainer';
 
+//manage ideas
 import ManageContainer from '../containers/manage/ManageContainer';
 import SetStateContainer from '../containers/set-state/SetStateContainer';
 
 // ideas new user
 import EditIdeaUser from '../containers/ideas/EditIdeaUser';
-
 import Dashboard from '../containers/dashboard/Dashboard';
 import BlankPage from '../pages/BlankPage';
 import ComponentsPage from '../pages/ComponentsPage';
@@ -75,6 +76,9 @@ const PageWrapper = () => (
                 <Route exact path="/ideas/:text?/:stateCode?/:step?/:areaId?/find" component={Ideas} />
                 <Route exact path="/ideas/new" component={EditIdea} />
                 <Route exact path="/idea/:_id/edit" component={EditIdea} />
+
+                {/* Comments */}
+                <Route exact path="/comments" component={CommentsContainer} />
 
                 {/* Ideas Usuario */}
                 <Route exact path="/ideas/new_user" component={EditIdeaUser} />
