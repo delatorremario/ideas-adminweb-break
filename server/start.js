@@ -103,8 +103,6 @@ const addExecutives = () => {
 };
 
 const setProfile = () => {
-
-
   _.map(_.union(admins, leaders, employees), (mail) => {
     const user = Meteor.users.findOne({ 'emails.address': mail })
     if (user) {
@@ -119,56 +117,10 @@ const setProfile = () => {
       console.log('set profile', user._id);
     }
   });
-
-
-
 }
 
-const state1A = () => {
-  const arrRoles = [{ role: 'Leader', title: 'Ideas Nuevas' }];
-  const arrNext = [{
-    "title": "Dar Continuidad",
-    "code": "2A",
-    "color": "green",
-    "action": "Dar Respuesta",
-  },
-  {
-    "title": "Derivar a otro Lider",
-    "code": "2B",
-    "color": "grey",
-    "action": "Derivar a otro Lider",
-  },
-  {
-    "title": "Rechazar",
-    "code": "3A",
-    "color": "orange",
-    "action": "Rechazar Idea",
-  }]
-  _.each(['1A'], code => {
-    const toChanges = []
-    States.update({ "code": code }, {
-      $set: {
-        "roles": arrRoles,
-        "nexts": arrNext,
-        toChanges,
-      }
-    }, { multi: true });
 
 
-    Ideas.update({ "states.code": code }, {
-      $set: {
-        "states.$.roles": arrRoles,
-        "states.$.nexts": arrNext,
-      }
-    }
-      , { multi: true }
-    )
-  })
-}
-
-const fixStates = () => {
-
-  state1A();
 
   /* state2A 2B */
 
@@ -244,5 +196,4 @@ const fixStates = () => {
 
   /******* END 2C ********/
 
-}
 // export default Start;

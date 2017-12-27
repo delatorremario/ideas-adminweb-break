@@ -3,11 +3,16 @@
     margin-bottom: 10px !important;
 }
 
-.btn-next-container {
-    margin-bottom: 15px;
-    .btn-next {
-        padding: 5px;
+.nexts-container {
+    display: flex;
+    flex-direction: column;
+    .btn {
+        text-align: center;
+        margin-bottom: 5px;
         width: 100%;
-        cursor: pointer;
+        padding: 15px;
+        color: white;
+        white-space: normal !important;
+        word-wrap: break-word !important;
     }
 }
