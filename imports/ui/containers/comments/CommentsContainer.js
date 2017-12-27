@@ -6,10 +6,11 @@ import moment from 'moment';
 
 const composer = ({ match }, onData) => {
     moment.locale('es');
-    let comment1 = 'Hola comment 1', comment2 = 'Hola comment 2'
-    comment3 = 'Hola comment 3', comment4 = 'Hola comment 4',
-        viewer1 = { userId: '1', view: true }, viewer2 = { userId: '2', view: true },
-        viewer3 = { userId: '3', view: false }, viewer4 = { userId: '4', view: true };
+    let comment1 = 'A mi me parece que lo que vos pedís no tiene sentido alguno.',
+        comment2 = 'Cuando será el día que dejes de tirar ideas inútiles vieja? Cambiá la actitud!',
+        comment3 = 'Hola comment 3', comment4 = 'Hola comment 4',
+        viewer1 = { userId: '1', view: true }, viewer2 = { userId: '2', view: false },
+        viewer3 = { userId: '3', view: true }, viewer4 = { userId: '4', view: true };
     let ideas = [
         {
             createdAt: moment(),
@@ -30,7 +31,7 @@ const composer = ({ match }, onData) => {
                         firstName: 'Pepe'
                     },
                     createdAt: moment(),
-                    comment: comment3,
+                    comment: comment2,
                     viewers: [viewer1, viewer2, viewer4]
                 }
             ]

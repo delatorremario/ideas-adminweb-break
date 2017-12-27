@@ -1,36 +1,99 @@
 .ci-item {
     width: 100%;
-    padding: 0px;
+    padding: 1px;
     margin: 0px;
-    background-color: #ffffff;
+    min-width: 100px;
+    background-color: #ffffff !important;
+    border: 0px solid black !important;
+    .panel-heading {
+        background-color: white !important;
+        border: 0px solid black !important;
+        border-bottom: 1px solid #ccd8ff !important;
+    }
     .ci-item-list {
         width: 100%;
         padding: 0px;
         margin: 0px;
-        background-color: #ffffff;
+        background-color: #ffffff !important;
+        border: 0px solid black !important;
         .ci-comment {
-            box-sizing: border-box;
             margin-bottom: 20px;
             width: 100%;
-            border-bottom: 1px solid #dadaff;
-            max-height: 50px;
-            overflow: hidden;
+            border-bottom: 1px solid #DBDBDB;
             .ci-comment-text {
-                box-sizing: border-box;
-                padding-bottom: 3px;
-                margin: 0px;
                 width: 100%;
-                .ci-comment-user {
-                    color: #365899;
-                }
+                margin: 20px 0px;
             }
             .ci-comment-info {
-                color: #7c7c7c;
+                display: flex;
+                flex: auto initial;
                 box-sizing: border-box;
                 padding: 0px;
                 margin: 0px;
-                text-align: right;
+                width: 100%;
+                .ci-comment-views {
+                    display: none;
+                    flex: auto;
+                    padding: 0px;
+                    margin: 0px;
+                    text-align: right;
+                    color: white;
+                    b {
+                        background-color: #b3bed4;
+                        height: 10px;
+                        width: 30px;
+                        padding: 4px;
+                        border-radius: 3px;
+                        font-size: 0.9em;
+                    }
+                }
+                .ci-comment-user {
+                    box-sizing: border-box;
+                    padding: 0px;
+                    margin: 0px;
+                    display: flex;
+                    .ci-comment-img {
+                        height: 50px;
+                        width: 50px;
+                        background-position: center;
+                        background-repeat: no-repeat;
+                        background-size: cover;
+                        background-color: black;
+                        border-radius: 50%;
+                    }
+                    .ci-comment-name {
+                        margin: 3px 15px;
+                        color: #2a5096;
+                        font-size: 1.1em;
+                    }
+                    .ci-comment-date {
+                        margin: 1px 15px;
+                        box-sizing: border-box;
+                        color: #9b9b9b;
+                        font-size: 0.8em;
+                    }
+                }
             }
+        }
+    }
+    .ci-item-new {
+        display: flex;
+        flex: initial auto initial;
+        width: 100%;
+        .ci-item-new-icon {
+            margin: 0px 15px;
+            cursor: pointer;
+        }
+        .ci-item-new-input {
+            transition: all 0.3s ease-in-out 0s;
+            width: 100%;
+            outline: none;
+            border: 0px solid black !important;
+            border-bottom: 1px solid #DBDBDB !important;
+        }
+        .ci-item-new-input:focus {
+            outline: none;
+            border-bottom: 1px solid rgb(40, 84, 167) !important;
         }
     }
 }
