@@ -93,5 +93,10 @@ Meteor.methods({
         check(_id, String);
         check(state, Object);
         Ideas.update({ _id }, { $push: { states: state } });
+    },
+    'idea.saveComment': (_id, comment) => {
+        check(_id, String);
+        check(state, Object);
+        Ideas.update({ _id }, { $push: { comments: comment } });
     }
 })
