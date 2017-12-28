@@ -10,7 +10,7 @@
         border: 0px solid black !important;
         border-bottom: 1px solid #ccd8ff !important;
     }
-    .ci-item-list {
+    .ci-list {
         width: 100%;
         padding: 0px;
         margin: 0px;
@@ -58,8 +58,9 @@
                         background-position: center;
                         background-repeat: no-repeat;
                         background-size: cover;
-                        background-color: black;
+                        background-color: rgb(130, 145, 189);
                         border-radius: 50%;
+                        box-shadow: inset 0px 0px 10px white;
                     }
                     .ci-comment-name {
                         margin: 3px 15px;
@@ -76,22 +77,22 @@
             }
         }
     }
-    .ci-item-new {
+    .ci-new {
         display: flex;
         flex: initial auto initial;
         width: 100%;
-        .ci-item-new-icon {
+        .ci-new-icon {
             margin: 0px 15px;
             cursor: pointer;
         }
-        .ci-item-new-input {
+        .ci-new-input {
             transition: all 0.3s ease-in-out 0s;
             width: 100%;
             outline: none;
             border: 0px solid black !important;
             border-bottom: 1px solid #DBDBDB !important;
         }
-        .ci-item-new-input:focus {
+        .ci-new-input:focus {
             outline: none;
             border-bottom: 1px solid rgb(40, 84, 167) !important;
         }

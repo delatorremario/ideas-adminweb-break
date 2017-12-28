@@ -15,23 +15,24 @@ const composer = ({ match }, onData) => {
         {
             createdAt: moment(),
             opportunity: 'Cambiemos',
+            viewers: [viewer1, viewer2, viewer4],
             comments: [
                 {
                     userId: '1',
-                    user: {
-                        firstName: 'Carlos'
-                    },
                     createdAt: moment(),
-                    comment: comment1,
+                    text: comment1,
                     viewers: [viewer1, viewer2]
                 },
                 {
                     userId: '4',
-                    user: {
-                        firstName: 'Pepe'
-                    },
                     createdAt: moment(),
-                    comment: comment2,
+                    text: comment2,
+                    viewers: [viewer1, viewer2, viewer4]
+                },
+                {
+                    userId: '1',
+                    createdAt: moment(),
+                    text: comment3,
                     viewers: [viewer1, viewer2, viewer4]
                 }
             ]
@@ -39,21 +40,18 @@ const composer = ({ match }, onData) => {
         {
             createdAt: moment(),
             opportunity: 'Frente para la victoria',
+            viewers: [viewer3, viewer4],
             comments: [
                 {
                     userId: '2',
-                    user: {
-                        firstName: 'Mario'
-                    },
-                    comment: comment2,
+                    createdAt: moment(),
+                    text: comment2,
                     viewers: [viewer3, viewer4]
                 },
                 {
                     userId: '3',
-                    user: {
-                        firstName: 'Fede'
-                    },
-                    comment: comment4,
+                    createdAt: moment(),
+                    text: comment4,
                     viewers: [viewer3, viewer4]
                 }
             ]
