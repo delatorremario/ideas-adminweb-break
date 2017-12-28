@@ -10,6 +10,7 @@ const send = (ideaId, viewers) => (event) => {
         userId: Meteor.userId(),
         viewers: viewers
     }
+    event.target.newComment.value = '';
     console.log('Comment', comment);
 }
 
