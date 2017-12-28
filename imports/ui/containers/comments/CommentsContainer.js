@@ -8,54 +8,58 @@ const composer = ({ match }, onData) => {
     moment.locale('es');
     let comment1 = 'Me parece que lo que pides tiene mucho sentido',
         comment2 = 'Puede ser factible',
-        comment3 = 'Hola comment 3', comment4 = 'Hola comment 4',
-        viewer1 = { userId: '1', view: true }, viewer2 = { userId: '2', view: false },
-        viewer3 = { userId: '3', view: true }, viewer4 = { userId: '4', view: true };
+        comment3 = 'Muy buena idea!', comment4 = 'Creo que habría que reveerlo...',
+        viewer1 = { userId: '1', viewedAt: new Date }, viewer2 = { userId: '2', viewedAt: new Date },
+        viewer3 = { userId: '3' }, viewer4 = { userId: '4', viewedAt: new Date };
     let ideas = [
         {
+            _id: '9283472234',
             createdAt: moment(),
             opportunity: 'Instalar Wifi en los baños',
             comments: [
                 {
-                    userId: '1',
-                    user: {
-                        firstName: 'Carlos'
-                    },
+                    userId: 'cxa2qDGNdJcin8rvx',
                     createdAt: moment(),
-                    comment: comment1,
+                    text: comment1,
                     viewers: [viewer1, viewer2]
                 },
                 {
-                    userId: '4',
-                    user: {
-                        firstName: 'Pepe'
-                    },
+                    userId: 'cxa2qDGNdJcin8rvx',
                     createdAt: moment(),
-                    comment: comment2,
+                    text: comment2,
+                    viewers: [viewer1, viewer2, viewer4]
+                },
+                {
+                    userId: 'cxa2qDGNdJcin8rvx',
+                    createdAt: moment(),
+                    text: comment3,
+                    viewers: [viewer1, viewer2, viewer4]
+                },
+                {
+                    userId: 'cxa2qDGNdJcin8rvx',
+                    createdAt: moment(),
+                    text: comment4,
                     viewers: [viewer1, viewer2, viewer4]
                 }
             ]
         },
         {
+            _i: '29374289374',
             createdAt: moment(),
             opportunity: 'Colocar pasto sintético',
             comments: [
-                {
-                    userId: '2',
-                    user: {
-                        firstName: 'Mario'
-                    },
-                    comment: comment2,
-                    viewers: [viewer3, viewer4]
-                },
-                {
-                    userId: '3',
-                    user: {
-                        firstName: 'Fede'
-                    },
-                    comment: comment4,
-                    viewers: [viewer3, viewer4]
-                }
+                // {
+                //     userId: 'cxa2qDGNdJcin8rvx',
+                //     createdAt: moment(),
+                //     text: comment2,
+                //     viewers: [viewer3, viewer4]
+                // },
+                // {
+                //     userId: 'cxa2qDGNdJcin8rvx',
+                //     createdAt: moment(),
+                //     text: comment4,
+                //     viewers: [viewer3, viewer4]
+                // }
             ]
         }
     ]
