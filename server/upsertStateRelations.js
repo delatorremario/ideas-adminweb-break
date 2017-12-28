@@ -135,7 +135,10 @@ const state2A = () => {
         },
     ]
 
-    const toChanges = [{ type: 'person', label: 'Encargado de Area', name: 'chief' }];
+    const toChanges = [
+        { type: 'person', label: 'Encargado de Area', name: 'chief' },
+        { type: 'text', label: 'Comentario', name: 'comment' },
+    ];
 
     States.update({ "code": code }, {
         $set: {
@@ -158,7 +161,7 @@ const state2A = () => {
 const state2B = () => {
     const code = '2B';
 
-    const arrRoles = [{ role: 'Executive', title: 'Idea Derivada Por Otro Lider' }];
+    const arrRoles = [{ role: 'Executive', title: 'Idea Derivada Por Otro Ejecutivo' }];
     const arrNext = [
         {
             "title": "No Corresponde a mi Area",
@@ -181,7 +184,8 @@ const state2B = () => {
     ]
 
     const toChanges = [
-        // { type: 'person', label: 'Encargado de Area', name: 'chief' }
+        { type: 'person', label: 'Otro Ejecutivo de mi Area', name: 'chief' },
+        { type: 'text', label: 'Comentario', name: 'comment' },
     ];
 
     States.update({ "code": code }, {
@@ -220,9 +224,8 @@ const state2C = () => {
     }]
 
     const toChanges = [
-        // { type: 'person', label: 'Encargado de Area', name: 'chief' }
+        { type: 'text', label: 'Motivo', name: 'motivo' },
     ];
-
     States.update({ "code": code }, {
         $set: {
             "roles": arrRoles,
@@ -272,9 +275,8 @@ const state2D = () => {
         },
     ]
 
-    const toChanges = [
-        // { type: 'person', label: 'Encargado de Area', name: 'chief' }
-    ];
+    const toChanges = [{ type: 'date', label: 'Fecha Compromiso Feedback', name: 'feedback' }];
+
 
     States.update({ "code": code }, {
         $set: {
@@ -294,37 +296,7 @@ const state2D = () => {
     )
 }
 
-const state3D = () => {
-    const code = '3D';
 
-    const arrRoles = [
-        { role: 'Executive', title: 'Ideas Rechazadas' },
-        { role: 'Leader', title: 'Ideas Rechazadas' },
-        { role: 'Employee', title: 'Ideas Rechazadas' },
-    ];
-    const arrNext = [];
-
-    const toChanges = [
-        // { type: 'person', label: 'Encargado de Area', name: 'chief' }
-    ];
-
-    States.update({ "code": code }, {
-        $set: {
-            "roles": arrRoles,
-            "nexts": arrNext,
-            toChanges,
-        }
-    }, { multi: true });
-
-    Ideas.update({ "states.code": code }, {
-        $set: {
-            "states.$.roles": arrRoles,
-            "states.$.nexts": arrNext,
-        }
-    }
-        , { multi: true }
-    )
-}
 
 const state3A = () => {
     const code = '3A';
@@ -343,7 +315,8 @@ const state3A = () => {
     ]
 
     const toChanges = [
-        // { type: 'person', label: 'Encargado de Area', name: 'chief' }
+        { type: 'text', label: 'Comentario', name: 'comment' },
+        { type: 'check', label: 'Conversación', name: 'conversation' },
     ];
 
     States.update({ "code": code }, {
@@ -381,7 +354,8 @@ const state3B = () => {
     ]
 
     const toChanges = [
-        // { type: 'person', label: 'Encargado de Area', name: 'chief' }
+        { type: 'text', label: 'Comentario', name: 'comment' },
+        { type: 'check', label: 'Conversación', name: 'conversation' },
     ];
 
     States.update({ "code": code }, {
@@ -419,8 +393,9 @@ const state3C = () => {
     ]
 
     const toChanges = [
-        // { type: 'person', label: 'Encargado de Area', name: 'chief' }
-    ];
+        { type: 'text', label: 'Motivo', name: 'comment' },
+        { type: 'check', label: 'Conversación', name: 'conversation' },
+   ];
 
     States.update({ "code": code }, {
         $set: {
@@ -439,7 +414,37 @@ const state3C = () => {
         , { multi: true }
     )
 }
+const state3D = () => {
+    const code = '3D';
 
+    const arrRoles = [
+        { role: 'Executive', title: 'Ideas Rechazadas' },
+        { role: 'Leader', title: 'Ideas Rechazadas' },
+        { role: 'Employee', title: 'Ideas Rechazadas' },
+    ];
+    const arrNext = [];
+
+    const toChanges = [
+        { type: 'check', label: 'Conversación', name: 'conversation' },
+   ];
+
+    States.update({ "code": code }, {
+        $set: {
+            "roles": arrRoles,
+            "nexts": arrNext,
+            toChanges,
+        }
+    }, { multi: true });
+
+    Ideas.update({ "states.code": code }, {
+        $set: {
+            "states.$.roles": arrRoles,
+            "states.$.nexts": arrNext,
+        }
+    }
+        , { multi: true }
+    )
+}
 const state4A = () => {
     const code = '4A';
 
@@ -464,7 +469,9 @@ const state4A = () => {
     ]
 
     const toChanges = [
-        // { type: 'person', label: 'Encargado de Area', name: 'chief' }
+        { type: 'text', label: 'Motivo', name: 'comment' },
+        { type: 'check', label: 'Conversación', name: 'conversation' },
+        { type: 'date', label: 'Fecha Compromiso Postergación', name: 'postergation' },
     ];
 
     States.update({ "code": code }, {
@@ -503,7 +510,11 @@ const state5A = () => {
     ]
 
     const toChanges = [
-        // { type: 'person', label: 'Encargado de Area', name: 'chief' }
+        { type: 'text', label: 'Mensaje', name: 'message' },
+        { type: 'option', label: 'Ideas', name: 'clasification' },
+        { type: 'option', label: 'Círculo', name: 'clasification' },
+        { type: 'check', label: 'Conversación', name: 'conversation' },
+        { type: 'date', label: 'Fecha Compromiso Postergación', name: 'date' },
     ];
 
     States.update({ "code": code }, {
@@ -548,8 +559,8 @@ const state5B = () => {
     ]
 
     const toChanges = [
-        // { type: 'person', label: 'Encargado de Area', name: 'chief' }
-    ];
+        { type: 'text', label: 'Plan de Acción', name: 'actionplan' },
+        ];
 
     States.update({ "code": code }, {
         $set: {
@@ -587,9 +598,9 @@ const state6A = () => {
     ]
 
     const toChanges = [
-        // { type: 'person', label: 'Encargado de Area', name: 'chief' }
+        { type: 'date', label: 'Fecha Compromiso Carga a Impact', name: 'compromise' },
     ];
-
+    
     States.update({ "code": code }, {
         $set: {
             "roles": arrRoles,
@@ -597,20 +608,20 @@ const state6A = () => {
             toChanges,
         }
     }, { multi: true });
-
+    
     Ideas.update({ "states.code": code }, {
         $set: {
             "states.$.roles": arrRoles,
             "states.$.nexts": arrNext,
         }
     }
-        , { multi: true }
-    )
+    , { multi: true }
+)
 }
 
 const state6B = () => {
     const code = '6B';
-
+    
     const arrRoles = [
         // { role: 'Executive', title: 'Ideas Pendientes Ingreso Plan de Acción' },
         { role: 'Leader', title: 'Ideas Ingresadas a Impact' },
@@ -624,9 +635,9 @@ const state6B = () => {
             "color": "green",
         },
     ]
-
+    
     const toChanges = [
-        // { type: 'person', label: 'Encargado de Area', name: 'chief' }
+        { type: 'date', label: 'Fecha Compromiso Carga a Impact', name: 'compromise' },
     ];
 
     States.update({ "code": code }, {
@@ -658,7 +669,9 @@ const state7A = () => {
     const arrNext = []
 
     const toChanges = [
-        // { type: 'person', label: 'Encargado de Area', name: 'chief' }
+        { type: 'text', label: 'Código Impact', name: 'impactCode' },
+        { type: 'check', label: 'Cierre en Impact', name: 'impactClose' },
+        { type: 'date', label: 'Fecha Implementación de la Idea', name: 'date' },
     ];
 
     States.update({ "code": code }, {
@@ -690,7 +703,9 @@ const state7B = () => {
     const arrNext = []
 
     const toChanges = [
-        // { type: 'person', label: 'Encargado de Area', name: 'chief' }
+        { type: 'text', label: 'Identificación', name: 'indentification' },
+        { type: 'check', label: 'Cierre en Impact', name: 'impactClose' },
+        { type: 'date', label: 'Fecha Implementación de la Idea', name: 'date' },
     ];
 
     States.update({ "code": code }, {

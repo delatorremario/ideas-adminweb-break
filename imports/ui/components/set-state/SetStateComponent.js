@@ -37,7 +37,7 @@ class SetStateComponent extends React.Component {
         // e.preventDefault();
 
         const value = (type, e) => {
-            console.log('valuessss',type,e);
+            console.log('valuessss', type, e);
             switch (type) {
                 case 'date':
                     return e;
@@ -62,17 +62,7 @@ class SetStateComponent extends React.Component {
                 <div>
                     {
                         _.map(toChanges, (toChange, index) => {
-                            return toChange.type === 'text'
-                                &&
-                                <FormGroup key={index}>
-                                    <FormControl componentClass="textarea"
-                                        name={toChange.name}
-                                        onChange={this.onChangeChange(index).bind(this)}
-                                        value={toChange.value}
-                                        placeholder={toChange.label}
-                                    />
-                                </FormGroup> ||
-                                toChange.type === 'date'
+                            return toChange.type === 'date'
                                 &&
                                 <FormGroup key={index}>
                                     <ControlLabel>{toChange.label}</ControlLabel>
@@ -81,7 +71,7 @@ class SetStateComponent extends React.Component {
                                         id="date"
                                         name={toChange.name}
                                         value={toChange.value}
-                                        onChange={this.onChangeChange(index,'date').bind(this)}
+                                        onChange={this.onChangeChange(index, 'date').bind(this)}
                                         dateFormat={'DD MM YYYY'}
                                         dayLabels={['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab']}
                                         monthLabels={['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']}
@@ -89,10 +79,19 @@ class SetStateComponent extends React.Component {
                                         todayButtonLabel={'Hoy'}
                                     />
                                 </FormGroup> ||
-                                toChange.type==='area'
-                                && 
-                                <PersonSearch className="personSearch" persons={[]} onChangeSearchPerson={()=>{}} selectPerson={()=>{}} />
-                                
+                                toChange.type === 'area'
+                                &&
+                                <PersonSearch className="personSearch" persons={[]} onChangeSearchPerson={() => { }} selectPerson={() => { }} />
+                                ||
+                                <FormGroup key={index}>
+                                    <FormControl componentClass="textarea"
+                                        name={toChange.name}
+                                        onChange={this.onChangeChange(index).bind(this)}
+                                        value={toChange.value}
+                                        placeholder={toChange.label}
+                                    />
+                                </FormGroup>
+
                         })
                     }
                     <div className='set-state-button-container'>
