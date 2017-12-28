@@ -75,7 +75,7 @@ class SetStateComponent extends React.Component {
                                 toChange.type === 'date'
                                 &&
                                 <FormGroup key={index}>
-                                    <ControlLabel>Fecha de Creación</ControlLabel>
+                                    <ControlLabel>{toChange.label}</ControlLabel>
                                     <i className="fa fa-calendar"></i>
                                     <DatePicker
                                         id="date"
