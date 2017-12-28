@@ -9,10 +9,23 @@ Meteor.methods({
         if (!Meteor.isServer) return;
         state1A();
         state1B();
+        state2A();
+        state2B();
+        state2C();
+        state2D();
+        state3A();
+        state3B();
+        state3C();
+        state3D();
+        state4A();
+        state5A();
+        state5B();
+        state6A();
+        state6B();
+        state7A();
+        state7B();
     }
 });
-
-
 
 const state1A = () => {
     const code = '1A';
@@ -55,8 +68,144 @@ const state1A = () => {
 
 const state1B = () => {
     const code = '1B';
-    
+
     const arrRoles = [{ role: 'Leader', title: 'Ideas Pendientes' }];
+    const arrNext = [{
+        "title": "Derivar",
+        "action": "Derivar Idea",
+        "code": "2A",
+        "color": "green",
+    },
+    {
+        "title": "Rechazar / Repetida",
+        "action": "Rechazar Idea Repetida",
+        "code": "3B",
+        "color": "grey",
+    },
+    {
+        "title": "Rechazar / Proceso",
+        "action": "Rechazar Idea en Proceso",
+        "code": "3A",
+        "color": "orange",
+    }
+    ]
+
+    const toChanges = [{ type: 'date', label: 'Fecha Compromiso Feedback', name: 'feedback' }];
+
+    States.update({ "code": code }, {
+        $set: {
+            "roles": arrRoles,
+            "nexts": arrNext,
+            toChanges,
+        }
+    }, { multi: true });
+
+    Ideas.update({ "states.code": code }, {
+        $set: {
+            "states.$.roles": arrRoles,
+            "states.$.nexts": arrNext,
+        }
+    }
+        , { multi: true }
+    )
+}
+
+const state2A = () => {
+    const code = '2A';
+
+    const arrRoles = [{ role: 'Executive', title: 'Ideas Nuevas' }];
+    const arrNext = [
+        {
+            "title": "No Corresponde a mi Area",
+            "action": "Devolver Idea",
+            "code": "2C",
+            "color": "green",
+        },
+        {
+            "title": "Corresponde a mi Area, pero la decisión es de otro lider de Area",
+            "action": "Rederivar Idea",
+            "code": "2B",
+            "color": "grey",
+        },
+        {
+            "title": "La decisión si me corresponde",
+            "action": "Dar Continuidad",
+            "code": "2D",
+            "color": "orange",
+        },
+    ]
+
+    const toChanges = [{ type: 'person', label: 'Encargado de Area', name: 'chief' }];
+
+    States.update({ "code": code }, {
+        $set: {
+            "roles": arrRoles,
+            "nexts": arrNext,
+            toChanges,
+        }
+    }, { multi: true });
+
+    Ideas.update({ "states.code": code }, {
+        $set: {
+            "states.$.roles": arrRoles,
+            "states.$.nexts": arrNext,
+        }
+    }
+        , { multi: true }
+    )
+}
+
+const state2B = () => {
+    const code = '2B';
+
+    const arrRoles = [{ role: 'Executive', title: 'Idea Derivada Por Otro Lider' }];
+    const arrNext = [
+        {
+            "title": "No Corresponde a mi Area",
+            "action": "Devolver Idea",
+            "code": "2C",
+            "color": "green",
+        },
+        {
+            "title": "Corresponde a mi Area, pero la decisión es de otro lider de Area",
+            "action": "Rederivar Idea",
+            "code": "2B",
+            "color": "grey",
+        },
+        {
+            "title": "La decisión si me corresponde",
+            "action": "Dar Continuidad",
+            "code": "2D",
+            "color": "orange",
+        },
+    ]
+
+    const toChanges = [
+        // { type: 'person', label: 'Encargado de Area', name: 'chief' }
+    ];
+
+    States.update({ "code": code }, {
+        $set: {
+            "roles": arrRoles,
+            "nexts": arrNext,
+            toChanges,
+        }
+    }, { multi: true });
+
+    Ideas.update({ "states.code": code }, {
+        $set: {
+            "states.$.roles": arrRoles,
+            "states.$.nexts": arrNext,
+        }
+    }
+        , { multi: true }
+    )
+}
+
+const state2C = () => {
+    const code = '2C';
+
+    const arrRoles = [{ role: 'Leader', title: 'Idea Derivada Por Otro Lider' }];
     const arrNext = [{
         "title": "Dar Continuidad",
         "action": "Dar Respuesta",
@@ -70,7 +219,479 @@ const state1B = () => {
         "color": "grey",
     }]
 
-    const toChanges = [{ type: 'date', label: 'Fecha Compromiso Feedback', name: 'feedback' }]
+    const toChanges = [
+        // { type: 'person', label: 'Encargado de Area', name: 'chief' }
+    ];
+
+    States.update({ "code": code }, {
+        $set: {
+            "roles": arrRoles,
+            "nexts": arrNext,
+            toChanges,
+        }
+    }, { multi: true });
+
+    Ideas.update({ "states.code": code }, {
+        $set: {
+            "states.$.roles": arrRoles,
+            "states.$.nexts": arrNext,
+        }
+    }
+        , { multi: true }
+    )
+}
+
+const state2D = () => {
+    const code = '2D';
+
+    const arrRoles = [{ role: 'Executive', title: 'Ideas Pendientes' }];
+    const arrNext = [
+        {
+            "title": "Aprobar",
+            "action": "Aceptar Idea",
+            "code": "5A",
+            "color": "green",
+        },
+        {
+            "title": "Rechazar",
+            "action": "Rechazar Idea",
+            "code": "3C",
+            "color": "grey",
+        },
+        {
+            "title": "Postergar",
+            "action": "Postergar Idea",
+            "code": "4A",
+            "color": "orange",
+        },
+        {
+            "title": "Reprogramar Feedback",
+            "action": "Reprogramar Feedback",
+            "code": "2D",
+            "color": "orange",
+        },
+    ]
+
+    const toChanges = [
+        // { type: 'person', label: 'Encargado de Area', name: 'chief' }
+    ];
+
+    States.update({ "code": code }, {
+        $set: {
+            "roles": arrRoles,
+            "nexts": arrNext,
+            toChanges,
+        }
+    }, { multi: true });
+
+    Ideas.update({ "states.code": code }, {
+        $set: {
+            "states.$.roles": arrRoles,
+            "states.$.nexts": arrNext,
+        }
+    }
+        , { multi: true }
+    )
+}
+
+const state3D = () => {
+    const code = '3D';
+
+    const arrRoles = [
+        { role: 'Executive', title: 'Ideas Rechazadas' },
+        { role: 'Leader', title: 'Ideas Rechazadas' },
+        { role: 'Employee', title: 'Ideas Rechazadas' },
+    ];
+    const arrNext = [];
+
+    const toChanges = [
+        // { type: 'person', label: 'Encargado de Area', name: 'chief' }
+    ];
+
+    States.update({ "code": code }, {
+        $set: {
+            "roles": arrRoles,
+            "nexts": arrNext,
+            toChanges,
+        }
+    }, { multi: true });
+
+    Ideas.update({ "states.code": code }, {
+        $set: {
+            "states.$.roles": arrRoles,
+            "states.$.nexts": arrNext,
+        }
+    }
+        , { multi: true }
+    )
+}
+
+const state3A = () => {
+    const code = '3A';
+
+    const arrRoles = [
+        { role: 'Leader', title: 'Ideas Rechazadas' },
+        { role: 'Employee', title: 'Ideas Rechazadas' },
+    ];
+    const arrNext = [
+        {
+            "title": "Aceptar Rechazo",
+            "action": "Aceptar Rechazo",
+            "code": "3D",
+            "color": "green",
+        },
+    ]
+
+    const toChanges = [
+        // { type: 'person', label: 'Encargado de Area', name: 'chief' }
+    ];
+
+    States.update({ "code": code }, {
+        $set: {
+            "roles": arrRoles,
+            "nexts": arrNext,
+            toChanges,
+        }
+    }, { multi: true });
+
+    Ideas.update({ "states.code": code }, {
+        $set: {
+            "states.$.roles": arrRoles,
+            "states.$.nexts": arrNext,
+        }
+    }
+        , { multi: true }
+    )
+}
+
+const state3B = () => {
+    const code = '3B';
+
+    const arrRoles = [
+        { role: 'Leader', title: 'Ideas Rechazadas' },
+        { role: 'Employee', title: 'Ideas Rechazadas' },
+    ];
+    const arrNext = [
+        {
+            "title": "Aceptar Rechazo",
+            "action": "Aceptar Rechazo",
+            "code": "3D",
+            "color": "green",
+        },
+    ]
+
+    const toChanges = [
+        // { type: 'person', label: 'Encargado de Area', name: 'chief' }
+    ];
+
+    States.update({ "code": code }, {
+        $set: {
+            "roles": arrRoles,
+            "nexts": arrNext,
+            toChanges,
+        }
+    }, { multi: true });
+
+    Ideas.update({ "states.code": code }, {
+        $set: {
+            "states.$.roles": arrRoles,
+            "states.$.nexts": arrNext,
+        }
+    }
+        , { multi: true }
+    )
+}
+const state3C = () => {
+    const code = '3C';
+
+    const arrRoles = [
+        { role: 'Executive', title: 'Ideas Rechazadas' },
+        { role: 'Leader', title: 'Ideas Rechazadas' },
+        { role: 'Employee', title: 'Ideas Rechazadas' },
+    ];
+    const arrNext = [
+        {
+            "title": "Aceptar Rechazo",
+            "action": "Aceptar Rechazo",
+            "code": "3D",
+            "color": "green",
+        },
+    ]
+
+    const toChanges = [
+        // { type: 'person', label: 'Encargado de Area', name: 'chief' }
+    ];
+
+    States.update({ "code": code }, {
+        $set: {
+            "roles": arrRoles,
+            "nexts": arrNext,
+            toChanges,
+        }
+    }, { multi: true });
+
+    Ideas.update({ "states.code": code }, {
+        $set: {
+            "states.$.roles": arrRoles,
+            "states.$.nexts": arrNext,
+        }
+    }
+        , { multi: true }
+    )
+}
+
+const state4A = () => {
+    const code = '4A';
+
+    const arrRoles = [
+        { role: 'Executive', title: 'Ideas StandBy' },
+        { role: 'Leader', title: 'Ideas StandBy' },
+        // { role: 'Employee', title: 'Ideas Rechazadas' },
+    ];
+    const arrNext = [
+        {
+            "title": "Comenzar Proceso",
+            "action": "Comenzar Proceso",
+            "code": "2D",
+            "color": "green",
+        },
+        {
+            "title": "Postergar Nuevamente",
+            "action": "Postergar Idea",
+            "code": "4A",
+            "color": "green",
+        },
+    ]
+
+    const toChanges = [
+        // { type: 'person', label: 'Encargado de Area', name: 'chief' }
+    ];
+
+    States.update({ "code": code }, {
+        $set: {
+            "roles": arrRoles,
+            "nexts": arrNext,
+            toChanges,
+        }
+    }, { multi: true });
+
+    Ideas.update({ "states.code": code }, {
+        $set: {
+            "states.$.roles": arrRoles,
+            "states.$.nexts": arrNext,
+        }
+    }
+        , { multi: true }
+    )
+}
+
+const state5A = () => {
+    const code = '5A';
+
+    const arrRoles = [
+        { role: 'Executive', title: 'Ideas Pendientes Ingreso Plan de Acción' },
+        { role: 'Leader', title: 'Ideas Pendientes Ingreso Plan de Acción' },
+        // { role: 'Employee', title: 'Ideas Rechazadas' },
+    ];
+    const arrNext = [
+        {
+            "title": "Ingresar Plan de Acción",
+            "action": "Ingresar Plan de Acción",
+            "code": "5B",
+            "color": "green",
+        },
+    ]
+
+    const toChanges = [
+        // { type: 'person', label: 'Encargado de Area', name: 'chief' }
+    ];
+
+    States.update({ "code": code }, {
+        $set: {
+            "roles": arrRoles,
+            "nexts": arrNext,
+            toChanges,
+        }
+    }, { multi: true });
+
+    Ideas.update({ "states.code": code }, {
+        $set: {
+            "states.$.roles": arrRoles,
+            "states.$.nexts": arrNext,
+        }
+    }
+        , { multi: true }
+    )
+}
+
+const state5B = () => {
+    const code = '5B';
+
+    const arrRoles = [
+        // { role: 'Executive', title: 'Ideas Pendientes Ingreso Plan de Acción' },
+        { role: 'Leader', title: 'Ideas Pendientes de Exportación' },
+        // { role: 'Employee', title: 'Ideas Rechazadas' },
+    ];
+    const arrNext = [
+        {
+            "title": "Exportar plan de acción formato Just Do It",
+            "action": "Exportar plan de acción",
+            "code": "6A",
+            "color": "green",
+        },
+        {
+            "title": "Exportar plan de acción Formato Iniciativa Nueva",
+            "action": "Exportar plan de acción",
+            "code": "6A",
+            "color": "green",
+        },
+    ]
+
+    const toChanges = [
+        // { type: 'person', label: 'Encargado de Area', name: 'chief' }
+    ];
+
+    States.update({ "code": code }, {
+        $set: {
+            "roles": arrRoles,
+            "nexts": arrNext,
+            toChanges,
+        }
+    }, { multi: true });
+
+    Ideas.update({ "states.code": code }, {
+        $set: {
+            "states.$.roles": arrRoles,
+            "states.$.nexts": arrNext,
+        }
+    }
+        , { multi: true }
+    )
+}
+
+const state6A = () => {
+    const code = '6A';
+
+    const arrRoles = [
+        // { role: 'Executive', title: 'Ideas Pendientes Ingreso Plan de Acción' },
+        { role: 'Leader', title: 'Ideas Ingresadas a Impact' },
+        // { role: 'Employee', title: 'Ideas Rechazadas' },
+    ];
+    const arrNext = [
+        {
+            "title": "Idea Implementada Just Do it",
+            "action": "Cerrar Ciclo",
+            "code": "7A",
+            "color": "green",
+        },
+    ]
+
+    const toChanges = [
+        // { type: 'person', label: 'Encargado de Area', name: 'chief' }
+    ];
+
+    States.update({ "code": code }, {
+        $set: {
+            "roles": arrRoles,
+            "nexts": arrNext,
+            toChanges,
+        }
+    }, { multi: true });
+
+    Ideas.update({ "states.code": code }, {
+        $set: {
+            "states.$.roles": arrRoles,
+            "states.$.nexts": arrNext,
+        }
+    }
+        , { multi: true }
+    )
+}
+
+const state6B = () => {
+    const code = '6B';
+
+    const arrRoles = [
+        // { role: 'Executive', title: 'Ideas Pendientes Ingreso Plan de Acción' },
+        { role: 'Leader', title: 'Ideas Ingresadas a Impact' },
+        // { role: 'Employee', title: 'Ideas Rechazadas' },
+    ];
+    const arrNext = [
+        {
+            "title": "Idea Implementada Iniciativa Nueva",
+            "action": "Cerrar Ciclo",
+            "code": "7B",
+            "color": "green",
+        },
+    ]
+
+    const toChanges = [
+        // { type: 'person', label: 'Encargado de Area', name: 'chief' }
+    ];
+
+    States.update({ "code": code }, {
+        $set: {
+            "roles": arrRoles,
+            "nexts": arrNext,
+            toChanges,
+        }
+    }, { multi: true });
+
+    Ideas.update({ "states.code": code }, {
+        $set: {
+            "states.$.roles": arrRoles,
+            "states.$.nexts": arrNext,
+        }
+    }
+        , { multi: true }
+    )
+}
+
+const state7A = () => {
+    const code = '7A';
+
+    const arrRoles = [
+        { role: 'Executive', title: 'Ideas Implementadas' },
+        { role: 'Leader', title: 'Ideas Implementadas' },
+        // { role: 'Employee', title: 'Ideas Rechazadas' },
+    ];
+    const arrNext = []
+
+    const toChanges = [
+        // { type: 'person', label: 'Encargado de Area', name: 'chief' }
+    ];
+
+    States.update({ "code": code }, {
+        $set: {
+            "roles": arrRoles,
+            "nexts": arrNext,
+            toChanges,
+        }
+    }, { multi: true });
+
+    Ideas.update({ "states.code": code }, {
+        $set: {
+            "states.$.roles": arrRoles,
+            "states.$.nexts": arrNext,
+        }
+    }
+        , { multi: true }
+    )
+}
+
+const state7B = () => {
+    const code = '7B';
+
+    const arrRoles = [
+        { role: 'Executive', title: 'Ideas Implementadas' },
+        { role: 'Leader', title: 'Ideas Implementadas' },
+        // { role: 'Employee', title: 'Ideas Rechazadas' },
+    ];
+    const arrNext = []
+
+    const toChanges = [
+        // { type: 'person', label: 'Encargado de Area', name: 'chief' }
+    ];
 
     States.update({ "code": code }, {
         $set: {
