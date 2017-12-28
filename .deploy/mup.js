@@ -20,7 +20,11 @@ module.exports = {
     // TODO: change app name and path
     name: 'ideas',
     path: '../.',
-
+    
+    volumes: {
+      '/ideasfiles':'/ideasfiles'
+    },
+    
     servers: {
       one: {},
     },

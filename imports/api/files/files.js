@@ -1,6 +1,10 @@
 import { FilesCollection } from 'meteor/ostrio:files';
 
 const Files = new FilesCollection({
+  // debug: true,
+  storagePath: '/ideasfiles',
+  permissions: 0o774,
+  parentDirPermissions: 0o774,
   collectionName: 'Files',
   allowClientCode: true, // Disallow remove files from Client
   onBeforeUpload(file) {
