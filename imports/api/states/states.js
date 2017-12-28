@@ -39,8 +39,9 @@ const NextSchema = new SimpleSchema({
     action: { type: String, optional: true },
 })
 const toChangeSchema = new SimpleSchema({
-    text: { type: Boolean, optional: true },
+    type: { type: String, optional: true },
     label: { type: String, optional: true },
+    name: { type: String, optional: true },
     value: { type: String, optional: true },
 })
 const RoleStateSchema = new SimpleSchema({
