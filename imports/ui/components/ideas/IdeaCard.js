@@ -40,10 +40,10 @@ const IdeaCard = ({ idea, imagesCursor, lap, handleRemove, showEdit, showNext })
                         showEdit &&
                         <Link to={`/idea/${idea._id}/edit`}><i className="fa fa-pencil"></i></Link>
                     }
-                    {/* Implementar */}
-                    <Link to={`/ideas/find`}>
-                        <i className="fa fa-comment"></i>
-                    </Link>
+                    {
+                        showEdit &&
+                        <Link to={`/comments`}><i className="fa fa-comment"></i></Link>
+                    }
                     {
                         showEdit &&
                         <i className="fa fa-trash" onClick={handleRemove(idea._id).bind(this)}></i>
@@ -110,7 +110,7 @@ const IdeaCard = ({ idea, imagesCursor, lap, handleRemove, showEdit, showNext })
                         {
                             showNext && nexts && <div className="nexts-container">
                                 {
-                                    _.map(nexts, (next, index) => 
+                                    _.map(nexts, (next, index) =>
                                         <Link to={`/set-state/${idea._id}/${next.code}`}
                                             key={index}
                                             style={{ backgroundColor: next.color }}

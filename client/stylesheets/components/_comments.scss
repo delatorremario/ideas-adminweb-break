@@ -1,3 +1,16 @@
+@keyframes appear {
+    0% {
+        opacity: 0;
+        transform: scale3d(0,0,1);
+    }
+    50% {
+        transform: scale3d(1,1,1);
+    }
+    100% {
+        opacity: 1;
+    }
+  }
+
 .ci-item {
     width: 100%;
     padding: 1px;
@@ -17,6 +30,8 @@
         background-color: #ffffff !important;
         border: 0px solid black !important;
         .ci-comment {
+            animation-name: appear;
+            animation-duration: 1.4s;
             margin-bottom: 20px;
             width: 100%;
             border-bottom: 1px solid #DBDBDB;
@@ -81,6 +96,7 @@
         display: flex;
         flex: initial auto initial;
         width: 100%;
+        margin-bottom: 30px;
         .ci-new-icon {
             margin: 0px 15px;
             cursor: pointer;
