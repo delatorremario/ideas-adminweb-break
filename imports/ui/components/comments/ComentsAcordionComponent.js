@@ -5,7 +5,6 @@ import moment from 'moment';
 import CommentsComponent from './CommentsComponent';
 
 const CommentsAcordionComponent = ({ ideas }) => {
-    // console.log('CAC', ideas);
     return (
         <Accordion>
             {

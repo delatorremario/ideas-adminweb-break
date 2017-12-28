@@ -4,7 +4,6 @@ import _ from 'lodash';
 import moment from 'moment';
 
 const CommentComponent = ({ text, name, img, date }) => {
-    // console.log('CC',  text, name, img, date);
     return <div className="ci-comment">
         <div className="ci-comment-info">
             <div className="ci-comment-user">

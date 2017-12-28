@@ -5,7 +5,8 @@ import Loading from '../../components/Loading';
 const send = (ideaId, viewers) => (event) => {
     event.preventDefault();
     let comment = {
-        comment: event.target.newComment.value,
+        text: event.target.newComment.value,
+        createdAt: new Date(),
         userId: Meteor.userId(),
         viewers: viewers
     }

@@ -6,8 +6,6 @@ import CommentsListComponent from './CommentsListComponent';
 import CommentSendComponent from './CommentSendComponent';
 
 const CommentsComponent = ({ idea }) => {
-    // console.log('CC', idea);
-    idea._id = '28947892379874';
     return (
         <div className="ci-component">
             <CommentsListComponent comments={idea.comments} />

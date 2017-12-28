@@ -5,7 +5,6 @@ import moment from 'moment';
 import CommentContainer from '../../containers/comments/CommentContainer';
 
 const CommentsListComponent = ({ comments }) => {
-    console.log('CLC', comments)
     return (
         <div className="ci-list">
             {

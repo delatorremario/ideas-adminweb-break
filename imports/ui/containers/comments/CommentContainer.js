@@ -5,7 +5,6 @@ import CommentComponent from '../../components/comments/CommentComponent';
 import moment from 'moment';
 
 const composer = ({ text, date, userId }, onData) => {
-    // console.log('CCr', text, date, userId);
     name = 'Pepe';
     img = 'url("http://localhost:3000/cdn/storage/Files/EqSsJ9pqaAkKwWT5X/original/EqSsJ9pqaAkKwWT5X")';
     onData(null, { text, date, name, img });
