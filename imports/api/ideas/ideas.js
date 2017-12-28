@@ -22,6 +22,18 @@ Ideas.deny({
     remove: () => true,
 })
 
+ViewerSchema = new SimpleSchema({
+    userId: { type: String },
+    viewedAt: { type: Date, optional: true }
+})
+
+CommentSchema = new SimpleSchema({
+    text: { type: String },
+    createdAt: { type: Date },
+    userId: { type: String },
+    viewers: { type: [ViewerSchema] }
+})
+
 Ideas.schema = new SimpleSchema([
     BaseSchema,
     { date: { type: Date } },
@@ -34,7 +46,7 @@ Ideas.schema = new SimpleSchema([
     { collaborators: { type: [PersonSchema], optional: true } },
     { states: { type: [States.schema] } },
     { images: { type: [String], optional: true } },
-
+    { viewers: { type: [ViewerSchema], optional: true }}
 ]);
 
 Ideas.attachSchema(Ideas.schema);
