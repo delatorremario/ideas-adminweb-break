@@ -12,8 +12,6 @@ const CommentsComponent = ({ idea }) => {
             <CommentSendComponent ideaId={idea._id} viewers={idea.viewers} />
         </div>
     )
-
-    
 }
 
 export default CommentsComponent;

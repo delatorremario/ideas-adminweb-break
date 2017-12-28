@@ -31,7 +31,7 @@ CommentSchema = new SimpleSchema({
     text: { type: String },
     createdAt: { type: Date },
     userId: { type: String },
-    viewers: { type: [ViewerSchema] }
+    viewers: { type: [ViewerSchema], optional: true }
 })
 
 Ideas.schema = new SimpleSchema([
@@ -46,7 +46,8 @@ Ideas.schema = new SimpleSchema([
     { collaborators: { type: [PersonSchema], optional: true } },
     { states: { type: [States.schema] } },
     { images: { type: [String], optional: true } },
-    { viewers: { type: [ViewerSchema], optional: true }}
+    { comments: { type: [CommentSchema], optional: true } },
+    { viewers: { type: [ViewerSchema], optional: true } }
 ]);
 
 Ideas.attachSchema(Ideas.schema);

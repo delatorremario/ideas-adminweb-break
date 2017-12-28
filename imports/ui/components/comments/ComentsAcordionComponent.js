@@ -9,7 +9,8 @@ const CommentsAcordionComponent = ({ ideas }) => {
         <Accordion>
             {
                 _.map(ideas, (idea, index) => {
-                    return <Panel className="ci-item" header={idea.opportunity + ' (' + idea.comments.length + ') - ' + moment(idea.createAt).format('DD/MM/YYYY')} eventKey={index} key={index}>
+                    const cantComments = idea && idea.comments && idea.comments.length || 0;
+                    return <Panel className="ci-item" header={idea.opportunity + ' (' + cantComments + ') - ' + moment(idea.createAt).format('DD/MM/YYYY')} eventKey={index} key={index}>
                         <CommentsComponent idea={idea} />
                     </Panel>
                 })

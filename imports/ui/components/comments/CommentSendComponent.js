@@ -11,7 +11,13 @@ const send = (ideaId, viewers) => (event) => {
         viewers: viewers
     }
     event.target.newComment.value = '';
-    console.log('Comment', comment);
+    Meteor.call('idea.saveComment', ideaId, comment, (err) => {
+        if (err) {
+            Bert.alert(err.message, 'danger');
+            return;
+        } else {
+        }
+    });
 }
 
 const CommentSendComponent = ({ ideaId, viewers }) => {
