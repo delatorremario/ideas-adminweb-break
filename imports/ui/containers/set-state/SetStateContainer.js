@@ -19,7 +19,7 @@ const composer = ({ match }, onData) => {
         const last = _.last(idea.states);
         const next = _.find(last.nexts, { code })
 
-        if (!state.toChange) { console.log('---- havent  change ------') }
+        // if (!state.toChange) { console.log('---- havent  change ------') }
 
         onData(null, { idea, state, next });
     }

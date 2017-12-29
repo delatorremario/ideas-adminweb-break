@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { composeWithTracker } from 'react-komposer';
 import { ReactiveVar } from 'meteor/reactive-var';

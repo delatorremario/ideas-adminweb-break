@@ -6,8 +6,8 @@ import DatePicker from 'react-bootstrap-date-picker';
 
 import IdeaCardContainer from '../../components/ideas/IdeaCardContainer'
 import StateCard from '../../components/ideas/StateCard';
-import PersonSearch from '../../components/persons/PersonSearch';
 import PersonSearchAndCardContainer from '../../containers/person/PersonSearchAndCardContainer';
+import AreasSearch from '../../containers/areas/AreasSearch'
 
 class SetStateComponent extends React.Component {
 
@@ -25,7 +25,6 @@ class SetStateComponent extends React.Component {
 
         _.extend(state, { action: next.title });
 
-        console.log('---- state -----', state);
         Meteor.call('idea.setState', idea._id, state, (err) => {
             if (err) { Bert.alert(error.reason, 'danger'); return; }
             history.push('/manage-ideas');
@@ -41,6 +40,9 @@ class SetStateComponent extends React.Component {
                 toChanges[index].date = e;
                 break;
             case 'chief':
+                toChanges[index].chief = e;
+                break;
+            case 'area':
                 toChanges[index].chief = e;
                 break;
             default:
@@ -62,6 +64,11 @@ class SetStateComponent extends React.Component {
                     {
                         _.map(toChanges, (toChange, index) => {
                             const selectPerson = person => e => {
+                                let chief = undefined
+                                if (person !== toChange.chief) chief = person;
+                                this.onChangeChange(index, 'chief')(chief);
+                            }
+                            const selectArea = person => e => {
                                 let chief = undefined
                                 if (person !== toChange.chief) chief = person;
                                 this.onChangeChange(index, 'chief')(chief);
@@ -93,10 +100,18 @@ class SetStateComponent extends React.Component {
                                     />
                                 </FormGroup>
                                 ||
+                                toChange.type === 'area'
+                                &&
+                                <FormGroup key={index}>
+                                    <ControlLabel>{toChange.label}</ControlLabel>
+                                    <AreasSearch {...this.props} selectArea={selectArea} areaSelected={undefined} />
+                               
+                                </FormGroup>
+                                ||
                                 <FormGroup key={index}>
                                     <FormControl componentClass="textarea"
                                         name={toChange.name}
-                                        onChange={this.onChangeChange(index,'text').bind(this)}
+                                        onChange={this.onChangeChange(index, 'text').bind(this)}
                                         value={toChange.value}
                                         placeholder={toChange.label}
                                     />

@@ -44,8 +44,8 @@ const state1A = () => {
     }]
 
     const toChanges = [
-        { type: 'text', label: 'Comentario', name: 'comment' },
         { type: 'area', label: 'Area Nuevo Lider', name: 'areaId' },
+        { type: 'text', label: 'Comentario', name: 'comment' },
     ]
 
     States.update({ "code": code }, {
