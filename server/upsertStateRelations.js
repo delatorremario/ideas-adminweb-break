@@ -136,7 +136,7 @@ const state2A = () => {
     ]
 
     const toChanges = [
-        { type: 'person', label: 'Encargado de Area', name: 'chief' },
+        { type: 'chief', label: 'Encargado de Area', name: 'chief' },
         { type: 'text', label: 'Comentario', name: 'comment' },
     ];
 

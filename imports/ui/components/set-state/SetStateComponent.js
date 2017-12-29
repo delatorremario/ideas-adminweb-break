@@ -7,15 +7,15 @@ import DatePicker from 'react-bootstrap-date-picker';
 import IdeaCardContainer from '../../components/ideas/IdeaCardContainer'
 import StateCard from '../../components/ideas/StateCard';
 import PersonSearch from '../../components/persons/PersonSearch';
+import PersonSearchAndCardContainer from '../../containers/person/PersonSearchAndCardContainer';
 
 class SetStateComponent extends React.Component {
 
-    state = { toChanges: [] }
+    state = { }
 
     componentDidMount() {
         const { state } = this.props;
-        console.log('__state__', state);
-        this.setState({ toChanges: state.toChanges })
+        this.setState({ ...state })
     }
 
     handlerState = e => {
@@ -37,7 +37,7 @@ class SetStateComponent extends React.Component {
         // e.preventDefault();
 
         const value = (type, e) => {
-            console.log('valuessss', type, e);
+            console.log('_onChangeChange_', type, e);
             switch (type) {
                 case 'date':
                     return e;
@@ -52,11 +52,23 @@ class SetStateComponent extends React.Component {
         this.setState({ toChanges });
     }
 
+    selectChief = chief => e => {
+        e.preventDefault()
+        delete chief.score;
+
+        this.setState(prev => ({
+            doc: { ...prev.doc, chief: prev.doc.chief !== chief && chief || undefined }
+        }))
+
+        this.props.textSearch.set('');
+
+    }
+
     render() {
         const { state, idea } = this.props;
         // const newState = this.props.state;
         const { toChanges } = this.state
-        console.log('_ toChanges _', toChanges);
+        console.log('_ this.state _', this.state);
         return (
             <div>
                 <div>
@@ -79,11 +91,11 @@ class SetStateComponent extends React.Component {
                                         todayButtonLabel={'Hoy'}
                                     />
                                 </FormGroup> ||
-                                toChange.type === 'person'
+                                toChange.type === 'chief'
                                 &&
-                                <FormGroup>
+                                <FormGroup key={index}>
                                     <ControlLabel>{toChange.label}</ControlLabel>
-                                    <PersonSearch className="personSearch" persons={[]} onChangeSearchPerson={() => { }} selectPerson={() => { }} />
+                                    <PersonSearchAndCardContainer />
                                 </FormGroup>
                                 ||
                                 <FormGroup key={index}>
