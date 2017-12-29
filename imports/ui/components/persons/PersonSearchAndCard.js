@@ -7,7 +7,12 @@ const PersonSearchAndCard = ({ persons, person, onChangeSearchPerson, selectPers
 
     return <div>
         {person && <PersonCard className="personCard" person={person} removePerson={selectPerson} />}
-        {!person && <PersonSearch className="personSearch" persons={persons} onChangeSearchPerson={onChangeSearchPerson} selectPerson={selectPerson} />}
+        {!person && <PersonSearch
+            className="personSearch"
+            persons={persons}
+            onChangeSearchPerson={onChangeSearchPerson}
+            selectPerson={selectPerson}
+        />}
     </div>
 }
 

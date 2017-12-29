@@ -13,28 +13,17 @@ const personReactiveVar = new ReactiveVar(undefined);
 
 const onChangeSearchPerson = (e) => {
       e.preventDefault()
-      console.log('__onChangeSearchPerson__', e.target.value);
+      // console.log('__onChangeSearchPerson__', e.target.value);
       textSearch.set(e.target.value);
 }
 
-
-const selectPerson = (person) => e => {
-      e.preventDefault();
-      console.log('---Person---', person);
-      if (person !== personReactiveVar.get()) personReactiveVar.set(person);
-      else personReactiveVar.set(undefined);
-
-      textSearch.set('');
-}
-
-const composer = ({ match }, onData) => {
+const composer = ({ selectPerson, person }, onData) => {
 
       const subscriptionPersons = Meteor.subscribe('persons.search', textSearch.get(), textSearchLimit.get());
 
       if (subscriptionPersons.ready()) {
             const persons = Persons.find({}, { sort: { score: -1 }, limit: textSearchLimit.get() }).fetch();
-            const person = personReactiveVar.get()
-            console.log('PARAMS', { persons, person, onChangeSearchPerson, selectPerson })
+            if (person) textSearch.set('');
             onData(null, { persons, person, onChangeSearchPerson, selectPerson });
       }
 };

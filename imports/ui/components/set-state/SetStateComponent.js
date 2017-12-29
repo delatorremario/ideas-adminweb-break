@@ -11,7 +11,7 @@ import PersonSearchAndCardContainer from '../../containers/person/PersonSearchAn
 
 class SetStateComponent extends React.Component {
 
-    state = { }
+    state = {}
 
     componentDidMount() {
         const { state } = this.props;
@@ -35,45 +35,48 @@ class SetStateComponent extends React.Component {
 
     onChangeChange = (index, type) => e => {
         // e.preventDefault();
-
-        const value = (type, e) => {
-            console.log('_onChangeChange_', type, e);
-            switch (type) {
-                case 'date':
-                    return e;
-                    break;
-                default:
-                    return e.target.value;
-            }
-        }
-        console.log('_value_', value(type, e));
         const { toChanges } = this.state;
-        toChanges[index].value = value(type, e);
+
+        console.log('_onChangeChange_', type, e);
+        switch (type) {
+            case 'date':
+                toChanges[index].date = e;
+                break;
+            case 'chief':
+                toChanges[index].chief = e;
+                break;
+            default:
+                toChanges[index].value = e.target.value;
+        }
         this.setState({ toChanges });
     }
 
-    selectChief = chief => e => {
-        e.preventDefault()
-        delete chief.score;
 
-        this.setState(prev => ({
-            doc: { ...prev.doc, chief: prev.doc.chief !== chief && chief || undefined }
-        }))
+    selectChief = (person) => e => {
+        e.preventDefault();
+        console.log('---Person---', person);
+        if (person !== personReactiveVar.get()) personReactiveVar.set(person);
+        else personReactiveVar.set(undefined);
 
-        this.props.textSearch.set('');
-
+        textSearch.set('');
     }
 
     render() {
-        const { state, idea } = this.props;
+        const { idea } = this.props;
         // const newState = this.props.state;
         const { toChanges } = this.state
         console.log('_ this.state _', this.state);
+
         return (
             <div>
                 <div>
                     {
                         _.map(toChanges, (toChange, index) => {
+                            const selectPerson = person => e => {
+                                let chief = undefined
+                                if(person!==toChange.chief) chief = person; 
+                                this.onChangeChange(index, 'chief')(chief);
+                            }
                             return toChange.type === 'date'
                                 &&
                                 <FormGroup key={index}>
@@ -95,7 +98,10 @@ class SetStateComponent extends React.Component {
                                 &&
                                 <FormGroup key={index}>
                                     <ControlLabel>{toChange.label}</ControlLabel>
-                                    <PersonSearchAndCardContainer />
+                                    <PersonSearchAndCardContainer
+                                        selectPerson={selectPerson}
+                                        person={toChange.chief}
+                                    />
                                 </FormGroup>
                                 ||
                                 <FormGroup key={index}>
