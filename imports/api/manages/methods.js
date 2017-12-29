@@ -16,8 +16,6 @@ Meteor.methods({
             { $project: { _id: 0, title: '$_id', codes: 1 } },
         ]);
 
-        console.log('__STATES__', states);
-
         _.map(states, state => {
 
             const codesFilter = [];

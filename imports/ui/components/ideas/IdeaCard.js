@@ -92,7 +92,10 @@ const IdeaCard = ({ idea, imagesCursor, lap, handleRemove, showEdit, showNext })
                                         <h4>{state.action}</h4>
                                         {
                                             _.map(state.toChanges, (toChange, i) => {
-                                                if (toChange.value) return <h5 key={i}>{toChange.label}: {toChange.value}</h5>
+                                                if (toChange.text) return <h5 key={i}>{toChange.label}: {toChange.text}</h5>
+                                                if (toChange.date) return <h5 key={i}>{toChange.label}: <Moment format="DD MMM YYYY" date={toChange.date} /></h5>
+                                                //console.log('toChange', toChange)
+                                                if (toChange.chief) return <h5 key={i}>{toChange.label}: {toChange.chief.lastName}, {toChange.chief.firstName} {toChange.chief.secondName}</h5>
                                             })
                                         }
                                     </li>

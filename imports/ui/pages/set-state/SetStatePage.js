@@ -7,7 +7,6 @@ import SetStateComponent from '../../components/set-state/SetStateComponent';
 
 const SetStatePage = (props) => {
     const { next } = props;
-    console.log('next', next);
     return <div>
         <div className="pageheader">
             <h1>{next && next.action}</h1>

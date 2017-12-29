@@ -7,6 +7,7 @@ import Ideas from './ideas';
 import rateLimit from '../../modules/rate-limit.js';
 import PersonSchema from '../../api/persons/personSchema';
 import States from '../../api/states/states';
+import { Meteor } from 'meteor/meteor';
 
 export const upsertIdea = new ValidatedMethod({
     name: 'ideas.upsert',
@@ -90,9 +91,19 @@ Meteor.methods({
         ]);
     },
     'idea.setState': (_id, state) => {
+        if(!Meteor.isServer) return;
         check(_id, String);
         check(state, Object);
-        Ideas.update({ _id }, { $push: { states: state } });
+
+        const update = { $push: { states: state } };
+        
+        _.map(state.toChanges, onchange =>{
+            console.log('--toChanges--',onchange);  
+            if (onchange.chief) _.extend(update, { $set: { chief: onchange.chief } })
+        })
+
+        console.log('---update---', update);
+        Ideas.update({ _id }, update);
     },
     'idea.saveComment': (_id, comment) => {
         check(_id, String);

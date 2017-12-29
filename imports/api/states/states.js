@@ -2,7 +2,7 @@ import { Mongo } from 'meteor/mongo';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Factory } from 'meteor/dburles:factory';
 
-import Persons from '../persons/persons'
+import PersonSchema from '../persons/personSchema';
 
 const AlertSchema = new SimpleSchema({
     temporal: { type: Boolean },
@@ -45,7 +45,7 @@ const toChangeSchema = new SimpleSchema({
     label: { type: String, optional: true },
     name: { type: String, optional: true },
     text: { type: String, optional: true },
-    chief: { type: Persons.schema, optional: true },
+    chief: { type: PersonSchema, optional: true },
     date: { type: Date, optional: true }
 })
 const RoleStateSchema = new SimpleSchema({

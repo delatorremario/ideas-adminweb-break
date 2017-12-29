@@ -20,12 +20,12 @@ class SetStateComponent extends React.Component {
 
     handlerState = e => {
         e.preventDefault();
-        const { state, idea, history, next } = this.props;
-        const { toChanges } = this.state;
+        const { idea, history, next } = this.props;
+        const state = this.state;
 
-        _.extend(state, { changes: toChanges, action: next.title });
+        _.extend(state, { action: next.title });
 
-        // console.log('state', state);
+        console.log('---- state -----', state);
         Meteor.call('idea.setState', idea._id, state, (err) => {
             if (err) { Bert.alert(error.reason, 'danger'); return; }
             history.push('/manage-ideas');
@@ -36,8 +36,6 @@ class SetStateComponent extends React.Component {
     onChangeChange = (index, type) => e => {
         // e.preventDefault();
         const { toChanges } = this.state;
-
-        console.log('_onChangeChange_', type, e);
         switch (type) {
             case 'date':
                 toChanges[index].date = e;
@@ -46,26 +44,17 @@ class SetStateComponent extends React.Component {
                 toChanges[index].chief = e;
                 break;
             default:
-                toChanges[index].value = e.target.value;
+                // console.log('--e.target.value--', e.target.value)
+                toChanges[index].text = e.target.value;
         }
         this.setState({ toChanges });
-    }
-
-
-    selectChief = (person) => e => {
-        e.preventDefault();
-        console.log('---Person---', person);
-        if (person !== personReactiveVar.get()) personReactiveVar.set(person);
-        else personReactiveVar.set(undefined);
-
-        textSearch.set('');
     }
 
     render() {
         const { idea } = this.props;
         // const newState = this.props.state;
         const { toChanges } = this.state
-        console.log('_ this.state _', this.state);
+        // console.log('_ this.state _', this.state);
 
         return (
             <div>
@@ -74,7 +63,7 @@ class SetStateComponent extends React.Component {
                         _.map(toChanges, (toChange, index) => {
                             const selectPerson = person => e => {
                                 let chief = undefined
-                                if(person!==toChange.chief) chief = person; 
+                                if (person !== toChange.chief) chief = person;
                                 this.onChangeChange(index, 'chief')(chief);
                             }
                             return toChange.type === 'date'
@@ -85,7 +74,7 @@ class SetStateComponent extends React.Component {
                                     <DatePicker
                                         id="date"
                                         name={toChange.name}
-                                        value={toChange.value}
+                                        value={toChange.date}
                                         onChange={this.onChangeChange(index, 'date').bind(this)}
                                         dateFormat={'DD MM YYYY'}
                                         dayLabels={['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab']}
@@ -107,7 +96,7 @@ class SetStateComponent extends React.Component {
                                 <FormGroup key={index}>
                                     <FormControl componentClass="textarea"
                                         name={toChange.name}
-                                        onChange={this.onChangeChange(index).bind(this)}
+                                        onChange={this.onChangeChange(index,'text').bind(this)}
                                         value={toChange.value}
                                         placeholder={toChange.label}
                                     />
