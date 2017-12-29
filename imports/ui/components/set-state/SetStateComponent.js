@@ -6,7 +6,7 @@ import DatePicker from 'react-bootstrap-date-picker';
 
 import IdeaCardContainer from '../../components/ideas/IdeaCardContainer'
 import StateCard from '../../components/ideas/StateCard';
-import PersonSearch from '../../components/ideas/PersonSearch';
+import PersonSearch from '../../components/persons/PersonSearch';
 
 class SetStateComponent extends React.Component {
 
@@ -66,7 +66,7 @@ class SetStateComponent extends React.Component {
                                 &&
                                 <FormGroup key={index}>
                                     <ControlLabel>{toChange.label}</ControlLabel>
-                                    <i className="fa fa-calendar"></i>
+                                    {/* <i className="fa fa-calendar"></i> */}
                                     <DatePicker
                                         id="date"
                                         name={toChange.name}
@@ -79,9 +79,12 @@ class SetStateComponent extends React.Component {
                                         todayButtonLabel={'Hoy'}
                                     />
                                 </FormGroup> ||
-                                toChange.type === 'area'
+                                toChange.type === 'person'
                                 &&
-                                <PersonSearch className="personSearch" persons={[]} onChangeSearchPerson={() => { }} selectPerson={() => { }} />
+                                <FormGroup>
+                                    <ControlLabel>{toChange.label}</ControlLabel>
+                                    <PersonSearch className="personSearch" persons={[]} onChangeSearchPerson={() => { }} selectPerson={() => { }} />
+                                </FormGroup>
                                 ||
                                 <FormGroup key={index}>
                                     <FormControl componentClass="textarea"

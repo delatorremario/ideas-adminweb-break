@@ -3,14 +3,13 @@ import _ from 'lodash';
 import { Grid, Row, Col, Thumbnail } from 'react-bootstrap';
 
 
-import PersonCard from './PersonCard';
-import PersonSearch from './PersonSearch';
+import PersonCard from '../persons/PersonCard';
+import PersonSearch from '../persons/PersonSearch';
 import StatesSelect from './StatesSelect';
 import StateCard from './StateCard';
 import AreasSearch from '../../containers/areas/AreasSearch';
 import FileUpload from '../files/FileUpload';
 import Photo from '../photo/photo';
-
 
 const IdeasUserStep3 = ({ images, attachImage, removeImage }) =>
     <div>

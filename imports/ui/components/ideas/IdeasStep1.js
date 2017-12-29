@@ -3,8 +3,8 @@ import _ from 'lodash';
 import { FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
 import DatePicker from 'react-bootstrap-date-picker';
 
-import PersonCard from './PersonCard';
-import PersonSearch from './PersonSearch';
+import PersonCard from '../persons/PersonCard';
+import PersonSearch from '../persons/PersonSearch';
 
 const IdeasStep1 = ({ onChangeForm, data, handleChangeDate, onChangeSearchPerson, persons, selectPerson, origins, selectOrigin }) => (
 

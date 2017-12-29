@@ -1,8 +1,8 @@
 import React from 'react';
 import _ from 'lodash';
 
-import PersonCard from './PersonCard';
-import PersonSearch from './PersonSearch';
+import PersonCard from '../persons/PersonCard';
+import PersonSearch from '../persons/PersonSearch';
 
 const IdeasStep4 = ({ data, onChangeSearchPerson, persons, selectCollaborator }) => {
 
