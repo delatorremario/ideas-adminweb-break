@@ -4,6 +4,7 @@ import _ from 'lodash';
 import moment from 'moment';
 
 const CommentComponent = ({ text, name, img, date }) => {
+    const color = stringToColor(name);
     return <div className="ci-comment">
         <div className="ci-comment-info">
             <div className="ci-comment-user">
@@ -11,7 +12,7 @@ const CommentComponent = ({ text, name, img, date }) => {
                     style={{ backgroundImage: img }}></div>
                 <div>
                     <div className="ci-comment-name">
-                        <b>{name}</b>
+                        <b style={{ color: color }}>{name}</b>
                     </div>
                     <div className="ci-comment-date">
                         <i>
@@ -27,6 +28,21 @@ const CommentComponent = ({ text, name, img, date }) => {
             {text}
         </div>
     </div>
+}
+
+const stringToColor = (string) => {
+    let color = 0;
+    stringA = string.split('');
+    _.forEach(stringA, (n, i) => {
+        color += n.charCodeAt(0) * stringA.length * i * 10;
+    })
+    if (color > 16777215) color -= 16777215;
+    if (color < 1048576) color += 1048576;
+    if (color > 16777215) color -= 16777215;
+    if (color < 1048576) color += 1048576;
+    color = parseInt(color, 10).toString(16);
+    color = '#' + color;
+    return color;
 }
 
 export default CommentComponent;
