@@ -68,9 +68,12 @@ class SetStateComponent extends React.Component {
                                 if (person !== toChange.chief) chief = person;
                                 this.onChangeChange(index, 'chief')(chief);
                             }
-                            const selectArea = person => e => {
-                                let chief = undefined
-                                if (person !== toChange.chief) chief = person;
+                            const selectArea = area => {
+                                let chief = undefined;
+                                if (area === undefined) chief = undefined;
+                                else {
+                                    chief = { areaId: area._id }
+                                }
                                 this.onChangeChange(index, 'chief')(chief);
                             }
                             return toChange.type === 'date'
@@ -104,8 +107,7 @@ class SetStateComponent extends React.Component {
                                 &&
                                 <FormGroup key={index}>
                                     <ControlLabel>{toChange.label}</ControlLabel>
-                                    <AreasSearch {...this.props} selectArea={selectArea} areaSelected={undefined} />
-                               
+                                    <AreasSearch {...this.props} selectArea={selectArea} />
                                 </FormGroup>
                                 ||
                                 <FormGroup key={index}>
