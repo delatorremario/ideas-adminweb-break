@@ -1,6 +1,6 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
+import { FormGroup, ControlLabel, FormControl, Checkbox } from 'react-bootstrap';
 import DatePicker from 'react-bootstrap-date-picker';
 
 
@@ -34,6 +34,7 @@ class SetStateComponent extends React.Component {
 
     onChangeChange = (index, type) => e => {
         // e.preventDefault();
+        console.log('--e.target.value--', e.target.checked)
         const { toChanges } = this.state;
         switch (type) {
             case 'date':
@@ -45,8 +46,10 @@ class SetStateComponent extends React.Component {
             case 'area':
                 toChanges[index].chief = e;
                 break;
+            case 'check':
+                toChanges[index].check = e.target.checked;
+                break;
             default:
-                // console.log('--e.target.value--', e.target.value)
                 toChanges[index].text = e.target.value;
         }
         this.setState({ toChanges });
@@ -56,7 +59,7 @@ class SetStateComponent extends React.Component {
         const { idea } = this.props;
         // const newState = this.props.state;
         const { toChanges } = this.state
-        // console.log('_ this.state _', this.state);
+        console.log('_ toChanges _', toChanges);
 
         return (
             <div>
@@ -108,6 +111,18 @@ class SetStateComponent extends React.Component {
                                 <FormGroup key={index}>
                                     <ControlLabel>{toChange.label}</ControlLabel>
                                     <AreasSearch {...this.props} selectArea={selectArea} />
+                                </FormGroup>
+                                ||
+                                toChange.type === 'check'
+                                &&
+                                <FormGroup key={index}>
+                                    <Checkbox
+                                        name={toChange.name}
+                                        // checked={toChange.check}
+                                        onChange={this.onChangeChange(index, 'check').bind(this)}
+                                    >
+                                        {toChange.label}
+                                    </Checkbox>
                                 </FormGroup>
                                 ||
                                 <FormGroup key={index}>
