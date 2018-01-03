@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
+import NonViewedComponent from '../components/nonViewed/NonViewedComponent';
 
 const handleLogout = () => {
     Meteor.logout();
@@ -28,16 +29,8 @@ class Footer extends Component {
                 <div className="footer-item">
                     <button className="footer-button">
                         <Link className="footer-button" to="/comments" >
-                            <i className="fa fa-fw fa-envelope">
-                                {
-                                    nonViewed.length < 1 ? '' :
-                                        <span className="label label-primary label-circle pull-right nonViewed">
-                                            {
-                                                3
-                                            }
-                                        </span>
-                                }
-                            </i>
+                            <i className="fa fa-fw fa-envelope"></i>
+                            <NonViewedComponent className="nonViewed" number={nonViewed.length} />
                         </Link>
                     </button>
                 </div>

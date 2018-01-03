@@ -20,7 +20,8 @@ import {
 import ColoredAvatar from '../components/ColoredAvatar';
 import $ from 'jquery';
 import { Roles } from 'meteor/alanning:roles';
-import '../../../node_modules/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar'
+import '../../../node_modules/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar';
+import NonViewedComponent from '../components/nonViewed/NonViewedComponent';
 require('malihu-custom-scrollbar-plugin')($);
 
 class SidebarPush extends Component {
@@ -195,12 +196,8 @@ class SidebarPush extends Component {
                                 <i className={link.iconClasses.join(" ")}></i>
                                 {link.title}
                                 {
-                                    (link.title !== 'Comentarios') || (nonViewed.length < 1) ? '' :
-                                        <span className="label label-primary label-circle pull-right">
-                                            {
-                                                3
-                                            }
-                                        </span>
+                                    link.title !== 'Comentarios' ? '' :
+                                        <NonViewedComponent number={nonViewed.length} />
                                 }
                             </Link>
                         </li>
