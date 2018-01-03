@@ -54,7 +54,7 @@ export const upsertIdea = new ValidatedMethod({
                 })
 
             }
-            Meteor.call('idea.addViewers', idea._id)
+            Meteor.call('idea.addViewers', data.insertedId);
         });
     },
 });
