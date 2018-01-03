@@ -4,7 +4,7 @@ import _ from 'lodash';
 import moment from 'moment';
 import CommentContainer from '../../containers/comments/CommentContainer';
 
-const CommentsListComponent = ({ comments }) => {
+const CommentsListComponent = ({ comments, ideaId }) => {
     return (
         <div className="ci-list">
             {
