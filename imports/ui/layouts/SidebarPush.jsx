@@ -194,6 +194,14 @@ class SidebarPush extends Component {
                             <Link onClick={this.sidebarPushMobile} to={link.path} title={link.path}>
                                 <i className={link.iconClasses.join(" ")}></i>
                                 {link.title}
+                                {
+                                    link.title !== 'Comentarios' ? '' :
+                                        <span className="label label-primary label-circle pull-right">
+                                            {
+                                                3
+                                            }
+                                        </span>
+                                }
                             </Link>
                         </li>
                     )
