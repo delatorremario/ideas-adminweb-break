@@ -112,11 +112,19 @@ Meteor.methods({
     },
     'idea.readComment': (_id) => {
         if (!Meteor.isServer) return;
-        check(ideaId, String);
+        check(_id, String);
         console.log('usuario id', Meteor.userId())
-        Ideas.update({ _id, 'comments.viewers.userId': Meteor.userId() },
-            { $set: { 'comments.viewers.viewedAt': new Date } }
-        )
+
+        const idea = Ideas.findOne(_id);
+
+        _.map(idea.comments, comment => {
+            _.map(comment.viewers, viewer => {
+                return (viewer.userId === Meteor.userId()) && _.extend(viewer, { viewedAt: new Date })
+            })
+        })
+
+        Ideas.update({ _id }, { $set: { comments: idea.comments } });
+        
     },
     'idea.addViewers': (_id) => {
         if (!Meteor.isServer) return;
