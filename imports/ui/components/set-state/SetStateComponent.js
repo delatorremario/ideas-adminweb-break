@@ -15,6 +15,7 @@ class SetStateComponent extends React.Component {
 
     componentDidMount() {
         const { state } = this.props;
+        console.log('lalalla state', state);
         this.setState({ ...state })
     }
 
@@ -34,7 +35,6 @@ class SetStateComponent extends React.Component {
 
     onChangeChange = (index, type) => e => {
         // e.preventDefault();
-        console.log('--e.target.value--', e.target.checked)
         const { toChanges } = this.state;
         switch (type) {
             case 'date':

@@ -395,7 +395,7 @@ const state3C = () => {
     const toChanges = [
         { type: 'text', label: 'Motivo', name: 'comment' },
         { type: 'check', label: 'Conversación', name: 'conversation' },
-   ];
+    ];
 
     States.update({ "code": code }, {
         $set: {
@@ -426,7 +426,7 @@ const state3D = () => {
 
     const toChanges = [
         { type: 'check', label: 'Conversación', name: 'conversation' },
-   ];
+    ];
 
     States.update({ "code": code }, {
         $set: {
@@ -560,7 +560,7 @@ const state5B = () => {
 
     const toChanges = [
         { type: 'text', label: 'Plan de Acción', name: 'actionplan' },
-        ];
+    ];
 
     States.update({ "code": code }, {
         $set: {
@@ -600,7 +600,7 @@ const state6A = () => {
     const toChanges = [
         { type: 'date', label: 'Fecha Compromiso Carga a Impact', name: 'compromise' },
     ];
-    
+
     States.update({ "code": code }, {
         $set: {
             "roles": arrRoles,
@@ -608,20 +608,20 @@ const state6A = () => {
             toChanges,
         }
     }, { multi: true });
-    
+
     Ideas.update({ "states.code": code }, {
         $set: {
             "states.$.roles": arrRoles,
             "states.$.nexts": arrNext,
         }
     }
-    , { multi: true }
-)
+        , { multi: true }
+    )
 }
 
 const state6B = () => {
     const code = '6B';
-    
+
     const arrRoles = [
         // { role: 'Executive', title: 'Ideas Pendientes Ingreso Plan de Acción' },
         { role: 'Leader', title: 'Ideas Ingresadas a Impact' },
@@ -635,7 +635,7 @@ const state6B = () => {
             "color": "green",
         },
     ]
-    
+
     const toChanges = [
         { type: 'date', label: 'Fecha Compromiso Carga a Impact', name: 'compromise' },
     ];
@@ -724,4 +724,14 @@ const state7B = () => {
     }
         , { multi: true }
     )
+}
+
+const setColors = () => {
+    const states = States.find().fetch();
+    _.each(states, state => {
+        _.each(state.nexts, next =>{
+            const oneState = States.findOne({code:next.code});
+            States.update({_id:oneState._id})
+        })
+    })
 }

@@ -41,10 +41,7 @@ const IdeaCard = ({ idea, imagesCursor, lap, handleRemove, showEdit, showNext })
                         showEdit &&
                         <Link to={`/idea/${idea._id}/edit`}><i className="fa fa-pencil"></i></Link>
                     }
-                    {
-                        showEdit &&
                         <Link to={`/comment/${idea._id}`}><i className="fa fa-comment"></i></Link>
-                    }
                     {
                         showEdit &&
                         <i className="fa fa-trash" onClick={handleRemove(idea._id).bind(this)}></i>

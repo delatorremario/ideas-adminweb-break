@@ -7,9 +7,10 @@ const ideasstates = [
     { code:'2C', step:'EN REVISIÓN CON LA LÍNEA', state:'DEVUELTA', description:'Idea devuelta a la Oficina de Mejoramiento', color:'#e65400'},
     { code:'2D', step:'EN REVISIÓN CON LA LÍNEA', state:'REVISADA', description:'Idea revisada por el Encargado del Area', color:'#e65400'},
     
-    { code:'3A', step:'RECHAZADA', state:'YA EN INICIATIVA', description:'Idea rechazada por mejoramiento, ya considerada dentro de iniciativas existentes', color:'#1966b1'},
-    { code:'3B', step:'RECHAZADA', state:'REPETIDA', description:'Idea rechazada por mejoramiento, repetida dentro de "Ideas 3.0".', color:'#1966b1'},
-    { code:'3C', step:'RECHAZADA', state:'NO FACTIBLE', description:'Idea rechazada por el encargado de área, no factible dadas las condiciones generales del área.', color:'#1966b1'},
+    { code:'3A', step:'RECHAZADA', state:'YA EN INICIATIVA', description:'Idea rechazada por mejoramiento, ya considerada dentro de iniciativas existentes.Pendiente de confirmación por parte del usuario creador.', color:'#1966b1'},
+    { code:'3B', step:'RECHAZADA', state:'REPETIDA', description:'Idea rechazada por mejoramiento, repetida dentro de "Ideas 3.0". Pendiente de confirmación por parte del usuario creador', color:'#1966b1'},
+    { code:'3C', step:'RECHAZADA', state:'NO FACTIBLE', description:'Idea rechazada por el encargado de área, no factible dadas las condiciones generales del área. Pendiente de confirmación por parte del usuario creador.', color:'#1966b1'},
+    { code:'3D', step:'RECHAZADA', state:'ACEPTADA', description:'Rechazo Aceptado', color:'#1966b1'},
 
     { code:'4A', step:'STAND BY', state:'STAND BY', description:'Idea postergada por encargado de área.', color:'#9f2996'},
 
