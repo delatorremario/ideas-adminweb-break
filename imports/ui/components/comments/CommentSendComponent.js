@@ -17,10 +17,6 @@ const send = (ideaId, viewers) => (event) => {
         if (err) {
             Bert.alert(err.message, 'danger');
             return;
-        } else {
-            setTimeout(() => {
-                document.getElementById('newComment').focus();
-            }, 1500);
         }
     });
 }

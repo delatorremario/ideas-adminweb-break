@@ -23,6 +23,7 @@ import { Roles } from 'meteor/alanning:roles';
 import '../../../node_modules/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar';
 import NonViewedComponent from '../components/nonViewed/NonViewedComponent';
 require('malihu-custom-scrollbar-plugin')($);
+import Ideas from '../../api/ideas/ideas';
 
 class SidebarPush extends Component {
     constructor(props, context) {
@@ -181,12 +182,27 @@ class SidebarPush extends Component {
         $('#level-' + levelNumb).slideToggle()
     }
 
+    cantNonViewedComments = (idea) => {
+        const userId = Meteor.userId();
+        return _.reduce(idea.comments, (sum, c) => {
+            c.viewers = _.filter(c.viewers, (v) => (v.userId === userId) && !v.viewedAt);
+            return sum + c.viewers.length;
+        }, 0);
+    }
+
     renderNavigation() {
         let links = ``;
         const { navLinks } = this.state
-        const user = Meteor.user();
-        const nonViewed = [1, 2, 3, 4];
-
+        const userId = Meteor.userId();
+        const sub = Meteor.subscribe('ideas.state.list', { 'viewers.userId': userId }, 100);
+        const ideas = [];
+        const nonViewed = 0;
+        if (sub.ready()) {
+           ideas = Ideas.find({}, {}).fetch();
+        }
+        _.forEach(ideas, (idea) => {
+            nonViewed += this.cantNonViewedComments(idea);
+        })
         links = navLinks.map((link, index) => {
             if (!link.roles || link.roles && Roles.userIsInRole(Meteor.userId(), link.roles)) {
                 if (!link.subLevel) {
@@ -197,7 +213,7 @@ class SidebarPush extends Component {
                                 {link.title}
                                 {
                                     link.title !== 'Comentarios' ? '' :
-                                        <NonViewedComponent number={nonViewed.length} />
+                                        <NonViewedComponent number={nonViewed} />
                                 }
                             </Link>
                         </li>
