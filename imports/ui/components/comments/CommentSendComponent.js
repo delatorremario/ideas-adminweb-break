@@ -4,9 +4,11 @@ import Loading from '../../components/Loading';
 
 const send = (ideaId, viewers) => (event) => {
     event.preventDefault();
+    const userId = Meteor.userId();
+    _.map(viewers, (viewer) => viewer.userId === userId && _.extend(viewer, { viewedAt: new Date() }));
     let comment = {
         text: event.target.newComment.value,
-        viewedAt: new Date(),
+        createdAt: new Date(),
         userId: Meteor.userId(),
         viewers: viewers
     }

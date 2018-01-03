@@ -24,8 +24,11 @@ const cantComments = (idea) => {
 }
 
 const cantNonViewesComments = (idea) => {
+    const userId = Meteor.userId();
     _.reduce(idea, (sum, i) => {
-        
+        if (idea) {
+            
+        }
     })
 }
 
