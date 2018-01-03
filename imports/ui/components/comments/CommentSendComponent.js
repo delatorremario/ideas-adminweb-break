@@ -30,7 +30,7 @@ const CommentSendComponent = ({ ideaId, viewers }) => {
                 <i className="ci-new-icon fa fa-comment-o"></i>
             </label>
             <input type="text" name="newComment" id="newComment" className="ci-new-input" placeholder="Comentar"></input>
-            <i className="ci-new-icon fa fa-send-o" onClick={send}></i>
+            <button className="ci-new-icon fa fa-send-o"></button>
         </form>
     )
 }

@@ -12,6 +12,7 @@
   }
 
 .ci-item {
+    box-sizing: border-box;
     width: 100%;
     padding: 1px;
     margin: 0px;
@@ -19,6 +20,7 @@
     background-color: #ffffff !important;
     border: 0px solid black !important;
     .panel-heading {
+        width: 100%;
         background-color: white !important;
         border: 0px solid black !important;
         border-bottom: 1px solid #ccd8ff !important;
@@ -30,15 +32,19 @@
         background-color: #ffffff !important;
         border: 0px solid black !important;
         .ci-comment {
+            box-sizing: border-box;
             padding: 6px 0px 24px 0px !important;
             animation-name: appear;
             animation-duration: 1.4s;
+            margin: 0px;
             margin-bottom: 20px;
             width: 100%;
             border-bottom: 1px solid #DBDBDB;
             .ci-comment-text {
+                box-sizing: border-box;
                 width: 100%;
-                margin-top: 20px !important;
+                margin: 15px 0px 0px 0px !important;
+                padding: 0px 10px !important;
                 color: #484848 !important;
                 font-size: 18px !important;
                 word-wrap: break-word !important;
@@ -70,7 +76,7 @@
                 }
                 .ci-comment-user {
                     box-sizing: border-box;
-                    padding: 0px;
+                    padding: 0px 0px 0px 5px;
                     margin: 0px;
                     display: flex;
                     .ci-comment-img {
@@ -105,6 +111,8 @@
         margin-bottom: 30px;
         .ci-new-icon {
             margin: 0px 15px;
+            background: none;
+            border: none;
             cursor: pointer;
         }
         .ci-new-input {

@@ -29,7 +29,7 @@ const IdeaCommentsPage = (props) => {
             </div>
             <section id="main-content">
                 <div className="row">
-                    <div className="col-md-12 col-lg-12">
+                    <div className="col-md-12 col-lg-12 noneMargin">
                         <div className="panel">
                             <div className="panel-body ng-binding">
                                 <div className="ci-item">
