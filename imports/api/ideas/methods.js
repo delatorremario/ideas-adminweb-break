@@ -120,17 +120,25 @@ Meteor.methods({
         const idea = Ideas.findOne(_id);
 
         // owner
-        viewers.push(idea.person._id);
+        const owner = Meteor.users.findOne({ 'emails.address': idea.person.email })
+        if (owner) viewers.push(owner._id);
 
         // leaders
         const leaders = Meteor.users.find({ roles: 'Leader' }, { fields: { _id: 1 } }).fetch();
         viewers = _.union(viewers, _.map(leaders, '_id'));
 
         // chief
-        if (idea.chief && idea.chief._id) viewers = _.union(viewers, [idea.person._id]);
+        if (idea.chief && idea.chief.email) {
+            const chief = Meteor.users.findOne({ 'emails.address': idea.chief.email })
+            if (chief) viewers = _.union(viewers, [chief._id])
+        };
 
-        // collaborators
-        if (idea.collaborators) viewers = _.union(viewers, _.map(idea.collaborators, '_id'));
+        // // collaborators
+        if (idea.collaborators) {
+            const collMails = _.map(idea.collaborators, 'email')
+            const collaborators = Meteor.users.find({ 'emails.address': { $in: collMails } }).fetch()
+            viewers = _.union(viewers, _.map(collaborators, '_id'));
+        }
 
         viewers = _.map(viewers, id => ({ userId: id }));
         Ideas.update({ _id }, { $set: { viewers } });
