@@ -6,7 +6,7 @@ const send = (ideaId, viewers) => (event) => {
     event.preventDefault();
     let comment = {
         text: event.target.newComment.value,
-        createdAt: new Date(),
+        viewedAt: new Date(),
         userId: Meteor.userId(),
         viewers: viewers
     }
