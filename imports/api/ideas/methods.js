@@ -99,11 +99,9 @@ Meteor.methods({
         const update = { $push: { states: state } };
 
         _.map(state.toChanges, onchange => {
-            console.log('--toChanges--', onchange);
             if (onchange.chief) _.extend(update, { $set: { chief: onchange.chief } })
         })
 
-        console.log('---update---', update);
         Ideas.update({ _id }, update);
         Meteor.call('idea.addViewers', _id)
     },
@@ -111,6 +109,14 @@ Meteor.methods({
         check(_id, String);
         check(comment, Object);
         Ideas.update({ _id }, { $push: { comments: comment } });
+    },
+    'idea.readComment': (_id) => {
+        if (!Meteor.isServer) return;
+        check(ideaId, String);
+        console.log('usuario id', Meteor.userId())
+        Ideas.update({ _id, 'comments.viewers.userId': Meteor.userId() },
+            { $set: { 'comments.viewers.viewedAt': new Date } }
+        )
     },
     'idea.addViewers': (_id) => {
         if (!Meteor.isServer) return;
