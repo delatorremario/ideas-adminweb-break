@@ -10,6 +10,8 @@ const composer = ({ match }, onData) => {
     const sub = Meteor.subscribe('ideas.state.list', {}, 100);
     if (sub.ready()) {
         const ideas = Ideas.find({},{}).fetch();
+        const userId = Meteor.userId();
+        console.log(userId, ideas);
         onData(null, { ideas });
     }
 };
