@@ -7,11 +7,12 @@ import Ideas from '../../../api/ideas/ideas';
 
 const composer = ({ match }, onData) => {
     moment.locale('es');
-    const sub = Meteor.subscribe('ideas.state.list', {}, 100);
+    const userId = Meteor.userId();
+    console.log(userId);
+    const sub = Meteor.subscribe('ideas.state.list', { 'viewers.userId': userId }, 100);
     if (sub.ready()) {
-        const ideas = Ideas.find({},{}).fetch();
-        const userId = Meteor.userId();
-        console.log(userId, ideas);
+        const ideas = Ideas.find({}, {}).fetch();
+        console.log(ideas);
         onData(null, { ideas });
     }
 };
