@@ -38,8 +38,6 @@ const stringToColor = (string) => {
     })
     if (color > 16777215) color -= 16777215;
     if (color < 1048576) color += 1048576;
-    if (color > 16777215) color -= 16777215;
-    if (color < 1048576) color += 1048576;
     color = parseInt(color, 10).toString(16);
     color = '#' + color;
     return color;

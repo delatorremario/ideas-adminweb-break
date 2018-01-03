@@ -10,9 +10,12 @@ const CommentsAcordionComponent = ({ ideas }) => {
             {
                 _.map(ideas, (idea, index) => {
                     const cantCom = cantComments(idea);
-                    return <Panel className="ci-item" header={idea.opportunity + ' (' + cantCom + ') - ' + moment(idea.createAt).format('DD/MM/YYYY')} eventKey={index} key={index}>
-                        <CommentsComponent idea={idea} />
-                    </Panel>
+                    const cVC = cantViewedComments(idea);
+                    return (
+                        <Panel className="ci-item" header={idea.opportunity + ' (' + (cVC) + '/' + cantCom + ') - ' + moment(idea.createAt).format('DD/MM/YYYY')} eventKey={index} key={index} onClick={viewComments(idea).bind(this)}>
+                            <CommentsComponent idea={idea}/>
+                        </Panel>
+                    )
                 })
             }
         </Accordion>
@@ -23,16 +26,15 @@ const cantComments = (idea) => {
     return idea && idea.comments && idea.comments.length || 0;
 }
 
-const cantNonViewesComments = (idea) => {
+const cantViewedComments = (idea) => {
     const userId = Meteor.userId();
-    _.reduce(idea, (sum, i) => {
-        if (idea) {
-            
-        }
-    })
+    return cantComments(idea) - _.reduce(idea.comments, (sum, c) => {
+        c.viewers = _.filter(c.viewers, (v) => (v.userId === userId) && !v.viewedAt);
+        return sum + c.viewers.length;
+    }, 0);
 }
 
-const viewComments = (idea) => {
+const viewComments = (idea) => (event) => {
     console.log(idea._id);
 }
 
