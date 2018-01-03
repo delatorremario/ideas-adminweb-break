@@ -43,7 +43,7 @@ const IdeaCard = ({ idea, imagesCursor, lap, handleRemove, showEdit, showNext })
                     }
                     {
                         showEdit &&
-                        <Link to={`/comments`}><i className="fa fa-comment"></i></Link>
+                        <Link to={`/comment/${idea._id}`}><i className="fa fa-comment"></i></Link>
                     }
                     {
                         showEdit &&

@@ -1,17 +1,18 @@
 import { Meteor } from 'meteor/meteor';
 import { composeWithTracker } from 'react-komposer';
 import Loading from '../../components/Loading.js';
-import CommentsPage from '../../pages/comments/CommentsPage';
+import IdeaCommentsPage from '../../pages/comments/IdeaCommentsPage';
 import moment from 'moment';
 import Ideas from '../../../api/ideas/ideas';
 
 const composer = ({ match }, onData) => {
     moment.locale('es');
-    const sub = Meteor.subscribe('ideas.state.list', {}, 100);
+    let id = match.params._id;
+    const sub = Meteor.subscribe('ideas.view', id);
     if (sub.ready()) {
-        const ideas = Ideas.find({},{}).fetch();
-        onData(null, { ideas });
+        const idea = Ideas.find({ _id: id }, {}).fetch();
+        onData(null, { idea });
     }
 };
 
-export default composeWithTracker(composer, Loading)(CommentsPage);
+export default composeWithTracker(composer, Loading)(IdeaCommentsPage);

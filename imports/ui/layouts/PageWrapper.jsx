@@ -18,6 +18,7 @@ import EditIdea from '../containers/ideas/EditIdea';
 
 // Comments
 import CommentsContainer from '../containers/comments/CommentsContainer';
+import IdeaCommentsContainer from '../containers/comments/IdeaCommentsContainer';
 
 //manage ideas
 import ManageContainer from '../containers/manage/ManageContainer';
@@ -79,6 +80,7 @@ const PageWrapper = () => (
 
                 {/* Comments */}
                 <Route exact path="/comments" component={CommentsContainer} />
+                <Route exact path="/comment/:_id" component={IdeaCommentsContainer} />
 
                 {/* Ideas Usuario */}
                 <Route exact path="/ideas/new_user" component={EditIdeaUser} />

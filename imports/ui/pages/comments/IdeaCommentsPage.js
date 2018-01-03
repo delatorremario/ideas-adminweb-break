@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import NotFound from '../NotFound';
-import CommentsAcordionComponent from '../../components/comments/ComentsAcordionComponent';
+import CommentsListComponent from '../../components/comments/CommentsListComponent';
 import moment from 'moment';
 
-const CommentsPage = (props) => {
-    let { ideas } = props;
+const IdeaCommentsPage = (props) => {
+    let { idea } = props;
     return (
         <div>
             <div className="pageheader">
@@ -13,7 +13,11 @@ const CommentsPage = (props) => {
                 <div className="breadcrumb-wrapper hidden-xs">
                     <span className="label">You are here:</span>
                     <ol className="breadcrumb">
-                        <li className="active">Comentarios</li>
+                        <li className="active">
+                            Comentarios de {
+                                idea.opportunity ? idea.opportunity : ''
+                            }
+                        </li>
                     </ol>
                 </div>
             </div>
@@ -22,7 +26,7 @@ const CommentsPage = (props) => {
                     <div className="col-md-12 col-lg-12">
                         <div className="panel">
                             <div className="panel-body ng-binding">
-                                <CommentsAcordionComponent ideas={ideas} />
+                                <CommentsListComponent ideas={idea.comments} />
                             </div>
                         </div>
                     </div>
@@ -32,4 +36,4 @@ const CommentsPage = (props) => {
     )
 };
 
-export default CommentsPage;
+export default IdeaCommentsPage;
