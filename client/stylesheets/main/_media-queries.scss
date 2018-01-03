@@ -193,6 +193,12 @@
         }
     }
 
+    .nonViewed {
+        position: absolute;
+        top: 4px;
+        right: 55%;
+    }
+
     .isDesktop {
         display: none;
     }

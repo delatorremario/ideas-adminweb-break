@@ -14,6 +14,8 @@ const userName = () => {
 
 class Footer extends Component {
     render() {
+        const user = Meteor.user();
+        const nonViewed = [1, 2, 3, 4];
         return (
             <footer id="footer">
                 <div className="footer-item">
@@ -26,7 +28,16 @@ class Footer extends Component {
                 <div className="footer-item">
                     <button className="footer-button">
                         <Link className="footer-button" to="/comments" >
-                            <i className="fa fa-fw fa-envelope"></i>
+                            <i className="fa fa-fw fa-envelope">
+                                {
+                                    nonViewed.length < 1 ? '' :
+                                        <span className="label label-primary label-circle pull-right nonViewed">
+                                            {
+                                                3
+                                            }
+                                        </span>
+                                }
+                            </i>
                         </Link>
                     </button>
                 </div>

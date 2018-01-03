@@ -183,10 +183,10 @@ class SidebarPush extends Component {
     renderNavigation() {
         let links = ``;
         const { navLinks } = this.state
-        // console.log('NavLinks', navLinks)
+        const user = Meteor.user();
+        const nonViewed = [1, 2, 3, 4];
 
         links = navLinks.map((link, index) => {
-
             if (!link.roles || link.roles && Roles.userIsInRole(Meteor.userId(), link.roles)) {
                 if (!link.subLevel) {
                     return (
@@ -195,7 +195,7 @@ class SidebarPush extends Component {
                                 <i className={link.iconClasses.join(" ")}></i>
                                 {link.title}
                                 {
-                                    link.title !== 'Comentarios' ? '' :
+                                    (link.title !== 'Comentarios') || (nonViewed.length < 1) ? '' :
                                         <span className="label label-primary label-circle pull-right">
                                             {
                                                 3
