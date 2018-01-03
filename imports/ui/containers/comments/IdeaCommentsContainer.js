@@ -10,7 +10,7 @@ const composer = ({ match }, onData) => {
     let id = match.params._id;
     const sub = Meteor.subscribe('ideas.view', id);
     if (sub.ready()) {
-        const idea = Ideas.find({ _id: id }, {}).fetch();
+        const idea = Ideas.find({ _id: id }, {}).fetch()[0];
         onData(null, { idea });
     }
 };

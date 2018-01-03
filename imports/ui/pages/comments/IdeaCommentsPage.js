@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import NotFound from '../NotFound';
-import CommentsListComponent from '../../components/comments/CommentsListComponent';
+import CommentsComponent from '../../components/comments/CommentsComponent';
 import moment from 'moment';
 
 const IdeaCommentsPage = (props) => {
@@ -9,13 +9,19 @@ const IdeaCommentsPage = (props) => {
     return (
         <div>
             <div className="pageheader">
-                <h1>Comentarios</h1>
+                <h1>
+                    Comentarios
+                </h1>
+                <p>
+                    <br />
+                    de <b>{idea.opportunity ? idea.opportunity : 'una idea...'}</b>
+                </p>
                 <div className="breadcrumb-wrapper hidden-xs">
                     <span className="label">You are here:</span>
                     <ol className="breadcrumb">
                         <li className="active">
                             Comentarios de {
-                                idea.opportunity ? idea.opportunity : ''
+                                idea.opportunity ? idea.opportunity : 'una idea...'
                             }
                         </li>
                     </ol>
@@ -26,7 +32,9 @@ const IdeaCommentsPage = (props) => {
                     <div className="col-md-12 col-lg-12">
                         <div className="panel">
                             <div className="panel-body ng-binding">
-                                <CommentsListComponent ideas={idea.comments} />
+                                <div className="ci-item">
+                                    <CommentsComponent idea={idea} />
+                                </div>
                             </div>
                         </div>
                     </div>
