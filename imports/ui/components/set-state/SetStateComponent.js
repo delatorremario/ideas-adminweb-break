@@ -47,7 +47,7 @@ class SetStateComponent extends React.Component {
                 toChanges[index].chief = e;
                 break;
             case 'check':
-                toChanges[index].check = e.target.checked;
+                toChanges[index].checked = e.target.checked;
                 break;
             default:
                 toChanges[index].text = e.target.value;
