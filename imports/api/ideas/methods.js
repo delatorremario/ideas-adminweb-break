@@ -54,6 +54,7 @@ export const upsertIdea = new ValidatedMethod({
                 })
 
             }
+            Meteor.call('idea.addViewers', data.insertedId);
         });
     },
 });
@@ -91,23 +92,51 @@ Meteor.methods({
         ]);
     },
     'idea.setState': (_id, state) => {
-        if(!Meteor.isServer) return;
+        if (!Meteor.isServer) return;
         check(_id, String);
         check(state, Object);
 
         const update = { $push: { states: state } };
-        
-        _.map(state.toChanges, onchange =>{
-            console.log('--toChanges--',onchange);  
+
+        _.map(state.toChanges, onchange => {
+            console.log('--toChanges--', onchange);
             if (onchange.chief) _.extend(update, { $set: { chief: onchange.chief } })
         })
 
         console.log('---update---', update);
         Ideas.update({ _id }, update);
+        Meteor.call('idea.addViewers', _id)
     },
     'idea.saveComment': (_id, comment) => {
         check(_id, String);
         check(comment, Object);
         Ideas.update({ _id }, { $push: { comments: comment } });
+    },
+    'idea.addViewers': (_id) => {
+        if (!Meteor.isServer) return;
+        check(_id, String);
+
+        let viewers = [];
+        const idea = Ideas.findOne(_id);
+
+        // owner
+        viewers.push(idea.person._id);
+
+        // leaders
+        const leaders = Meteor.users.find({ roles: 'Leader' }, { fields: { _id: 1 } }).fetch();
+        viewers = _.union(viewers, _.map(leaders, '_id'));
+
+        // chief
+        if (idea.chief && idea.chief._id) viewers = _.union(viewers, [idea.person._id]);
+
+        // collaborators
+        if (idea.collaborators) viewers = _.union(viewers, _.map(idea.collaborators, '_id'));
+
+        viewers = _.map(viewers, id => ({ userId: id }));
+        Ideas.update({ _id }, { $set: { viewers } });
+    },
+    'idea.setAllViewers': () => {
+        const ideas = Ideas.find({}, { fields: { _id: 1 } }).fetch();
+        _.each(ideas, idea => Meteor.call('idea.addViewers', idea._id));
     }
 })

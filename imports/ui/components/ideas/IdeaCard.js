@@ -94,6 +94,7 @@ const IdeaCard = ({ idea, imagesCursor, lap, handleRemove, showEdit, showNext })
                                         {
                                             _.map(state.toChanges, (toChange, i) => {
                                                 if (toChange.text) return <p key={i}>{toChange.label}: {toChange.text}</p>
+                                                if (toChange.check) return <p key={i}>{toChange.label}: CHECK HERE!!</p>
                                                 if (toChange.date) return <p key={i}>{toChange.label}: <Moment format="DD MMM YYYY" date={toChange.date} /></p>
                                                 if (toChange.chief) return <div key={i}><IdeaCardChiefAreaContainer chief={toChange.chief} /></div>
                                             })
