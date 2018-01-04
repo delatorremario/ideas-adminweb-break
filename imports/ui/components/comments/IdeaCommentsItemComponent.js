@@ -5,11 +5,12 @@ import moment from 'moment';
 import { Link, Redirect } from 'react-router-dom';
 
 const IdeaCommentsItemComponent = ({ idea }) => {
-    console.log(idea)
     const cantCom = cantComments(idea);
     const cantNVCom = cantNonViewedComments(idea);
     return (
-        <Link to={'/comment/' + idea._id} className="ci-a">
+        <Link to={'/comment/' + idea._id} className="ci-a"
+            // onClick={() => Meteor.call('idea.readComment', idea._id)}
+        >
             <li className="ci-li pointer">
                 <label className="ci-oportunity pointer">{idea.opportunity}</label>
                 <label className="ci-data pointer">

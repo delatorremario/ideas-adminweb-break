@@ -11,7 +11,8 @@ const CommentsListComponent = ({ comments, ideaId }) => {
         <div className="ci-list">
             {
                 _.map(comments, (comment, index) => {
-                    return <CommentContainer text={comment.text} date={comment.createdAt} userId={comment.userId} key={index} />
+                    const read = true
+                    return <CommentContainer index={index} read={read} text={comment.text} date={comment.createdAt} userId={comment.userId} key={index} />
                 })
             }
         </div>

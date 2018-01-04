@@ -29,9 +29,7 @@ const composer = ({ }, onData) => {
                 number+=unread.length;
             })
         })
-        console.log('number', number);
         onData(null, { number });
-
     }
 };
 
