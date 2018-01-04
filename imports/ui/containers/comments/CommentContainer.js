@@ -3,7 +3,8 @@ import { composeWithTracker } from 'react-komposer';
 import Loading from '../../components/Loading.js';
 import CommentComponent from '../../components/comments/CommentComponent';
 
-const composer = ({ text, date, userId }, onData) => {
+const composer = ({ text, date, userId, read }, onData) => {
+    console.log(read)
     const sub = Meteor.subscribe('user.profile', userId);
     if (sub.ready()) {
         const user = Meteor.users.findOne({ _id: userId });
