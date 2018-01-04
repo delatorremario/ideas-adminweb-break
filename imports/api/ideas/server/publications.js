@@ -69,7 +69,7 @@ Meteor.publish('ideas.state.list', (filter, limit) => {
     // if (areasIdsFilter.length > 0) _.extend(filters, { 'chief.areaId': { $in: areasIdsFilter } });
 
     // console.log('areasIdsFilter', areasIdsFilter);
-    console.log('__FILTER__', filter);
+    // console.log('__FILTER__', filter);
 
     return Ideas.find(filter, { sort: { date: -1 }, limit });
 
