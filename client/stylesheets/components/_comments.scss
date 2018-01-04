@@ -151,7 +151,7 @@
             flex-direction: column;
             box-sizing: border-box;
             width: 100%;
-            margin: 1px;
+            margin: 0px 2px;
             padding: 5px 5px 2px 5px;
             background-color: rgb(249, 254, 255);
             border-bottom: 1px solid rgb(241, 241, 241);
@@ -207,4 +207,6 @@
 
 .pointer {
     cursor: pointer;
+    margin-left: 0px !important;
+    margin-right: 0px !important;
 }
