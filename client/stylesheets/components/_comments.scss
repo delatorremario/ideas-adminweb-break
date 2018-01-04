@@ -132,3 +132,79 @@
 .tituloAcordion {
     margin: 20px 0px 10px 0px !important;
 }
+
+.ci-ul {
+    font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif !important;
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+    .ci-a {
+        width: 100%;
+        margin: 0px;
+        padding: 0px;
+        background-color: grey;
+        text-decoration: none;
+        .ci-li {
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: column;
+            box-sizing: border-box;
+            width: 100%;
+            margin: 1px;
+            padding: 5px 5px 2px 5px;
+            background-color: rgb(249, 254, 255);
+            border-bottom: 1px solid rgb(241, 241, 241);
+            border-radius: 5px;
+            transition: all 0.3s ease-in-out 0s;
+            .ci-oportunity {
+                box-sizing: border-box;
+                width: 100%;
+                margin: 0px;
+                padding: 1px;
+                font-size: 1.1em;
+                color: #484848;
+                text-align: left;
+                font-weight: 200;
+            }
+            .ci-data {
+                height: 27px;
+                display: flex;
+                flex-direction: row;
+                .ci-cantNVCom {
+                    box-sizing: border-box;
+                    width: 100%;
+                    margin: 0px;
+                    padding: 5px;
+                    text-align: right;
+                    color: #849097;
+                    font-size: 0.8em;
+                    font-weight: 100;
+                    .ci-label {
+                        margin: 0px 10px;
+                        font-size: 0.9em;
+                    }
+                }
+                .ci-date {
+                    box-sizing: border-box;
+                    width: 100%;
+                    margin: 0px;
+                    padding: 5px;
+                    color: #849097;
+                    text-align: left;
+                    font-size: 0.7em;
+                    font-weight: 100;
+                    font-style: italic;
+                }
+            }
+        }
+        .ci-li:hover {
+            border-bottom: 1px solid #a0acb3;
+            background-color: rgb(245, 247, 248);
+        }
+    }
+}
+
+.pointer {
+    cursor: pointer;
+}

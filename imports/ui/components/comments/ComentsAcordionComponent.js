@@ -3,39 +3,21 @@ import { Accordion, Panel } from 'react-bootstrap';
 import _ from 'lodash';
 import moment from 'moment';
 import CommentsComponent from './CommentsComponent';
+import NonViewedComponent from '../nonViewed/NonViewedComponent';
+import IdeaCommentsItemComponent from './IdeaCommentsItemComponent';
 
 const CommentsAcordionComponent = ({ ideas }) => {
     return (
-        <Accordion>
+        <ul className="ci-ul">
             {
                 _.map(ideas, (idea, index) => {
-                    const cantCom = cantComments(idea);
-                    const cVC = cantViewedComments(idea);
                     return (
-                        <Panel className="ci-item" header={idea.opportunity + ' (' + (cVC) + '/' + cantCom + ') - ' + moment(idea.date).format('DD/MM/YYYY')} eventKey={index} key={index} onClick={viewComments(idea).bind(this)}>
-                            <CommentsComponent idea={idea}/>
-                        </Panel>
+                        <IdeaCommentsItemComponent idea={idea} key={index} />
                     )
                 })
             }
-        </Accordion>
+        </ul>
     )
-}
-
-const cantComments = (idea) => {
-    return idea && idea.comments && idea.comments.length || 0;
-}
-
-const cantViewedComments = (idea) => {
-    const userId = Meteor.userId();
-    return cantComments(idea) - _.reduce(idea.comments, (sum, c) => {
-        c.viewers = _.filter(c.viewers, (v) => (v.userId === userId) && !v.viewedAt);
-        return sum + c.viewers.length;
-    }, 0);
-}
-
-const viewComments = (idea) => (event) => {
-    // console.log(idea._id);
 }
 
 export default CommentsAcordionComponent;
