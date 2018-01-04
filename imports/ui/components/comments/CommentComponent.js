@@ -3,13 +3,13 @@ import Loading from '../../components/Loading';
 import _ from 'lodash';
 import moment from 'moment';
 
-const CommentComponent = ({ text, name, img, date, read, ideaId, index }) => {
-    if (read) {
-        Meteor.call('idea.readComment', ideaId, index, (err) => {
-            if (err) { console.log('err', err); return; }
-        })
-    }
-    const color = stringToColor(name);
+const CommentComponent = ({ text, name, img, date, color, read, ideaId, index }) => {
+    // if (read) {
+    //     Meteor.call('idea.readComment', ideaId, index, (err, data) => {
+    //         if (err) { console.log('err CommentComponent call idea.readComment ', err); return; }
+    //         console.log('--- readComment ---', data);
+    //     })
+    // }
     return <div className="ci-comment">
         <div className="ci-comment-info">
             <div className="ci-comment-user">

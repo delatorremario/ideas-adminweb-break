@@ -7,9 +7,10 @@ const composer = ({ text, date, userId, read, ideaId, index }, onData) => {
     const sub = Meteor.subscribe('user.profile', userId);
     if (sub.ready()) {
         const user = Meteor.users.findOne({ _id: userId });
-        let name = user.profile && user.profile.lastName + ' ' + user.profile.firstName || user.emails[0].address || 'Sin Profile';
-        let img = 'url("http://localhost:3000/cdn/storage/Files/EqSsJ9pqaAkKwWT5X/original/EqSsJ9pqaAkKwWT5X")';
-        onData(null, { text, date, name, img, read, ideaId, index });
+        let name =  user.profile && (user.profile.firstName + ' ' + user.profile.lastName) || user.emails[0].address || 'Sin Profile';
+        let img = undefined;
+        let color = '#337ab7';
+        onData(null, { text, date, name, img, color, read, ideaId, index });
     }
 };
 
