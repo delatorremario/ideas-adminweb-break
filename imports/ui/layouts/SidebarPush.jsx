@@ -23,7 +23,7 @@ import { Roles } from 'meteor/alanning:roles';
 import '../../../node_modules/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar';
 // import NonViewedComponent from '../components/nonViewed/NonViewedComponent';
 import NonViewedContainer from '../containers/nonViewed/NonViewedContainer';
-
+import AvatarContainer from '../containers/avatar/AvatarContainer.js';
 require('malihu-custom-scrollbar-plugin')($);
 import Ideas from '../../api/ideas/ideas';
 
@@ -256,14 +256,7 @@ class SidebarPush extends Component {
         return (
             <aside className="sidebar sidebar-left">
                 <div className="sidebar-profile">
-                    {
-                        userImg ?
-                            <div className="avatar">
-                                <img className="img-circle profile-image" src={userImg && userImg.link()} />
-                                <i className="on border-dark animated bounceIn"></i>
-                            </div>
-                            : <ColoredAvatar color={user.profile && user.profile.color} userName={user && user.name ? user.name : user.emails[0].address} />
-                    }
+                    <AvatarContainer />
                     <div className="profile-body dropdown">
                         <a href="javascript:void(0);" className="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                             <h4>{this.renderUserName()}
