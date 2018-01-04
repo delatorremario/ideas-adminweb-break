@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
-import NonViewedComponent from '../components/nonViewed/NonViewedComponent';
-import Ideas from '../../api/ideas/ideas';
+
+import NonViewedContainer from '../containers/nonViewed/NonViewedContainer';
 
 const handleLogout = () => {
     Meteor.logout();
@@ -24,17 +24,6 @@ cantNonViewedComments = (idea) => {
 
 class Footer extends Component {
     render() {
-        const user = Meteor.user();
-        const userId = Meteor.userId();
-        const sub = Meteor.subscribe('ideas.state.list', { 'viewers.userId': userId }, 100);
-        const ideas = [];
-        const nonViewed = 0;
-        if (sub.ready()) {
-            ideas = Ideas.find({}, {}).fetch();
-        }
-        _.forEach(ideas, (idea) => {
-            nonViewed += cantNonViewedComments(idea);
-        })
         return (
             <footer id="footer">
                 <div className="footer-item">
@@ -48,14 +37,15 @@ class Footer extends Component {
                     <button className="footer-button">
                         <Link className="footer-button" to="/comments" >
                             <i className="fa fa-fw fa-envelope"></i>
-                            <NonViewedComponent className="nonViewed" number={nonViewed} />
                         </Link>
                     </button>
                 </div>
                 <div className="footer-item">
                     <button className="footer-button">
                         <Link className="footer-button" to="/" >
-                            <i className="fa fa fa-bell"></i>
+                            <i className="fa fa fa-bell">
+                            <NonViewedContainer />
+                            </i>
                         </Link>
                     </button>
                 </div>
