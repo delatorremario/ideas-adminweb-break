@@ -34,18 +34,18 @@ class Footer extends Component {
                     </button>
                 </div>
                 <div className="footer-item">
-                    <button className="footer-button">
+                    {/* <button className="footer-button"> */}
                         <Link className="footer-button" to="/comments" >
-                            <i className="fa fa-fw fa-envelope"></i>
+                            <i className="fa fa-fw fa-envelope">
+                            <NonViewedContainer />
+                            </i>
                         </Link>
-                    </button>
+                    {/* </button> */}
                 </div>
                 <div className="footer-item">
                     <button className="footer-button">
                         <Link className="footer-button" to="/" >
-                            <i className="fa fa fa-bell">
-                            <NonViewedContainer />
-                            </i>
+                            <i className="fa fa fa-bell"></i>
                         </Link>
                     </button>
                 </div>
