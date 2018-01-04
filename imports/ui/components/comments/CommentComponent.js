@@ -13,8 +13,12 @@ const CommentComponent = ({ text, name, img, date, read, ideaId, index }) => {
     return <div className="ci-comment">
         <div className="ci-comment-info">
             <div className="ci-comment-user">
-                <div className='ci-comment-img'
-                    style={{ backgroundImage: img }}></div>
+                {
+                    img ? <div className='ci-comment-img' style={{ backgroundImage: img }}></div>
+                        : <div className='ci-comment-img colored-avatar' style={{ backgroundColor: `${color}` }}>
+                            <h2>{name.charAt(0)}</h2>
+                        </div>
+                }
                 <div>
                     <div className="ci-comment-name">
                         <b style={{ color: color }}>{name}</b>
@@ -33,19 +37,6 @@ const CommentComponent = ({ text, name, img, date, read, ideaId, index }) => {
             {text}
         </div>
     </div>
-}
-
-const stringToColor = (string) => {
-    let color = 0;
-    stringA = string.split('');
-    _.forEach(stringA, (n, i) => {
-        color += n.charCodeAt(0) * stringA.length * i * 10;
-    })
-    if (color > 16777215) color -= 16777215;
-    if (color < 1048576) color += 1048576;
-    color = parseInt(color, 10).toString(16);
-    color = '#' + color;
-    return color;
 }
 
 export default CommentComponent;
