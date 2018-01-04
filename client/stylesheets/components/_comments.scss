@@ -12,6 +12,7 @@
   }
 
 .ci-item {
+    zoom: 1;
     box-sizing: border-box;
     width: 100%;
     padding: 1px;
@@ -151,8 +152,8 @@
             flex-direction: column;
             box-sizing: border-box;
             width: 100%;
-            margin: 0px 2px;
-            padding: 5px 5px 2px 5px;
+            margin: 0px 0px;
+            padding: 5px 5px 0px 5px;
             background-color: rgb(249, 254, 255);
             border-bottom: 1px solid rgb(241, 241, 241);
             border-radius: 5px;
@@ -181,7 +182,7 @@
                     font-size: 0.8em;
                     font-weight: 100;
                     .ci-label {
-                        margin: 0px 10px;
+                        margin-left: 10px !important;
                         font-size: 0.9em;
                     }
                 }
