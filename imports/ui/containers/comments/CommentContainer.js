@@ -15,7 +15,8 @@ const composer = ({ text, date, userId, read, ideaId, index }, onData) => {
         let name = user.profile && user.profile.lastName + ' ' + user.profile.firstName || user.emails[0].address || 'Sin Profile';
         let img = 'url("http://localhost:3000/cdn/storage/Files/EqSsJ9pqaAkKwWT5X/original/EqSsJ9pqaAkKwWT5X")';
         if(ready.get()) {
-            Meteor.call('idea.readComment', ideaId, (err)=>{
+            console.log('ideaId', ideaId);
+            Meteor.call('idea.readComment', ideaId, index, (err)=>{
                 if(err) { console.log('err', err); return; }
                 ready.set(true);
             })

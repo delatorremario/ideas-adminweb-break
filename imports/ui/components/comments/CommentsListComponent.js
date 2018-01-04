@@ -11,8 +11,8 @@ const CommentsListComponent = ({ comments, ideaId }) => {
         <div className="ci-list">
             {
                 _.map(comments, (comment, index) => {
-                    const read = true
-                    return <CommentContainer index={index} read={read} text={comment.text} date={comment.createdAt} userId={comment.userId} key={index} />
+                    const read = _.filter(comment.viewers, v => (v.userId === userId) && v.viewedAt).length > 0 ? false : true;
+                    return <CommentContainer index={index} read={read} text={comment.text} date={comment.createdAt} ideaId={ideaId} userId={comment.userId} key={index} />
                 })
             }
         </div>
