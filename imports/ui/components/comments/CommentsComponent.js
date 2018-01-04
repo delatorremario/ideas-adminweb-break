@@ -8,7 +8,7 @@ import CommentSendComponent from './CommentSendComponent';
 const CommentsComponent = ({ idea }) => {
     return (
         <div className="ci-component">
-            <CommentsListComponent comments={idea.comments} />
+            <CommentsListComponent comments={idea.comments} ideaId={idea._id} />
             <CommentSendComponent ideaId={idea._id} viewers={idea.viewers} />
         </div>
     )
