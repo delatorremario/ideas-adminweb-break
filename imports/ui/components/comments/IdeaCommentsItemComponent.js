@@ -17,8 +17,7 @@ const IdeaCommentsItemComponent = ({ idea }) => {
                     {
                         cantNVCom < 1 ? '' :
                             <label className="ci-cantNVCom pointer">
-                                No leidos:
-                                <span className="label label-primary label-circlet ci-label pointer">{cantNVCom}</span>
+                                <span className="label label-primary label-circlet ci-label pointer">{cantNVCom} sin leer</span>
                             </label>
                     }
                 </label>
