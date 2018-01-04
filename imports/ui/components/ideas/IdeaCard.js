@@ -41,7 +41,12 @@ const IdeaCard = ({ idea, imagesCursor, lap, handleRemove, showEdit, showNext })
                         showEdit &&
                         <Link to={`/idea/${idea._id}/edit`}><i className="fa fa-pencil"></i></Link>
                     }
-                        <Link to={`/comment/${idea._id}`}><i className="fa fa-comment"></i></Link>
+                    {
+                        _.filter(idea.viewers, v => {
+                            return v.userId === Meteor.userId();
+                        }).length < 1 ? '' :
+                            <Link to={`/comment/${idea._id}`}><i className="fa fa-comment"></i></Link>
+                    }
                     {
                         showEdit &&
                         <i className="fa fa-trash" onClick={handleRemove(idea._id).bind(this)}></i>

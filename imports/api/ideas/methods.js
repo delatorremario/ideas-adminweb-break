@@ -9,6 +9,11 @@ import PersonSchema from '../../api/persons/personSchema';
 import States from '../../api/states/states';
 import { Meteor } from 'meteor/meteor';
 
+const ViewerSchema = new SimpleSchema({
+    userId: { type: String },
+    viewedAt: { type: Date, optional: true }
+})
+
 export const upsertIdea = new ValidatedMethod({
     name: 'ideas.upsert',
     validate: new SimpleSchema({
@@ -27,6 +32,7 @@ export const upsertIdea = new ValidatedMethod({
         collaborators: { type: [PersonSchema], optional: true },
         states: { type: [States.schema], optional: true },
         images: { type: [String], optional: true },
+        viewers: { type: [ViewerSchema], optional: true }
 
     }).validator(),
     run(idea) {
@@ -113,7 +119,6 @@ Meteor.methods({
     'idea.readComment': (_id) => {
         if (!Meteor.isServer) return;
         check(_id, String);
-        console.log('usuario id', Meteor.userId())
 
         const idea = Ideas.findOne(_id);
 

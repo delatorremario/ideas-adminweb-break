@@ -6,7 +6,6 @@ let component;
 
 const handleUpsert = () => {
     const { doc } = component.state;
-    console.log("props ", component.props)
     const confirmation = doc && doc._id ? 'Datos actualizados correctamente' : 'Datos guardados con éxito';
     const upsert = {
          name: doc.name.trim(),

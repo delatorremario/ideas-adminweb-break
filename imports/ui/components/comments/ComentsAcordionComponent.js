@@ -12,7 +12,7 @@ const CommentsAcordionComponent = ({ ideas }) => {
                     const cantCom = cantComments(idea);
                     const cVC = cantViewedComments(idea);
                     return (
-                        <Panel className="ci-item" header={idea.opportunity + ' (' + (cVC) + '/' + cantCom + ') - ' + moment(idea.createAt).format('DD/MM/YYYY')} eventKey={index} key={index} onClick={viewComments(idea).bind(this)}>
+                        <Panel className="ci-item" header={idea.opportunity + ' (' + (cVC) + '/' + cantCom + ') - ' + moment(idea.date).format('DD/MM/YYYY')} eventKey={index} key={index} onClick={viewComments(idea).bind(this)}>
                             <CommentsComponent idea={idea}/>
                         </Panel>
                     )
@@ -35,7 +35,7 @@ const cantViewedComments = (idea) => {
 }
 
 const viewComments = (idea) => (event) => {
-    console.log(idea._id);
+    // console.log(idea._id);
 }
 
 export default CommentsAcordionComponent;
