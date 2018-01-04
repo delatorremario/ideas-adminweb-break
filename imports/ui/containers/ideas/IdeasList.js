@@ -9,6 +9,7 @@ import Ideas from '../../../api/ideas/ideas';
 import IdeasList from '../../components/ideas/IdeaList';
 import States from '../../../api/states/states';
 // import ideasstates from '../../../api/ideasStatesSchema/ideasstates';
+import UnreadComments from '../../../api/unreadComments/UnreadComments'
 
 import Loading from '../../components/Loading.js';
 
@@ -35,8 +36,10 @@ const composer = ({ match }, onData) => {
 	const areasviewsub = Meteor.subscribe('areas.view', areaId || '');
 	const statessub = Meteor.subscribe('states.list');
 
-	if (subscription.ready() && areasviewsub.ready() && statessub.ready()) {
-		const ideasstates = States.find({},{}).fetch();
+	const subUnRead = Meteor.subscribe('ideas.unreadComments')
+
+	if (subscription.ready() && areasviewsub.ready() && statessub.ready() && subUnRead.ready()) {
+		const ideasstates = States.find({}, {}).fetch();
 
 		const states = statesCodesFilter.get();
 
@@ -50,10 +53,12 @@ const composer = ({ match }, onData) => {
 		}
 
 		const user = Meteor.user();
-		const showEdit = Roles.userIsInRole(user._id,['SuperAdminHolos','Leader']) 
-		
+		const showEdit = Roles.userIsInRole(user._id, ['SuperAdminHolos', 'Leader'])
 
-		onData(null, { ideas, ideasstates, ideasFindLimit, textSearch, statesCodesFilter, areasIdsFilter, params: match.params, user, showEdit });
+		const unread = UnreadComments.findOne();
+		console.log('--unread--', unread);
+
+		onData(null, { ideas, ideasstates, ideasFindLimit, textSearch, statesCodesFilter, areasIdsFilter, params: match.params, user, showEdit, unread });
 	}
 };
 

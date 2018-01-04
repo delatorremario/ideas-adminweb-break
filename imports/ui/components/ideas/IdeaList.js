@@ -33,6 +33,8 @@ class IdeasList extends Component {
         // reactVars
         const { textSearch, statesCodesFilter, areasIdsFilter } = this.props;
 
+        const { unread } = this.props;
+
         const { text, stateCode, areaId } = this.props.params;
 
         // console.log('STATE', this.props.params && this.props.params.sate);
@@ -152,9 +154,11 @@ class IdeasList extends Component {
         const { areaId } = this.props.params;
         const { stateSelected, textSearch, areaSelected, statesCodesSelected } = this.state;
         const { showFilters, showArea, showList } = this.state;
+        const { unread } = this.props;
 
         return (
             <div className='ideas-list'>
+                <h1>sin leer {unread && unread.count || 'ninguna'}</h1>
                 <IdeasTableForExcelContainer ideas={ideas} />
                 <div className="panel panel-body">
                     <div className="ideas-buttons">

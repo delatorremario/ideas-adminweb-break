@@ -29,4 +29,6 @@ import '../../api/files/server/publications';
 
 import '../../api/manages/methods';
 
+import '../../api/unreadComments/server/publications';
+
 // import '../../api/base/baseSchema';
