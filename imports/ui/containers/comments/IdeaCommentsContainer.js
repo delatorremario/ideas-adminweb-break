@@ -21,12 +21,6 @@ const composer = ({ match, history }, onData) => {
             Bert.alert('Usted no está asociado a esta idea.', 'warning');
             history.goBack();
         }
-        // Meteor.call('idea.readComment', idea._id, (err) => {
-        //     if (err) {
-        //         Bert.alert(err.message, 'danger');
-        //         return;
-        //     }
-        // });
         onData(null, { idea });
     }
 };
