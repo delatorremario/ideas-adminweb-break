@@ -44,8 +44,8 @@ const state1A = () => {
     }]
 
     const toChanges = [
-        { type: 'area', label: 'Area Nuevo Lider', name: 'areaId' },
-        { type: 'text', label: 'Comentario', name: 'comment' },
+        { type: 'area', label: 'Area Nuevo Lider', name: 'areaId', },
+        { type: 'text', label: 'Comentario', name: 'comment', },
     ]
 
     States.update({ "code": code }, {
@@ -729,9 +729,9 @@ const state7B = () => {
 const setColors = () => {
     const states = States.find().fetch();
     _.each(states, state => {
-        _.each(state.nexts, next =>{
-            const oneState = States.findOne({code:next.code});
-            States.update({_id:oneState._id})
+        _.each(state.nexts, next => {
+            const oneState = States.findOne({ code: next.code });
+            States.update({ _id: oneState._id })
         })
     })
 }
