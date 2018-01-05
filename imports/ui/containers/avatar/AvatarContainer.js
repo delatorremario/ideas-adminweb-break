@@ -8,7 +8,7 @@ const composer = ({ }, onData) => {
     console.log(user);
     let userImg;
     let color = (user.profile && user.profile.color) || '#337ab7';
-    let name = (user.profile && (user.profile.firstName + ' ' + user.profile.lastName)) || 'O';
+    let name = (user.profile && (user.profile.firstName + ' ' + user.profile.lastName)) || 'I';
     let email = user.emails[0].address;
     onData(null, { userImg, color, name, email });
 };
