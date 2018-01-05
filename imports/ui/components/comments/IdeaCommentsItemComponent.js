@@ -7,10 +7,12 @@ import { Link, Redirect } from 'react-router-dom';
 const IdeaCommentsItemComponent = ({ idea }) => {
     const cantCom = cantComments(idea);
     const cantNVCom = cantNonViewedComments(idea);
+    const colorB = (idea.states && _.last(idea.states).color) || 'rgb(249, 254, 255)';
+    const colorT = (idea.states && _.last(idea.states).color) || '#484848';
     return (
         <Link to={'/comment/' + idea._id} className="ci-a">
-            <li className="ci-li pointer">
-                <label className="ci-oportunity pointer">{idea.opportunity}</label>
+            <li className="ci-li pointer" style={{ backgroundColor: colorB + '0C', borderBottomColor: colorB }}>
+                <label className="ci-oportunity pointer" style={{ color: colorT }}>{idea.opportunity}</label>
                 <label className="ci-data pointer">
                     <label className="ci-date pointer">{moment(idea.date).format('DD/MM/YYYY')}</label>
                     {

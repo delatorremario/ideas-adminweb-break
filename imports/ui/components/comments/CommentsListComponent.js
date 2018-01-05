@@ -12,7 +12,6 @@ const CommentsListComponent = ({ comments, ideaId }) => {
             {
                 _.map(comments, (comment, index) => {
                     const read = _.find(comment.viewers, v => (v.userId === userId) && !v.viewedAt)
-                    console.log(' --- READ ---', !!read, read)
                     return <CommentContainer index={index} read={!!read} text={comment.text} date={comment.createdAt} ideaId={ideaId} userId={comment.userId} key={index} />
                 })
             }

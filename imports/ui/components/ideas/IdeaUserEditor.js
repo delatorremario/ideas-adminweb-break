@@ -184,23 +184,17 @@ export default class IdeaUserEditor extends Component {
     removeImage = (fileObj) => e => {
         const images = _.pull(this.state.doc.images, fileObj._id);
         this.setState(prev => ({ doc: { ...prev.doc, images } }))
-        console.log('fileObj', fileObj);
         fileObj.remove((err) => {
-           if(err) Bert.alert(err.message, 'danger');
+            if (err) Bert.alert(err.message, 'danger');
         });
     }
 
     render() {
-
         const formMaxStep = 4;
-
         const { persons, driversArray, origins, ideasstates } = this.props;
-
         const { formStep, area } = this.state;
         const { doc } = this.state;
         const { origin, _id, images } = this.state.doc;
-
-        console.log('__doc__', doc);
 
         return (
             <div className="row">

@@ -4,17 +4,11 @@ import _ from 'lodash';
 import moment from 'moment';
 import AvatarContainer from '../../containers/avatar/AvatarContainer';
 
-const CommentComponent = ({ text, name, img, date, color, read, ideaId, index }) => {
-    // if (read) {
-    //     Meteor.call('idea.readComment', ideaId, index, (err, data) => {
-    //         if (err) { console.log('err CommentComponent call idea.readComment ', err); return; }
-    //         console.log('--- readComment ---', data);
-    //     })
-    // }
+const CommentComponent = ({ text, name, userId, date, color, read, ideaId, index }) => {
     return <div className="ci-comment">
         <div className="ci-comment-info">
             <div className="ci-comment-user">
-                <AvatarContainer />
+                <AvatarContainer userId={userId} />
                 <div>
                     <div className="ci-comment-name">
                         <b style={{ color: color }}>{name}</b>

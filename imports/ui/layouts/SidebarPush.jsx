@@ -256,7 +256,7 @@ class SidebarPush extends Component {
         return (
             <aside className="sidebar sidebar-left">
                 <div className="sidebar-profile">
-                    <AvatarContainer />
+                    <AvatarContainer userId={user._id}/>
                     <div className="profile-body dropdown">
                         <a href="javascript:void(0);" className="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                             <h4>{this.renderUserName()}
