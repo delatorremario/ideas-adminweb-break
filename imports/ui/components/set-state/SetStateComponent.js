@@ -1,51 +1,49 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { FormGroup, ControlLabel, FormControl, Checkbox, Radio } from 'react-bootstrap';
+import { FormGroup, ControlLabel, FormControl, Checkbox, Radio, Button } from 'react-bootstrap';
 import DatePicker from 'react-bootstrap-date-picker';
 import { Bert } from 'meteor/themeteorchef:bert';
-
-
 
 import IdeaCardContainer from '../../components/ideas/IdeaCardContainer'
 import StateCard from '../../components/ideas/StateCard';
 import PersonSearchAndCardContainer from '../../containers/person/PersonSearchAndCardContainer';
 import AreasSearch from '../../containers/areas/AreasSearch'
 
-const validate = (toChanges) => {
+class CustomControl extends React.Component {
+    render() {
+        const {
+            value,
+            placeholder,
+            ...rest,
+        } = this.props;
+        return <Button {...rest}>{value || placeholder}</Button>;
+    }
+};
 
+const validate = (toChanges) => {
     const confirm = true;
     _.each(toChanges, toChange => {
-        if (!toChange.optional)
+        if (!toChange.optional && toChange.type != 'check') {
             switch (toChange.type) {
                 case 'date':
                     confirm = !!toChange.date;
-                    //toChanges[index].date = e;
                     break;
                 case 'chief':
                     confirm = !!toChange.chief;
-                    // toChanges[index].chief = e;
                     break;
                 case 'area':
                     confirm = !!toChange.chief;
-                    // toChanges[index].chief = e;
                     break;
-                // case 'check':
-                //     confirm = toChange.checked;
-                //     // toChanges[index].checked = e.target.checked;
-                //     break;
                 case 'option':
                     confirm = !!toChange.value;
-                    // toChanges[index].value = e.target.value;
                     break;
                 default:
                     confirm = !!toChange.text;
-                // toChanges[index].text = e.target.value;
             }
+        }
     })
-
     return confirm
 }
-
 
 class SetStateComponent extends React.Component {
 
@@ -75,7 +73,6 @@ class SetStateComponent extends React.Component {
     }
 
     onChangeChange = (index, type) => e => {
-        // e.preventDefault();
         const { toChanges } = this.state;
         switch (type) {
             case 'date':
@@ -107,10 +104,7 @@ class SetStateComponent extends React.Component {
 
     render() {
         const { idea } = this.props;
-        // const newState = this.props.state;
         const { toChanges } = this.state
-        console.log('_ toChanges _', toChanges);
-
         return (
             <div>
                 <div>
@@ -139,15 +133,17 @@ class SetStateComponent extends React.Component {
                                                 name={toChange.name}
                                                 value={toChange.date}
                                                 onChange={this.onChangeChange(index, 'date').bind(this)}
-                                                dateFormat={'DD MM YYYY'}
+                                                dateFormat={'DD-MM-YYYY'}
                                                 dayLabels={['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab']}
                                                 monthLabels={['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']}
                                                 showTodayButton={true}
                                                 todayButtonLabel={'Hoy'}
+                                                placeholder='Seleccionar Fecha'
+                                                autoComplete='off'
+                                                customControl={<CustomControl />}
                                             />
                                         </div>
                                     }
-
                                     {
                                         toChange.type === 'chief' && <div>
                                             <ControlLabel>{toChange.label}</ControlLabel>
@@ -164,7 +160,6 @@ class SetStateComponent extends React.Component {
                                             <AreasSearch {...this.props} selectArea={selectArea} />
                                         </div>
                                     }
-
                                     {
                                         toChange.type === 'check' && <div>
                                             <Checkbox name={toChange.name} onChange={this.onChangeChange(index, 'check').bind(this)}>
@@ -178,7 +173,6 @@ class SetStateComponent extends React.Component {
                                                 {toChange.label}
                                             </Radio>
                                         </div>
-
                                     }
                                     {
                                         toChange.type === 'text' && <div>
@@ -205,8 +199,6 @@ class SetStateComponent extends React.Component {
             </div>
         )
     }
-
-
 }
 
 export default SetStateComponent;
