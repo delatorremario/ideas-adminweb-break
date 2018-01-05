@@ -1,6 +1,6 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { FormGroup, ControlLabel, FormControl, Checkbox } from 'react-bootstrap';
+import { FormGroup, ControlLabel, FormControl, Checkbox, Radio } from 'react-bootstrap';
 import DatePicker from 'react-bootstrap-date-picker';
 
 
@@ -49,6 +49,15 @@ class SetStateComponent extends React.Component {
             case 'check':
                 toChanges[index].checked = e.target.checked;
                 break;
+            case 'option':
+                _.map(toChanges, t => {
+                    if (t.type==='option' && t.name===e.target.name ) {
+                        t.value ="off"
+                        return t
+                    } 
+                })
+                toChanges[index].value = e.target.value;
+                break;
             default:
                 toChanges[index].text = e.target.value;
         }
@@ -64,78 +73,86 @@ class SetStateComponent extends React.Component {
         return (
             <div>
                 <div>
-                    {
-                        _.map(toChanges, (toChange, index) => {
-                            const selectPerson = person => e => {
-                                let chief = undefined
-                                if (person !== toChange.chief) chief = person;
-                                this.onChangeChange(index, 'chief')(chief);
-                            }
-                            const selectArea = area => {
-                                let chief = undefined;
-                                if (area === undefined) chief = undefined;
-                                else {
-                                    chief = { areaId: area._id }
+                    <FormGroup>
+                        {
+                            _.map(toChanges, (toChange, index) => {
+                                const selectPerson = person => e => {
+                                    let chief = undefined
+                                    if (person !== toChange.chief) chief = person;
+                                    this.onChangeChange(index, 'chief')(chief);
                                 }
-                                this.onChangeChange(index, 'chief')(chief);
-                            }
-                            return toChange.type === 'date'
-                                &&
-                                <FormGroup key={index}>
-                                    <ControlLabel>{toChange.label}</ControlLabel>
-                                    {/* <i className="fa fa-calendar"></i> */}
-                                    <DatePicker
-                                        id="date"
-                                        name={toChange.name}
-                                        value={toChange.date}
-                                        onChange={this.onChangeChange(index, 'date').bind(this)}
-                                        dateFormat={'DD MM YYYY'}
-                                        dayLabels={['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab']}
-                                        monthLabels={['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']}
-                                        showTodayButton={true}
-                                        todayButtonLabel={'Hoy'}
-                                    />
-                                </FormGroup> ||
-                                toChange.type === 'chief'
-                                &&
-                                <FormGroup key={index}>
-                                    <ControlLabel>{toChange.label}</ControlLabel>
-                                    <PersonSearchAndCardContainer
-                                        selectPerson={selectPerson}
-                                        person={toChange.chief}
-                                    />
-                                </FormGroup>
-                                ||
-                                toChange.type === 'area'
-                                &&
-                                <FormGroup key={index}>
-                                    <ControlLabel>{toChange.label}</ControlLabel>
-                                    <AreasSearch {...this.props} selectArea={selectArea} />
-                                </FormGroup>
-                                ||
-                                toChange.type === 'check'
-                                &&
-                                <FormGroup key={index}>
-                                    <Checkbox
-                                        name={toChange.name}
-                                        // checked={toChange.check}
-                                        onChange={this.onChangeChange(index, 'check').bind(this)}
-                                    >
-                                        {toChange.label}
-                                    </Checkbox>
-                                </FormGroup>
-                                ||
-                                <FormGroup key={index}>
-                                    <FormControl componentClass="textarea"
-                                        name={toChange.name}
-                                        onChange={this.onChangeChange(index, 'text').bind(this)}
-                                        value={toChange.value}
-                                        placeholder={toChange.label}
-                                    />
-                                </FormGroup>
+                                const selectArea = area => {
+                                    let chief = undefined;
+                                    if (area === undefined) chief = undefined;
+                                    else {
+                                        chief = { areaId: area._id }
+                                    }
+                                    this.onChangeChange(index, 'chief')(chief);
+                                }
+                                return <div key={index}>
+                                    {
+                                        toChange.type === 'date' && <div>
+                                            <ControlLabel>{toChange.label}</ControlLabel>
+                                            <DatePicker
+                                                id="date"
+                                                name={toChange.name}
+                                                value={toChange.date}
+                                                onChange={this.onChangeChange(index, 'date').bind(this)}
+                                                dateFormat={'DD MM YYYY'}
+                                                dayLabels={['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab']}
+                                                monthLabels={['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']}
+                                                showTodayButton={true}
+                                                todayButtonLabel={'Hoy'}
+                                            />
+                                        </div>
+                                    }
 
-                        })
-                    }
+                                    {
+                                        toChange.type === 'chief' && <div>
+                                            <ControlLabel>{toChange.label}</ControlLabel>
+                                            <PersonSearchAndCardContainer
+                                                selectPerson={selectPerson}
+                                                person={toChange.chief}
+                                            />
+                                        </div>
+
+                                    }
+                                    {
+                                        toChange.type === 'area' && <div>
+                                            <ControlLabel>{toChange.label}</ControlLabel>
+                                            <AreasSearch {...this.props} selectArea={selectArea} />
+                                        </div>
+                                    }
+
+                                    {
+                                        toChange.type === 'check' && <div>
+                                            <Checkbox name={toChange.name} onChange={this.onChangeChange(index, 'check').bind(this)}>
+                                                {toChange.label}
+                                            </Checkbox>
+                                        </div>
+                                    }
+                                    {
+                                        toChange.type === 'option' && <div>
+                                            <Radio inline name={toChange.name} onChange={this.onChangeChange(index, 'option').bind(this)}>
+                                                {toChange.label}
+                                            </Radio>
+                                        </div>
+
+                                    }
+                                    {
+                                        toChange.type === 'text' && <div>
+                                            <FormControl componentClass="textarea"
+                                                name={toChange.name}
+                                                onChange={this.onChangeChange(index, 'text').bind(this)}
+                                                value={toChange.value}
+                                                placeholder={toChange.label}
+                                            />
+                                        </div>
+                                    }
+                                </div>
+                            })
+                        }
+                    </FormGroup>
                     <div className='set-state-button-container'>
                         <button onClick={this.handlerState.bind(this)} className='btn btn-success btn-trans'>Confirmar</button>
                     </div>
