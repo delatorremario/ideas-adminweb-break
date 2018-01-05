@@ -2,7 +2,9 @@ import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import { FormGroup, ControlLabel, FormControl, Checkbox, Radio, Button } from 'react-bootstrap';
 import DatePicker from 'react-bootstrap-date-picker';
+// import DatePicker from 'react-date-picker';
 import { Bert } from 'meteor/themeteorchef:bert';
+import moment from 'moment';
 
 import IdeaCardContainer from '../../components/ideas/IdeaCardContainer'
 import StateCard from '../../components/ideas/StateCard';
@@ -76,6 +78,7 @@ class SetStateComponent extends React.Component {
         const { toChanges } = this.state;
         switch (type) {
             case 'date':
+                console.log('---DATE---', e);
                 toChanges[index].date = e;
                 break;
             case 'chief':
@@ -140,6 +143,8 @@ class SetStateComponent extends React.Component {
                                                 todayButtonLabel={'Hoy'}
                                                 placeholder='Seleccionar Fecha'
                                                 autoComplete='off'
+                                                minDate={moment().toISOString()}
+                                                maxDate={toChange.maxDais && moment().add('days', toChange.maxDais).toISOString()}
                                                 customControl={<CustomControl />}
                                             />
                                         </div>

@@ -37,7 +37,7 @@ Meteor.publish('ideas.list', (
 
     return Ideas.find(
       filters,
-      { sort: { date: -1 }, limit });
+      { sort: { date: 1 }, limit });
 
   } else return;
 });
@@ -71,7 +71,7 @@ Meteor.publish('ideas.state.list', (filter, limit) => {
     // console.log('areasIdsFilter', areasIdsFilter);
     // console.log('__FILTER__', filter);
 
-    return Ideas.find(filter, { sort: { date: -1 }, limit });
+    return Ideas.find(filter, { sort: { date: 1 }, limit });
 
   } else return;
 });

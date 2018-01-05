@@ -90,7 +90,7 @@ const state1B = () => {
     }
     ]
 
-    const toChanges = [{ type: 'date', label: 'Fecha Compromiso Feedback', name: 'feedback' }];
+    const toChanges = [{ type: 'date', label: 'Fecha Compromiso Feedback', name: 'feedback', maxDais:7 }];
 
     States.update({ "code": code }, {
         $set: {
@@ -275,7 +275,7 @@ const state2D = () => {
         },
     ]
 
-    const toChanges = [{ type: 'date', label: 'Fecha Compromiso Feedback', name: 'feedback' }];
+    const toChanges = [{ type: 'date', label: 'Fecha Compromiso Feedback', name: 'feedback', maxDais:21 }];
 
 
     States.update({ "code": code }, {
@@ -307,15 +307,15 @@ const state3A = () => {
     ];
     const arrNext = [
         {
-            "title": "Aceptar Rechazo",
-            "action": "Aceptar Rechazo",
+            "title": "Confirmar Rechazo",
+            "action": "Confirmar Rechazo",
             "code": "3D",
             "color": "green",
         },
     ]
 
     const toChanges = [
-        { type: 'text', label: 'Comentario', name: 'comment' },
+        { type: 'text', label: 'Motivo', name: 'comment' },
         { type: 'check', label: 'Conversación', name: 'conversation' },
     ];
 
@@ -346,15 +346,15 @@ const state3B = () => {
     ];
     const arrNext = [
         {
-            "title": "Aceptar Rechazo",
-            "action": "Aceptar Rechazo",
+            "title": "Confirmar Rechazo",
+            "action": "Confirmar Rechazo",
             "code": "3D",
             "color": "green",
         },
     ]
 
     const toChanges = [
-        { type: 'text', label: 'Comentario', name: 'comment' },
+        { type: 'text', label: 'Motivo', name: 'comment' },
         { type: 'check', label: 'Conversación', name: 'conversation' },
     ];
 
@@ -385,8 +385,8 @@ const state3C = () => {
     ];
     const arrNext = [
         {
-            "title": "Aceptar Rechazo",
-            "action": "Aceptar Rechazo",
+            "title": "Confirmar Rechazo",
+            "action": "Confirmar Rechazo",
             "code": "3D",
             "color": "green",
         },

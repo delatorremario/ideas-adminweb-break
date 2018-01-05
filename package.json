@@ -78,7 +78,7 @@
     "react-addons-css-transition-group": "^15.6.2",
     "react-addons-pure-render-mixin": "^15.3.2",
     "react-bootstrap": "^0.30.10",
-    "react-bootstrap-date-picker": "^5.1.0",
+    "react-bootstrap-date-picker": "git+https://github.com/travellingprog/react-bootstrap-date-picker.git#fix-makeDateValue-bug",
     "react-chartjs-2": "^2.6.4",
     "react-dom": "^15.6.2",
     "react-html-table-to-excel": "^2.0.0",

@@ -40,7 +40,7 @@ const composer = ({ match }, onData) => {
 
 		const states = statesCodesFilter.get();
 
-		let ideas = Ideas.find({}, { sort: { date: -1 }, limit: ideasFindLimit.get() }).fetch();
+		let ideas = Ideas.find({}, { sort: { date: 1 }, limit: ideasFindLimit.get() }).fetch();
 
 		if (states.length > 0) {
 			ideas = _.filter(ideas, (idea) => {

@@ -9,7 +9,7 @@ import Ideas from '../../../api/ideas/ideas';
 import States from '../../../api/states/states';
 
 const composer = ({ match }, onData) => {
-    console.log('--match --', match)
+    // console.log('--match --', match)
     const ideaId = match.params.ideaId;
     const code = match.params.code;
     const ideaSub = Meteor.subscribe('ideas.view', ideaId);
