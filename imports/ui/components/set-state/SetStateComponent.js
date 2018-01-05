@@ -2,6 +2,8 @@ import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import { FormGroup, ControlLabel, FormControl, Checkbox, Radio } from 'react-bootstrap';
 import DatePicker from 'react-bootstrap-date-picker';
+import { Bert } from 'meteor/themeteorchef:bert';
+
 
 
 import IdeaCardContainer from '../../components/ideas/IdeaCardContainer'
@@ -9,13 +11,48 @@ import StateCard from '../../components/ideas/StateCard';
 import PersonSearchAndCardContainer from '../../containers/person/PersonSearchAndCardContainer';
 import AreasSearch from '../../containers/areas/AreasSearch'
 
+const validate = (toChanges) => {
+
+    const confirm = true;
+    _.each(toChanges, toChange => {
+        if (!toChange.optional)
+            switch (toChange.type) {
+                case 'date':
+                    confirm = !!toChange.date;
+                    //toChanges[index].date = e;
+                    break;
+                case 'chief':
+                    confirm = !!toChange.chief;
+                    // toChanges[index].chief = e;
+                    break;
+                case 'area':
+                    confirm = !!toChange.chief;
+                    // toChanges[index].chief = e;
+                    break;
+                // case 'check':
+                //     confirm = toChange.checked;
+                //     // toChanges[index].checked = e.target.checked;
+                //     break;
+                case 'option':
+                    confirm = !!toChange.value;
+                    // toChanges[index].value = e.target.value;
+                    break;
+                default:
+                    confirm = !!toChange.text;
+                // toChanges[index].text = e.target.value;
+            }
+    })
+
+    return confirm
+}
+
+
 class SetStateComponent extends React.Component {
 
     state = {}
 
     componentDidMount() {
         const { state } = this.props;
-        console.log('lalalla state', state);
         this.setState({ ...state })
     }
 
@@ -23,13 +60,17 @@ class SetStateComponent extends React.Component {
         e.preventDefault();
         const { idea, history, next } = this.props;
         const state = this.state;
+        const { toChanges } = this.state;
 
-        _.extend(state, { action: next.title });
+        if (validate(toChanges)) {
 
-        Meteor.call('idea.setState', idea._id, state, (err) => {
-            if (err) { Bert.alert(error.reason, 'danger'); return; }
-            history.push('/manage-ideas');
-        });
+            _.extend(state, { action: next.title });
+
+            Meteor.call('idea.setState', idea._id, state, (err) => {
+                if (err) { Bert.alert(error.reason, 'danger'); return; }
+                history.push('/manage-ideas');
+            });
+        } else Bert.alert('Debe completar los campos requeridos', 'warning')
 
     }
 
@@ -51,10 +92,10 @@ class SetStateComponent extends React.Component {
                 break;
             case 'option':
                 _.map(toChanges, t => {
-                    if (t.type==='option' && t.name===e.target.name ) {
-                        t.value ="off"
+                    if (t.type === 'option' && t.name === e.target.name) {
+                        t.value = "off"
                         return t
-                    } 
+                    }
                 })
                 toChanges[index].value = e.target.value;
                 break;
