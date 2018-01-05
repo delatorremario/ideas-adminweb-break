@@ -1,9 +1,7 @@
 @media all and (max-width: 767px) {
-
     #main-wrapper {
         padding: 0px 0px 40px 0px !important;
     }
-
     .person-card {
         display: block !important;
         float: left !important;
@@ -71,7 +69,6 @@
             }
         }
     }
-
     .panel-body.ng-binding {
         padding: 10px 0px 0px 0px;
         margin: 0px !important;
@@ -90,16 +87,19 @@
                     margin: 5px 5% !important;
                     width: 90% !important;
                 }
-                button, div button {
+                button,
+                div button {
                     margin: 5px 7px !important;
                     font-size: 0.8em !important;
                 }
             }
         }
-        .person-card, row .person-card {
+        .person-card,
+        row .person-card {
             margin: 0px !important;
         }
-        .personSearch, row .person-card {
+        .personSearch,
+        row .person-card {
             width: 100% !important;
             margin: 10px !important;
         }
@@ -124,7 +124,6 @@
             }
         }
     }
-
     .ideas-list {
         .show-filters {
             .panel.panel-body {
@@ -138,7 +137,6 @@
             }
         }
     }
-
     .dashboardPanel {
         padding: 0px 15px 15px 10px;
         .panel-heading {
@@ -153,11 +151,9 @@
             }
         }
     }
-
     .forms-bottom-panel {
         margin: 15px 20px !important;
     }
-    
     .login-box-container {
         .login-box {
             width: 100% !important;
@@ -192,13 +188,15 @@
             }
         }
     }
-
+    .ideas-buttons {
+        justify-content: center;
+        width: 100%;
+    }
     .nonViewed {
         position: absolute;
         top: 4px;
         right: 55%;
     }
-
     .isDesktop {
         display: none;
     }
