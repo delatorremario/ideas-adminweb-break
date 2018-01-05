@@ -1,15 +1,15 @@
 @keyframes appear {
     0% {
         opacity: 0;
-        transform: scale3d(0,0,1);
+        transform: scale3d(0, 0, 1);
     }
     50% {
-        transform: scale3d(1,1,1);
+        transform: scale3d(1, 1, 1);
     }
     100% {
         opacity: 1;
     }
-  }
+}
 
 .ci-item {
     zoom: 0.85;
@@ -50,7 +50,7 @@
                 font-size: 18px !important;
                 word-wrap: break-word !important;
                 font-weight: 200 !important;
-                font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif !important;
+                font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif !important;
             }
             .ci-comment-info {
                 display: flex;
@@ -135,7 +135,7 @@
 }
 
 .ci-ul {
-    font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif !important;
+    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif !important;
     width: 100%;
     margin: 0px;
     padding: 0px;
@@ -211,4 +211,10 @@
     cursor: pointer;
     margin-left: 0px !important;
     margin-right: 0px !important;
+}
+
+.ci-comment-user {
+    .colored-avatar {
+        zoom: 0.8 !important;
+    }
 }
