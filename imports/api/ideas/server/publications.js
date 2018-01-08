@@ -30,15 +30,18 @@ Meteor.publish('ideas.list', (
       _.extend(filters, { 'person._id': user && user.profile._id })
     }
     if (Roles.userIsInRole(user._id, ['Leader'])) {
-      const area = Areas.findOne({ _id: user.profile.leaderAreaId })
+      const areas = Areas.find({ _id: { $in: user.profile.leaderAreasIds } }).fetch();
+      let families = [];
+      _.each(areas, area => families = _.union(families, area.family))
       _.extend(filters, {
         $or: [
           { 'person._id': user && user.profile._id },
-          { 'chief.areaId': { $in: area.family } }
+          {
+            'chief.areaId': { $in: families }
+          }
         ]
       })
     }
-    console.log(' --- publis areas filters --- ', filters)
     if (textSearch) _.extend(filters, { $text: { $search: textSearch } });
     if (statesCodesFilter.length > 0) _.extend(filters, { 'states.code': { $in: statesCodesFilter } });
     if (areasIdsFilter.length > 0) _.extend(filters, { 'chief.areaId': { $in: areasIdsFilter } });
@@ -71,14 +74,19 @@ Meteor.publish('ideas.state.list', (filters, limit) => {
 
     _.extend(filters, { corporationId: (user.profile && user.profile.corporationId) || '' });
     if (Roles.userIsInRole(user._id, ['Leader'])) {
-      const area = Areas.findOne({ _id: user.profile.leaderAreaId })
+      const areas = Areas.find({ _id: { $in: user.profile.leaderAreasIds } }).fetch();
+      let families = [];
+      _.each(areas, area => families = _.union(families, area.family))
       _.extend(filters, {
         $or: [
           { 'person._id': user && user.profile._id },
-          { 'chief.areaId': { $in: area.family } }
+          {
+            'chief.areaId': { $in: families }
+          }
         ]
       })
     }
+    /// console.log('-- filters --', filters);
     return Ideas.find(filters, { sort: { date: 1 }, limit });
 
   } else return;

@@ -8,8 +8,8 @@ Meteor.methods({
     'manages.states': () => {
         // role this user
         if (!Meteor.isServer) return;
-
-        const { roles, profile } = Meteor.user();
+        const user = Meteor.user();
+        const { roles, profile } = user;
         const states = States.aggregate([
             { $unwind: '$roles' },
             { $match: { 'roles.role': { $in: roles } } },
@@ -19,22 +19,29 @@ Meteor.methods({
 
         const filters = {}
 
-        const area = Areas.findOne({ _id: profile && profile.leaderAreaId })
-        _.extend(filters, {
-            $or: [
-                { 'person._id': profile && profile._id },
-                { 'chief.areaId': { $in: area && area.family } }
-            ]
-        })
+        if (Roles.userIsInRole(user._id, ['Leader'])) {
+            const areas = Areas.find({ _id: { $in: user.profile.leaderAreasIds } }).fetch();
+            //console.log('AREAS ', areas);
+            let families = [];
+            _.each(areas, area => families = _.union(families, area.family))
+            _.extend(filters, {
+                // $or: [
+                // { 'person._id': user && user.profile._id },
+                //{
+                'chief.areaId': { $in: families }
+                //}
+                // ]
+            })
+        }
 
         _.map(states, state => {
-
+            const ideafilter = filters;
             const codesFilter = [];
             _.each(state.codes, code => {
                 codesFilter.push({ $where: `this.states[this.states.length - 1].code === '${code}'` })
             })
-            _.extend(filters, { $or: codesFilter })
-            const ideas = Ideas.find(filters).fetch();
+            _.extend(ideafilter, { $or: codesFilter })
+            const ideas = Ideas.find(ideafilter).fetch();
             _.extend(state, { ideas, count: ideas.length });
             return state;
         })
