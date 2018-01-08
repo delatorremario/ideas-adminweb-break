@@ -180,7 +180,7 @@ class IdeasList extends Component {
                             <i className="fa fa-lightbulb-o"></i>
                         </Link>
                         {
-                            !Roles.userIsInRole(user._id, ['Employee']) &&
+                            !Roles.userIsInRole(user && user._id, ['Employee']) &&
                             <Link to="/ideas/new" className="btn btn-success btn-trans btn-action ideas-button">
                                 <i className="fa fa-hand-peace-o"></i>
                             </Link>

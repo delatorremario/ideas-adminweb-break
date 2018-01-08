@@ -50,7 +50,7 @@ const composer = ({ match }, onData) => {
 		}
 
 		const user = Meteor.user();
-		const showEdit = Roles.userIsInRole(user._id,['SuperAdminHolos','Leader']) 
+		const showEdit = Roles.userIsInRole(user && user._id,['SuperAdminHolos','Leader']) 
 		
 
 		onData(null, { ideas, ideasstates, ideasFindLimit, textSearch, statesCodesFilter, areasIdsFilter, params: match.params, user, showEdit });

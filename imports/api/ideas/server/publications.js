@@ -4,6 +4,7 @@ import _ from 'lodash';
 import { check } from 'meteor/check';
 
 import Ideas from '../ideas';
+import Areas from '../../areas/areas';
 
 Meteor.publish('ideas.list', (
   textSearch,
@@ -25,9 +26,19 @@ Meteor.publish('ideas.list', (
       corporationId: (user.profile && user.profile.corporationId) || '',
     };
 
-    if (!Roles.userIsInRole(user._id, ['SuperAdminHolos', 'Leader'])) {
+    if (!Roles.userIsInRole(user._id, ['SuperAdminHolos'])) {
       _.extend(filters, { 'person._id': user && user.profile._id })
     }
+    if (Roles.userIsInRole(user._id, ['Leader'])) {
+      const area = Areas.findOne({ _id: user.profile.leaderAreaId })
+      _.extend(filters, {
+        $or: [
+          { 'person._id': user && user.profile._id },
+          { 'chief.areaId': { $in: area.family } }
+        ]
+      })
+    }
+    console.log(' --- publis areas filters --- ', filters)
     if (textSearch) _.extend(filters, { $text: { $search: textSearch } });
     if (statesCodesFilter.length > 0) _.extend(filters, { 'states.code': { $in: statesCodesFilter } });
     if (areasIdsFilter.length > 0) _.extend(filters, { 'chief.areaId': { $in: areasIdsFilter } });
@@ -49,8 +60,8 @@ Meteor.publish('ideas.view', (_id) => {
 });
 
 
-Meteor.publish('ideas.state.list', (filter, limit) => {
-  check(filter, Object);
+Meteor.publish('ideas.state.list', (filters, limit) => {
+  check(filters, Object);
   check(limit, Number);
 
   const self = this.Meteor;
@@ -58,20 +69,17 @@ Meteor.publish('ideas.state.list', (filter, limit) => {
 
   if (user) {
 
-    _.extend(filter, { corporationId: (user.profile && user.profile.corporationId) || '' });
-
-
-    // if (!Roles.userIsInRole(user._id, ['SuperAdminHolos','Leader'])) {
-    //   _.extend(filters, { 'person._id': user && user.profile._id })
-    // }
-    // if (textSearch) _.extend(filters, { $text: { $search: textSearch } });
-    // if (statesCodesFilter.length > 0) _.extend(filters, { 'states.code': { $in: statesCodesFilter } });
-    // if (areasIdsFilter.length > 0) _.extend(filters, { 'chief.areaId': { $in: areasIdsFilter } });
-
-    // console.log('areasIdsFilter', areasIdsFilter);
-    // console.log('__FILTER__', filter);
-
-    return Ideas.find(filter, { sort: { date: 1 }, limit });
+    _.extend(filters, { corporationId: (user.profile && user.profile.corporationId) || '' });
+    if (Roles.userIsInRole(user._id, ['Leader'])) {
+      const area = Areas.findOne({ _id: user.profile.leaderAreaId })
+      _.extend(filters, {
+        $or: [
+          { 'person._id': user && user.profile._id },
+          { 'chief.areaId': { $in: area.family } }
+        ]
+      })
+    }
+    return Ideas.find(filters, { sort: { date: 1 }, limit });
 
   } else return;
 });
