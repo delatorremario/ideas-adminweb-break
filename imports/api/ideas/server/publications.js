@@ -19,14 +19,14 @@ Meteor.publish('ideas.list', (
 
   const self = this.Meteor;
   const user = self.user();
-
   if (user) {
-
     const filters = {
       corporationId: (user.profile && user.profile.corporationId) || '',
     };
 
-    if (!Roles.userIsInRole(user._id, ['SuperAdminHolos'])) {
+    if (
+      !Roles.userIsInRole(user._id, ['SuperAdminHolos']) && 
+      (!textSearch && statesCodesFilter.length===0 && areasIdsFilter.length===0)) {
       _.extend(filters, { 'person._id': user && user.profile._id })
     }
     if (Roles.userIsInRole(user._id, ['Leader'])) {
@@ -45,9 +45,6 @@ Meteor.publish('ideas.list', (
     if (textSearch) _.extend(filters, { $text: { $search: textSearch } });
     if (statesCodesFilter.length > 0) _.extend(filters, { 'states.code': { $in: statesCodesFilter } });
     if (areasIdsFilter.length > 0) _.extend(filters, { 'chief.areaId': { $in: areasIdsFilter } });
-
-    // console.log('areasIdsFilter', areasIdsFilter);
-    // console.log('FILTERS', filters);
 
     return Ideas.find(
       filters,
