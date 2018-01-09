@@ -9,7 +9,6 @@ const composer = ({ ideaId, match }, onData) => {
     const sub = Meteor.subscribe('comments.byIdea', ideaId);
     if (sub.ready()) {
         const comments = Comments.find({ ideaId: ideaId }, { sort: { createdAt: 1 } }).fetch();
-        console.log(comments);
         onData(null, { comments, ideaId });
     }
 };

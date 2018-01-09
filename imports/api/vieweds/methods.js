@@ -36,11 +36,15 @@ rateLimit({
 });
 
 Meteor.methods({
-    'vieweds.viewed': (view) => {
-        check(view, ViewedsSchema);
-        if (view.viewedAt === undefined) {
-            view.viewedAt = new Date();
-            Meteor.call('vieweds.upsert', view);
+    'vieweds.viewed': (viewed) => {
+        if (!Meteor.isServer) return;
+        check(viewed, ViewedsSchema);
+        if (viewed.viewedAt === undefined) {
+            console.log('View');
+            viewed.viewedAt = new Date();
+            Meteor.call('vieweds.upsert', viewed);
+        } else {
+            console.log('Viewed');
         }
     }
 })

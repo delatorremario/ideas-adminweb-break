@@ -17,6 +17,7 @@ const composer = ({ commentId }, onData) => {
             const date = comment.createdAt;
             const name = user.profile && (user.profile.firstName + ' ' + user.profile.lastName) || user.emails[0].address || _.last(user.emails).address;
             const color = (user.profile && user.profile.color) || '#337ab7';
+            Meteor.call('comments.view', commentId)
             onData(null, { text, date, name, userId, color });
         }
     }

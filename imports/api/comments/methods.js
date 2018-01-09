@@ -56,4 +56,11 @@ rateLimit({
     timeRange: 1000,
 });
 
-Meteor.methods({})
+Meteor.methods({
+    'comments.view': (commentId) => {
+        if (!Meteor.isServer) return;
+        check(commentId, String);
+        const viewed = Vieweds.findOne({commentId: commentId, userId: Meteor.userId()})
+        Meteor.call('vieweds.viewed', viewed);
+    }
+})
