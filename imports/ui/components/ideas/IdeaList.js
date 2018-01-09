@@ -211,18 +211,24 @@ class IdeasList extends Component {
                         </div>
                         <div className="panel panel-body panel-tabs">
                             <button disabled={showArea} className={"btn btn-success btn-action " + (showArea ? 'active' : 'btn-trans')} onClick={this.showArea}>{areaSelected && <i className="fa fa-filter"></i>} Areas</button>
-                            <button disabled={!showArea} className={"btn btn-success btn-action " + (!showArea ? 'active' : 'btn-trans')} onClick={this.showArea}>{statesCodesSelected.length > 0 && <i className="fa fa-filter"></i>} Estados</button>
+                            {
+                                showEdit &&
+                                <button disabled={!showArea} className={"btn btn-success btn-action " + (!showArea ? 'active' : 'btn-trans')} onClick={this.showArea}>{statesCodesSelected.length > 0 && <i className="fa fa-filter"></i>} Estados</button>
+                            }
                         </div>
                         <div className="panel panel-body">
                             {
                                 showArea &&
                                 <AreasSearch {...this.props} selectArea={this.selectArea} areaSelected={areaSelected} /> ||
-                                <StatesSearch stateSelected={stateSelected}
-                                    removeStateFilter={this.removeStateFilter}
-                                    selectState={this.selectState}
-                                    ideasstates={ideasstates}
-                                    statesCodesSelected={statesCodesSelected}
-                                />
+                                (
+                                    showEdit &&
+                                    <StatesSearch stateSelected={stateSelected}
+                                        removeStateFilter={this.removeStateFilter}
+                                        selectState={this.selectState}
+                                        ideasstates={ideasstates}
+                                        statesCodesSelected={statesCodesSelected}
+                                    />
+                                )
                             }
                         </div>
 

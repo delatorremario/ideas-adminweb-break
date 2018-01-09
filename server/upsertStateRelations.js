@@ -32,13 +32,13 @@ const state1A = () => {
     const arrRoles = [{ role: 'Leader', title: 'Ideas Nuevas' }];
     const arrNext = [{
         "title": "Dar Continuidad",
-        "action": "Dar Respuesta",
+        "action": "Dar Continuidad",
         "code": "1B",
         "color": "green",
     },
     {
-        "title": "Derivar a otra Area",
-        "action": "Derivar a otra Area",
+        "title": "Derivar a otro Lider",
+        "action": "Derivar a otro Lider",
         "code": "1A",
         "color": "grey",
     }]
@@ -90,7 +90,7 @@ const state1B = () => {
     }
     ]
 
-    const toChanges = [{ type: 'date', label: 'Fecha Compromiso Feedback', name: 'feedback', maxDais:7 }];
+    const toChanges = [{ type: 'date', label: 'Fecha Compromiso Feedback', name: 'feedback', maxDais: 7 }];
 
     States.update({ "code": code }, {
         $set: {
@@ -209,7 +209,7 @@ const state2B = () => {
 const state2C = () => {
     const code = '2C';
 
-    const arrRoles = [{ role: 'Leader', title: 'Idea Derivada Por Otro Lider' }];
+    const arrRoles = [{ role: 'Leader', title: 'Idea Devuelta por Area' }];
     const arrNext = [{
         "title": "Dar Continuidad",
         "action": "Dar Respuesta",
@@ -275,7 +275,7 @@ const state2D = () => {
         },
     ]
 
-    const toChanges = [{ type: 'date', label: 'Fecha Compromiso Feedback', name: 'feedback', maxDais:21 }];
+    const toChanges = [{ type: 'date', label: 'Fecha Compromiso Feedback', name: 'feedback', maxDais: 21 }];
 
 
     States.update({ "code": code }, {
@@ -302,7 +302,7 @@ const state3A = () => {
     const code = '3A';
 
     const arrRoles = [
-        { role: 'Leader', title: 'Ideas Rechazadas' },
+        { role: 'Leader', title: 'Ideas Rechazadas', onlyView: true },
         { role: 'Employee', title: 'Ideas Rechazadas' },
     ];
     const arrNext = [
@@ -341,7 +341,7 @@ const state3B = () => {
     const code = '3B';
 
     const arrRoles = [
-        { role: 'Leader', title: 'Ideas Rechazadas' },
+        { role: 'Leader', title: 'Ideas Rechazadas', onlyView: true },
         { role: 'Employee', title: 'Ideas Rechazadas' },
     ];
     const arrNext = [
@@ -379,8 +379,8 @@ const state3C = () => {
     const code = '3C';
 
     const arrRoles = [
-        { role: 'Executive', title: 'Ideas Rechazadas' },
-        { role: 'Leader', title: 'Ideas Rechazadas' },
+        { role: 'Executive', title: 'Ideas Rechazadas', onlyView: true },
+        { role: 'Leader', title: 'Ideas Rechazadas', onlyView: true },
         { role: 'Employee', title: 'Ideas Rechazadas' },
     ];
     const arrNext = [
@@ -418,9 +418,9 @@ const state3D = () => {
     const code = '3D';
 
     const arrRoles = [
-        { role: 'Executive', title: 'Ideas Rechazadas' },
-        { role: 'Leader', title: 'Ideas Rechazadas' },
-        { role: 'Employee', title: 'Ideas Rechazadas' },
+        { role: 'Executive', title: 'Ideas Rechazadas', onlyView: true },
+        { role: 'Leader', title: 'Ideas Rechazadas', onlyView: true },
+        { role: 'Employee', title: 'Ideas Rechazadas', onlyView: true },
     ];
     const arrNext = [];
 
@@ -450,7 +450,7 @@ const state4A = () => {
 
     const arrRoles = [
         { role: 'Executive', title: 'Ideas StandBy' },
-        { role: 'Leader', title: 'Ideas StandBy' },
+        { role: 'Leader', title: 'Ideas StandBy',onlyView: true  },
         // { role: 'Employee', title: 'Ideas Rechazadas' },
     ];
     const arrNext = [
@@ -514,7 +514,7 @@ const state5A = () => {
         { type: 'option', label: 'Ideas', name: 'clasification' },
         { type: 'option', label: 'Círculo', name: 'clasification' },
         { type: 'check', label: 'Conversación', name: 'conversation' },
-        { type: 'date', label: 'Fecha Compromiso Postergación', name: 'date' },
+        { type: 'date', label: 'Fecha Compromiso Plan de Acción', name: 'date' },
     ];
 
     States.update({ "code": code }, {
@@ -539,7 +539,7 @@ const state5B = () => {
     const code = '5B';
 
     const arrRoles = [
-        // { role: 'Executive', title: 'Ideas Pendientes Ingreso Plan de Acción' },
+        { role: 'Executive', title: 'Ideas Pendientes de Exportación', onlyView: true },
         { role: 'Leader', title: 'Ideas Pendientes de Exportación' },
         // { role: 'Employee', title: 'Ideas Rechazadas' },
     ];

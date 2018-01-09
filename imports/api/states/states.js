@@ -53,6 +53,7 @@ const toChangeSchema = new SimpleSchema({
 const RoleStateSchema = new SimpleSchema({
     role: { type: String, optional: true },
     title: { type: String, optional: true },
+    onlyView: { type: Boolean, optional: true },
 })
 
 
