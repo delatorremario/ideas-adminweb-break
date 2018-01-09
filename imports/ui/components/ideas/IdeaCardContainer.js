@@ -17,8 +17,13 @@ const composer = ({ idea, lap, handleRemove, showEdit, showNext }, onData) => {
             if (err) { console.log('err', err); return; }
             idea.area = area;
             const imagesCursor = Files.find({ _id: { $in: idea.images || [] } }).each();
+          
             if (showNext) {
                 const lastState = _.last(idea.states);
+                _.each(Meteor.user().roles, myrol =>{
+                    const staterol = _.find(lastState.roles,myrol)
+                    showNext=!staterol;
+                })
             }
 
             onData(null, { idea, imagesCursor, lap, handleRemove, showEdit, showNext });
