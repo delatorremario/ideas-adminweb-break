@@ -27,7 +27,7 @@ export const upsertComment = new ValidatedMethod({
                     ideaId: ideaId
                 }
                 if (viewer.userId === Meteor.userId()) {
-                    Meteor.call('vieweds.viewed', view);
+                    Meteor.call('vieweds.view', view);
                 } else {
                     Meteor.call('vieweds.upsert', view);
                 }
@@ -60,7 +60,14 @@ Meteor.methods({
     'comments.view': (commentId) => {
         if (!Meteor.isServer) return;
         check(commentId, String);
-        const viewed = Vieweds.findOne({commentId: commentId, userId: Meteor.userId()})
-        Meteor.call('vieweds.viewed', viewed);
+        const ideaId = Comments.findOne(commentId).ideaId;
+        const vieweds = Vieweds.find({
+            userId: Meteor.userId(),
+            commentId: commentId,
+            ideaId: ideaId
+        }).fetch();
+        _.forEach(vieweds, viewed => {
+            Meteor.call('vieweds.view', viewed);
+        })
     }
 })

@@ -36,15 +36,15 @@ rateLimit({
 });
 
 Meteor.methods({
-    'vieweds.viewed': (viewed) => {
+    'vieweds.view': (view) => {
         if (!Meteor.isServer) return;
-        check(viewed, ViewedsSchema);
-        if (viewed.viewedAt === undefined) {
+        check(view, ViewedsSchema);
+        if (view.viewedAt === undefined) {
             console.log('View');
-            viewed.viewedAt = new Date();
-            Meteor.call('vieweds.upsert', viewed);
-        } else {
-            console.log('Viewed');
+            view.viewedAt = new Date();
+            Meteor.call('vieweds.upsert', view);
         }
-    }
+    },
+    'vieweds.quantityByUser': () => {},
+    'vieweds.quantityByUser&Idea': (ideaId) => {}
 })
