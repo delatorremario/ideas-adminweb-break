@@ -14,7 +14,7 @@ const IdeaCommentsPage = (props) => {
                 </h1>
                 <p>
                     <br />
-                    de <b>{idea.opportunity ? idea.opportunity : 'una idea...'}</b>
+                    <b>{idea.opportunity ? idea.opportunity : 'de una idea...'}</b>
                 </p>
                 <div className="breadcrumb-wrapper hidden-xs">
                     <span className="label">You are here:</span>

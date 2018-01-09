@@ -4,7 +4,7 @@ import _ from 'lodash';
 import moment from 'moment';
 import AvatarContainer from '../../containers/avatar/AvatarContainer';
 
-const CommentComponent = ({ text, name, userId, date, color, read, ideaId, index }) => {
+const CommentComponent = ({ text, name, userId, date, color, index }) => {
     return <div className="ci-comment">
         <div className="ci-comment-info">
             <div className="ci-comment-user">
