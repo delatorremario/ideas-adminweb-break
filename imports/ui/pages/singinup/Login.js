@@ -41,6 +41,7 @@ class Login extends React.Component {
                 ref="emailAddress"
                 name="emailAddress"
                 placeholder="Email"
+                autoComplete="off"
               />
             </FormGroup>
             <FormGroup>

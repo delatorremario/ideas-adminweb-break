@@ -9,12 +9,14 @@ const PersonSchema = new SimpleSchema([
     { updatedAt: { type: Date, optional: true } },
 
     { lastName: { type: String, optional: true } },
+    { secondLastName: { type: String, optional: true } },
     { firstName: { type: String, optional: true } },
     { secondName: { type: String, optional: true } },
     { rut: { type: String, optional: true } },
     { email: { type: String, optional: true } },
     { oneUp: { type: String, optional: true } },
-    { areaId: { type: String } },
+    { areaId: { type: String,  } },
+    { chiefAreaId: { type: String, optional: true } },
     { masterArea: { type: String, optional: true } },
     { corporationId: { type: String, optional: true } },
 ]);
