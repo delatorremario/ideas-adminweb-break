@@ -3,28 +3,26 @@ import { Meteor } from 'meteor/meteor';
 import Loading from '../../components/Loading';
 import { Bert } from 'meteor/themeteorchef:bert';
 
-const send = (ideaId, viewers) => (event) => {
+const send = (ideaId) => (event) => {
     event.preventDefault();
-    const userId = Meteor.userId();
-    _.map(viewers, (viewer) => viewer.userId === userId && _.extend(viewer, { viewedAt: new Date() }));
     let comment = {
+        ideaId: ideaId,
         text: event.target.newComment.value,
         createdAt: new Date(),
-        userId: Meteor.userId(),
-        viewers: viewers
+        userId: Meteor.userId()
     }
     event.target.newComment.value = '';
-    Meteor.call('idea.saveComment', ideaId, comment, (err) => {
+    Meteor.call('comments.upsert', comment, (err) => {
         if (err) {
             Bert.alert(err.message, 'danger');
             return;
         }
-    });
+    })
 }
 
-const CommentSendComponent = ({ ideaId, viewers }) => {
+const CommentSendComponent = ({ ideaId }) => {
     return (
-        <form className="ci-new" onSubmit={send(ideaId, viewers).bind(this)}>
+        <form className="ci-new" onSubmit={send(ideaId).bind(this)}>
             <label htmlFor="newComment">
                 <i className="ci-new-icon fa fa-comment-o"></i>
             </label>

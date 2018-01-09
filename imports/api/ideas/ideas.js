@@ -1,7 +1,6 @@
 import { Mongo } from 'meteor/mongo';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Factory } from 'meteor/dburles:factory';
-
 import BaseSchema from '../base/baseSchema';
 import PersonSchema from '../persons/personSchema';
 // import IdeasStateSchema from '../ideasStatesSchema/ideasStatesSchema';
@@ -22,7 +21,7 @@ Ideas.deny({
     remove: () => true,
 })
 
-ViewerSchema = new SimpleSchema({
+export const ViewerSchema = new SimpleSchema({
     userId: { type: String },
     viewedAt: { type: Date, optional: true }
 })
