@@ -35,4 +35,12 @@ rateLimit({
     timeRange: 1000,
 });
 
-Meteor.methods()
+Meteor.methods({
+    'vieweds.viewed': (view) => {
+        check(view, ViewedsSchema);
+        if (view.viewedAt === undefined) {
+            view.viewedAt = new Date();
+            Meteor.call('vieweds.upsert', view);
+        }
+    }
+})

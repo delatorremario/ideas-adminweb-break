@@ -7,6 +7,7 @@ import { Meteor } from 'meteor/meteor';
 import { Stream } from 'stream';
 import Comments, { CommentsSchema } from './comments';
 import Vieweds from '../vieweds/vieweds';
+import Ideas from '../ideas/ideas';
 
 export const upsertComment = new ValidatedMethod({
     name: 'comments.upsert',
@@ -16,13 +17,21 @@ export const upsertComment = new ValidatedMethod({
             if (err) {
                 throw err;
             }
-            const viewed = {
-                userId: Meteor.userId(),
-                commentId: data.insertedId,
-                ideaId: comment.ideaId,
-                viewedAt: new Date()
-            }
-            Meteor.call('vieweds.upsert', viewed);
+            const ideaId = comment.ideaId;
+            const idea = Ideas.findOne(ideaId);
+            const commentId = data.insertedId;
+            _.forEach(idea.viewers, viewer => {
+                const view = {
+                    userId: viewer.userId,
+                    commentId: commentId,
+                    ideaId: ideaId
+                }
+                if (viewer.userId === Meteor.userId()) {
+                    Meteor.call('vieweds.viewed', view);
+                } else {
+                    Meteor.call('vieweds.upsert', view);
+                }
+            })
         });
     },
 });
@@ -47,9 +56,4 @@ rateLimit({
     timeRange: 1000,
 });
 
-Meteor.methods({
-    'comments.read': (commentId) => {
-        check(commentId, String);
-        console.log('method comments.read:', commentId, Meteor.userId());
-    }
-})
+Meteor.methods({})
