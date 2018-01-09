@@ -4,9 +4,7 @@ import _ from 'lodash';
 import moment from 'moment';
 import { Link, Redirect } from 'react-router-dom';
 
-const IdeaCommentsItemComponent = ({ idea }) => {
-    const cantCom = cantComments(idea);
-    const cantNVCom = cantNonViewedComments(idea);
+const IdeaCommentsItemComponent = ({ idea, cantNVCom }) => {
     const colorB = (idea.states && _.last(idea.states).color) || 'rgb(249, 254, 255)';
     const colorT = (idea.states && _.last(idea.states).color) || '#484848';
     return (
@@ -18,25 +16,13 @@ const IdeaCommentsItemComponent = ({ idea }) => {
                     {
                         cantNVCom < 1 ? '' :
                             <label className="ci-cantNVCom pointer">
-                                <span className="label label-primary label-circlet ci-label pointer">{cantNVCom} sin leer</span>
+                                <span className="label label-primary label-circlet ci-label pointer" style={{ backgroundColor: colorT }}>{cantNVCom} sin leer</span>
                             </label>
                     }
                 </label>
             </li>
         </Link>
     )
-}
-
-const cantComments = (idea) => {
-    return idea && idea.comments && idea.comments.length || 0;
-}
-
-const cantNonViewedComments = (idea) => {
-    const userId = Meteor.userId();
-    return _.reduce(idea.comments, (sum, c) => {
-        c.viewers = _.filter(c.viewers, (v) => (v.userId === userId) && !v.viewedAt);
-        return sum + c.viewers.length;
-    }, 0);
 }
 
 export default IdeaCommentsItemComponent;

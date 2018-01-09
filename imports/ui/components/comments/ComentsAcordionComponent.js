@@ -3,8 +3,7 @@ import { Accordion, Panel } from 'react-bootstrap';
 import _ from 'lodash';
 import moment from 'moment';
 import CommentsComponent from './CommentsComponent';
-import NonViewedComponent from '../nonViewed/NonViewedComponent';
-import IdeaCommentsItemComponent from './IdeaCommentsItemComponent';
+import IdeaCommentsItemContainer from '../../containers/comments/IdeaCommentsItemContainer';
 
 const CommentsAcordionComponent = ({ ideas }) => {
     return (
@@ -12,7 +11,7 @@ const CommentsAcordionComponent = ({ ideas }) => {
             {
                 _.map(ideas, (idea, index) => {
                     return (
-                        <IdeaCommentsItemComponent idea={idea} key={index} />
+                        <IdeaCommentsItemContainer idea={idea} key={index} />
                     )
                 })
             }

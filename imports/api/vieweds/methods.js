@@ -44,8 +44,5 @@ Meteor.methods({
             view.viewedAt = new Date();
             Meteor.call('vieweds.upsert', view);
         }
-    },
-    /* Pasar a Puslication */
-    'vieweds.quantityByUser': () => {},
-    'vieweds.quantityByUser&Idea': (ideaId) => {}
+    }
 })

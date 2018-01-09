@@ -195,16 +195,6 @@ class SidebarPush extends Component {
     renderNavigation() {
         let links = ``;
         const { navLinks } = this.state
-        const userId = Meteor.userId();
-       // const sub = Meteor.subscribe('ideas.state.list', { 'viewers.userId': userId }, 100);
-        const ideas = [];
-        const nonViewed = 0;
-        // if (sub.ready()) {
-        //    ideas = Ideas.find({}, {}).fetch();
-        // }
-        // _.forEach(ideas, (idea) => {
-        //     nonViewed += this.cantNonViewedComments(idea);
-        // })
         links = navLinks.map((link, index) => {
             if (!link.roles || link.roles && Roles.userIsInRole(Meteor.userId(), link.roles)) {
                 if (!link.subLevel) {
