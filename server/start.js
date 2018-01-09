@@ -37,7 +37,11 @@ const admins = ['mariodelatorre@holos.cl',
   'cguinez@holos.cl',
 ];
 
-const leaders = ['mauricio.ma.rodriguez@bhpbilliton.com', 'delatorremario@gmail.com', 'demo@holos.cl',];
+const leaders = ['mauricio.ma.rodriguez@bhpbilliton.com', 'delatorremario@gmail.com', 'demo@holos.cl',
+  'jorge.jm.jalil@bhpbilliton.com', 'jorge.jn.tom@bhpbilliton.com',
+  'camila.ca.perez@bhpbilliton.com', 'mauricio.ma.rodriguez@bhpbilliton.com', 'maria.mp.bustamante@bhpbilliton.com'
+];
+
 const executives = ['felipte.f.duery@bhpbilliton.com', 'felipe.fs.aguilera@bhpbilliton.com']
 const employees = ['usuario@holos.cl', 'neftali.a.herrera@bhpbilliton.com'];
 
