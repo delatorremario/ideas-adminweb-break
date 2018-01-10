@@ -48,7 +48,17 @@ const IdeaCard = ({ idea, imagesCursor, lap, handleRemove, showEdit, showNext, n
                                 <i className="fa fa-comment">
                                     {
                                         nonViewed < 1 ? '' :
-                                            <span className="badge" style={{ backgroundColor: color, color: 'white', zoom: 0.7, position: 'relative', top: '-10px', right: '7px' }}>{nonViewed}</span>
+                                            <span className="badge" style={{
+                                                backgroundColor: color,
+                                                color: 'white',
+                                                zoom: 0.75,
+                                                position: 'relative',
+                                                top: '-10px',
+                                                right: '7px',
+                                                borderRadius: '50%',
+                                                padding: '3px 5px',
+                                                margin: '0px'
+                                            }}>{nonViewed}</span>
                                     }
                                 </i>
                             </Link>
