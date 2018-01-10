@@ -40,12 +40,8 @@ Meteor.methods({
         if (!Meteor.isServer) return;
         check(view, ViewedsSchema);
         if (view.viewedAt === undefined) {
-            console.log('View');
             view.viewedAt = new Date();
             Meteor.call('vieweds.upsert', view);
         }
-    },
-    /* Pasar a Puslication */
-    'vieweds.quantityByUser': () => {},
-    'vieweds.quantityByUser&Idea': (ideaId) => {}
+    }
 })

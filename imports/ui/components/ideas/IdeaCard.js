@@ -9,12 +9,11 @@ import Areas from '../../../api/areas/areas';
 import SetStateComponent from '../../components/set-state/SetStateComponent';
 import IdeaCardChiefAreaContainer from './IdeaCardChiefAreaContainer';
 
-const IdeaCard = ({ idea, imagesCursor, lap, handleRemove, showEdit, showNext }) => {
+const IdeaCard = ({ idea, imagesCursor, lap, handleRemove, showEdit, showNext, nonViewed }) => {
     const { userId, person, chief, description, opportunity, collaborators, drivers, origin, createdAt, date, states, images } = idea;
     const createdUser = Meteor.users.findOne(userId);
     const color = states && _.last(states).color || 'white';
     const nexts = states && _.last(states).nexts || [];
-
     return <div className="col-sm-6 col-lg-4 cards-item">
         <div className="panel panel-default" style={{ borderColor: color }}>
             <div className="panel-heading" style={{ borderColor: color, backgroundColor: color + '0C' }}>
@@ -45,7 +44,14 @@ const IdeaCard = ({ idea, imagesCursor, lap, handleRemove, showEdit, showNext })
                         _.filter(idea.viewers, v => {
                             return v.userId === Meteor.userId();
                         }).length < 1 ? '' :
-                            <Link to={`/comment/${idea._id}`}><i className="fa fa-comment"></i></Link>
+                            <Link to={`/comment/${idea._id}`}>
+                                <i className="fa fa-comment">
+                                    {
+                                        nonViewed < 1 ? '' :
+                                            <span className="badge" style={{ backgroundColor: color, color: 'white', zoom: 0.7, position: 'relative', top: '-10px', right: '7px' }}>{nonViewed}</span>
+                                    }
+                                </i>
+                            </Link>
                     }
                     {
                         showEdit &&
