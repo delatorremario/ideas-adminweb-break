@@ -192,6 +192,15 @@
         justify-content: center;
         width: 100%;
     }
+    .recover-password {
+        .form-group {
+            .form-control {
+                box-sizing: border-box !important;
+                margin: 0px 5% !important;
+                width: 90% !important;
+            }
+        }
+    }
     .nonViewed {
         position: absolute;
         top: 4px;
