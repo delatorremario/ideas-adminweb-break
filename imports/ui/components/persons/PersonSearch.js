@@ -21,8 +21,13 @@ const PersonSearch = ({ persons, onChangeSearchPerson, selectPerson }) => {
                                 <ul className="list-group list-group-flush">
                                     {
                                         _.map(persons, (person, index) => (
-                                            <li key={index} className="list-group-item" onClick={selectPerson(person).bind(this)}>
-                                                {person.lastName}, {person.firstName} {person.secondName}  <span className="badge"><small>{person.rut}</small></span>
+                                            <li key={index} className="list-group-item" onClick={selectPerson(person).bind(this)}
+                                                style={person.executive && { fontWeight: 'bold' }}
+                                            >
+                                                {person.lastName}, {person.firstName} {person.secondName}
+                                                <span className="badge">
+                                                    <small>{person.rut}</small>
+                                                </span>
                                             </li>))
                                     }
 
