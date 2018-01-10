@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
 import IdeasLogo from '../components/IdeasLogo'
+import AlertsContainer from '../containers/alerts/AlertsContainer';
 
 const handleLogout = () => {
     Meteor.logout();
@@ -12,10 +13,6 @@ const userName = () => {
     const name = user && user.profile ? user.profile.name : '';
     return user ? `${name.first} ${name.last}` : '';
 };
-
-const handleAlerts = () => {
-    console.log('Alert!');
-}
 
 class Header extends Component {
 
@@ -44,11 +41,7 @@ class Header extends Component {
                     </li> */}
                 </ul>
                 <ul className="nav navbar-nav navbar-right isDesktop">
-                    <li className="toggle-navigation toggle-right">
-                        <button className="sidebar-toggle" onClick={handleAlerts} >
-                            <i className="fa fa-bell"></i>
-                        </button>
-                    </li>
+                    <AlertsContainer />
                     <li className="toggle-navigation toggle-right">
                         <button className="sidebar-toggle" onClick={handleLogout} >
                             <i className="fa fa-sign-out"></i>

@@ -1,0 +1,85 @@
+.dropdown-notifications {
+    width: auto;
+    background-color: #fff;
+    position: absolute;
+    top: 68px;
+    right: 0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    &::before {
+        content: "";
+        display: block;
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        background-color: #fff;
+        box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+        top: -6px;
+        right: 26px;
+        z-index: -1;
+        transform: rotate(45deg);
+    }
+    li.single-notification {
+        width: 340px;
+        padding: 8px 15px;
+        box-sizing: border-box;
+        margin: 2px;
+        &:hover {
+            background-color: #f1f1f1 !important;
+        }
+        &.not-opened {
+            background-color: #f6f6f6;
+            h3::before {
+                content: "";
+                width: 6px;
+                height: 6px;
+                background-color: #2c5694;
+                border-radius: 50%;
+                position: absolute;
+                top: 3px;
+                left: -10px;
+            }
+        }
+        a {
+            color: #424856;
+            &:hover {
+                text-decoration: none;
+                color: #424856
+            }
+        }
+        h3 {
+            position: relative;
+            font-size: 0.85em !important;
+            font-weight: 600 !important;
+            margin-bottom: 1px !important;
+        }
+        p {
+            font-size: 0.75em !important;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            margin-bottom: 0px;
+            line-height: 1.5em;
+        }
+        p.date {
+            font-size: 0.8em !important;
+            line-height: 2em !important;
+            color: #999;
+            font-weight: 600;
+            margin-top: -5px
+        }
+    }
+    .btn-show-more {
+        a {
+            display: block;
+            width: 100%;
+            font-size: 0.7em;
+            text-align: center;
+            text-transform: uppercase;
+            font-weight: bold;
+            color: #2c5694 !important
+        }
+    }
+}
