@@ -24,7 +24,8 @@ Accounts.onLogin((data) => {
         _.extend(user.profile, { areaId, email })
         console.log('--- no existe en persons ---');
         // si el usuario no existe en PERSONS lo agrega
-        Persons.insert({ profile }, (err, data) => {
+
+        Persons.insert({ ...user.profile }, (err, data) => {
             console.log('upsert person', err, data);
         })
     }
