@@ -20,8 +20,8 @@ Meteor.methods({
         const filters = {}
 
         if (Roles.userIsInRole(user._id, ['Leader'])) {
-            const areas = Areas.find({ _id: { $in: user.profile.leaderAreasIds } }).fetch();
-            //console.log('AREAS ', areas);
+            console.log('--- LEADER AREAS ---');
+            const areas = Areas.find({ _id: { $in: user.profile.leaderAreasIds || [] } }).fetch();
             let families = [];
             _.each(areas, area => families = _.union(families, area.family))
             _.extend(filters, {
@@ -32,16 +32,17 @@ Meteor.methods({
                 //}
                 // ]
             })
+            console.log('--- LEADER AREAS --- filters', filters);
         }
         if (Roles.userIsInRole(user._id, ['Employee'])) {
-           // const areas = Areas.find({ _id: { $in: user.profile.leaderAreasIds } }).fetch();
+            // const areas = Areas.find({ _id: { $in: user.profile.leaderAreasIds } }).fetch();
             //console.log('AREAS ', areas);
             let families = [];
             //_.each(areas, area => families = _.union(families, area.family))
             _.extend(filters, {
                 // $or: [
                 // { 
-                    'person._id': user && user.profile._id 
+                'person._id': user && user.profile._id
                 //},
                 //{
                 //'chief.areaId': { $in: families }
