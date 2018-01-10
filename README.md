@@ -3,7 +3,7 @@
 <p><b>$ meteor npm install</b></p>
 
 
-<p>Populates</p>
+<h4>Populates</h4>
 <ul>
     <li>Meteor.call('start') <small>Crea Roles y Usuarios Iniciales</small></li>
     <li>Logearse y Creaer la Primer Corporación</li>
@@ -14,3 +14,5 @@
     <li>Meteor.call('states.relations') <small>Actualiza los posibles flujos de los estados</small></li>
     <li>Meteor.call('leaders.update') <small>Asigna las areas a los Líderes</small></li>
 </ul>
+<h4>DB Index</h4>
+<p>Meteor.call('dbIndexs')</p>

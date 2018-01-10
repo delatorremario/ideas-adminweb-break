@@ -28,6 +28,7 @@ Meteor.publish('ideas.list', (
     }
     
     if (Roles.userIsInRole(user._id, ['Executive'])) {
+      console.log('---- Executive ---- filters', filters);
       const area = Areas.findOne({ _id: user.profile.areaId });
       _.extend(filters, {
         $or: [
@@ -35,7 +36,6 @@ Meteor.publish('ideas.list', (
           { 'chief.areaId': { $in: area.family } }
         ]
       })
-      console.log('---- Executive ---- filters', filters);
     }
     
     // (!textSearch && statesCodesFilter.length === 0 && areasIdsFilter.length === 0)
@@ -43,7 +43,7 @@ Meteor.publish('ideas.list', (
     if (Roles.userIsInRole(user._id, ['Leader'])) {
       const areas = Areas.find({ _id: { $in: user.profile.leaderAreasIds } }).fetch();
       let families = [];
-      console.log('---- Leader ---- area.family', area.family);
+      console.log('---- Leader ---- ');
       _.each(areas, area => families = _.union(families, area.family))
       _.extend(filters, {
         $or: [
