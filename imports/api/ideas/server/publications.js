@@ -20,18 +20,30 @@ Meteor.publish('ideas.list', (
   const self = this.Meteor;
   const user = self.user();
   if (user) {
-    const filters = {
-      corporationId: (user.profile && user.profile.corporationId) || '',
-    };
+    const filters = { corporationId: (user.profile && user.profile.corporationId) || '', };
 
-    if (
-      !Roles.userIsInRole(user._id, ['SuperAdminHolos']) && 
-      (!textSearch && statesCodesFilter.length===0 && areasIdsFilter.length===0)) {
+    if (Roles.userIsInRole(user._id, ['Employee'])) {
+      console.log('---- Employee ----');
       _.extend(filters, { 'person._id': user && user.profile._id })
     }
+    
+    if (Roles.userIsInRole(user._id, ['Executive'])) {
+      console.log('---- Executive ---- filters', filters);
+      const area = Areas.findOne({ _id: user.profile.areaId });
+      _.extend(filters, {
+        $or: [
+          { 'person._id': user && user.profile._id },
+          { 'chief.areaId': { $in: area.family } }
+        ]
+      })
+    }
+    
+    // (!textSearch && statesCodesFilter.length === 0 && areasIdsFilter.length === 0)
+    
     if (Roles.userIsInRole(user._id, ['Leader'])) {
       const areas = Areas.find({ _id: { $in: user.profile.leaderAreasIds } }).fetch();
       let families = [];
+      console.log('---- Leader ---- ');
       _.each(areas, area => families = _.union(families, area.family))
       _.extend(filters, {
         $or: [
@@ -42,6 +54,13 @@ Meteor.publish('ideas.list', (
         ]
       })
     }
+    
+    if (Roles.userIsInRole(user._id, ['SuperAdminHolos'])) {
+      console.log('----user.profile._id---- SuperAdminHolos', user.profile._id);
+    }
+
+
+    if (textSearch || statesCodesFilter.length > 0 || areasIdsFilter.length > 0) filters = {}
     if (textSearch) _.extend(filters, { $text: { $search: textSearch } });
     if (statesCodesFilter.length > 0) _.extend(filters, { 'states.code': { $in: statesCodesFilter } });
     if (areasIdsFilter.length > 0) _.extend(filters, { 'chief.areaId': { $in: areasIdsFilter } });
