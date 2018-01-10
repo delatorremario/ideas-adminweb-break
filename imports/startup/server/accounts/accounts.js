@@ -5,6 +5,7 @@ import _ from 'lodash';
 
 import Persons from '../../../api/persons/persons';
 import Areas from '../../../api/areas/areas';
+import Corporations from '../../../api/corporations/corporations';
 
 Accounts.onLogin((data) => {
     const user = data.user;
@@ -18,6 +19,10 @@ Accounts.onLogin((data) => {
     const person = Persons.findOne({ email });
 
     if (!user.profile) _.extend(user, { profile: {} })
+    if (!user.profile.corporationId) {
+        const corp = Corporations.findOne();
+        Meteor.users.update({ _id: user._id }, { $set: { 'profile.corporationId': corp && corp._id } })
+    }
     if (!person) {
         const area = Areas.findOne();
         const areaId = area && area._id;

@@ -41,9 +41,9 @@ Meteor.publish('ideas.list', (
     // (!textSearch && statesCodesFilter.length === 0 && areasIdsFilter.length === 0)
     
     if (Roles.userIsInRole(user._id, ['Leader'])) {
-      const areas = Areas.find({ _id: { $in: user.profile.leaderAreasIds } }).fetch();
+      console.log('---- Leader ---- filters', filters);
+      const areas = Areas.find({ _id: { $in: user.profile.leaderAreasIds || [] } }).fetch();
       let families = [];
-      console.log('---- Leader ---- ');
       _.each(areas, area => families = _.union(families, area.family))
       _.extend(filters, {
         $or: [

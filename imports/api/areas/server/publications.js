@@ -6,6 +6,7 @@ import { check } from 'meteor/check';
 import Areas from '../areas';
 
 Meteor.publish('areas.search', (textSearch) => {
+  console.log('publish areas.search');
   check(textSearch, String);
   const self = this.Meteor;
   const user = self.user();

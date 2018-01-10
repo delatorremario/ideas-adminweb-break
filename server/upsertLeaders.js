@@ -16,6 +16,7 @@ Meteor.methods({
             { mail: 'Camila.CA.Perez@bhpbilliton.com', areas: ['Concentrate Operations'] },
             { mail: 'Mauricio.MA.Rodriguez@bhpbilliton.com', areas: ['NPI & Conc. Handling Operations'] },
             { mail: 'Maria.MP.Bustamante@bhpbilliton.com', areas: ['Logistic & Execution Integ Operations'] },
+            { mail: 'delatorremario@gmail.com', areas: ['Escondida'] },
         ]
 
         _.each(leadersMails, leader => {
