@@ -13,16 +13,16 @@ const userName = () => {
     return user ? `${name.first} ${name.last}` : '';
 };
 
+const handleAlerts = () => {
+    console.log('Alert!');
+}
+
 class Header extends Component {
+
     sidebarPush = () => {
         var bodyEl = $('#main-wrapper');
         ($(window).width() > 767) ? $(bodyEl).toggleClass('sidebar-mini') : $(bodyEl).toggleClass('sidebar-opened');
     }
-
-    // sidebarOverlay = () => {
-    //     $('#sidebar-right').toggleClass('sidebar-right-open');
-    //     $("#toggle-right .fa").toggleClass("fa-indent fa-dedent");
-    // }
 
     render() {
         return (
@@ -44,6 +44,11 @@ class Header extends Component {
                     </li> */}
                 </ul>
                 <ul className="nav navbar-nav navbar-right isDesktop">
+                    <li className="toggle-navigation toggle-right">
+                        <button className="sidebar-toggle" onClick={handleAlerts} >
+                            <i className="fa fa-bell"></i>
+                        </button>
+                    </li>
                     <li className="toggle-navigation toggle-right">
                         <button className="sidebar-toggle" onClick={handleLogout} >
                             <i className="fa fa-sign-out"></i>
