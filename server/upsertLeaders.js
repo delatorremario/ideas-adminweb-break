@@ -20,10 +20,12 @@ Meteor.methods({
 
         _.each(leadersMails, leader => {
             const email = _.toLower(leader.mail);
-            _.each(leader.areas, area =>{
+            _.each(leader.areas, area => {
                 const myarea = Areas.findOne({ name: area });
                 if (!myarea) { console.log('-- NO EXISTE AREA --', area); return; }
                 const user = Meteor.users.findOne({ 'emails.address': email });
+                console.log('---USER---', user);
+                if (user && !user.profile) Meteor.users.update({ _id: user._id }, { $set: { profile: { leaderAreasIds: [] } } });
                 if (!user) { console.log('-- NO EXISTE USUARIO --', email); return; }
                 Roles.addUsersToRoles(user._id, 'Leader');
                 Meteor.users.update({ _id: user._id }, { $addToSet: { 'profile.leaderAreasIds': myarea._id } });

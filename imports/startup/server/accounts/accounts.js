@@ -16,16 +16,18 @@ Accounts.onLogin((data) => {
     const email = user.emails[0].address
 
     const person = Persons.findOne({ email });
-    const areaId = Areas.findOne()._id;
 
     if (!user.profile) _.extend(user, { profile: {} })
-
-    _.extend(user.profile, { areaId, email })
-    
-    // si el usuario no existe en PERSONS lo agrega
-    Persons.upsert({ _id: person && person._id }, { $set: user && user.profile }, (err, data) => {
-        console.log('upsert person', err, data);
-    })
+    if (!person) {
+        const area = Areas.findOne();
+        const areaId = area && area._id;
+        _.extend(user.profile, { areaId, email })
+        console.log('--- no existe en persons ---');
+        // si el usuario no existe en PERSONS lo agrega
+        Persons.insert({ profile }, (err, data) => {
+            console.log('upsert person', err, data);
+        })
+    }
     console.log('Login complete!');
 
 

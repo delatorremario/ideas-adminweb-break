@@ -17,7 +17,7 @@ const Start = {
     addEmployees();
     addExecutives();
     setProfile();
-    fixStates()
+    // fixStates()
   },
 };
 
@@ -42,7 +42,7 @@ const leaders = ['mauricio.ma.rodriguez@bhpbilliton.com', 'delatorremario@gmail.
   'camila.ca.perez@bhpbilliton.com', 'mauricio.ma.rodriguez@bhpbilliton.com', 'maria.mp.bustamante@bhpbilliton.com'
 ];
 
-const executives = ['felipte.f.duery@bhpbilliton.com', 'felipe.fs.aguilera@bhpbilliton.com']
+const executives = ['felipe.fs.aguilera@bhpbilliton.com', 'luis.a.benavente@bhpbilliton.com']
 const employees = ['usuario@holos.cl', 'neftali.a.herrera@bhpbilliton.com'];
 
 const createAccounts = () => {
