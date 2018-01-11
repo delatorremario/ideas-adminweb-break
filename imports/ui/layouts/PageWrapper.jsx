@@ -80,6 +80,7 @@ const PageWrapper = () => (
                 <Route exact path="/ideas/:text?/:stateCode?/:step?/:areaId?/find" component={Ideas} />
                 <Route exact path="/ideas/new" component={EditIdea} />
                 <Route exact path="/idea/:_id/edit" component={EditIdea} />
+                {/* TODO <Route exact path="/idea/:_id/view" component={ViewIdeaContainer} /> */}
 
                 {/* Comments */}
                 <Route exact path="/comments" component={CommentsContainer} />

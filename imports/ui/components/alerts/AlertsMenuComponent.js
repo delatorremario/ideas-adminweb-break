@@ -66,20 +66,20 @@ class AlertsMenuComponent extends Component {
                     {alerts.length ? <div>
                         {alerts.map(not => {
                             return (
-                                <li key={not._id} className={"single-notification" + (not.state === 'new' ? ' not-opened' : '')} onClick={() => { this.setOpened(not) }}>
-                                    <Link to={not.path} >
+                                <Link key={not._id} to={not.path} >
+                                    <li className={"single-notification" + (not.state === 'new' ? ' not-opened' : '')} onClick={() => { this.setOpened(not) }}>
                                         <h3>{not.body.title}</h3>
                                         <p>{not.body.message}</p>
                                         <p className="date"><i className="fa fa-calendar"></i> {Moment(not.createdAt).from()}</p>
-                                    </Link>
-                                </li>
+                                    </li>
+                                </Link>
                             )
                         })}
-                        <li className="single-notification btn-show-more" >
-                            <Link to="/alerts">
+                        <Link to="/alerts">
+                            <li className="single-notification btn-show-more" >
                                 Ver todas las alertas
-                                </Link>
-                        </li>
+                            </li>
+                        </Link>
                     </div>
                         :
                         <div className="empty-notifications">
