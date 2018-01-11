@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
-
+import AlertsMenuContainer from '../containers/alerts/AlertsMenuContainer';
 import NonViewedContainer from '../containers/nonViewed/NonViewedContainer';
 
 const handleLogout = () => {
@@ -43,11 +43,9 @@ class Footer extends Component {
                     </button>
                 </div>
                 <div className="footer-item">
-                    <button className="footer-button">
-                        <Link className="footer-button" to="/" >
-                            <i className="fa fa fa-bell"></i>
-                        </Link>
-                    </button>
+                    <i className="footer-button">
+                        <AlertsMenuContainer />
+                    </i>
                 </div>
                 <div className="footer-item">
                     <button className="footer-button" onClick={handleLogout} to="#" >

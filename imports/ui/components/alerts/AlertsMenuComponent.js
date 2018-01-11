@@ -3,8 +3,9 @@ import { Meteor } from 'meteor/meteor';
 import { Link } from 'react-router-dom';
 import Moment from 'moment';
 import { Bert } from 'meteor/themeteorchef:bert';
+import $ from 'jquery';
 
-class AlertsComponent extends Component {
+class AlertsMenuComponent extends Component {
 
     state = {
         showNotMenu: false,
@@ -15,6 +16,9 @@ class AlertsComponent extends Component {
     }
 
     toggleNotificationsMenu = e => {
+        if ($( window ).width() < 768) {
+            console.log('mobile');
+        }
         if (e) e.preventDefault();
         this.setState(prev => ({
             showNotMenu: !prev.showNotMenu
@@ -32,7 +36,7 @@ class AlertsComponent extends Component {
     };
 
     setOpened = not => {
-        Meteor.call('setNotificationOpened', not, (err, res) => {
+        Meteor.call('alerts.setOpened', not, (err, res) => {
             if (err) {
                 Bert.alert("Se produjo un error al abrir la notificación: " + err.message, 'danger');
             }
@@ -40,7 +44,7 @@ class AlertsComponent extends Component {
     };
 
     render() {
-        const { notifications, counter } = this.props;
+        const { alerts, counter } = this.props;
         const { showNotMenu } = this.state;
         return (
             <li className="toggle-navigation toggle-right">
@@ -63,28 +67,28 @@ class AlertsComponent extends Component {
                     </i>
                 </button>
                 {showNotMenu && <ul className="dropdown-notifications">
-                    {notifications.length ? <div>
-                        {notifications.map(not => {
+                    {alerts.length ? <div>
+                        {alerts.map(not => {
                             return (
-                                <li key={not._id} className={"single-notification" + (not.state === 'new' ? ' not-opened' : '')} onClick={() => { this.setOpened(not) }}>
-                                    <Link to={not.path} >
+                                <Link key={not._id} to={not.path} >
+                                    <li className={"single-notification" + (not.state === 'new' ? ' not-opened' : '')} onClick={() => { this.setOpened(not) }}>
                                         <h3>{not.body.title}</h3>
                                         <p>{not.body.message}</p>
                                         <p className="date"><i className="fa fa-calendar"></i> {Moment(not.createdAt).from()}</p>
-                                    </Link>
-                                </li>
+                                    </li>
+                                </Link>
                             )
                         })}
-                        <li className="single-notification btn-show-more" >
-                            <Link to="/notifications">
-                                Ver todas las notificaciones
-                                </Link>
-                        </li>
+                        <Link to="/alerts">
+                            <li className="single-notification btn-show-more" >
+                                Ver todas las alertas
+                            </li>
+                        </Link>
                     </div>
                         :
                         <div className="empty-notifications">
                             <i className="fa fa-bell-slash-o"></i>
-                            <h3>No hay notificaciones pendientes</h3>
+                            <h3>No hay alertas pendientes</h3>
                         </div>
                     }
                 </ul>}
@@ -93,4 +97,4 @@ class AlertsComponent extends Component {
     }
 }
 
-export default AlertsComponent;
+export default AlertsMenuComponent;

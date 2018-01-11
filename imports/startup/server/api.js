@@ -36,3 +36,6 @@ import '../../api/comments/server/publications';
 
 import '../../api/vieweds/methods';
 import '../../api/vieweds/server/publications';
+
+import '../../api/alerts/methods';
+import '../../api/alerts/server/publications';
