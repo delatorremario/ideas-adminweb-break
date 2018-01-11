@@ -6,34 +6,15 @@ import AlertsMenuComponent from '../../components/alerts/AlertsMenuComponent';
 
 const composer = ({ }, onData) => {
     const subscription = Meteor.subscribe('alerts.topList', 10);
-
     if (subscription.ready()) {
         const alerts = Alerts.find({}).fetch();
         newAlerts = [];
-
         alerts.map(not => {
             if (not.state === "new") newAlerts.push(not);
         })
-        
         counter = newAlerts.length
         onData(null, { alerts, counter });
     }
 };
 
 export default composeWithTracker(composer, Loading)(AlertsMenuComponent);
-
-// const composer = ({ }, onData) => {
-//     const subscription = Meteor.subscribe('notifications.topList', 10);
-
-//     if (subscription.ready()) {
-//         const notifications = Notifications.find({}).fetch();
-//         newNotifications = [];
-
-//         notifications.map(not => {
-//             if (not.state === "new") newNotifications.push(not);
-//         })
-        
-//         counter = newNotifications.length
-//         onData(null, { notifications, counter });
-//     }
-// };

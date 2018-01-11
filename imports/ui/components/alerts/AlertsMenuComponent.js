@@ -32,7 +32,7 @@ class AlertsMenuComponent extends Component {
     };
 
     setOpened = not => {
-        Meteor.call('setAlertOpened', not, (err, res) => {
+        Meteor.call('alerts.setOpened', not, (err, res) => {
             if (err) {
                 Bert.alert("Se produjo un error al abrir la notificación: " + err.message, 'danger');
             }

@@ -9,19 +9,9 @@ const composer = (params, onData) => {
     const { match } = params;
     const sub = Meteor.subscribe('alerts.listByUserDestination');
     if (sub.ready()) {
-        const alerts = Alerts.find({ usersDestination: Meteor.user().emails[0].address }, { sort: { date: -1 } }).fetch();
+        const alerts = Alerts.find({ usersDestination: Meteor.userId() }, { sort: { date: -1 } }).fetch();
         onData(null, { match, alerts });
     }
 }
 
 export default composeWithTracker(composer, Loading)(AlertsListComponent);
-
-// const composer = (params, onData) => {
-//     const { match } = params;
-//     const subscription = Meteor.subscribe('notifications.listByUserDestination');
-
-//     if (subscription.ready()) {
-//         const notifications = Notifications.find({}).fetch()
-//         onData(null, { match, notifications })
-//     }
-// }
