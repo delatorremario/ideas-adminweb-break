@@ -12,26 +12,33 @@ import IdeaCardChiefAreaContainer from './IdeaCardChiefAreaContainer';
 const IdeaCard = ({ idea, imagesCursor, lap, handleRemove, showEdit, showNext, nonViewed }) => {
     const { userId, person, chief, description, opportunity, collaborators, drivers, origin, createdAt, date, states, images } = idea;
     const createdUser = Meteor.users.findOne(userId);
-    const color = states && _.last(states).color || 'white';
-    const nexts = states && _.last(states).nexts || [];
+    const lastState = states && _.last(states);
+    const color = states && lastState && lastState.color || 'white';
+    const nexts = states && lastState && lastState.nexts || [];
+
     return <div className="col-sm-6 col-lg-4 cards-item">
         <div className="panel panel-default" style={{ borderColor: color }}>
             <div className="panel-heading" style={{ borderColor: color, backgroundColor: color + '0C' }}>
                 <h5 className="panel-title">
                     <div style={{ borderBottom: `1px solid ${color}` }}>
-                        <small> <Moment format="DD MMM YYYY" date={date} /> </small>
+                        <small> <Moment format="DD MMM YYYY HH:mm" date={date} /> </small>
                         <div className="title-name" style={{ color: color }}>
                             <b>&nbsp;{person.lastName} </b>{person.firstName} {person.secondName}
                         </div>
                     </div>
                     <br></br>
                     {
-                        states && <div> <small className="label" style={{ backgroundColor: `${color}` }}>{_.last(states).step} - {_.last(states).state}</small>
-                            <br></br>
-                            <div className="time-ago">hace <Moment fromNow ago locale="es">{_.last(states).createdAt}</Moment></div></div>
+                        states && lastState &&
+                        <div>
+                            <small className="label" style={{ backgroundColor: `${color}` }}>{lastState.step} - {lastState.state}</small>
+                            <span className="time-ago">hace <Moment fromNow ago locale="es">{lastState.updatedAt}</Moment></span>
+                        </div>
                     }
                     {
-                        idea.area && <label className="label label-default label-sm">{idea.area.name}</label>
+                        idea.area &&
+                        <div className="area-name">
+                            <label className="label label-default label-sm">{idea.area.name}</label>
+                        </div>
                     }
                 </h5>
 

@@ -188,13 +188,14 @@ class IdeasList extends Component {
                         <div className={"btn btn-success btn-action ideas-button " + (showFilters ? 'active' : 'btn-trans')} onClick={this.showFilters}>
                             <i className={"fa " + (showFilters && "fa-ban" || "fa-filter")}></i>
                         </div>
-                        <ReactHTMLTableToExcel
+                        {showEdit && <ReactHTMLTableToExcel
                             id="ideas-xls-button"
                             className="btn btn-success btn-trans btn-action btn-ideas-excel ideas-button"
                             table="ideas-to-xls"
                             filename={"ideas-" + new Date().toLocaleDateString()}
                             sheet="ideas"
                             buttonText="xls" />
+                        }
                     </div>
                 </div>
 
@@ -210,10 +211,11 @@ class IdeasList extends Component {
                             />
                         </div>
                         <div className="panel panel-body panel-tabs">
-                            <button disabled={showArea} className={"btn btn-success btn-action " + (showArea ? 'active' : 'btn-trans')} onClick={this.showArea}>{areaSelected && <i className="fa fa-filter"></i>} Areas</button>
                             {
-                                showEdit &&
-                                <button disabled={!showArea} className={"btn btn-success btn-action " + (!showArea ? 'active' : 'btn-trans')} onClick={this.showArea}>{statesCodesSelected.length > 0 && <i className="fa fa-filter"></i>} Estados</button>
+                                showEdit && <div>
+                                    <button disabled={showArea} className={"btn btn-success btn-action " + (showArea ? 'active' : 'btn-trans')} onClick={this.showArea}>{areaSelected && <i className="fa fa-filter"></i>} Areas</button>
+                                    <button disabled={!showArea} className={"btn btn-success btn-action " + (!showArea ? 'active' : 'btn-trans')} onClick={this.showArea}>{statesCodesSelected.length > 0 && <i className="fa fa-filter"></i>} Estados</button>
+                                </div>
                             }
                         </div>
                         <div className="panel panel-body">
