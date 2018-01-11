@@ -146,11 +146,18 @@ Meteor.methods({
         console.log('---- END generate family --- ');
         return true;
     },
-    'area.get': (areaId) => {
-        check(areaId, String);
-        return Areas.findOne(areaId)
+    'area.get': (_id) => {
+        if (!Meteor.isServer) return;
+        check(_id, String);
+        const area = Areas.findOne({ _id });
+        const leader = findLeader(area);
+        _.extend(area, { leader });
+        console.log('--AREA--', area.leader.firstName);
+        return area
     },
 });
+
+
 
 rateLimit({
     methods: [
@@ -162,4 +169,12 @@ rateLimit({
 });
 
 
-
+const findLeader = (area) => {
+    const leader = Meteor.users.findOne({ 'profile.leaderAreasIds': area._id }, { fields: { profile: 1 } })
+    if (!leader) {
+        if (!area.parentAreaId) return;
+        const parent = Areas.findOne({ _id: area.parentAreaId });
+        return findLeader(parent);
+    }
+    return leader.profile;
+}
