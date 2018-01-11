@@ -243,6 +243,7 @@ class SidebarPush extends Component {
 
     render() {
         const { user, userImg } = this.props;
+        console.log('user', user);
         return (
             <aside className="sidebar sidebar-left">
                 <div className="sidebar-profile">
@@ -253,9 +254,11 @@ class SidebarPush extends Component {
                                 {/* <span className="caret"></span> */}
                             </h4>
                         </a>
-                        <p className="title">{user && user.roles && user.roles.map((rol, index) => (
-                            index === 0 ? rol : `, ${rol}`)) || ' NO TIENE ROLES '}</p>
-
+                        <div className="title">{user && user.roles && user.roles.map((rol, index) => (
+                            index === 0 ? rol : `, ${rol}`)) || ' NO TIENE ROLES '}
+                            <div><small>{user && user.profile && user.area && user.area.name}</small></div>
+                        </div>
+                        
                         <ul className="dropdown-menu animated fadeInRight" role="menu">
                             <li className="profile-progress">
                                 <h5>
