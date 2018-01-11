@@ -13,7 +13,7 @@ import ResetPassword from '../pages/singinup/ResetPassword';
 import Signup from '../pages/singinup/Signup';
 
 // Layouts components pages
-import MainWrapper from '../containers/Main';
+import MainContainer from '../containers/MainContainer';
 
 const App = appProps => (
   <Router>
@@ -26,7 +26,7 @@ const App = appProps => (
       <Route name="signup" path="/signup" component={Signup} />
 
       <Public path="/login" component={Login} {...appProps} />
-      <Authenticated path="/" component={MainWrapper} {...appProps} />
+      <Authenticated path="/" component={MainContainer} {...appProps} />
     </div>
   </Router>
 );

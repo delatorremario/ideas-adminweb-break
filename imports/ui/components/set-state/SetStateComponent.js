@@ -145,7 +145,7 @@ class SetStateComponent extends React.Component {
                                                 autoComplete='off'
                                                 minDate={moment().toISOString()}
                                                 maxDate={toChange.maxDais && moment().add('days', toChange.maxDais).toISOString()}
-                                                customControl={<CustomControl />}
+                                                // customControl={<CustomControl />}
                                             />
                                         </div>
                                     }

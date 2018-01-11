@@ -247,7 +247,7 @@ class SidebarPush extends Component {
         return (
             <aside className="sidebar sidebar-left">
                 <div className="sidebar-profile">
-                    <AvatarContainer userId={user._id}/>
+                    <AvatarContainer userId={user._id} />
                     <div className="profile-body dropdown">
                         <a href="javascript:void(0);" className="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                             <h4>{this.renderUserName()}
@@ -256,9 +256,9 @@ class SidebarPush extends Component {
                         </a>
                         <div className="title">{user && user.roles && user.roles.map((rol, index) => (
                             index === 0 ? rol : `, ${rol}`)) || ' NO TIENE ROLES '}
-                            <div><small>{user && user.profile && user.area && user.area.name}</small></div>
+                            <div><small>{user && user.profile && user.profile.area || 'Sin Area Asignada'}</small></div>
                         </div>
-                        
+
                         <ul className="dropdown-menu animated fadeInRight" role="menu">
                             <li className="profile-progress">
                                 <h5>

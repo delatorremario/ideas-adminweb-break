@@ -39,11 +39,11 @@ const admins = ['mariodelatorre@holos.cl',
 
 const leaders = ['mauricio.ma.rodriguez@bhpbilliton.com', 'delatorremario@gmail.com', 'demo@holos.cl',
   'jorge.jm.jalil@bhpbilliton.com', 'jorge.jn.tom@bhpbilliton.com',
-  'camila.ca.perez@bhpbilliton.com', 'mauricio.ma.rodriguez@bhpbilliton.com', 'maria.mp.bustamante@bhpbilliton.com'
+  'camila.ca.perez@bhpbilliton.com', 'maria.mp.bustamante@bhpbilliton.com'
 ];
 
 const executives = ['felipe.fs.aguilera@bhpbilliton.com', 'luis.a.benavente@bhpbilliton.com']
-const employees = ['usuario@holos.cl', 'neftali.a.herrera@bhpbilliton.com'];
+const employees = ['usuario@holos.cl','cristhianco.diaz@bhpbilliton.com', 'neftali.a.herrera@bhpbilliton.com'];
 
 const createAccounts = () => {
   _.map(_.union(admins, leaders), (mail) => {
