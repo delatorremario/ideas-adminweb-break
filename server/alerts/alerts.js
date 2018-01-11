@@ -59,10 +59,24 @@ Meteor.methods({
                             type: 'normal-notification',
                             usersDestination: _.map(idea.viewers, v => v.userId),
                             state: 'new',
-                            "body.title": idea && idea.oportunity || 'Alerta de retraso!',
-                            "body.message": text,
+                            body: {
+                                title: idea && idea.oportunity || 'Alerta de retraso!',
+                                message: text,
+                            },
                             path: '/ideas/find'
                         });
+                        // Meteor.call('alerts.upsert', {
+                        //     createdAt: new Date(),
+                        //     userOwner: 'cxa2qDGNdJcin8rvx',
+                        //     type: 'normal-notification',
+                        //     usersDestination: ['cxa2qDGNdJcin8rvx'],
+                        //     state: 'new',
+                        //     body: {
+                        //         title: 'Alerta de retraso!',
+                        //         message: 'La idea de Martín tiene un retraso'
+                        //     },
+                        //     path: '/ideas/find'
+                        // })
                         Email.send({ to, from, subject, text });
 
                     }
