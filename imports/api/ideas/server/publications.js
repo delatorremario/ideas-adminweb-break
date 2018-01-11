@@ -20,7 +20,7 @@ Meteor.publish('ideas.list', (
   const self = this.Meteor;
   const user = self.user();
   if (user) {
-    const filters = { corporationId: (user.profile && user.profile.corporationId) || '', };
+    let filters = { corporationId: (user.profile && user.profile.corporationId) || '', };
 
     if (Roles.userIsInRole(user._id, ['Employee'])) {
       console.log('---- Employee ----');

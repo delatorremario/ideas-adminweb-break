@@ -30,7 +30,7 @@ export const upsertIdea = new ValidatedMethod({
         opportunity: { type: String },
         drivers: { type: [String] },
         collaborators: { type: [PersonSchema], optional: true },
-        states: { type: [States.schema], optional: true },
+        states: { type: [States.schema] },
         images: { type: [String], optional: true },
         viewers: { type: [ViewerSchema], optional: true }
 

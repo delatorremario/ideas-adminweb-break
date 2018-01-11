@@ -21,6 +21,7 @@ const PersonSchema = new SimpleSchema([
     { masterArea: { type: String, optional: true } },
     { corporationId: { type: String, optional: true } },
     { origin: { type: String, optional: true } }, // MEL BHP Contratista
+    { oneUp: { type: String, optional: true } }, // TODO remover y generar script para quitar de la base de dats
 ]);
 
 export default PersonSchema;
