@@ -51,7 +51,7 @@ class SidebarPush extends Component {
                     collapsed: true,
                 },
                 {
-                    title: "Ideas",
+                    title: "Mis Ideas",
                     iconClasses: ["fa", "fa-fw", "fa-lightbulb-o"],
                     path: "/ideas/find",
                 },

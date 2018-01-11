@@ -152,7 +152,6 @@ Meteor.methods({
         const area = Areas.findOne({ _id });
         const leader = findLeader(area);
         _.extend(area, { leader });
-        console.log('--AREA--', area.leader.firstName);
         return area
     },
 });
