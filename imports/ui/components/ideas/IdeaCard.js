@@ -86,7 +86,7 @@ const IdeaCard = ({ idea, imagesCursor, lap, handleRemove, showEdit, showNext, n
                     </p>
                     <div className="col-md-12 panel-body-description">
                         <p>Ingresada: <small><Moment format="DD MMM YYYY" date={createdAt} /></small></p>
-                        <p><b>Leader: {leader.lastName} {leader.firstName} {leader.secondName}</b></p>
+                        <p><b>Lider: {leader.lastName} {leader.firstName} {leader.secondName}</b></p>
                         <p>Encargado de Area: <b>{chief.lastName} {chief.firstName} {chief.secondName}</b></p>
                         <p>Oportunidad: <b>{opportunity}</b></p>
                         <p>Descripción: <b>{description}</b></p>
