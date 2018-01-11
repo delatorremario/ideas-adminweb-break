@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import Moment from 'moment';
 import { Bert } from 'meteor/themeteorchef:bert';
 
-class AlertsComponent extends Component {
+class AlertsMenuComponent extends Component {
 
     state = {
         showNotMenu: false,
@@ -40,7 +40,7 @@ class AlertsComponent extends Component {
     };
 
     render() {
-        const { notifications, counter } = this.props;
+        const { alerts, counter } = this.props;
         const { showNotMenu } = this.state;
         return (
             <li className="toggle-navigation toggle-right">
@@ -63,8 +63,8 @@ class AlertsComponent extends Component {
                     </i>
                 </button>
                 {showNotMenu && <ul className="dropdown-notifications">
-                    {notifications.length ? <div>
-                        {notifications.map(not => {
+                    {alerts.length ? <div>
+                        {alerts.map(not => {
                             return (
                                 <li key={not._id} className={"single-notification" + (not.state === 'new' ? ' not-opened' : '')} onClick={() => { this.setOpened(not) }}>
                                     <Link to={not.path} >
@@ -76,7 +76,7 @@ class AlertsComponent extends Component {
                             )
                         })}
                         <li className="single-notification btn-show-more" >
-                            <Link to="/notifications">
+                            <Link to="/alerts">
                                 Ver todas las notificaciones
                                 </Link>
                         </li>
@@ -93,4 +93,4 @@ class AlertsComponent extends Component {
     }
 }
 
-export default AlertsComponent;
+export default AlertsMenuComponent;

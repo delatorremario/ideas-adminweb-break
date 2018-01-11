@@ -83,3 +83,15 @@
         }
     }
 }
+
+.righty {
+    text-align: right;
+    display: block;
+    float: right;
+    &::before {
+        text-align: right;
+        display: block;
+        float: right;
+        margin-right: -15px;
+    }
+}

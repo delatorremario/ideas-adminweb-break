@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
 import IdeasLogo from '../components/IdeasLogo'
-import AlertsContainer from '../containers/alerts/AlertsContainer';
+import AlertsMenuContainer from '../containers/alerts/AlertsMenuContainer';
 
 const handleLogout = () => {
     Meteor.logout();
@@ -41,7 +41,7 @@ class Header extends Component {
                     </li> */}
                 </ul>
                 <ul className="nav navbar-nav navbar-right isDesktop">
-                    <AlertsContainer />
+                    <AlertsMenuContainer />
                     <li className="toggle-navigation toggle-right">
                         <button className="sidebar-toggle" onClick={handleLogout} >
                             <i className="fa fa-sign-out"></i>

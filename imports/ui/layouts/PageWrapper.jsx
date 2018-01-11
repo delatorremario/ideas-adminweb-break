@@ -20,11 +20,14 @@ import EditIdea from '../containers/ideas/EditIdea';
 import CommentsContainer from '../containers/comments/CommentsContainer';
 import IdeaCommentsContainer from '../containers/comments/IdeaCommentsContainer';
 
-//manage ideas
+// Alerts
+import AlertsContainer from '../containers/alerts/AlertsContainer';
+
+// Manage ideas
 import ManageContainer from '../containers/manage/ManageContainer';
 import SetStateContainer from '../containers/set-state/SetStateContainer';
 
-// ideas new user
+// Ideas new user
 import EditIdeaUser from '../containers/ideas/EditIdeaUser';
 import Dashboard from '../containers/dashboard/Dashboard';
 import BlankPage from '../pages/BlankPage';
@@ -81,6 +84,9 @@ const PageWrapper = () => (
                 {/* Comments */}
                 <Route exact path="/comments" component={CommentsContainer} />
                 <Route exact path="/comment/:_id" component={IdeaCommentsContainer} />
+
+                {/* Alerts */}
+                <Route exact path="/alerts" component={AlertsContainer} />
 
                 {/* Ideas Usuario */}
                 <Route exact path="/ideas/new_user" component={EditIdeaUser} />
