@@ -32,7 +32,7 @@ class AlertsMenuComponent extends Component {
     };
 
     setOpened = not => {
-        Meteor.call('setNotificationOpened', not, (err, res) => {
+        Meteor.call('setAlertOpened', not, (err, res) => {
             if (err) {
                 Bert.alert("Se produjo un error al abrir la notificación: " + err.message, 'danger');
             }
@@ -77,14 +77,14 @@ class AlertsMenuComponent extends Component {
                         })}
                         <li className="single-notification btn-show-more" >
                             <Link to="/alerts">
-                                Ver todas las notificaciones
+                                Ver todas las alertas
                                 </Link>
                         </li>
                     </div>
                         :
                         <div className="empty-notifications">
                             <i className="fa fa-bell-slash-o"></i>
-                            <h3>No hay notificaciones pendientes</h3>
+                            <h3>No hay alertas pendientes</h3>
                         </div>
                     }
                 </ul>}

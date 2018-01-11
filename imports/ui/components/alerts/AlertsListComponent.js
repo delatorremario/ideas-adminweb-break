@@ -5,7 +5,7 @@ import { Bert } from 'meteor/themeteorchef:bert';
 import $ from 'jquery';
 import swal from 'sweetalert2';
 import Moment from 'moment';
-// import { removeNotification } from '../../../api/notifications/methods';
+import { removeAlert } from '../../../api/alerts/methods';
 
 const handleRemove = _id => {
     swal({
@@ -16,13 +16,13 @@ const handleRemove = _id => {
         confirmButtonText: 'Eliminar',
         cancelButtonText: 'Cancelar',
     }).then(() => {
-        // removeNotification.call({ _id }, (error) => {
-        //     if (error) {
-        //         Bert.alert(error.reason, 'danger')
-        //     } else {
-        //         Bert.alert('Datos eliminados', 'success')
-        //     }
-        // })
+        removeAlert.call({ _id }, (error) => {
+            if (error) {
+                Bert.alert(error.reason, 'danger')
+            } else {
+                Bert.alert('Datos eliminados', 'success')
+            }
+        })
     }, (dismiss) => {
         console.log(dismiss)
     })
