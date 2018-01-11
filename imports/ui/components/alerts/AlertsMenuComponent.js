@@ -3,6 +3,7 @@ import { Meteor } from 'meteor/meteor';
 import { Link } from 'react-router-dom';
 import Moment from 'moment';
 import { Bert } from 'meteor/themeteorchef:bert';
+import $ from 'jquery';
 
 class AlertsMenuComponent extends Component {
 
@@ -15,6 +16,9 @@ class AlertsMenuComponent extends Component {
     }
 
     toggleNotificationsMenu = e => {
+        if ($( window ).width() < 768) {
+            console.log('mobile');
+        }
         if (e) e.preventDefault();
         this.setState(prev => ({
             showNotMenu: !prev.showNotMenu

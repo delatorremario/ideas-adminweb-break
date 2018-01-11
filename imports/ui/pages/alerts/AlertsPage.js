@@ -14,7 +14,6 @@ const AlertsPage = (match) => (
                 </ol>
             </div>
         </div>
-
         <section id="main-content">
             <div className="row">
                 <div className="col-md-12 col-lg-12">

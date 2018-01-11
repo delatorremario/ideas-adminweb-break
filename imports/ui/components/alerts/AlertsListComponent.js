@@ -38,68 +38,57 @@ const setOpened = not => {
 
 const CorporationsList = ({ match, alerts }) => (
     <div>
-        <div className="panel panel-body">
-            <div role="grid" id="example_wrapper" className="dataTables_wrapper form-inline no-footer">
-                <div className="row table-top">
-                    <div className="col-fixed" style={{ width: "115px" }}>
-                        <Link to="/notifications/new" className="btn btn-success"><i className="fa fa-plus"></i>NUEVO</Link>
-                    </div>
-                    <div className="col-flex smart-searcher-container">
-                        <div id="example_filter" className="dataTables_filter">
-                            <input type="search" placeholder="Buscar..." className="form-control input-sm" aria-controls="example" />
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         {alerts.length > 0 ?
             <div className="row cards-container">
-                {alerts.map(not => {
-                    return (
-                        <div key={not._id} className="col-sm-6 col-lg-4 cards-item" onClick={() => { setOpened(not) }}>
-                            <div className="panel panel-default">
-                                <div className="panel-heading">
-                                    <h3 className="panel-title col-flex" style={{ zoom: 0.8 }}>
-                                        {not.body.title}
-                                        {
-                                            not.state === "new" && <i>&nbsp;</i>
-                                        }
-                                        {
-                                            not.state === "new" &&
-                                            <span className="badge badge-danger" style={{ fontSize: '0.7em', marginTop: '-5px', backgroundColor: '#2c5694' }}>
-                                                nuevo!
-                                            </span>
-                                        }
-                                    </h3>
-                                    <div className="actions col-fixed righty">
-                                        <i className="fa fa-trash righty" onClick={() => { handleRemove(not._id) }}></i>
+                {
+                    alerts.map(not => {
+                        return (
+                            <div key={not._id} className="col-sm-6 col-lg-4 cards-item" onClick={() => { setOpened(not) }}>
+                                <div className="panel panel-default">
+                                    <div className="panel-heading">
+                                        <h3 className="panel-title col-flex" style={{ zoom: 0.8 }}>
+                                            {not.body.title}
+                                            {
+                                                not.state === "new" && <i>&nbsp;</i>
+                                            }
+                                            {
+                                                not.state === "new" &&
+                                                <span className="badge badge-danger" style={{ fontSize: '0.7em', marginTop: '-5px', backgroundColor: '#2c5694' }}>
+                                                    nuevo!
+                                                </span>
+                                            }
+                                        </h3>
+                                        <div className="actions col-fixed righty">
+                                            <i className="fa fa-trash righty" onClick={() => { handleRemove(not._id) }}></i>
+                                        </div>
                                     </div>
+                                    <Link to={not.path} >
+                                        <div className="row panel-body">
+                                            <p className="col-md-12 panel-body-title">
+                                                <i className="fa fa-calendar"></i>
+                                                &nbsp;
+                                                <b>Fecha</b>
+                                            </p>
+                                            <div className="col-md-12 panel-body-description">
+                                                <p className="col-md-12">{Moment(not.createdAt).format("DD/MM/YYYY HH:mm")}</p>
+                                            </div>
+                                            <p className="col-md-12 panel-body-title">
+                                                <i className="fa fa-commenting"></i>
+                                                &nbsp;
+                                                <b>Mensaje</b>
+                                            </p>
+                                            <div className="col-md-12 panel-body-description">
+                                                <p className="col-md-12">{not.body.message}</p>
+                                            </div>
+                                        </div>
+                                    </Link>
                                 </div>
-                                <Link to={not.path} >
-                                    <div className="row panel-body">
-                                        <p className="col-md-12 panel-body-title">
-                                            <i className="fa fa-calendar"></i>&nbsp;
-                                        <b>Fecha</b>
-                                        </p>
-                                        <div className="col-md-12 panel-body-description">
-                                            <p className="col-md-12">{Moment(not.createdAt).format("DD/MM/YYYY HH:mm")}</p>
-                                        </div>
-                                        <p className="col-md-12 panel-body-title">
-                                            <i className="fa fa-commenting"></i>&nbsp;
-                                    <b>Mensaje</b>
-                                        </p>
-                                        <div className="col-md-12 panel-body-description">
-                                            <p className="col-md-12">{not.body.message}</p>
-                                        </div>
-                                    </div>
-                                </Link>
                             </div>
-                        </div>
-                    )
-                })}
+                        )
+                    })
+                }
             </div>
-            : <Alert bsStyle="warning">No notifications yet.</Alert>}
+            : <Alert bsStyle="warning">Sin alertas.</Alert>}
     </div>
 );
 

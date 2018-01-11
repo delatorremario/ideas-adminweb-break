@@ -9,19 +9,7 @@ const composer = (params, onData) => {
     const { match } = params;
     const sub = Meteor.subscribe('alerts.listByUserDestination');
     if (sub.ready()) {
-        let allAlerts = Alerts.find({ usersDestination: Meteor.userId() }, { sort: { createdAt: -1 } }).fetch();
-        let alerts = [];
-        let newAlerts = [];
-        let oldAlerts = [];
-        _.forEach(allAlerts, not => {
-            if (not.state === "new") {
-                newAlerts.push(not)
-            } else {
-                oldAlerts.push(not)
-            }
-        })
-        newAlerts = _.take(newAlerts, 5);
-        alerts = _.concat(newAlerts, oldAlerts);
+        const alerts = Alerts.find({ usersDestination: Meteor.userId() }, { sort: { createdAt: -1 } }).fetch();
         onData(null, { match, alerts });
     }
 }

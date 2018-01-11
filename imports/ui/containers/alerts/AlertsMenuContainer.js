@@ -9,26 +9,18 @@ const composer = ({ }, onData) => {
     const subscription = Meteor.subscribe('alerts.topList', 0);
     if (subscription.ready()) {
         let counter = 0;
-        const allAlerts = Alerts.find(
+        const alerts = Alerts.find(
             { usersDestination: Meteor.userId() },
             { sort: { createdAt: -1 }, limit: 0 }
         ).fetch();
-        let alerts = [];
         let newAlerts = [];
-        let oldAlerts = [];
-        _.forEach(allAlerts, not => {
+        _.forEach(alerts, not => {
             if (not.state === "new") {
                 newAlerts.push(not)
-            } else {
-                oldAlerts.push(not)
             }
         })
-        newAlerts = _.take(newAlerts, 5);
-        alerts = newAlerts;
-        if (alerts.length < 5) {
-            alerts = _.concat(alerts, _.take(oldAlerts, (5 - alerts.length)));
-        }
         counter = newAlerts.length;
+        alerts = _.take(alerts, 5);
         onData(null, { alerts, counter });
     }
 };
