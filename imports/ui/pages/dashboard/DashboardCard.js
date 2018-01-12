@@ -45,7 +45,7 @@ const DashboardCard = ({ area }) => {
         {
             icon: 'fa fa-star-o',
             concept: 'Participación del Area',
-            value: participation.toFixed(1) + '%',
+            value:(participation && participation.toFixed(1) || 0) + '%',
         },
         {
             icon: 'fa fa-user-o',

@@ -7,19 +7,19 @@ import Loading from '../../components/Loading';
 
 const composer = ({ match }, onData) => {
 
-    if (Roles.userIsInRole(Meteor.user(), ['SuperAdminHolos', 'Leader'])) {
+    // if (Roles.userIsInRole(Meteor.user(), ['SuperAdminHolos', 'Leader','Executive'])) {
         Meteor.call('getDashboard', (err, data) => {
             // console.log('data', data);
             // console.log('err', err);
             onData(null, { data });
         })
-    } else {
-        Meteor.call('getDashboardEmploye', (err, data) => {
-            console.log('data', data);
-            // console.log('err', err);
-            onData(null, { data });
-        })
-    }
+    // } else {
+    //     Meteor.call('getDashboardEmploye', (err, data) => {
+    //         console.log('data', data);
+    //         // console.log('err', err);
+    //         onData(null, { data });
+    //     })
+    // }
 
 }
 
