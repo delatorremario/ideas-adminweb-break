@@ -7,6 +7,8 @@ import colors from '../../../api/dashboard/colors';
 
 const DashboardCard = ({ area }) => {
 
+    console.log('--AREA--', area);
+
     const { name, employes, ideasAdded, ideasByStep, ideasPersonAdded, participation, ideasByStatus, extarnalPersons } = area;
 
     const labels = [];
@@ -46,7 +48,7 @@ const DashboardCard = ({ area }) => {
         {
             icon: 'fa fa-star-o',
             concept: 'Participación del Area',
-            value: participation && participation.toFixed(1) + '%' || null,
+            value: participation.toFixed(1) + '%',
         },
         {
             icon: 'fa fa-user-o',
@@ -65,7 +67,7 @@ const DashboardCard = ({ area }) => {
                     <div className='head-dashboard-card'>
                         {
                             _.map(headDash, (head, index) => {
-                                return head.value && <div key={index}><h4><i className={head.icon} /> {head.concept}</h4><p>{head.value}</p></div>
+                                return  <div key={index}><h4><i className={head.icon} /> {head.concept}</h4><p>{head.value}</p></div>
                             })
                         }
                     </div>
@@ -81,7 +83,7 @@ const DashboardCard = ({ area }) => {
                         {
                             _.map(ideasByStatus, (state, index) => <div key={index} className="link-status"  >
                                 <Link to={`/ideas/%20/${state.code}/%20/${area._id}/find`}>
-                                    <div>{state.state}</div>
+                                    <div>{state.step} {state.state}</div>
                                     {/* <div className="count">{state.count}</div> */}
                                     <div className="count" style={{ backgroundColor: state.green == 0 ? 'none' : colors[0] }}>{state.green}</div>
                                     <div className="count" style={{ backgroundColor: state.yellow == 0 ? 'none' : colors[1] }}>{state.yellow}</div>
