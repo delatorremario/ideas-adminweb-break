@@ -10,23 +10,27 @@ export default class IdeaCommentsPage extends Component {
         const { idea } = this.props;
         return (
             <div>
-                <div className="pageheader">
-                    <h1>
-                        Comentarios
+                <div className="ci-header-position">
+                    <div className="ci-header-container">
+                        <div className="pageheader">
+                            <h1>
+                                Comentarios
                 </h1>
-                    <p>
-                        <br />
-                        <b>{idea.opportunity ? idea.opportunity : 'de una idea...'}</b>
-                    </p>
-                    <div className="breadcrumb-wrapper hidden-xs">
-                        <span className="label">You are here:</span>
-                        <ol className="breadcrumb">
-                            <li className="active">
-                                Comentarios de {
-                                    idea.opportunity ? idea.opportunity : 'una idea...'
-                                }
-                            </li>
-                        </ol>
+                            <p>
+                                <br />
+                                <b>{idea.opportunity ? idea.opportunity : 'de una idea...'}</b>
+                            </p>
+                            <div className="breadcrumb-wrapper hidden-xs">
+                                <span className="label">You are here:</span>
+                                <ol className="breadcrumb">
+                                    <li className="active">
+                                        Comentarios de {
+                                            idea.opportunity ? idea.opportunity : 'una idea...'
+                                        }
+                                    </li>
+                                </ol>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <section id="main-content">
