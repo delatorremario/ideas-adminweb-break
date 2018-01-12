@@ -68,8 +68,6 @@ Meteor.methods({
 
                 area.ideasPersonAdded = ideasInFamily.length; // (ideasPersonAdded && ideasPersonAdded[0] && ideasPersonAdded[0].count) || 0;
 
-                console.log('ideasPersonAdded',area.ideasPersonAdded);
-
                 const ideasByStep = Ideas.aggregate([
                     { $match: { 'chief.areaId': { $in: area.family } } },
                     {
