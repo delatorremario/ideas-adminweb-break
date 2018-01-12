@@ -72,10 +72,10 @@ Meteor.methods({
                         //     usersDestination: ['cxa2qDGNdJcin8rvx'],
                         //     state: 'new',
                         //     body: {
-                        //         title: 'Alerta de retraso!',
+                        //         title: 'Aprender a cambiar un foco',
                         //         message: 'La idea de Martín tiene un retraso'
                         //     },
-                        //     path: '/ideas/find'
+                        //     path: '/idea/SWK2uE4eWFNz8XKxA/view'
                         // })
                         Email.send({ to, from, subject, text });
 
