@@ -17,6 +17,7 @@ class AlertsMenuComponent extends Component {
 
     toggleNotificationsMenu = e => {
         if ($( window ).width() < 768) {
+            /* TODO */
             console.log('mobile');
         }
         if (e) e.preventDefault();

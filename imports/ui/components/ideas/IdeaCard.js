@@ -10,6 +10,7 @@ import SetStateComponent from '../../components/set-state/SetStateComponent';
 import IdeaCardChiefAreaContainer from './IdeaCardChiefAreaContainer';
 
 const IdeaCard = ({ idea, imagesCursor, lap, handleRemove, showEdit, showNext, nonViewed }) => {
+    console.log('idea', idea)
     const { userId, person, chief, description, opportunity, collaborators, drivers, origin, createdAt, date, states, images, area } = idea;
     const { leader } = area;
     const createdUser = Meteor.users.findOne(userId);

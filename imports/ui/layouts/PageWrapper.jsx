@@ -15,6 +15,7 @@ import EditArea from '../containers/areas/EditArea';
 // Ideas
 import Ideas from '../pages/ideas/Ideas';
 import EditIdea from '../containers/ideas/EditIdea';
+import IdeaViewContainer from '../containers/ideas/IdeaViewContainer'
 
 // Comments
 import CommentsContainer from '../containers/comments/CommentsContainer';
@@ -80,7 +81,7 @@ const PageWrapper = () => (
                 <Route exact path="/ideas/:text?/:stateCode?/:step?/:areaId?/find" component={Ideas} />
                 <Route exact path="/ideas/new" component={EditIdea} />
                 <Route exact path="/idea/:_id/edit" component={EditIdea} />
-                {/* TODO <Route exact path="/idea/:_id/view" component={ViewIdeaContainer} /> */}
+                <Route exact path="/idea/:_id/view" component={IdeaViewContainer} />
 
                 {/* Comments */}
                 <Route exact path="/comments" component={CommentsContainer} />
