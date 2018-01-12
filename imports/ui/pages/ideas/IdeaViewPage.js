@@ -5,10 +5,11 @@ import IdeaCardContainer from '../../components/ideas/IdeaCardContainer';
 
 const IdeaViewPage = (props) => {
     const { doc } = props;
+    console.log('doc', doc)
     return doc ? (
         <div className="pageWrapper">
             <div className="pageheader">
-                <h1>{doc && doc.origin}</h1>
+                <h2>{doc && doc.opportunity}</h2>
                 <div className="breadcrumb-wrapper hidden-xs">
                     <span className="label">Estás aquí:</span>
                     <ol className="breadcrumb">
@@ -24,7 +25,7 @@ const IdeaViewPage = (props) => {
                 <div className="row">
                     <div className="col-md-12 col-lg-12">
                         <div className="panel">
-                            <div className="panel-body ng-binding">
+                            <div className="panel-body ng-binding" style={{ display: 'flex', justifyContent: 'center' }}>
                                 <IdeaCardContainer {...props} idea={doc} />
                             </div>
                         </div>
