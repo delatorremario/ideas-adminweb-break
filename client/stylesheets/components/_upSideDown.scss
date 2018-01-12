@@ -6,11 +6,11 @@
     width: 70px !important;
     flex-direction: row-reverse !important;
     @media all and (max-width: 767px) {
-        bottom: 38px !important;
+        bottom: 82px !important;
         right: 0px !important;
     }
     @media all and (min-width: 768px) {
-        bottom: 5px !important;
+        bottom: 62px !important;
         right: 15px !important;
     }
     .btn {
@@ -23,7 +23,7 @@
             color: #194280 !important;
         }
         @media all and (min-width: 768px) {
-            color: #5a80b8 !important;
+            color: #6e8fc0 !important;
         }
         cursor: pointer !important;
     }

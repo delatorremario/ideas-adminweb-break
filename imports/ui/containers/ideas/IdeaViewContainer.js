@@ -22,7 +22,6 @@ const driversArray = [
 const composer = ({ match }, onData) => {
     const docId = match.params._id || '';
     const subscription = Meteor.subscribe('ideas.view', docId);
-
     const subscriptionPersons = Meteor.subscribe('persons.search', textSearch.get(), textSearchLimit.get());
     const statessub = Meteor.subscribe('states.list');
 
@@ -32,13 +31,11 @@ const composer = ({ match }, onData) => {
         const ideasstates = States.find({}, { sort: { code: 1 } }).fetch();
         const persons = Persons.find({}, { sort: { score: -1 }, limit: textSearchLimit.get() }).fetch();
         let doc = Ideas.findOne(docId);
-
         if (doc) {
             doc.date = (new Date(doc.date)).toISOString();
         } else {
             doc = { date: new Date().toISOString() };
         }
-
         onData(null, { doc, textSearch, persons, driversArray, origins, ideasstates });
     }
 };

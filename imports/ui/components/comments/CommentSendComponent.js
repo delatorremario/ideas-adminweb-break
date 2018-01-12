@@ -22,13 +22,17 @@ const send = (ideaId) => (event) => {
 
 const CommentSendComponent = ({ ideaId }) => {
     return (
-        <form className="ci-new" onSubmit={send(ideaId).bind(this)}>
-            <label htmlFor="newComment">
-                <i className="ci-new-icon fa fa-comment-o"></i>
-            </label>
-            <input type="text" name="newComment" id="newComment" className="ci-new-input" placeholder="Comentar" autoComplete="off"></input>
-            <button className="ci-new-icon fa fa-send-o"></button>
-        </form>
+        <div className="ci-new-position">
+            <div className="ci-new-container">
+                <form className="ci-new" onSubmit={send(ideaId).bind(this)}>
+                    <label htmlFor="newComment">
+                        <i className="ci-new-icon fa fa-comment-o"></i>
+                    </label>
+                    <input type="text" name="newComment" id="newComment" className="ci-new-input" placeholder="Comentar" autoComplete="off"></input>
+                    <button className="ci-new-icon fa fa-send-o"></button>
+                </form>
+            </div>
+        </div>
     )
 }
 

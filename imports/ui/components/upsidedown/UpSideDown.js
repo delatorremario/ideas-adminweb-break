@@ -7,23 +7,23 @@ export default class UpSideDown extends Component {
     }
 
     componentDidMount() {
-        $(document).scroll(function () {
-            $('.up').stop(true, true);
-            $('.down').stop(true, true);
-            var y = $('html,body').scrollTop();
-            if (y >= 0 && y < 500) {
-                $('.up').animate({ opacity: '0' }, 500);
-                $('.down').animate({ opacity: '1' }, 500);
-            }
-            if (y >= 500 && y < document.body.scrollHeight - $(window).height() - 500) {
-                $('.up').animate({ opacity: '1' }, 500);
-                $('.down').animate({ opacity: '1' }, 500);
-            }
-            if (y >= document.body.scrollHeight - $(window).height() - 500) {
-                $('.up').animate({ opacity: '1' }, 500);
-                $('.down').animate({ opacity: '0' }, 500);
-            }
-        });
+        // $(document).scroll(function () {
+        //     $('.up').stop(true, true);
+        //     $('.down').stop(true, true);
+        //     var y = $('html,body').scrollTop();
+        //     if (y >= 0 && y < 500) {
+        //         $('.up').animate({ opacity: '0' }, 500);
+        //         $('.down').animate({ opacity: '1' }, 500);
+        //     }
+        //     if (y >= 500 && y < document.body.scrollHeight - $(window).height() - 500) {
+        //         $('.up').animate({ opacity: '1' }, 500);
+        //         $('.down').animate({ opacity: '1' }, 500);
+        //     }
+        //     if (y >= document.body.scrollHeight - $(window).height() - 500) {
+        //         $('.up').animate({ opacity: '1' }, 500);
+        //         $('.down').animate({ opacity: '0' }, 500);
+        //     }
+        // });
     }
 
     scroll = move => event => {
