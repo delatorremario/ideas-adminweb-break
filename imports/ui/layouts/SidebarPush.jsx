@@ -243,7 +243,6 @@ class SidebarPush extends Component {
 
     render() {
         const { user, userImg } = this.props;
-        console.log('user', user);
         return (
             <aside className="sidebar sidebar-left">
                 <div className="sidebar-profile">

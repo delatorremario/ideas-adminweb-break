@@ -10,15 +10,12 @@ import SetStateComponent from '../../components/set-state/SetStateComponent';
 import IdeaCardChiefAreaContainer from './IdeaCardChiefAreaContainer';
 
 const IdeaCard = ({ idea, imagesCursor, lap, handleRemove, showEdit, showNext, nonViewed }) => {
-    console.log('idea', idea)
     const { userId, person, chief, description, opportunity, collaborators, drivers, origin, createdAt, date, states, images, area } = idea;
     const { leader } = area;
     const createdUser = Meteor.users.findOne(userId);
     const lastState = states && _.last(states);
     const color = states && lastState && lastState.color || 'white';
     const nexts = states && lastState && lastState.nexts || [];
-
-    console.log('--idea--',idea);
 
     return <div className="col-sm-6 col-lg-4 cards-item">
         <div className="panel panel-default" style={{ borderColor: color }}>
