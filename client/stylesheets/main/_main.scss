@@ -503,8 +503,12 @@ input:-webkit-autofill::-webkit-input-placeholder {
 
 .card-single {
     display: flex;
-    background-color: #f9f9f9;
+    background-color: #f5f5f8;
     padding: 15px;
+    margin: 10px 0px;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 5px;
     .state-color {
         width: 10px; // padding: 0px;
         min-width: 10px; // padding: 0px;
@@ -514,12 +518,13 @@ input:-webkit-autofill::-webkit-input-placeholder {
     }
     .close-card {
         position: absolute;
-        top: -5px;
-        right: 8px;
+        top: 10px;
+        right: 15px;
         background-color: $dangerColor;
         width: 20px;
         height: 20px;
-        border-radius: 50%;
+        border-bottom-left-radius: 5px;
+        border-top-right-radius: 5px;
         cursor: pointer;
         i {
             width: 100%;
@@ -537,7 +542,8 @@ input:-webkit-autofill::-webkit-input-placeholder {
     h2 {
         line-height: 30px;
         height: 30px;
-        margin: 0 !important;
+        margin: 10px !important;
+        padding-left: 10px;
         i.title-icon {
             position: relative !important;
             left: 0 !important;
@@ -546,9 +552,17 @@ input:-webkit-autofill::-webkit-input-placeholder {
             font-size: 1em;
         }
     }
+    hr {
+        display: block !important;
+        float: left !important;
+        width: 100% !important;
+        height: 1px !important;
+        border-color: white !important;
+        border-width: 2px;
+    }
     small {
-        margin-bottom: 15px !important;
-        padding-left: 23px;
+        text-align: center;
+        margin: 10px 0px 5px 0px !important;
         font-size: 0.9em;
         color: #979797;
         display: block;
