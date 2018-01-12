@@ -6,9 +6,6 @@ import _ from 'lodash';
 import colors from '../../../api/dashboard/colors';
 
 const DashboardCard = ({ area }) => {
-
-    console.log('--AREA--', area);
-
     const { name, employes, ideasAdded, ideasByStep, ideasPersonAdded, participation, ideasByStatus, extarnalPersons } = area;
 
     const labels = [];
