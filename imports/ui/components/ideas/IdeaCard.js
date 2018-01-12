@@ -17,8 +17,6 @@ const IdeaCard = ({ idea, imagesCursor, lap, handleRemove, showEdit, showNext, n
     const color = states && lastState && lastState.color || 'white';
     const nexts = states && lastState && lastState.nexts || [];
 
-    console.log('--idea--',idea);
-
     return <div className="col-sm-6 col-lg-4 cards-item">
         <div className="panel panel-default" style={{ borderColor: color }}>
             <div className="panel-heading" style={{ borderColor: color, backgroundColor: color + '0C' }}>

@@ -3,6 +3,7 @@ import { Link, Redirect } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
 import AlertsMenuContainer from '../containers/alerts/AlertsMenuContainer';
 import NonViewedContainer from '../containers/nonViewed/NonViewedContainer';
+import NonViewedAlertsContainer from '../containers/nonViewed/NonViewedAlertsContainer';
 
 const handleLogout = () => {
     Meteor.logout();
@@ -24,28 +25,34 @@ cantNonViewedComments = (idea) => {
 
 class Footer extends Component {
     render() {
+        const { history } = this.props;
         return (
             <footer id="footer">
                 <div className="footer-item">
-                    <button className="footer-button">
-                        <Link className="footer-button" to="/ideas/find" >
+                    <Link className="footer-button" to="/ideas/find" >
+                        <button className="footer-button">
                             <i className="fa fa-fw fa-lightbulb-o"></i>
-                        </Link>
-                    </button>
+                        </button>
+                    </Link>
                 </div>
                 <div className="footer-item">
-                    <button className="footer-button">
-                        <Link className="footer-button" to="/comments" >
+                    <Link className="footer-button" to="/comments" >
+                        <button className="footer-button">
                             <i className="fa fa-fw fa-envelope">
                             </i>
                             <NonViewedContainer />
-                        </Link>
-                    </button>
+                        </button>
+                    </Link>
                 </div>
                 <div className="footer-item">
-                    <i className="footer-button">
-                        <AlertsMenuContainer />
-                    </i>
+                    {/* <i className="footer-button">
+                        <AlertsMenuContainer history={history} />
+                    </i> */}
+                    <Link className="footer-button" to="/alerts" >
+                        <button className="footer-button">
+                            <NonViewedAlertsContainer />
+                        </button>
+                    </Link>
                 </div>
                 <div className="footer-item">
                     <button className="footer-button" onClick={handleLogout} to="#" >

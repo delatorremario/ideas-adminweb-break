@@ -1,14 +1,14 @@
 import { Meteor } from 'meteor/meteor';
 import { composeWithTracker } from 'react-komposer';
-import Loading from '../../components/Loading.js';
-import Alerts from '../../../api/alerts/alerts';
-import AlertsMenuComponent from '../../components/alerts/AlertsMenuComponent';
 import _ from 'lodash';
+import Loading from '../../components/Loading.js';
+import Vieweds from '../../../api/vieweds/vieweds';
+import Alerts from '../../../api/alerts/alerts';
+import NonViewedAlertsComponent from '../../components/nonViewed/NonViewedAlertsComponent';
 
-const composer = ({ history }, onData) => {
-    const subscription = Meteor.subscribe('alerts.topList', 0);
-    if (subscription.ready()) {
-        let counter = 0;
+const composer = ({ }, onData) => {
+    const sub = Meteor.subscribe('alerts.topList', 0);
+    if (sub.ready()) {
         const alerts = Alerts.find(
             { usersDestination: Meteor.userId() },
             { sort: { createdAt: -1 }, limit: 0 }
@@ -19,10 +19,9 @@ const composer = ({ history }, onData) => {
                 newAlerts.push(not)
             }
         })
-        counter = newAlerts.length;
-        alerts = _.take(alerts, 5);
-        onData(null, { alerts, counter, history });
+        const counter = newAlerts.length;
+        onData(null, { counter });
     }
 };
 
-export default composeWithTracker(composer, Loading)(AlertsMenuComponent);
+export default composeWithTracker(composer, Loading)(NonViewedAlertsComponent);
