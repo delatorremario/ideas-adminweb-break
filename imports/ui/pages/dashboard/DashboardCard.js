@@ -31,26 +31,31 @@ const DashboardCard = ({ area }) => {
             icon: 'fa fa-users',
             concept: 'Personal',
             value: employes,
+            show: name != 'MIS IDEAS',
         },
         {
             icon: 'fa fa-lightbulb-o',
             concept: 'Ideas Ingresadas',
             value: ideasAdded,
+            show: true,
         },
         {
             icon: 'fa fa-user-o',
             concept: 'Generaron Ideas',
             value: ideasPersonAdded,
+            show: name != 'MIS IDEAS',
         },
         {
             icon: 'fa fa-star-o',
             concept: 'Participación del Area',
-            value:(participation && participation.toFixed(1) || 0) + '%',
+            value: (participation && participation.toFixed(1) || 0) + '%',
+            show: name != 'MIS IDEAS',
         },
         {
             icon: 'fa fa-user-o',
             concept: 'Ingresaron Ideas al Area',
             value: extarnalPersons,
+            show: name != 'MIS IDEAS',
         },
     ]
     return (
@@ -64,7 +69,7 @@ const DashboardCard = ({ area }) => {
                     <div className='head-dashboard-card'>
                         {
                             _.map(headDash, (head, index) => {
-                                return  <div key={index}><h4><i className={head.icon} /> {head.concept}</h4><p>{head.value}</p></div>
+                                return head.show && <div key={index}><h4><i className={head.icon} /> {head.concept}</h4><p>{head.value}</p></div>
                             })
                         }
                     </div>
@@ -78,15 +83,15 @@ const DashboardCard = ({ area }) => {
                     </div>
                     <div className="link-status-container">
                         {
-                            _.map(ideasByStatus, (state, index) => <div key={index} className="link-status"  >
-                                <Link to={`/ideas/%20/${state.code}/%20/${area._id}/find`}>
-                                    <div>{state.step} {state.state}</div>
-                                    {/* <div className="count">{state.count}</div> */}
-                                    <div className="count" style={{ backgroundColor: state.green == 0 ? 'none' : colors[0] }}>{state.green}</div>
-                                    <div className="count" style={{ backgroundColor: state.yellow == 0 ? 'none' : colors[1] }}>{state.yellow}</div>
-                                    <div className="count" style={{ backgroundColor: state.red == 0 ? 'none' : colors[2] }}>{state.red}</div>
-                                </Link>
-                            </div>
+                            _.map(ideasByStatus, (state, index) =>  <div key={index} className="link-status"  >
+                                    <Link to={name === 'MIS IDEAS' && '/ideas/find' || `/ideas/%20/${state.code}/%20/${area._id}/find`}>
+                                        <div>{state.step} {state.state}</div>
+                                        {/* <div className="count">{state.count}</div> */}
+                                        <div className="count" style={{ backgroundColor: state.green == 0 ? 'none' : colors[0] }}>{state.green}</div>
+                                        <div className="count" style={{ backgroundColor: state.yellow == 0 ? 'none' : colors[1] }}>{state.yellow}</div>
+                                        <div className="count" style={{ backgroundColor: state.red == 0 ? 'none' : colors[2] }}>{state.red}</div>
+                                    </Link>
+                                </div>
                             )
                         }
                     </div>
