@@ -24,6 +24,7 @@ cantNonViewedComments = (idea) => {
 
 class Footer extends Component {
     render() {
+        const { history } = this.props;
         return (
             <footer id="footer">
                 <div className="footer-item">
@@ -44,7 +45,7 @@ class Footer extends Component {
                 </div>
                 <div className="footer-item">
                     <i className="footer-button">
-                        <AlertsMenuContainer />
+                        <AlertsMenuContainer history={history} />
                     </i>
                 </div>
                 <div className="footer-item">

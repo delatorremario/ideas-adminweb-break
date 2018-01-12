@@ -5,7 +5,7 @@ import Alerts from '../../../api/alerts/alerts';
 import AlertsMenuComponent from '../../components/alerts/AlertsMenuComponent';
 import _ from 'lodash';
 
-const composer = ({ }, onData) => {
+const composer = ({ history }, onData) => {
     const subscription = Meteor.subscribe('alerts.topList', 0);
     if (subscription.ready()) {
         let counter = 0;
@@ -21,7 +21,7 @@ const composer = ({ }, onData) => {
         })
         counter = newAlerts.length;
         alerts = _.take(alerts, 5);
-        onData(null, { alerts, counter });
+        onData(null, { alerts, counter, history });
     }
 };
 

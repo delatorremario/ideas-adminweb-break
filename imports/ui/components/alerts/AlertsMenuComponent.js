@@ -8,7 +8,7 @@ import $ from 'jquery';
 class AlertsMenuComponent extends Component {
 
     state = {
-        showNotMenu: false,
+        showNotMenu: false
     };
 
     componentDidMount() {
@@ -16,9 +16,8 @@ class AlertsMenuComponent extends Component {
     }
 
     toggleNotificationsMenu = e => {
-        if ($( window ).width() < 768) {
-            /* TODO */
-            console.log('mobile');
+        if ($(window).width() < 768) {
+            this.props.history.push('/alerts');
         }
         if (e) e.preventDefault();
         this.setState(prev => ({

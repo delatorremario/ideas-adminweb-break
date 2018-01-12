@@ -5,7 +5,6 @@ import IdeaCardContainer from '../../components/ideas/IdeaCardContainer';
 
 const IdeaViewPage = (props) => {
     const { doc } = props;
-    console.log('doc', doc)
     return doc ? (
         <div className="pageWrapper">
             <div className="pageheader">

@@ -22,6 +22,7 @@ class Header extends Component {
     }
 
     render() {
+        const { history } = this.props;
         return (
             <header id="header">
                 <div className="brand">
@@ -41,7 +42,7 @@ class Header extends Component {
                     </li> */}
                 </ul>
                 <ul className="nav navbar-nav navbar-right isDesktop">
-                    <AlertsMenuContainer />
+                    <AlertsMenuContainer history={history} />
                     <li className="toggle-navigation toggle-right">
                         <button className="sidebar-toggle" onClick={handleLogout} >
                             <i className="fa fa-sign-out"></i>
