@@ -3,6 +3,7 @@ import { Meteor } from 'meteor/meteor';
 import { Link } from 'react-router-dom';
 import Moment from 'moment';
 import { Bert } from 'meteor/themeteorchef:bert';
+import NonViewedAlertsComponent from '../nonViewed/NonViewedAlertsComponent';
 import $ from 'jquery';
 
 class AlertsMenuComponent extends Component {
@@ -16,9 +17,6 @@ class AlertsMenuComponent extends Component {
     }
 
     toggleNotificationsMenu = e => {
-        if ($(window).width() < 768) {
-            this.props.history.push('/alerts');
-        }
         if (e) e.preventDefault();
         this.setState(prev => ({
             showNotMenu: !prev.showNotMenu
@@ -49,22 +47,7 @@ class AlertsMenuComponent extends Component {
         return (
             <li className="toggle-navigation toggle-right">
                 <button className="sidebar-toggle" onClick={e => { this.toggleNotificationsMenu(e); e.stopPropagation(); }} >
-                    <i className="fa fa-bell">
-                        {
-                            counter < 1 ? '' :
-                                <span className="badge" style={{
-                                    backgroundColor: '#2c5694',
-                                    color: 'white',
-                                    zoom: 0.9,
-                                    position: 'relative',
-                                    top: '-10px',
-                                    right: '7px',
-                                    borderRadius: '50%',
-                                    padding: '3px 6px',
-                                    margin: '0px'
-                                }}>{counter}</span>
-                        }
-                    </i>
+                    <NonViewedAlertsComponent counter={counter} />
                 </button>
                 {showNotMenu && <ul className="dropdown-notifications">
                     {alerts.length ? <div>

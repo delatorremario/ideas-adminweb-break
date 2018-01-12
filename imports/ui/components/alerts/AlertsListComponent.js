@@ -43,7 +43,7 @@ const CorporationsList = ({ match, alerts }) => (
                 {
                     alerts.map(not => {
                         return (
-                            <div key={not._id} className="col-sm-6 col-lg-4 cards-item" onClick={() => { setOpened(not) }}>
+                            <div key={not._id} className="col-sm-6 col-lg-4 cards-item">
                                 <div className="panel panel-default">
                                     <div className="panel-heading">
                                         <h3 className="panel-title col-flex" style={{ zoom: 0.8 }}>
@@ -62,7 +62,7 @@ const CorporationsList = ({ match, alerts }) => (
                                             <i className="fa fa-trash righty" onClick={() => { handleRemove(not._id) }}></i>
                                         </div>
                                     </div>
-                                    <Link to={not.path} >
+                                    <Link to={not.path} onClick={() => { setOpened(not) }} >
                                         <div className="row panel-body">
                                             <p className="col-md-12 panel-body-title">
                                                 <i className="fa fa-calendar"></i>

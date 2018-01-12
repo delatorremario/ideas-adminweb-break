@@ -215,4 +215,17 @@
     .isMobile {
         display: none;
     }
+    .idea-view {
+        .col-sm-6.col-lg-4.cards-item {
+            background-color: rgb(248, 252, 255);
+            width: 100%;
+            padding: 0px !important;
+            .panel.panel-default {
+                margin: 10px !important;
+                background-color: rgb(255, 255, 255);
+                border-radius: 10px;
+                width: 100%;
+            }
+        }
+    }
 }
