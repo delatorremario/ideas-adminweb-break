@@ -35,8 +35,6 @@ class IdeasList extends Component {
 
         const { text, stateCode, areaId } = this.props.params;
 
-        // console.log('STATE', this.props.params && this.props.params.sate);
-
         if (text) {
             textSearch.set(text.trim());
             this.setState({ showFilters: true })
@@ -50,6 +48,8 @@ class IdeasList extends Component {
             this.setState({ areaSelected: area, showFilters: true });
             this.props.areasIdsFilter.set(area && area.family || [])
         }
+
+        if (!text && !stateCode && !areaId) this.setState({ showFilters: false });
 
         this.setState({ textSearch: textSearch.get() })
     }
@@ -95,12 +95,6 @@ class IdeasList extends Component {
         this.setState({ areaSelected: area, showList: false });
         this.props.areasIdsFilter.set(area && area.family || [])
     }
-
-    // removeStateFilter = e => {
-    //     e.preventDefault();
-    //     this.setState({ stateSelected: {} });
-    //     this.props.stateFilter.set('')
-    // }
 
     onChangeTextSearch = e => {
         e.preventDefault();
@@ -148,33 +142,17 @@ class IdeasList extends Component {
 
     render() {
 
-        const { history, ideas, ideasstates, showEdit, user } = this.props;
+        const { history, ideas, ideasstates, showEdit, user, remove } = this.props;
         const { areaId } = this.props.params;
         const { stateSelected, textSearch, areaSelected, statesCodesSelected } = this.state;
         const { showFilters, showArea, showList } = this.state;
+
+        showFilters = !remove;
 
         return (
             <div className='ideas-list'>
                 <IdeasTableForExcelContainer ideas={ideas} />
                 <div className="panel panel-body">
-                    {/* <div className="ideas-buttons">
-                        <Link to="/ideas/new_user" className="btn btn-success btn-trans btn-action ideas-button"><i className="fa fa-plus"></i> Nueva Idea Mia</Link>
-                        {
-                            !Roles.userIsInRole(user._id, ['Employee']) &&
-                            <Link to="/ideas/new" className="btn btn-success btn-trans btn-action ideas-button"><i className="fa fa-plus"></i> Nueva de Tercero</Link>
-                        }
-                        <div className={"btn btn-success btn-action ideas-button " + (showFilters ? 'active' : 'btn-trans')} onClick={this.showFilters}>
-                            <i className={"fa " + (showFilters && "fa-ban" || "fa-filter")}></i> Filtros
-                        </div>
-                        <ReactHTMLTableToExcel
-                            id="ideas-xls-button"
-                            className="btn btn-success btn-trans btn-action btn-ideas-excel ideas-button"
-                            table="ideas-to-xls"
-                            filename={"ideas-" + new Date().toLocaleDateString()}
-                            sheet="ideas"
-                            buttonText="Xls" />
-                    </div> */}
-
                     <div className="ideas-buttons">
                         <Link to="/ideas/new_user" className="btn btn-success btn-trans btn-action ideas-button">
                             <i className="fa fa-lightbulb-o"></i>

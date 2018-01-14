@@ -20,18 +20,20 @@ const ideasFindLimit = new ReactiveVar(10);
 
 const composer = ({ match }, onData) => {
 
-	const { areaId, showUser } = match.params;
-	console.log('showUser', showUser, (showUser === 'true'));
+	const { areaId, showUser, remove } = match.params;
+	console.log('----- remove container -----', !!remove);
+	if(remove){
+		textSearch.set('');
+		statesCodesFilter.set([]);
+		areasIdsFilter.set([]);
+	}
 	const subscription = Meteor.subscribe('ideas.list',
 		textSearch.get(),
 		statesCodesFilter.get(),
-		// stepFilter.get(),
 		areasIdsFilter.get(),
 		(showUser === 'true'),
 		ideasFindLimit.get(),
 	);
-
-	// console.log('areaID', areaId);
 
 	const areasviewsub = Meteor.subscribe('areas.view', areaId || '');
 	const statessub = Meteor.subscribe('states.list');
@@ -54,7 +56,7 @@ const composer = ({ match }, onData) => {
 		const showEdit = Roles.userIsInRole(user && user._id, ['SuperAdminHolos', 'Leader'])
 
 
-		onData(null, { ideas, ideasstates, ideasFindLimit, textSearch, statesCodesFilter, areasIdsFilter, params: match.params, user, showEdit });
+		onData(null, { ideas, ideasstates, ideasFindLimit, textSearch, statesCodesFilter, areasIdsFilter, params: match.params, user, showEdit, remove });
 	}
 };
 
