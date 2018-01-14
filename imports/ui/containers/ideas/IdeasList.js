@@ -21,7 +21,6 @@ const ideasFindLimit = new ReactiveVar(10);
 const composer = ({ match }, onData) => {
 
 	const { areaId, showUser, remove } = match.params;
-	console.log('----- remove container -----', !!remove);
 	if(remove){
 		textSearch.set('');
 		statesCodesFilter.set([]);

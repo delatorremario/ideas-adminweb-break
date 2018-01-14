@@ -48,17 +48,16 @@ Meteor.methods({
             name: 'MIS IDEAS',
             match,
             ideasstates,
-            ideasstatesshowCodes: _.map(ideasstates, 'code'),
+            ideasstatesshowCodes,
+            // ideasstatesshowCodes: _.map(ideasstates, 'code'), // habilitar si hay q mostrar todo
             family: []
         };
         areasDashboard.push(miArea)
-
         _.map(areasDashboard, area => {
             getDashboardArea(area)
         });
 
         // personal
-        //console.log('--areasDashboard--', areasDashboard);
         return areasDashboard;
     },
 });
@@ -117,15 +116,15 @@ const getDashboardArea = (area) => {
 
     // ***** ini by status ******
 
-    _.extend(area.match, { 'states.code': { $in: ideasstatesshowCodes } })
     const ideasByStatus = Ideas.aggregate([
-        { $match: area.match},
+        { $match: area.match },
         {
             $project:
                 {
                     lastState: { $arrayElemAt: ["$states", -1] },
                 }
         },
+        { $match: { 'lastState.code': { $in: ideasstatesshowCodes } } },
         {
             $project:
                 {
@@ -190,10 +189,11 @@ const getDashboardArea = (area) => {
             }
         },
         { $project: { state: '$_id.state', step: '$_id.step', code: '$_id.code', count: 1, green: 1, yellow: 1, red: 1 } },
+
     ]);
 
     _.map(ideasByStatus, state => {
-        const ideastate = _.find(ideasstates, { state: state.state });
+        const ideastate = _.find(ideasstates, { code: state.code });
         state.color = ideastate && ideastate.color || '#fff';
         return state;
     })
@@ -202,139 +202,4 @@ const getDashboardArea = (area) => {
     // ***** end by status *****
 
     area.participation = area.ideasPersonAdded === 0 ? 0 : area.ideasPersonAdded * 100 / area.employes
-}
-
-const getDashboardEmploye = () => {
-    console.log('--getDashboardEmploye--')
-    if (!Meteor.isServer) return;
-    const self = this.Meteor;
-    const user = self.user();
-    if (!user) return;
-    const area = { name: 'MIS IDEAS' };
-    const filters = { corporationId: (user.profile && user.profile.corporationId) || '' };
-    const ideasstates = States.find(filters).fetch();
-    const ideasstatesshowCodes = _.map(ideasstates, 'code');
-
-    const match = { 'person._id': user && user.profile && user.profile._id || '' };
-
-    const ideasAdded = Ideas.aggregate([
-        { $match: match },
-        {
-            $group: {
-                _id: '',
-                count: { $sum: 1 }
-            }
-        }]);
-    area.ideasAdded = (ideasAdded && ideasAdded[0] && ideasAdded[0].count) || 0;
-
-
-    const ideasByStep = Ideas.aggregate([
-        { $match: match },
-        {
-            $project:
-                {
-                    lastState: { $arrayElemAt: ["$states", -1] }
-                }
-        },
-        {
-            $group: {
-                _id: '$lastState.step',
-                count: { $sum: 1 },
-            }
-        },
-        { $project: { step: '$_id', count: 1 } },
-    ]);
-    _.map(ideasByStep, step => {
-        const ideastate = _.find(ideasstates, { step: step.step });
-        step.color = ideastate && ideastate.color || '#fff';
-        return step;
-    })
-    area.ideasByStep = ideasByStep;
-
-    // ***** ini by status ******
-
-    _.extend(match, { 'states.code': { $in: ideasstatesshowCodes } })
-    const ideasByStatus = Ideas.aggregate([
-        { $match: match },
-        {
-            $project:
-                {
-                    lastState: { $arrayElemAt: ["$states", -1] },
-                }
-        },
-        {
-            $project:
-                {
-                    // lastState: 1,
-                    stateId: '$lastState._id',
-                    state: '$lastState.state',
-                    code: '$lastState.code',
-                    createdAt: '$lastState.createdAt',
-                    diff: {
-                        "$trunc": {
-                            '$divide': [
-                                { '$subtract': [new Date(), "$lastState.createdAt"] },
-                                86400000
-                            ]
-                        }
-                    }
-                }
-        },
-        { $lookup: { from: 'states', foreignField: '_id', localField: 'stateId', as: 'State' } },
-        { $unwind: '$State' },
-        {
-            $group: {
-                _id: { state: '$state', code: '$code' },
-                green: {
-                    "$sum": { "$cond": [{ "$lt": ['$diff', "$State.green"] }, 1, 0] }
-                },
-                yellow: {
-                    "$sum": {
-                        "$cond": [{
-                            '$and': [{
-                                "$gte": [
-                                    '$diff',
-                                    "$State.green"
-                                ]
-                            },
-                            {
-                                "$lte": [
-                                    '$diff',
-                                    "$State.yellow"
-                                ]
-                            }
-                            ]
-                        }
-                            , 1, 0
-                        ]
-                    }
-                },
-                red: {
-                    "$sum": {
-                        "$cond": [
-                            {
-                                "$gt": [
-                                    "$diff",
-                                    "$State.yellow"
-                                ]
-                            }, 1, 0
-                        ]
-                    }
-                },
-                count: { $sum: 1 },
-            }
-        },
-        { $project: { state: '$_id.state', code: '$_id.code', count: 1, green: 1, yellow: 1, red: 1 } },
-    ]);
-
-    _.map(ideasByStatus, state => {
-        const ideastate = _.find(ideasstates, { state: state.state });
-        state.color = ideastate && ideastate.color || '#fff';
-        return state;
-    })
-
-    area.ideasByStatus = ideasByStatus;
-    // ***** end by status *****
-
-    return area;
 }
