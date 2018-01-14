@@ -256,6 +256,18 @@ const state2D = () => {
             "color": "green",
         },
         {
+            "title": "Rechazar / Proceso",
+            "action": "Rechazar Idea en Proceso",
+            "code": "3A",
+            "color": "orange",
+        },
+        {
+            "title": "Rechazar / Repetida",
+            "action": "Rechazar Idea Repetida",
+            "code": "3B",
+            "color": "grey",
+        },
+        {
             "title": "Rechazar",
             "action": "Rechazar Idea",
             "code": "3C",
@@ -668,7 +680,7 @@ const state7A = () => {
     const arrRoles = [
         { role: 'Executive', title: 'Ideas Implementadas' },
         { role: 'Leader', title: 'Ideas Implementadas' },
-        // { role: 'Employee', title: 'Ideas Rechazadas' },
+        { role: 'Employee', title: 'Ideas Implementadas' },
     ];
     const arrNext = []
 
@@ -702,7 +714,7 @@ const state7B = () => {
     const arrRoles = [
         { role: 'Executive', title: 'Ideas Implementadas' },
         { role: 'Leader', title: 'Ideas Implementadas' },
-        // { role: 'Employee', title: 'Ideas Rechazadas' },
+        { role: 'Employee', title: 'Ideas Implementadas' },
     ];
     const arrNext = []
 
