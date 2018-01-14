@@ -20,13 +20,14 @@ const ideasFindLimit = new ReactiveVar(10);
 
 const composer = ({ match }, onData) => {
 
-	// console.log('match', match);
-	const { areaId } = match.params;
+	const { areaId, showUser } = match.params;
+	console.log('showUser', showUser, (showUser === 'true'));
 	const subscription = Meteor.subscribe('ideas.list',
 		textSearch.get(),
 		statesCodesFilter.get(),
 		// stepFilter.get(),
 		areasIdsFilter.get(),
+		(showUser === 'true'),
 		ideasFindLimit.get(),
 	);
 
@@ -36,7 +37,7 @@ const composer = ({ match }, onData) => {
 	const statessub = Meteor.subscribe('states.list');
 
 	if (subscription.ready() && areasviewsub.ready() && statessub.ready()) {
-		const ideasstates = States.find({},{}).fetch();
+		const ideasstates = States.find({}, {}).fetch();
 
 		const states = statesCodesFilter.get();
 
@@ -50,8 +51,8 @@ const composer = ({ match }, onData) => {
 		}
 
 		const user = Meteor.user();
-		const showEdit = Roles.userIsInRole(user && user._id,['SuperAdminHolos','Leader']) 
-		
+		const showEdit = Roles.userIsInRole(user && user._id, ['SuperAdminHolos', 'Leader'])
+
 
 		onData(null, { ideas, ideasstates, ideasFindLimit, textSearch, statesCodesFilter, areasIdsFilter, params: match.params, user, showEdit });
 	}

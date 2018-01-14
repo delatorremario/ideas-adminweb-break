@@ -84,7 +84,10 @@ const DashboardCard = ({ area }) => {
                     <div className="link-status-container">
                         {
                             _.map(ideasByStatus, (state, index) =>  <div key={index} className="link-status"  >
-                                    <Link to={name === 'MIS IDEAS' && '/ideas/find' || `/ideas/%20/${state.code}/%20/${area._id}/find`}>
+                                    <Link to={
+                                        name === 'MIS IDEAS' 
+                                        && `/ideas/%20/${state.code}/%20/%20/true/find` 
+                                        || `/ideas/%20/${state.code}/%20/${area._id}/false/find`}>
                                         <div>{state.step} {state.state}</div>
                                         {/* <div className="count">{state.count}</div> */}
                                         <div className="count" style={{ backgroundColor: state.green == 0 ? 'none' : colors[0] }}>{state.green}</div>

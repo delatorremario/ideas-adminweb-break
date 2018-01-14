@@ -78,7 +78,7 @@ const PageWrapper = () => (
                 <Route exact path="/set-state/:ideaId/:code" component={SetStateContainer} />
 
                 {/* Ideas */}
-                <Route exact path="/ideas/:text?/:stateCode?/:step?/:areaId?/find" component={Ideas} />
+                <Route exact path="/ideas/:text?/:stateCode?/:step?/:areaId?/:showUser?/find" component={Ideas} />
                 <Route exact path="/ideas/new" component={EditIdea} />
                 <Route exact path="/idea/:_id/edit" component={EditIdea} />
                 <Route exact path="/idea/:_id/view" component={IdeaViewContainer} />
