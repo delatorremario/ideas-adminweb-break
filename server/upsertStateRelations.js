@@ -471,7 +471,7 @@ const state4A = () => {
     const toChanges = [
         { type: 'text', label: 'Motivo', name: 'comment' },
         { type: 'check', label: 'Conversación', name: 'conversation' },
-        { type: 'date', label: 'Fecha Compromiso Postergación', name: 'postergation' },
+        { type: 'date', label: 'Fecha Compromiso Postergación', name: 'postergation', maxDais: 365 },
     ];
 
     States.update({ "code": code }, {
@@ -514,7 +514,7 @@ const state5A = () => {
         { type: 'option', label: 'Ideas', name: 'clasification' },
         { type: 'option', label: 'Círculo', name: 'clasification' },
         { type: 'check', label: 'Conversación', name: 'conversation' },
-        { type: 'date', label: 'Fecha Compromiso Plan de Acción', name: 'date' },
+        { type: 'date', label: 'Fecha Compromiso Ingreso de Plan de Acción', name: 'date', maxDais: 21 },
     ];
 
     States.update({ "code": code }, {
@@ -559,7 +559,10 @@ const state5B = () => {
     ]
 
     const toChanges = [
-        { type: 'text', label: 'Plan de Acción', name: 'actionplan' },
+        { type: 'text', label: 'Acción', name: 'actionplan' },
+        { type: 'date', label: 'Fecha Inicio', name: 'iniDate', maxDais: 7 },
+        { type: 'date', label: 'Fecha Fin', name: 'endDate', maxDais: 7 },
+  
     ];
 
     States.update({ "code": code }, {
@@ -598,8 +601,8 @@ const state6A = () => {
     ]
 
     const toChanges = [
-        { type: 'date', label: 'Fecha Compromiso Carga a Impact', name: 'compromise' },
-    ];
+        { type: 'date', label: 'Fecha Compromiso Carga a Impact', name: 'compromise', maxDais: 3 },
+      ];
 
     States.update({ "code": code }, {
         $set: {
