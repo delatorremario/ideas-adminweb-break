@@ -560,8 +560,9 @@ const state5B = () => {
 
     const toChanges = [
         { type: 'text', label: 'Acción', name: 'actionplan' },
-        { type: 'date', label: 'Fecha Inicio', name: 'iniDate', maxDais: 7 },
-        { type: 'date', label: 'Fecha Fin', name: 'endDate', maxDais: 7 },
+        { type: 'text', label: 'Responsable', name: 'actionplan' },
+        { type: 'date', label: 'Fecha Inicio', name: 'iniDate' },
+        { type: 'date', label: 'Fecha Fin', name: 'endDate', maxDais: 100 },
   
     ];
 

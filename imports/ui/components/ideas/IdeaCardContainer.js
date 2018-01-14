@@ -20,7 +20,6 @@ const composer = ({ idea, lap, handleRemove, showEdit, showNext }, onData) => {
 
                 if (showNext) {
                     const lastState = _.last(idea.states);
-                    console.log('---lastState---', lastState.roles, Meteor.user().roles)
                     _.each(Meteor.user().roles, myrol => {
                         const staterol = _.find(lastState.roles, { role: myrol })
                         console.log('staterol', staterol)
