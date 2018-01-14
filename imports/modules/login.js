@@ -14,14 +14,18 @@ const login = () => {
 
   Meteor.loginWithPassword(email, password, (error) => {
     if (error) {
-      Bert.alert(error.reason, 'warning');
+      console.log('--login error--', error)
+      const message = error.reason === "Incorrect password" && 'Contraseña Incorrecta' ||
+        error.reason === "User not found" && 'Usuario no encontrado' ||
+        error.reason;
+      Bert.alert(message, 'warning');
       return false;
     }
     /* assign default selected corporarion */
-    selectByUser.call({ }, (err) => {
+    selectByUser.call({}, (err) => {
       if (err) {
         Bert.alert(err.message, 'danger')
-      } 
+      }
       // else {
       //    Bert.alert('Lgin', 'success')
       // }
@@ -42,11 +46,11 @@ const validate = () => {
     },
     messages: {
       emailAddress: {
-        required: 'Need an email address here.',
-        email: 'Is this email address legit?',
+        required: 'Ingrese un correo',
+        email: 'no tiene formato de correo',
       },
       password: {
-        required: 'Need a password here.',
+        required: 'Ingrese una contraseña',
       },
     },
     submitHandler() { login(); },

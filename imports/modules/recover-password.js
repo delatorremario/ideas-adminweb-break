@@ -33,8 +33,8 @@ const validate = () => {
         },
         messages: {
             emailAddress: {
-                required: 'Need an email address here.',
-                email: 'Is this email address legit?',
+                required: 'Ingrese un correo',
+                email: 'no tiene formato de correo',
             },
         },
         submitHandler() { handleRecovery(); },
