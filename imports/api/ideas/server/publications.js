@@ -84,3 +84,18 @@ Meteor.publish('ideas.state.list', (filters, limit) => {
 
   } else return;
 });
+
+
+Meteor.publish('ideas.filters', (filters, limit) => {
+
+  check(filters, Object);
+  check(limit, Number);
+
+  const self = this.Meteor;
+  const user = self.user();
+  if (!user) return;
+  _.extend(filters, { corporationId: (user.profile && user.profile.corporationId) || '' });
+
+  console.log('--filters--', filters);
+  return Ideas.find(filters, { sort: { date: 1 }, limit });
+})
