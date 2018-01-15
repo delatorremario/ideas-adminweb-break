@@ -45,6 +45,7 @@ const composer = ({ match }, onData) => {
       else _.extend(doc, { origin: 'Web' })
 
       const state = States.findOne({}, { sort: { code: 1 } });
+      _.extend(state, { createdAt: new Date });
       const person = Persons.findOne({ email });
       _.extend(doc, { person, states: [state] })
 

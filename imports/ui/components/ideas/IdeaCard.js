@@ -32,7 +32,7 @@ const IdeaCard = ({ idea, imagesCursor, lap, handleRemove, showEdit, showNext, n
                         states && lastState &&
                         <div>
                             <small className="label" style={{ backgroundColor: `${color}` }}>{lastState.step} - {lastState.state}</small>
-                            <div className="time-ago">hace <Moment fromNow ago locale="es">{lastState.updatedAt}</Moment></div>
+                            <div className="time-ago">hace <Moment fromNow ago locale="es">{lastState.createdAt}</Moment></div>
                         </div>
                     }
                     {
@@ -115,7 +115,7 @@ const IdeaCard = ({ idea, imagesCursor, lap, handleRemove, showEdit, showNext, n
                         {
                             _.map(states, (state, index) =>
                                 <div className="state-info" key={index}>
-                                    <small> <Moment format="DD MMM YY - HH:mm ->" date={state.updatedAt} /> {state.step} {state.state} </small>
+                                    <small> <Moment format="DD MMM YY - HH:mm ->" date={state.createdAt} /> {state.step} {state.state} </small>
                                     <h4>{state.action}</h4>
                                     {
                                         _.map(state.toChanges, (toChange, i) => {

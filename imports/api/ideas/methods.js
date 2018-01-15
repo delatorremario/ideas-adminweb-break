@@ -102,6 +102,8 @@ Meteor.methods({
         check(_id, String);
         check(state, Object);
 
+        _.extend(state, { createdAt: new Date })
+
         const update = { $push: { states: state } };
 
         _.map(state.toChanges, onchange => {
