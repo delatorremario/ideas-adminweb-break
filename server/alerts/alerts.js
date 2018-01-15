@@ -63,7 +63,7 @@ Meteor.methods({
                                 title: idea && idea.oportunity || 'Alerta de retraso!',
                                 message: text,
                             },
-                            path: '/ideas/find'
+                            path: '/ideas/find/true'
                         });
                         // Meteor.call('alerts.upsert', {
                         //     createdAt: new Date(),

@@ -268,7 +268,7 @@ const state2D = () => {
             "color": "grey",
         },
         {
-            "title": "Rechazar",
+            "title": "Rechazar / No factible",
             "action": "Rechazar Idea",
             "code": "3C",
             "color": "grey",

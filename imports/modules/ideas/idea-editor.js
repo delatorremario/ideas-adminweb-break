@@ -28,7 +28,7 @@ const handleUpsert = () => {
         } else {
             component.ideaEditorForm.reset();
             Bert.alert(confirmation, 'success');
-            component.props.history.push('/ideas/find');
+            component.props.history.push('/ideas/find/true');
             // history.pushState(state, url, param)
         }
     });

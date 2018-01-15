@@ -265,7 +265,7 @@ export default class IdeaEditor extends Component {
                                 </Button>
                             }
 
-                            <Button onClick={(e) => this.props.history.push('/ideas/find')} type="button" bsStyle="default" className="btn btn-trans btn-sm pull-right"><i className="fa fa-times"></i>Cancelar</Button>
+                            <Button onClick={(e) => this.props.history.push('/ideas/find/true')} type="button" bsStyle="default" className="btn btn-trans btn-sm pull-right"><i className="fa fa-times"></i>Cancelar</Button>
 
                         </div>
                     </form>
