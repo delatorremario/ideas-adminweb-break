@@ -11,6 +11,30 @@ import App from '../../ui/layouts/App.js';
 if (Meteor.isCordova) { Bert.defaults.style = 'fixed-bottom'; }
 else { Bert.defaults.style = 'growl-bottom-right'; }
 
+Push.Configure({
+  android: {
+    senderID: 341548539694,
+    alert: true,
+    badge: true,
+    sound: true,
+    vibrate: true,
+    clearNotifications: true
+    // icon: '',
+    // iconColor: ''
+  },
+  ios: {
+    alert: true,
+    badge: true,
+    sound: true
+  }
+});
+
+Push.allow({
+  send: function (userId, notification) {
+    return true;
+  }
+});
+
 Meteor.startup(() => {
   render(<App />, document.getElementById('react-root'));
 });
