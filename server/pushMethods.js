@@ -8,6 +8,7 @@ Push.allow({
 
 Meteor.methods({
     serverNotification: function (text, title) {
+        console.log('--serverNotification--', text, title);
         check(text, String);
         check(title, String);
         var badge = 1
@@ -26,6 +27,7 @@ Meteor.methods({
                 // this will send to all users
             }
         });
+        console.log('--sended--')
     },
     userNotification: function (text, title, userId) {
         var badge = 1
