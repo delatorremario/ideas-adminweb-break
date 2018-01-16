@@ -62,7 +62,7 @@ const componentDidMount = () => {
 const PageWrapper = () => (
     <section className="main-content-wrapper">
         {
-            componentDidMount && !completedProfile() && <Route path="/" component={EditProfile} /> ||
+            componentDidMount() && !completedProfile() && <Route path="/" component={EditProfile} /> ||
             <div>
                 <Route exact path="/" component={Dashboard} />
                 <Route path="/dashboard" component={Dashboard} />
