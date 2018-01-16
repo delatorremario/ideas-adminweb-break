@@ -34,7 +34,12 @@ Meteor.methods({
         });
         console.log('--sended--')
     },
-    userNotification: function (text, title, userId) {
+    userNotification: function (text, title, viewers) {
+        var badge = 1
+        console.log('--serverNotification--', text, title, viewers.length);
+        check(text, String);
+        check(title, String);
+        check(viewers, Array);
         var badge = 1
         Push.send({
             from: 'push',
@@ -42,14 +47,22 @@ Meteor.methods({
             text: text,
             badge: badge,
             sound: 'airhorn.caf',
-            payload: {
-                title: title,
-                // historyId: result
+            payload: {},
+            gcm: {
+                title: text,
+                text: title,
+                style: 'inbox',
+                summaryText: '%n% notificacion/es'
+            },
+            apn: {
+                title: text,
+                text: title,
             },
             query: {
-                // userId: userId //this will send to a specific Meteor.user()._id
+                userId: viewers
             }
         });
+        console.log('--sended--')
     },
     removeHistory: function () {
         NotificationHistory.remove({}, function (error) {

@@ -32,6 +32,11 @@ export const upsertComment = new ValidatedMethod({
                     Meteor.call('vieweds.upsert', view);
                 }
             })
+            let viewers = [];
+            _.forEach(idea.viewers, v => {
+                if (v.userId !== Meteor.userId()) viewers = _.concat(viewers, v.userId);
+            })
+            Meteor.call('userNotification', comment.text, idea.opportunity, viewers);
         });
     },
 });
