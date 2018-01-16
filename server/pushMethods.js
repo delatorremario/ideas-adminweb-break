@@ -59,7 +59,7 @@ Meteor.methods({
                 text: title,
             },
             query: {
-                userId: viewers
+                userId: { $in: viewers } // "GrmDbWJTsWNDwB6o2"
             }
         });
         console.log('--sended--')
