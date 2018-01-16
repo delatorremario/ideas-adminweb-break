@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
+import $ from 'jquery';
 
 // Corporaciones
 import Corporations from '../pages/corporations/Corporations';
@@ -39,12 +40,9 @@ import ComponentsPage from '../pages/ComponentsPage';
 import EditProfile from '../containers/profile/EditProfile';
 
 // Configs
-
 import Configs from '../containers/configs/Configs';
 import EditConfig from '../containers/configs/EditConfig';
-
 import SendInvitationPage from '../pages/singinup/SendInvitationPage';
-
 
 const completedProfile = () => {
     const user = Meteor.user()
@@ -55,12 +53,16 @@ const completedProfile = () => {
         && user.profile.area
 }
 
+const componentDidMount = () => {
+    $('html,body').stop(true, true);
+    $('html,body').animate({ scrollTop: 0 }, 0, "swing");
+    return true;
+}
+
 const PageWrapper = () => (
     <section className="main-content-wrapper">
-
-
         {
-            !completedProfile() && <Route path="/" component={EditProfile} /> ||
+            componentDidMount() && !completedProfile() && <Route path="/" component={EditProfile} /> ||
             <div>
                 <Route exact path="/" component={Dashboard} />
                 <Route path="/dashboard" component={Dashboard} />

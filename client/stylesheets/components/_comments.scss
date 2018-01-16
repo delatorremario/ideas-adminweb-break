@@ -116,6 +116,10 @@
             background: none;
             border: none;
             cursor: pointer;
+            outline: none;
+            &:focus {
+                outline: none;
+            }
         }
         .ci-new-input {
             transition: all 0.3s ease-in-out 0s;
@@ -167,7 +171,7 @@
                 font-size: 1.1em;
                 color: #484848;
                 text-align: left;
-                font-weight: 200;
+                font-weight: 600;
             }
             .ci-data {
                 height: 27px;

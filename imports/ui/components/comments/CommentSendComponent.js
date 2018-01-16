@@ -3,6 +3,11 @@ import { Meteor } from 'meteor/meteor';
 import Loading from '../../components/Loading';
 import { Bert } from 'meteor/themeteorchef:bert';
 
+const componentDidMount = () => {
+    $('html,body').stop(true, true);
+    $('html,body').animate({ scrollTop: document.body.scrollHeight }, 500, "swing");
+}
+
 const send = (ideaId) => (event) => {
     event.preventDefault();
     let comment = {
@@ -17,6 +22,7 @@ const send = (ideaId) => (event) => {
             Bert.alert(err.message, 'danger');
             return;
         }
+        componentDidMount();
     })
 }
 
