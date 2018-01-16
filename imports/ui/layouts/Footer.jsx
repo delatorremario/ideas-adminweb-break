@@ -29,7 +29,7 @@ class Footer extends Component {
         return (
             <footer id="footer">
                 <div className="footer-item">
-                    <Link className="footer-button" to="/ideas/find/true" >
+                    <Link className="footer-button" to="/my-ideas" >
                         <button className="footer-button">
                             <i className="fa fa-fw fa-lightbulb-o"></i>
                         </button>

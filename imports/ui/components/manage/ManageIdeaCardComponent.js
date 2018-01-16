@@ -39,7 +39,7 @@ const ManageIdeaCardComponent = ({ idea, imagesCursor, lap, handleRemove, showEd
                         <Link to={`/idea/${idea._id}/edit`}><i className="fa fa-pencil"></i></Link>
                     }
                     {/* Implementar */}
-                    <Link to={`/ideas/find/true`}>
+                    <Link to={`/my-ideas`}>
                         <i className="fa fa-comment"></i>
                     </Link>
                     {

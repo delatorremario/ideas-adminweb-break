@@ -121,7 +121,7 @@ class MyIdeasList extends Component {
             })
 
             if (text && stateCode && areaId) {
-                this.props.history.push('/ideas/find/true');
+                this.props.history.push('/my-ideas');
                 console.log('history');
             }
         }

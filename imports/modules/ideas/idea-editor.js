@@ -6,6 +6,7 @@ import '../validation.js';
 let component;
 
 const handleUpsert = () => {
+    component.setState({ loading: true });
     const { doc } = component.state;
     const user = this.Meteor.user();
 
@@ -28,7 +29,7 @@ const handleUpsert = () => {
         } else {
             component.ideaEditorForm.reset();
             Bert.alert(confirmation, 'success');
-            component.props.history.push('/ideas/find/true');
+            component.props.history.push('/my-ideas');
             // history.pushState(state, url, param)
         }
     });
