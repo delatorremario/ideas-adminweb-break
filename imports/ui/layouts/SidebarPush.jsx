@@ -56,6 +56,11 @@ class SidebarPush extends Component {
                     path: "/my-ideas",
                 },
                 {
+                    title: "Otras Ideas",
+                    iconClasses: ["fa", "fa-fw", "fa-hand-peace-o"],
+                    path: "/ideas/find",
+                },
+                {
                     title: "Gestionar Ideas",
                     iconClasses: ["fa", "fa-fw", "fa-suitcase"],
                     path: "/manage-ideas",

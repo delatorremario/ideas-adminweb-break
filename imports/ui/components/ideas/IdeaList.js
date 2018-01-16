@@ -147,8 +147,7 @@ class IdeasList extends Component {
         const { stateSelected, textSearch, areaSelected, statesCodesSelected } = this.state;
         const { showFilters, showArea, showList } = this.state;
 
-        showFilters = !remove;
-
+     
         return (
             <div className='ideas-list'>
                 <IdeasTableForExcelContainer ideas={ideas} />
@@ -163,9 +162,9 @@ class IdeasList extends Component {
                                 <i className="fa fa-hand-peace-o"></i>
                             </Link>
                         }
-                        <div className={"btn btn-success btn-action ideas-button " + (showFilters ? 'active' : 'btn-trans')} onClick={this.showFilters}>
+                        {<div className={"btn btn-success btn-action ideas-button " + (showFilters ? 'active' : 'btn-trans')} onClick={this.showFilters}>
                             <i className={"fa " + (showFilters && "fa-ban" || "fa-filter")}></i>
-                        </div>
+                        </div>}
                         {showEdit && <ReactHTMLTableToExcel
                             id="ideas-xls-button"
                             className="btn btn-success btn-trans btn-action btn-ideas-excel ideas-button"
@@ -177,7 +176,6 @@ class IdeasList extends Component {
                     </div>
                 </div>
 
-                {showFilters &&
                     <div className="show-filters">
                         {/* find input */}
                         <div className="panel panel-body">
@@ -214,8 +212,7 @@ class IdeasList extends Component {
 
                         {!showList && <button className={"btn btn-success btn-search"} onClick={this.showList.bind(this)}><i className="fa fa-search"></i> BUSCAR</button>}
                     </div>
-                }
-
+              
                 {
                     showList &&
                     <div>
