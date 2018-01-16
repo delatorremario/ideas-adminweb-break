@@ -8,7 +8,7 @@ import Ideas from '../../../api/ideas/ideas';
 const composer = ({ match }, onData) => {
     moment.locale('es');
     const userId = Meteor.userId();
-    const sub = Meteor.subscribe('ideas.state.list', { 'viewers.userId': userId }, 100);
+    const sub = Meteor.subscribe('ideas.filters', { 'viewers.userId': userId }, 100);
     if (sub.ready()) {
         const ideas = Ideas.find({ 'viewers.userId': userId }, { sort: { date: -1 } }).fetch();
         onData(null, { ideas });
