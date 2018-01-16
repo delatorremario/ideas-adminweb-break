@@ -18,10 +18,15 @@ Meteor.methods({
             text: text,
             badge: badge,
             sound: 'airhorn.caf',
-            payload: {
-                title: title,
-                text: text,
-                // historyId: result
+            payload: {},
+            gcm: {
+                title: text,
+                text: title,
+                style: 'inbox',
+                summaryText: '%n% notificacion/es'
+            },
+            apn: {
+                title: 'Sent via APN'
             },
             query: {
                 // this will send to all users

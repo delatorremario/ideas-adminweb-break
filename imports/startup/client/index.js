@@ -6,36 +6,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../../node_modules/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css';
 import '../../../node_modules/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.js';
 import '../../../node_modules/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js';
+
+import './push';
+
 import App from '../../ui/layouts/App.js';
 
 if (Meteor.isCordova) { Bert.defaults.style = 'fixed-bottom'; }
 else { Bert.defaults.style = 'growl-bottom-right'; }
-
-Meteor.startup(() => {
-  Push.Configure({
-    android: {
-      senderID: 341548539694,
-      alert: true,
-      badge: true,
-      sound: true,
-      vibrate: true,
-      clearNotifications: true
-      // icon: '',
-      // iconColor: ''
-    },
-    ios: {
-      alert: true,
-      badge: true,
-      sound: true
-    }
-  });
-
-  Push.allow({
-    send: function (userId, notification) {
-      return true;
-    }
-  });
-})
 
 
 Meteor.startup(() => {
