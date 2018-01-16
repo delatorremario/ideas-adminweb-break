@@ -32,7 +32,7 @@ const IdeaCard = ({ idea, imagesCursor, lap, handleRemove, showEdit, showNext, n
                         states && lastState &&
                         <div>
                             <small className="label" style={{ backgroundColor: `${color}` }}>{lastState.step} - {lastState.state}</small>
-                            <span className="time-ago">hace <Moment fromNow ago locale="es">{lastState.updatedAt}</Moment></span>
+                            <div className="time-ago">hace <Moment fromNow ago locale="es">{lastState.createdAt}</Moment></div>
                         </div>
                     }
                     {
@@ -112,24 +112,22 @@ const IdeaCard = ({ idea, imagesCursor, lap, handleRemove, showEdit, showNext, n
                         }
 
                         <p>Estados</p>
-                        <ul>
-                            {
-                                _.map(states, (state, index) =>
-                                    <li key={index}>
-                                        <small> <Moment format="DD MMM YY" date={state.createdAt} /> {state.step} {state.state} </small>
-                                        <h4>{state.action}</h4>
-                                        {
-                                            _.map(state.toChanges, (toChange, i) => {
-                                                if (toChange.text) return <p key={i}>{toChange.label}: {toChange.text}</p>
-                                                if (toChange.type === 'check') return <p key={i}>{toChange.label}: {toChange.checked && 'SI' || 'NO'}</p>
-                                                if (toChange.date) return <p key={i}>{toChange.label}: <Moment format="DD MMM YYYY" date={toChange.date} /></p>
-                                                if (toChange.chief) return <div key={i}><IdeaCardChiefAreaContainer chief={toChange.chief} /></div>
-                                            })
-                                        }
-                                    </li>
-                                )
-                            }
-                        </ul>
+                        {
+                            _.map(states, (state, index) =>
+                                <div className="state-info" key={index}>
+                                    <small> <Moment format="DD MMM YY - HH:mm ->" date={state.createdAt} /> {state.step} {state.state} </small>
+                                    <h4>{state.action}</h4>
+                                    {
+                                        _.map(state.toChanges, (toChange, i) => {
+                                            if (toChange.text) return <div className='text' key={i}>{toChange.label}: {toChange.text}</div>
+                                            if (toChange.type === 'check') return <div key={i}>{toChange.label}: {toChange.checked && 'SI' || 'NO'}</div>
+                                            if (toChange.date) return <div key={i}>{toChange.label}: <Moment format="DD MMM YYYY" date={toChange.date} /></div>
+                                            if (toChange.chief) return <div key={i}><IdeaCardChiefAreaContainer chief={toChange.chief} /></div>
+                                        })
+                                    }
+                                </div>
+                            )
+                        }
                         <div className="images-list">
 
                             {_.map(imagesCursor, (imagePath, index) =>

@@ -22,7 +22,6 @@ const composer = ({ idea, lap, handleRemove, showEdit, showNext }, onData) => {
                     const lastState = _.last(idea.states);
                     _.each(Meteor.user().roles, myrol => {
                         const staterol = _.find(lastState.roles, { role: myrol })
-                        console.log('staterol', staterol)
                         if (staterol) {
                             showNext = !staterol.onlyView;
                             return;

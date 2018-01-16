@@ -14,23 +14,30 @@ import Loading from '../../components/Loading.js';
 
 const textSearch = new ReactiveVar('');
 const statesCodesFilter = new ReactiveVar([]);
-// const stepFilter = new ReactiveVar('');
 const areasIdsFilter = new ReactiveVar([]);
 const ideasFindLimit = new ReactiveVar(10);
 
 const composer = ({ match }, onData) => {
 
 	const { areaId, showUser, remove } = match.params;
-	if(remove){
-		textSearch.set('');
-		statesCodesFilter.set([]);
-		areasIdsFilter.set([]);
-	}
-	const subscription = Meteor.subscribe('ideas.list',
-		textSearch.get(),
-		statesCodesFilter.get(),
-		areasIdsFilter.get(),
-		(showUser === 'true'),
+
+	/*** set filters */
+
+	const user = Meteor.user();
+
+	if (!user) return;
+
+	const filters = {};
+
+
+	if (textSearch.get()) _.extend(filters, { $text: { $search: textSearch.get() } });
+	if (statesCodesFilter.get().length > 0) _.extend(filters, { 'states.code': { $in: statesCodesFilter.get() } });
+	if (areasIdsFilter.get().length > 0) _.extend(filters, { 'chief.areaId': { $in: areasIdsFilter.get() } });
+
+	/*** end set filters */
+
+	const subscription = Meteor.subscribe('ideas.filters',
+		filters,
 		ideasFindLimit.get(),
 	);
 
@@ -51,7 +58,6 @@ const composer = ({ match }, onData) => {
 			})
 		}
 
-		const user = Meteor.user();
 		const showEdit = Roles.userIsInRole(user && user._id, ['SuperAdminHolos', 'Leader'])
 
 

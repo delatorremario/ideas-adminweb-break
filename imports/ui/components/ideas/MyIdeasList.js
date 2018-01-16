@@ -18,7 +18,7 @@ import AreasSearch from '../../containers/areas/AreasSearch';
 import Areas from '../../../api/areas/areas';
 import IdeasTableForExcelContainer from './IdeasTableForExcelContainer';
 
-class IdeasList extends Component {
+class MyIdeasList extends Component {
 
     state = {
         areaSelected: undefined,
@@ -29,30 +29,30 @@ class IdeasList extends Component {
         showList: true,
     }
 
-    componentWillMount() {
-        // reactVars
-        const { textSearch, statesCodesFilter, areasIdsFilter } = this.props;
+    // componentWillMount() {
+    //     // reactVars
+    //     const { textSearch, statesCodesFilter, areasIdsFilter } = this.props;
 
-        const { text, stateCode, areaId } = this.props.params;
+    //     const { text, stateCode, areaId } = this.props.params;
 
-        if (text) {
-            textSearch.set(text.trim());
-            this.setState({ showFilters: true })
-        }
-        if (stateCode) {
-            statesCodesFilter.set([stateCode.trim()]);
-            this.setState({ statesCodesSelected: [stateCode.trim()], showFilters: true })
-        }
-        if (areaId) {
-            const area = Areas.findOne(areaId);
-            this.setState({ areaSelected: area, showFilters: true });
-            this.props.areasIdsFilter.set(area && area.family || [])
-        }
+    //     if (text) {
+    //         textSearch.set(text.trim());
+    //         this.setState({ showFilters: true })
+    //     }
+    //     if (stateCode) {
+    //         statesCodesFilter.set([stateCode.trim()]);
+    //         this.setState({ statesCodesSelected: [stateCode.trim()], showFilters: true })
+    //     }
+    //     if (areaId) {
+    //         const area = Areas.findOne(areaId);
+    //         this.setState({ areaSelected: area, showFilters: true });
+    //         this.props.areasIdsFilter.set(area && area.family || [])
+    //     }
 
-        if (!text && !stateCode && !areaId) this.setState({ showFilters: false });
+    //     if (!text && !stateCode && !areaId) this.setState({ showFilters: false });
 
-        this.setState({ textSearch: textSearch.get() })
-    }
+    //     this.setState({ textSearch: textSearch.get() })
+    // }
 
     handleNav = (history, _id) => {
         history.push(`/idea/${_id}`)
@@ -143,14 +143,15 @@ class IdeasList extends Component {
     render() {
 
         const { history, ideas, ideasstates, showEdit, user, remove } = this.props;
-        const { areaId } = this.props.params;
-        const { stateSelected, textSearch, areaSelected, statesCodesSelected } = this.state;
-        const { showFilters, showArea, showList } = this.state;
+        //const { areaId } = this.props.params;
+        // const { stateSelected, textSearch, areaSelected, statesCodesSelected } = this.state;
+        // const { showFilters, showArea, showList } = this.state;
 
-     
+        console.log('IDEAS', ideas);
+
         return (
             <div className='ideas-list'>
-                <IdeasTableForExcelContainer ideas={ideas} />
+                {/* <IdeasTableForExcelContainer ideas={ideas} />*/}
                 <div className="panel panel-body">
                     <div className="ideas-buttons">
                         <Link to="/ideas/new_user" className="btn btn-success btn-trans btn-action ideas-button">
@@ -162,10 +163,7 @@ class IdeasList extends Component {
                                 <i className="fa fa-hand-peace-o"></i>
                             </Link>
                         }
-                        {<div className={"btn btn-success btn-action ideas-button " + (showFilters ? 'active' : 'btn-trans')} onClick={this.showFilters}>
-                            <i className={"fa " + (showFilters && "fa-ban" || "fa-filter")}></i>
-                        </div>}
-                        {showEdit && <ReactHTMLTableToExcel
+                         {showEdit && <ReactHTMLTableToExcel
                             id="ideas-xls-button"
                             className="btn btn-success btn-trans btn-action btn-ideas-excel ideas-button"
                             table="ideas-to-xls"
@@ -174,69 +172,30 @@ class IdeasList extends Component {
                             buttonText="xls" />
                         }
                     </div>
+                </div> 
+
+
+
+                <div>
+                    {
+                        ideas &&
+                        <div className="row cards-container">
+                            {_.map(ideas, (idea, index) => {
+                                let lap = index / 2;
+                                return <IdeaCard key={index} idea={idea} lap={lap} handleRemove={this.handleRemove} showEdit={showEdit} />
+                            })}
+                        </div>
+                        || <Alert bsStyle="warning">No se encontraron datos.</Alert>
+                    }
                 </div>
 
-                    <div className="show-filters">
-                        {/* find input */}
-                        <div className="panel panel-body">
-                            <input type="search"
-                                value={textSearch}
-                                onChange={this.onChangeTextSearch.bind(this)}
-                                placeholder="Buscar por palabras claves en oportunidad o descripción o nombres ..."
-                                className="form-control input-sm"
-                            />
-                        </div>
-                        <div className="panel panel-body panel-tabs">
-                            {
-                                showEdit && <div>
-                                    <button disabled={showArea} className={"btn btn-success btn-action " + (showArea ? 'active' : 'btn-trans')} onClick={this.showArea}>{areaSelected && <i className="fa fa-filter"></i>} Areas</button>
-                                    <button disabled={!showArea} className={"btn btn-success btn-action " + (!showArea ? 'active' : 'btn-trans')} onClick={this.showArea}>{statesCodesSelected.length > 0 && <i className="fa fa-filter"></i>} Estados</button>
-                                </div>
-                            }
-                        </div>
-                        <div className="panel panel-body">
-                            {
-                                showArea &&
-                                <AreasSearch {...this.props} selectArea={this.selectArea} areaSelected={areaSelected} /> ||
-                                (
-                                    showEdit &&
-                                    <StatesSearch stateSelected={stateSelected}
-                                        removeStateFilter={this.removeStateFilter}
-                                        selectState={this.selectState}
-                                        ideasstates={ideasstates}
-                                        statesCodesSelected={statesCodesSelected}
-                                    />
-                                )
-                            }
-                        </div>
-
-                        {!showList && <button className={"btn btn-success btn-search"} onClick={this.showList.bind(this)}><i className="fa fa-search"></i> BUSCAR</button>}
-                    </div>
-              
-                {
-                    showList &&
-                    <div>
-                        {
-                            ideas.length > 0 ?
-                                <div className="row cards-container">
-                                    {_.map(ideas, (idea, index) => {
-                                        let lap = index / 2;
-                                        return <IdeaCard key={index} idea={idea} lap={lap} handleRemove={this.handleRemove} showEdit={showEdit} />
-                                    })}
-                                </div>
-                                : <Alert bsStyle="warning">No se encontraron datos.</Alert>
-                        }
-                    </div>
-                }
 
             </div >
         )
     }
 }
-IdeasList.propTypes = {
-    history: PropTypes.object,
+MyIdeasList.propTypes = {
     ideas: PropTypes.array,
-    ideasstates: PropTypes.array,
 };
 
-export default IdeasList;
+export default MyIdeasList;

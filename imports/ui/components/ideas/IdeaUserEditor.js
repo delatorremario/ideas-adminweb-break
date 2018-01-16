@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import { FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap';
+import { FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
+import Button from 'react-bootstrap-button-loader';
 import { Link } from 'react-router-dom';
 import ideaEditor from '../../../modules/ideas/idea-editor.js';
 import CSSTransitionGroup from 'react-addons-css-transition-group';
@@ -34,6 +35,7 @@ export default class IdeaUserEditor extends Component {
             images: [],
         },
         area: undefined,
+        loading: false,
     }
 
     componentDidMount() {
@@ -233,13 +235,13 @@ export default class IdeaUserEditor extends Component {
                             {
                                 formStep === formMaxStep &&
                                 <Button
+                                    loading={this.state.loading}
                                     disabled={this.toggleStepReady() ? false : true}
                                     type='submit'
                                     bsStyle="success"
                                     className="btn btn-sm pull-right">
                                     <i className="fa fa-paper-plane"></i>
-                                    Finalizar
-                                                        </Button> ||
+                                    Finalizar</Button> ||
                                 <Button
                                     onClick={this.changeStep(true, 1)}
                                     disabled={this.toggleStepReady() ? false : true}
@@ -260,8 +262,7 @@ export default class IdeaUserEditor extends Component {
                                 </Button>
                             }
 
-                            <Button onClick={(e) => this.props.history.push('/ideas/find')} type="button" bsStyle="default" className="btn btn-trans btn-sm pull-right"><i className="fa fa-times"></i>Cancelar</Button>
-
+                            <Button onClick={(e) => this.props.history.push('/my-ideas')} type="button" bsStyle="default" className="btn btn-trans btn-sm pull-right"><i className="fa fa-times"></i>Cancelar</Button>
                         </div>
                     </form>
                 </div>

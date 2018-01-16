@@ -1,6 +1,8 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { FormGroup, ControlLabel, FormControl, Checkbox, Radio, Button } from 'react-bootstrap';
+import { FormGroup, ControlLabel, FormControl, Checkbox, Radio } from 'react-bootstrap';
+import Button from 'react-bootstrap-button-loader';
+
 import DatePicker from 'react-bootstrap-date-picker';
 // import DatePicker from 'react-date-picker';
 import { Bert } from 'meteor/themeteorchef:bert';
@@ -49,7 +51,9 @@ const validate = (toChanges) => {
 
 class SetStateComponent extends React.Component {
 
-    state = {}
+    state = {
+        loading: false,
+    }
 
     componentDidMount() {
         const { state } = this.props;
@@ -63,11 +67,11 @@ class SetStateComponent extends React.Component {
         const { toChanges } = this.state;
 
         if (validate(toChanges)) {
-
+            this.setState({ loading: true })
             _.extend(state, { action: next.title });
 
             Meteor.call('idea.setState', idea._id, state, (err) => {
-                if (err) { Bert.alert(error.reason, 'danger'); return; }
+                if (err) { Bert.alert(error.reason, 'danger'); this.setState({ loading: false }); return; }
                 history.push('/manage-ideas');
             });
         } else Bert.alert('Debe completar los campos requeridos', 'warning')
@@ -145,7 +149,7 @@ class SetStateComponent extends React.Component {
                                                 autoComplete='off'
                                                 minDate={moment().toISOString()}
                                                 maxDate={toChange.maxDais && moment().add('days', toChange.maxDais).toISOString()}
-                                                // customControl={<CustomControl />}
+                                            // customControl={<CustomControl />}
                                             />
                                         </div>
                                     }
@@ -194,7 +198,7 @@ class SetStateComponent extends React.Component {
                         }
                     </FormGroup>
                     <div className='set-state-button-container'>
-                        <button onClick={this.handlerState.bind(this)} className='btn btn-success btn-trans'>Confirmar</button>
+                        <Button loading={this.state.loading} onClick={this.handlerState.bind(this)} className='btn btn-success btn-trans'>Confirmar</Button>
                     </div>
                 </div>
                 <IdeaCardContainer

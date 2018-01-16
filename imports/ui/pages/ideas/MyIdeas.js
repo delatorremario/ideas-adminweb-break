@@ -1,16 +1,16 @@
 import React from 'react';
-import IdeasList from '../../containers/ideas/IdeasList';
+import MyIdeasList from '../../containers/ideas/MyIdeasList';
 
-const Ideas = (props) => (
+const MyIdeas = (props) => (
     <div className="pageWrapper">
         <div className="pageheader">
-            <h1>Otras Ideas</h1>
+            <h1>Mis Ideas</h1>
 
             <div className="breadcrumb-wrapper hidden-xs">
                 <span className="label">Estás aquí:</span>
                 <ol className="breadcrumb">
                     <li>
-                        Otras Ideas
+                        Mis Ideas
                     </li>
                 </ol>
             </div>
@@ -19,11 +19,11 @@ const Ideas = (props) => (
         <section id="main-content">
             <div className="row">
                 <div className="col-md-12 col-lg-12">
-                    <IdeasList {...props} />
+                    <MyIdeasList {...props} />
                 </div>
             </div>
         </section>
     </div>
 );
 
-export default Ideas;
+export default MyIdeas;
