@@ -96,6 +96,5 @@ Meteor.publish('ideas.filters', (filters, limit) => {
   if (!user) return;
   _.extend(filters, { corporationId: (user.profile && user.profile.corporationId) || '' });
 
-  console.log('--filters--', filters);
   return Ideas.find(filters, { sort: { date: 1 }, limit });
 })

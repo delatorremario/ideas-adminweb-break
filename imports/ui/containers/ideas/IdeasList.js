@@ -36,8 +36,6 @@ const composer = ({ match }, onData) => {
 
 	/*** end set filters */
 
-	console.log('---filters---', filters);
-
 	const subscription = Meteor.subscribe('ideas.filters',
 		filters,
 		ideasFindLimit.get(),

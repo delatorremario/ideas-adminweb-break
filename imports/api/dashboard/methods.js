@@ -43,7 +43,11 @@ Meteor.methods({
             })
         });
 
-        const match = { 'person._id': user && user.profile && user.profile._id || '' };
+        const match = { 
+            $or: [{ 'person._id': user && user.profile._id }, { 'collaborators._id': user && user.profile._id }]
+
+            //'person._id': user && user.profile && user.profile._id || '' 
+        };
         const miArea = {
             name: 'MIS IDEAS',
             match,
