@@ -26,7 +26,8 @@ class IdeasListComponent extends Component {
         statesCodesSelected: [],
         // showFilters: false,
         showArea: true,
-        showMore: true,
+        showStates: false,
+        // showMore: true,
     }
 
 
@@ -64,12 +65,12 @@ class IdeasListComponent extends Component {
         const statesCodes = statesCodesFilter.get()
         if (_.includes(statesCodes, state.code)) _.remove(statesCodes, code => code === state.code)
         else statesCodes.push(state.code);
-        this.setState({ statesCodesSelected: statesCodes, showList: false, });
-        statesCodesFilter.set(statesCodes);
+        this.setState({ statesCodesSelected: statesCodes });
+        // statesCodesFilter.set(statesCodes);
     }
 
     selectArea = area => {
-        this.setState({ areaSelected: area, showList: false });
+        this.setState({ areaSelected: area });
         this.props.areasIdsFilter.set(area && area.family || [])
     }
 
@@ -81,77 +82,49 @@ class IdeasListComponent extends Component {
         //this.props.textSearch.set(text);
     }
 
-    showFilters = e => {
-        e.preventDefault();
-        const { showFilters } = this.state;
-        const { textSearch, statesCodesFilter, areasIdsFilter } = this.props
-        if (showFilters) {
-
-            const { text, stateCode, areaId } = this.props.params;
-
-            textSearch.set('');
-            statesCodesFilter.set([]);
-            areasIdsFilter.set([]);
-            this.setState({
-                areaSelected: undefined,
-                textSearch: '',
-                statesCodesSelected: [],
-            })
-
-            if (text && stateCode && areaId) {
-                this.props.history.push('/my-ideas');
-                console.log('history');
-            }
-        }
-
-        this.setState(prev => ({ showFilters: !prev.showFilters, showList: prev.showFilters }));
-
-    }
-
     showArea = e => {
         e.preventDefault();
-        this.setState(prev => ({ showArea: !prev.showArea }));
+        this.setState(prev => ({ showArea: true, showStates: false }));
     }
 
-    // showList = e => {
-    //     e.preventDefault();
-    //     this.setState(prev => ({ showList: true }));
-    // }
+    showStates = e => {
+        e.preventDefault();
+        this.setState(prev => ({ showArea: false, showStates: true }));
+    }
 
     search = () => {
         const { textSearch, statesCodesFilter, areasIdsFilter } = this.props
-        const { text } = this.state;
+        const { text, areaSelected, statesCodesSelected } = this.state;
         textSearch.set(text);
+        areasIdsFilter.set(areaSelected && areaSelected.family || [])
+        statesCodesFilter.set(statesCodesSelected);
         this.setState({ showMore: true })
-        
     }
     handleKeyPress = (event) => {
         if (event.key == 'Enter') {
-            console.log('enter press here! ')
             this.search();
         }
     }
     clear = () => {
-        const { textSearch } = this.props;
-        this.setState({ text: '' })
+        const { textSearch, statesCodesFilter, areasIdsFilter, ideasFindLimit } = this.props;
+        this.setState({ text: '', statesCodesSelected: [] })
         textSearch.set('')
+        statesCodesFilter.set([]);
+       // areasIdsFilter.set([])
+        // ideasFindLimit.set(5);
     }
     more = () => {
         const { ideasFindLimit, ideas } = this.props;
-
-        // console.log(ideasFindLimit.get(), ideas.length);
         ideasFindLimit.set(ideasFindLimit.get() + 5)
-        // console.log(ideasFindLimit.get(), ideas.length, ideas.length);
-        this.setState({ showMore: (ideasFindLimit.get() === ideas.length + 5 ) })
+        //this.setState({ showMore: (ideasFindLimit.get() === ideas.length + 5) })
     }
     render() {
 
-        const { history, ideas, ideasstates, showEdit, user, textSearch } = this.props;
-        // const text = textSearch.get();
-        // const { areaId } = this.props.params;
+        const { history, ideas, ideasstates, showEdit, user, textSearch, ideasFindLimit } = this.props;
         const { stateSelected, areaSelected, statesCodesSelected } = this.state;
-        const { showFilters, showArea, showList, text, showMore } = this.state;
+        const { showFilters, showArea, showList, text, showStates } = this.state;
 
+        const showMore = ideasFindLimit.get() === ideas.length + 5
 
         return (
             <div className='ideas-list'>
@@ -167,17 +140,14 @@ class IdeasListComponent extends Component {
                                 <i className="fa fa-hand-peace-o"></i>
                             </Link>
                         }
-                        {/* {<div className={"btn btn-success btn-action ideas-button " + (showFilters ? 'active' : 'btn-trans')} onClick={this.showFilters}>
-                            <i className={"fa " + (showFilters && "fa-ban" || "fa-filter")}></i>
-                        </div>} */}
-                        {/* <Button className="btn btn-success btn-action ideas-button btn-trans fa fa-ban" onClick={this.clear.bind(this)}></Button> */}
-                        {showEdit && <ReactHTMLTableToExcel
-                            id="ideas-xls-button"
-                            className="btn btn-success btn-trans btn-action btn-ideas-excel ideas-button"
-                            table="ideas-to-xls"
-                            filename={"ideas-" + new Date().toLocaleDateString()}
-                            sheet="ideas"
-                            buttonText="xls" />
+                        {
+                            showEdit && <ReactHTMLTableToExcel
+                                id="ideas-xls-button"
+                                className="btn btn-success btn-trans btn-action btn-ideas-excel ideas-button"
+                                table="ideas-to-xls"
+                                filename={"ideas-" + new Date().toLocaleDateString()}
+                                sheet="ideas"
+                                buttonText="xls" />
                         }
                     </div>
                 </div>
@@ -193,15 +163,18 @@ class IdeasListComponent extends Component {
                             className="form-control input-sm"
                         />
                     </div>
-                    {/* <div className="panel panel-body panel-tabs">
+                    <div className="panel panel-body">
+
+                        {/* <Button disabled={showArea} className={"btn btn-success btn-search " + (showArea ? '' : 'btn-trans')} onClick={this.showArea}>{areaSelected && <i className="fa fa-filter"></i>} Areas</Button> */}
+                        <Button className={"btn btn-success btn-search " + (showArea ? '' : 'btn-trans')} onClick={this.showArea}>{areaSelected && <i className="fa fa-filter"></i>} Areas</Button>
+
                         {
-                            showEdit && <div>
-                                <button disabled={showArea} className={"btn btn-success btn-action " + (showArea ? 'active' : 'btn-trans')} onClick={this.showArea}>{areaSelected && <i className="fa fa-filter"></i>} Areas</button>
-                                <button disabled={!showArea} className={"btn btn-success btn-action " + (!showArea ? 'active' : 'btn-trans')} onClick={this.showArea}>{statesCodesSelected.length > 0 && <i className="fa fa-filter"></i>} Estados</button>
-                            </div>
+                            showEdit && !Roles.userIsInRole(user && user._id, ['Employee']) &&
+                            <Button className={"btn btn-success btn-search " + (showStates ? '' : 'btn-trans')} onClick={this.showStates}>{statesCodesSelected.length > 0 && <i className="fa fa-filter"></i>} Estados</Button>
+
                         }
-                    </div> */}
-                    {/* <div className="panel panel-body">
+                    </div>
+                    <div className="panel panel-body">
                         {
                             showArea &&
                             <AreasSearch {...this.props} selectArea={this.selectArea} areaSelected={areaSelected} /> ||
@@ -215,7 +188,7 @@ class IdeasListComponent extends Component {
                                 />
                             )
                         }
-                    </div> */}
+                    </div>
                     <div className="panel panel-body">
                         <Button className={"btn btn-success btn-search"} onClick={this.search}><i className="fa fa-search"></i> BUSCAR</Button>
                         <Button className={"btn btn-success btn-search"} onClick={this.clear}><i className="fa fa-ban"></i> LIMPIAR</Button>

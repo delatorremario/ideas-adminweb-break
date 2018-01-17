@@ -31,8 +31,18 @@ const composer = ({ match }, onData) => {
 	const limit = ideasFindLimit.get()
 
 	if (textSearch.get()) _.extend(filters, { $text: { $search: text } });
-	// if (statesCodesFilter.get().length > 0) _.extend(filters, { 'states.code': { $in: statesCodesFilter.get() } });
-	// if (areasIdsFilter.get().length > 0) _.extend(filters, { 'chief.areaId': { $in: areasIdsFilter.get() } });
+	if (statesCodesFilter.get().length > 0) {
+		const codesFilter = [];
+            _.each(states, code => {
+                codesFilter.push({ $where: `this.states[this.states.length - 1].code === '${code}'` })
+            })
+		_.extend(filters, { $or: codesFilter});
+			//'states.code': { $in: statesCodesFilter.get() } 
+		
+	}
+	if (areasIdsFilter.get().length > 0) _.extend(filters, { 'chief.areaId': { $in: areasIds } });
+
+	console.log('---areasids---', areasIds);
 
 	/*** end set filters */
 
@@ -44,8 +54,8 @@ const composer = ({ match }, onData) => {
 
 		const ideasstates = States.find({}, {}).fetch();
 		console.log('---filters---', filters);
-		//let ideas = _.isEmpty(filters) && [] || Ideas.find({}, { sort: { date: 1 }, limit: ideasFindLimit.get() }).fetch();
-		const ideas = Ideas.find({}, { sort: { date: 1 }, limit: ideasFindLimit.get() }).fetch();
+		const ideas = _.isEmpty(filters) && [] || Ideas.find({}, { sort: { date: 1 }, limit: ideasFindLimit.get() }).fetch();
+		//const ideas = Ideas.find({}, { sort: { date: 1 }, limit: ideasFindLimit.get() }).fetch();
 
 		// if (states.length > 0) {
 		// 	ideas = _.filter(ideas, (idea) => {
