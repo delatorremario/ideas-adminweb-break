@@ -11,7 +11,6 @@ import Areas from '../../../api/areas/areas';
 // import ideasstates from '../../../api/ideasStatesSchema/ideasstates';
 
 import Loading from '../../components/Loading.js';
-import IdeaList from '../../components/ideas/IdeaList';
 
 // const ideasFindLimit = new ReactiveVar(0);
 

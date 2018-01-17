@@ -1,7 +1,7 @@
 import React from 'react';
-import IdeasList from '../../containers/ideas/IdeasList';
+import IdeaListComponent from '../../components/ideas/IdeaListComponent';
 
-const Ideas = (props) => (
+const IdeasListPage = (props) => (
     <div className="pageWrapper">
         <div className="pageheader">
             <h1>Buscar Ideas</h1>
@@ -19,11 +19,11 @@ const Ideas = (props) => (
         <section id="main-content">
             <div className="row">
                 <div className="col-md-12 col-lg-12">
-                    <IdeasList {...props} />
+                    <IdeaListComponent {...props} />
                 </div>
             </div>
         </section>
     </div>
 );
 
-export default Ideas;
+export default IdeasListPage;
