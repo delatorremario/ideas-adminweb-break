@@ -6,13 +6,13 @@ Push.Configure({
         certData: Assets.getText('meteorApp-cert-prod.pem'),
         keyData: Assets.getText('meteorApp-key-prod.pem'),
         passphrase: '',
-        production: true,
         gateway: 'gateway.push.apple.com',
     },
     gcm: {
         apiKey: 'AAAAT4XhHy4:APA91bH7IldZN3enKa3mp_rGqH23BYjNG5NvwmxUXO2PI6Oslrupl1i24xiv07XdoYYYoNnm0Ht44PBIPCmwpPAVeiRvbQWC-C0GK6OAZwUidj2AXKvyrktWiTI6kKtGGVIOSByP7XUT',
         projectNumber: 341548539694
     },
+    production: true,
     // production: true,
     // 'sound' true,
     // 'badge' true,

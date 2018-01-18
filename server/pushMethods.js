@@ -20,13 +20,16 @@ Meteor.methods({
             sound: 'airhorn.caf',
             payload: {},
             gcm: {
-                title: text,
-                text: title,
+                title: title,
+                text: text,
                 style: 'inbox',
                 summaryText: '%n% notificacion/es'
             },
             apn: {
-                title: 'Sent via APN'
+                title: title,
+                text: text,
+                style: 'inbox',
+                summaryText: '%n% notificacion/es'
             },
             query: {
                 // this will send to all users
@@ -35,7 +38,6 @@ Meteor.methods({
         console.log('--sended--')
     },
     userNotification: function (text, title, viewers) {
-        var badge = 1
         console.log('--serverNotification--', text, title, viewers.length);
         check(text, String);
         check(title, String);
