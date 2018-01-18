@@ -144,7 +144,7 @@ const IdeaCard = ({ idea, imagesCursor, lap, handleRemove, showEdit, showNext, n
                                             key={index}
                                             style={{ backgroundColor: next.color }}
                                             className="btn btn-trans" >
-                                            {next.title} ({next.code})
+                                            {next.title}
                                             </Link>
                                     )
                                 }
