@@ -118,7 +118,11 @@ const IdeaCard = ({ idea, imagesCursor, lap, handleRemove, showEdit, showNext, n
                         {
                             _.map(states, (state, index) =>
                                 <div className="state-info" key={index}>
-                                    <small> <Moment format="DD MMM YY - HH:mm ->" date={state.createdAt} /> {state.step} {state.state} </small>
+                                    <small>
+                                        {
+                                            state.createdAt && <Moment format="DD MMM YY - HH:mm ->" date={state.createdAt} />
+                                        }
+                                        {state.step} {state.state} </small>
                                     <h4>{state.action}</h4>
                                     {
                                         _.map(state.toChanges, (toChange, i) => {
