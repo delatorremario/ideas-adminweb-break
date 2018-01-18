@@ -18,6 +18,7 @@ import Ideas from '../pages/ideas/Ideas';
 import EditIdea from '../containers/ideas/EditIdea';
 import IdeaViewContainer from '../containers/ideas/IdeaViewContainer'
 import MyIdeasList from '../containers/ideas/MyIdeasList';
+import IdeasListFilter from '../containers/ideas/IdeasListFilter'
 
 // Comments
 import CommentsContainer from '../containers/comments/CommentsContainer';
@@ -81,7 +82,8 @@ const PageWrapper = () => (
                 <Route exact path="/set-state/:ideaId/:code" component={SetStateContainer} />
 
                 {/* Ideas */}
-                <Route exact path="/ideas/:text?/:stateCode?/:step?/:areaId?/:showUser?/find/:remove?" component={Ideas} />
+                {/* <Route exact path="/ideas/:text?/:stateCode?/:step?/:areaId?/find" component={Ideas} /> */}
+                <Route exact path="/ideas/:stateCode?/:areaId?/filter" component={IdeasListFilter} />
                 <Route exact path="/my-ideas" component={MyIdeasList} />
                 <Route exact path="/ideas/new" component={EditIdea} />
                 <Route exact path="/idea/:_id/edit" component={EditIdea} />

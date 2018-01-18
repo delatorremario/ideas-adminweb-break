@@ -18,18 +18,9 @@ import AreasSearch from '../../containers/areas/AreasSearch';
 import Areas from '../../../api/areas/areas';
 import IdeasTableForExcelContainer from './IdeasTableForExcelContainer';
 
-class MyIdeasList extends Component {
+class IdeasListFilter extends Component {
 
-    state = {
-        areaSelected: undefined,
-        textSearch: '',
-        statesCodesSelected: [],
-        showFilters: false,
-        showArea: true,
-        showList: true,
-    }
-
-  
+    state = {}
 
     handleNav = (history, _id) => {
         history.push(`/idea/${_id}`)
@@ -58,72 +49,18 @@ class MyIdeasList extends Component {
         })
     }
 
-    selectState = state => e => {
-        e.preventDefault();
-        const { statesCodesFilter } = this.props;
-        const statesCodes = statesCodesFilter.get()
-        if (_.includes(statesCodes, state.code)) _.remove(statesCodes, code => code === state.code)
-        else statesCodes.push(state.code);
-        this.setState({ statesCodesSelected: statesCodes, showList: false, });
-        statesCodesFilter.set(statesCodes);
-    }
-
-    selectArea = area => {
-        this.setState({ areaSelected: area, showList: false });
-        this.props.areasIdsFilter.set(area && area.family || [])
-    }
-
-    onChangeTextSearch = e => {
-        e.preventDefault();
-        const text = e.target.value;
-        this.setState({ textSearch: text })
-        this.props.textSearch.set(text);
-    }
-
-    showFilters = e => {
-        e.preventDefault();
-        const { showFilters } = this.state;
-        const { textSearch, statesCodesFilter, areasIdsFilter } = this.props
-        if (showFilters) {
-
-            const { text, stateCode, areaId } = this.props.params;
-
-            textSearch.set('');
-            statesCodesFilter.set([]);
-            areasIdsFilter.set([]);
-            this.setState({
-                areaSelected: undefined,
-                textSearch: '',
-                statesCodesSelected: [],
-            })
-
-            if (text && stateCode && areaId) {
-                this.props.history.push('/my-ideas');
-                console.log('history');
-            }
-        }
-
-        this.setState(prev => ({ showFilters: !prev.showFilters, showList: prev.showFilters }));
-
-    }
-
-    showArea = e => {
-        e.preventDefault();
-        this.setState(prev => ({ showArea: !prev.showArea }));
-    }
-
-    showList = e => {
-        e.preventDefault();
-        this.setState(prev => ({ showList: true }));
-    }
 
     render() {
 
         const { history, ideas, ideasstates, showEdit, user, remove } = this.props;
-   
+       // const { areaId } = this.props.params;
+        const { stateSelected, textSearch, areaSelected, statesCodesSelected } = this.state;
+        const { showFilters, showArea, showList } = this.state;
+
+
         return (
             <div className='ideas-list'>
-                {/* <IdeasTableForExcelContainer ideas={ideas} />*/}
+                <IdeasTableForExcelContainer ideas={ideas} />
                 <div className="panel panel-body">
                     <div className="ideas-buttons">
                         <Link to="/ideas/new_user" className="btn btn-success btn-trans btn-action ideas-button">
@@ -138,7 +75,7 @@ class MyIdeasList extends Component {
                         <Link className="btn btn-success btn-action ideas-button btn-trans" to='/ideas/find'>
                             <i className="fa fa-search"></i>
                         </Link>
-                         {showEdit && <ReactHTMLTableToExcel
+                        {showEdit && <ReactHTMLTableToExcel
                             id="ideas-xls-button"
                             className="btn btn-success btn-trans btn-action btn-ideas-excel ideas-button"
                             table="ideas-to-xls"
@@ -147,20 +84,18 @@ class MyIdeasList extends Component {
                             buttonText="xls" />
                         }
                     </div>
-                </div> 
-
-
+                </div>
 
                 <div>
                     {
-                        ideas &&
-                        <div className="row cards-container">
-                            {_.map(ideas, (idea, index) => {
-                                let lap = index / 2;
-                                return <IdeaCard key={index} idea={idea} lap={lap} handleRemove={this.handleRemove} showEdit={showEdit} />
-                            })}
-                        </div>
-                        || <Alert bsStyle="warning">No se encontraron datos.</Alert>
+                        ideas.length > 0 ?
+                            <div className="row cards-container">
+                                {_.map(ideas, (idea, index) => {
+                                    let lap = index / 2;
+                                    return <IdeaCard key={index} idea={idea} lap={lap} handleRemove={this.handleRemove} showEdit={showEdit} />
+                                })}
+                            </div>
+                            : <Alert bsStyle="warning">No se encontraron datos.</Alert>
                     }
                 </div>
 
@@ -169,8 +104,9 @@ class MyIdeasList extends Component {
         )
     }
 }
-MyIdeasList.propTypes = {
+IdeasListFilter.propTypes = {
+    history: PropTypes.object,
     ideas: PropTypes.array,
 };
 
-export default MyIdeasList;
+export default IdeasListFilter;
