@@ -7,7 +7,7 @@ App.info({
     author: 'Holos Develops',
     email: 'desarrollo@holos.cl',
     website: 'http://holos.cl/',
-    version: "1.0.7",
+    version: "0.0.8",
 });
 
 // Set up resources such as icons and launch screens.
@@ -19,8 +19,8 @@ App.icons({
     'ios_settings_3x': 'public/app/iPhone/ideas.appiconset/iphone-settings@3x.png',
     'ios_spotlight_2x': 'public/app/iPhone/ideas.appiconset/iphone-spotlight@2x.png',
     'ios_spotlight_3x': 'public/app/iPhone/ideas.appiconset/iphone-spotlight@3x.png',
-    // 'notification_2x': 'public/app/iPhone/ideas.appiconset/iphone-notification@2x.png',
-    // 'notification_3x': 'public/app/iPhone/ideas.appiconset/iphone-notification@3x.png',
+    'notification_2x': 'public/app/iPhone/ideas.appiconset/iphone-notification@2x.png',
+    'notification_3x': 'public/app/iPhone/ideas.appiconset/iphone-notification@3x.png',
 
     // More screen sizes and platforms...
 
