@@ -32,7 +32,10 @@ const IdeaCard = ({ idea, imagesCursor, lap, handleRemove, showEdit, showNext, n
                         states && lastState &&
                         <div>
                             <small className="label" style={{ backgroundColor: `${color}` }}>{lastState.step} - {lastState.state}</small>
-                            <div className="time-ago">hace <Moment fromNow ago locale="es">{lastState.createdAt}</Moment></div>
+                            {
+                                lastState.createdAt &&
+                                <div className="time-ago">hace <Moment fromNow ago locale="es">{lastState.createdAt}</Moment></div>
+                            }
                         </div>
                     }
                     {
@@ -145,7 +148,7 @@ const IdeaCard = ({ idea, imagesCursor, lap, handleRemove, showEdit, showNext, n
                                             style={{ backgroundColor: next.color }}
                                             className="btn btn-trans" >
                                             {next.title}
-                                            </Link>
+                                        </Link>
                                     )
                                 }
                             </div>
