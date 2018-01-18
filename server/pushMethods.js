@@ -20,8 +20,8 @@ Meteor.methods({
             sound: 'airhorn.caf',
             payload: {},
             gcm: {
-                title: text,
-                text: title,
+                title: title,
+                text: text,
                 style: 'inbox',
                 summaryText: '%n% notificacion/es'
             },
