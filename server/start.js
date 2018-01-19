@@ -42,7 +42,7 @@ const leaders = ['mauricio.ma.rodriguez@bhpbilliton.com', 'delatorremario@gmail.
   'camila.ca.perez@bhpbilliton.com', 'maria.mp.bustamante@bhpbilliton.com'
 ];
 
-const executives = ['felipe.fs.aguilera@bhpbilliton.com', 'luis.a.benavente@bhpbilliton.com']
+const executives = ['luis.gonzalez4@bhpbilliton.com', 'carlos.r.delgado@bhpbilliton.com']
 const employees = ['usuario@holos.cl','cristhianco.diaz@bhpbilliton.com', 'neftali.a.herrera@bhpbilliton.com'];
 
 const createAccounts = () => {

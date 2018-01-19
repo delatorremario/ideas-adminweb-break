@@ -110,6 +110,7 @@ export default class ProfileEditor extends Component {
 
         const { _id, emails, profile } = this.state.user;
         const rut = profile && profile.rut || '';
+        const group = profile && profile.group || '';
         const firstName = profile && profile.firstName || '';
         const secondName = profile && profile.secondName || '';
         const lastName = profile && profile.lastName || '';
@@ -158,6 +159,7 @@ export default class ProfileEditor extends Component {
                                             ))
                                         }
                                     </span>
+                                    <span className="text-muted">{group}</span>
                                     {
                                         !completedProfile(user) &&
                                         <Alert bsStyle="warning">

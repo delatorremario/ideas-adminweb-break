@@ -28,6 +28,7 @@ const PersonSearch = ({ persons, onChangeSearchPerson, selectPerson }) => {
                                                 <span className="badge">
                                                     <small>{person.rut}</small>
                                                 </span>
+                                                <div><small>{person.group}</small></div>
                                             </li>))
                                     }
 

@@ -157,6 +157,7 @@ class SetStateComponent extends React.Component {
                                         toChange.type === 'chief' && <div>
                                             <ControlLabel>{toChange.label}</ControlLabel>
                                             <PersonSearchAndCardContainer
+                                                onlyChief={true}
                                                 selectPerson={selectPerson}
                                                 person={toChange.chief}
                                             />

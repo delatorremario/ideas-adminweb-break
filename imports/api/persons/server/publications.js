@@ -7,14 +7,18 @@ import { check } from 'meteor/check';
 
 import Persons from '../persons';
 
-Meteor.publish('persons.search', (text, limit) => {
+Meteor.publish('persons.search', (text, onlyChief, myArea, limit) => {
   check(text, String);
   check(limit, Number);
+  check(myArea, Boolean);
+  check(onlyChief, Boolean);
+
   const self = this.Meteor;
   const user = self.user();
 
   if (user) {
     const filters = { $text: { $search: text }, corporationId: (user.profile && user.profile.corporationId) || '' };
+    if (onlyChief) _.extend(filters, { group: 'EXECUT.' })
     const persons = Persons.find(
       filters,
       { fields: { score: { $meta: 'textScore' } } }, { sort: { score: -1 }, limit: limit });

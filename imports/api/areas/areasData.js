@@ -166,5 +166,6 @@ const areasData = [
     { code: '30057564', name: 'Planificación y control de procesos', type: 'Gerencia', parent: '30000637'},
     { code: '30059171', name: 'Comisionamiento y proyectos mayores', type: 'Gerencia', parent: '30000637'},
     { code: '30066484', name: 'Producción concentradora', type: 'Gerencia', parent: '30000637'},
+    { code: '30013283', name: 'Producción NPI', type: 'Gerencia', parent: '30007434'},
 ]
 export default areasData

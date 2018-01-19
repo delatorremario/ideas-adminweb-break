@@ -23,12 +23,8 @@ class PersonCard extends Component {
             <div className="col-md-6 person-card" style={{ display: "flex" }}>
                 <div className="card-single" style={{ width: "100%" }}>
                     <div className="close-card" onClick={removePerson(person).bind(this)} ><i className="fa fa-times"></i></div>
-                    <h2><i className="fa fa-user title-icon"></i> {person.lastName}, {person.firstName} {person.secondName}</h2>
-                    <hr className="nonePM"></hr>
-                    <small className="">{person.email}</small>
-                    <h3 className="">{area && area.name}</h3>
-                    {/* <p>Escondida - NPI & Conc. Handling Operations</p>
-                            <p>NPI Mtto</p> */}
+                    <h2><i className="fa fa-user title-icon"></i> {person.lastName} {person.secondLastName}, {person.firstName} {person.secondName}</h2>
+                    <h3>{area && area.name} <span><small>{person.email}</small></span> </h3>
                 </div>
             </div>
         );
