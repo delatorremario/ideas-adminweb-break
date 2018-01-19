@@ -10,35 +10,31 @@ import FileUpload from '../files/FileUpload';
 import Files from '../../../api/files/files';
 
 
-const companies = ['MEL', 'BHP', 'Contratista']
+const companies = ['BHP', 'Contratista']
 
 const completedProfile = (user) => {
     return user && user.profile
         && user.profile.firstName
         && user.profile.lastName
-        && user.profile.oneUp
-        && user.profile.area
+        && user.profile.rut
 }
 export default class ProfileEditor extends Component {
     state = {
         user: {
             profile: {
-                group: '',
-                personId: '',
-                rut: '',
-                firstName: '',
-                secondName: '',
+                masterCode: '',
                 lastName: '',
                 secondLastName: '',
-                nationality: '',
-                company: '',
-                oneUp: {
-                    email: '',
-                    name: '',
-                },
+                firstName: '',
+                secondName: '',
+                rut: '',
+                email: '',
+                managerCode: '',
+                areaCode: '',
                 areaId: '',
+                group: '',
+                origin: ''
             },
-
         },
         person: {},
         searching: false,
@@ -110,6 +106,13 @@ export default class ProfileEditor extends Component {
     render() {
 
         const { user, person } = this.state;
+
+        console.log('user', user);
+        console.log('person', person);
+
+        const MEL = person && person.origin === 'MEL'
+        console.log('MEL', MEL);
+
         const { _id, emails, profile } = this.state.user;
         const rut = profile && profile.rut || '';
         const firstName = profile && profile.firstName || '';
@@ -122,10 +125,10 @@ export default class ProfileEditor extends Component {
         const contactPhone = profile && profile.contactPhone || '';
         const address = profile && profile.address || '';
         const company = profile && profile.company || '';
-        const oneUp = profile && profile.oneUp || '';
+        const oneUp = profile && profile.managerCode || '';
         const emailChief = profile && profile.emailChief || '';
         const area = profile && profile.area || '';
-        const oneText = company === "MEL" ? 'One Up' : 'Jefe Directo';
+        const oneText = MEL ? 'One Up' : 'Jefe Directo';
         const imageId = profile && profile.imageId || '';
         const image = Files.findOne({ _id: imageId });
 
@@ -165,30 +168,26 @@ export default class ProfileEditor extends Component {
                                             Debe completar su perfil para continuar
                                         </Alert>
                                     }
-                                    {/* {
-                                        _.isEmpty(person) && */}
-                                    <FormGroup>
-                                        <div className="col-sm-12">
-                                            {
-                                                _.map(companies, (inc, index) =>
-                                                    <Radio key={index} name="company" value={inc} checked={inc == company}
-                                                        // onChange={this.onChangeProfile} 
-                                                        onChange={(e) => this.onChangeInc(inc)}
-                                                        inline>
-                                                        {inc}
-                                                    </Radio>
-                                                )
-                                            }
-                                        </div>
-                                    </FormGroup>
-                                    {/* } */}
-
-                                    {/* {
-                                        !_.isEmpty(person) && */}
-                                    <div className="connect">
-                                        <button className="btn btn-primary btn-trans btn-xs" onClick={this.setDatosMel}>Copiar Datos de MEL</button>
-                                    </div>
-                                    {/* } */}
+                                    {
+                                        MEL &&
+                                        <div className="connect">
+                                            <button className="btn btn-primary btn-trans btn-xs" onClick={this.setDatosMel}>Copiar Datos de MEL</button>
+                                        </div> ||
+                                        <FormGroup>
+                                            <div className="col-sm-12">
+                                                {
+                                                    _.map(companies, (inc, index) =>
+                                                        <Radio key={index} name="company" value={inc} checked={inc == company}
+                                                            // onChange={this.onChangeProfile} 
+                                                            onChange={(e) => this.onChangeInc(inc)}
+                                                            inline>
+                                                            {inc}
+                                                        </Radio>
+                                                    )
+                                                }
+                                            </div>
+                                        </FormGroup>
+                                    }
                                 </div>
                             </div>
                         </div>
@@ -314,7 +313,7 @@ export default class ProfileEditor extends Component {
                     <FormGroup>
                         <div className="col-sm-4">
                             <ControlLabel>
-                                {oneText}
+                                Código {oneText}
                             </ControlLabel>
                         </div>
                         <div className="col-sm-6">
@@ -324,10 +323,11 @@ export default class ProfileEditor extends Component {
                                 value={oneUp}
                                 onChange={this.onChangeProfile}
                                 placeholder={oneText}
+                                disabled={true}
                             />
                         </div>
                     </FormGroup>
-                    <FormGroup>
+                    {/* <FormGroup>
                         <div className="col-sm-4">
                             <ControlLabel>Email {oneText}</ControlLabel>
                         </div>
@@ -340,7 +340,7 @@ export default class ProfileEditor extends Component {
                                 placeholder={'Email ' + oneText}
                             />
                         </div>
-                    </FormGroup>
+                    </FormGroup> */}
                     <FormGroup>
                         <div className="col-sm-4">
                             <ControlLabel>Area de Trabajo</ControlLabel>

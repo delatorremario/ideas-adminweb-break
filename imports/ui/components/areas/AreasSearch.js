@@ -7,56 +7,55 @@ import { ControlLabel } from 'react-bootstrap';
 class AreasSearch extends Component {
 
     state = {
-        selected: undefined,
-        text: '',
+        // selected: undefined,
+        // text: '',
     }
 
-    componentDidMount() {
-        this.setState({ selected: this.props.areaSelected })
-    }
+    // componentDidMount() {
+    //     this.setState({ selected: this.props.areaSelected, text: this.props.textSearch.get() })
+    // }
 
 
     onChangeSearch = e => {
         e.preventDefault();
         const text = e.target.value;
         this.props.textSearch.set(text);
-        this.setState({ text: text })
+        // this.setState({ text: text })
     }
 
     select = select => e => {
         e.preventDefault();
-        this.setState({ selected: select });
-        this.props.selectArea(select);
+        const { textSearch, selectArea } = this.props;
+        textSearch.set('');
+        selectArea(select);
     }
     removeFilter = e => {
         e.preventDefault()
         const { textSearch, selectArea } = this.props;
-
         textSearch.set('');
-        this.setState({ selected: undefined, text: '' })
         selectArea(undefined);
     }
     render() {
-        const { selected, text } = this.state;
-        const { areas, selectArea } = this.props;
-
+        // const { selected } = this.state;
+        const { areas, selectArea, textSearch, areaSelected } = this.props;
+        const text = textSearch.get();
         return <div className='areas-search'>
             {
-                !selected &&
+                !areaSelected &&
                 <input type="search" className="form-control input-sm" value={text} placeholder="Buscar por Nombre de Area ..." onChange={this.onChangeSearch.bind(this)} />
             }
             {
-                selected &&
+                areaSelected &&
                 <div >
                     <div className="area-selected">
-                        <h3>{selected.name} <span><a href="" onClick={this.removeFilter.bind(this)}><i className='fa fa-times' /></a></span></h3>
+                        <h3>{areaSelected.name} <span><a href="" onClick={this.removeFilter.bind(this)}><i className='fa fa-times' /></a></span></h3>
 
                     </div>
                 </div>
             }
 
             {
-                !selected && areas && <div className="form-group">
+                !areaSelected && areas && <div className="form-group">
                     {/* <label className="col-md-10 control-label">Seleccione una Persona para continuar</label> */}
                     <div className="card" style={{ marginTop: "25px" }}>
                         <ul className="list-group list-group-flush">

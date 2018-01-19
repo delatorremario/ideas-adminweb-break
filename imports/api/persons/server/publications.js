@@ -27,6 +27,10 @@ Meteor.publish('persons.view', (_id) => {
   check(_id, String);
   return Persons.find(_id);
 });
+Meteor.publish('persons.executive', (_id) => {
+  check(_id, String);
+  return Persons.find(_id);
+});
 
 Meteor.publish('persons.email', (email) => {
   check(email, String);

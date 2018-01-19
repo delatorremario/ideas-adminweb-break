@@ -23,16 +23,14 @@ const handleUpsert = () => {
 const validate = () => {
     $(component.profileEditorForm).validate({
         rules: {
+            rut: { required: true },
             firstName: { required: true },
             lastName: { required: true },
-            oneUp: { required: true },
-            area: { required: true },
         },
         messages: {
+            rut: { required: 'Ingrese su RUT' },
             firstName: { required: 'Ingrese el Primer Nombre' },
             lastName: { required: 'Ingrese el Apellido' },
-            oneUp: { required: 'Ingrese un Nombre' },
-            area: { required: 'Ingrese un Area' },
         },
         submitHandler() { handleUpsert(); },
     });

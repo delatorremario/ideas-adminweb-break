@@ -174,7 +174,8 @@ export default class IdeaUserEditor extends Component {
     }
 
     selectArea = area => {
-        this.setState(prev => ({ doc: { ...prev.doc, chief: { areaId: area._id } }, area }))
+        console.log('--AREA--', area);
+        this.setState(prev => ({ doc: { ...prev.doc, chief: { areaId: area && area._id || undefined } }, area }))
     }
 
     attachImage = (fileObj) => {

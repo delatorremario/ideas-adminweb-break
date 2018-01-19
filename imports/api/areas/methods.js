@@ -156,8 +156,6 @@ Meteor.methods({
     },
 });
 
-
-
 rateLimit({
     methods: [
         upsertArea,
@@ -166,7 +164,6 @@ rateLimit({
     limit: 5,
     timeRange: 1000,
 });
-
 
 const findLeader = (area) => {
     const leader = Meteor.users.findOne({ 'profile.leaderAreasIds': area._id }, { fields: { profile: 1 } })

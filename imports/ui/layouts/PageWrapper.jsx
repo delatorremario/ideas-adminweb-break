@@ -50,8 +50,7 @@ const completedProfile = () => {
     return user && user.profile
         && user.profile.firstName
         && user.profile.lastName
-        && user.profile.oneUp
-        && user.profile.area
+        && user.profile.rut
 }
 
 const componentDidMount = () => {

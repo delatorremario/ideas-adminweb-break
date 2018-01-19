@@ -26,6 +26,12 @@ Areas.schema = new SimpleSchema([
         }
     },
     {
+        code: {
+            type: String
+        }
+    },
+   
+    {
         typeAreaId: {
             type: String, optional: true // Area Operativa o Area Funcional
         }
@@ -35,18 +41,9 @@ Areas.schema = new SimpleSchema([
             type: String, optional: true // 'Presidencia', 'Vicepresidencia', 'Gerencia General', 'Gerencia', 'SuperIntendencia
         }
     },
+ 
     {
         parentAreaId: {
-            type: String, optional: true
-        }
-    },
-    {
-        masterDataMatchText: {
-            type: String, optional: true
-        }
-    },
-    {
-        responsableId: {
             type: String, optional: true
         }
     },
@@ -61,6 +58,16 @@ Areas.schema = new SimpleSchema([
         }
     },
     { family: { type: [String], optional: true } },
+    {
+        masterType: {
+            type: String, optional: true // 'Presidencia', 'Vicepresidencia', 'Gerencia General', 'Gerencia', 'SuperIntendencia
+        }
+    },
+    {
+        masterParentCode: {
+            type: String, optional: true 
+        }
+    },
 ])
 
 Areas.attachSchema(Areas.schema);
