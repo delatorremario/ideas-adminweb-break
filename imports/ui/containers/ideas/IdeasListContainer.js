@@ -42,8 +42,6 @@ const composer = ({ match }, onData) => {
 	}
 	if (areasIdsFilter.get().length > 0) _.extend(filters, { 'chief.areaId': { $in: areasIds } });
 
-	console.log('---areasids---', areasIds);
-
 	/*** end set filters */
 
 	const subsIdeas = Meteor.subscribe('ideas.filters', filters, limit);
@@ -53,7 +51,7 @@ const composer = ({ match }, onData) => {
 	if (subsIdeas.ready() && statessub.ready()) {
 
 		const ideasstates = States.find({}, {}).fetch();
-		console.log('---filters---', filters);
+		// console.log('---filters---', filters);
 		const ideas = _.isEmpty(filters) && [] || Ideas.find({}, { sort: { date: 1 }, limit: ideasFindLimit.get() }).fetch();
 		//const ideas = Ideas.find({}, { sort: { date: 1 }, limit: ideasFindLimit.get() }).fetch();
 

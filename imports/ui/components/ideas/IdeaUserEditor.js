@@ -174,7 +174,6 @@ export default class IdeaUserEditor extends Component {
     }
 
     selectArea = area => {
-        console.log('--AREA--', area);
         this.setState(prev => ({ doc: { ...prev.doc, chief: { areaId: area && area._id || undefined } }, area }))
     }
 

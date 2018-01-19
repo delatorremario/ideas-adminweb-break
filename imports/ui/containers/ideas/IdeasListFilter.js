@@ -51,7 +51,6 @@ const composer = ({ match }, onData) => {
 			let ideas = Ideas.find(filters, { sort: { date: 1 }, limit: 0 }).fetch();
 
 			const showEdit = Roles.userIsInRole(user && user._id, ['SuperAdminHolos', 'Leader'])
-			console.log('--IDEAS--container--', ideas)
 
 			onData(null, { ideas, user, showEdit });
 		}

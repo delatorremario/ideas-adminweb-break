@@ -106,12 +106,7 @@ export default class ProfileEditor extends Component {
     render() {
 
         const { user, person } = this.state;
-
-        console.log('user', user);
-        console.log('person', person);
-
         const MEL = person && person.origin === 'MEL'
-        console.log('MEL', MEL);
 
         const { _id, emails, profile } = this.state.user;
         const rut = profile && profile.rut || '';

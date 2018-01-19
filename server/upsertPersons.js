@@ -32,7 +32,7 @@ Meteor.methods({
 
                 Persons.upsert({ _id: find && find._id || '' }, { $set: { ...person } }, (err, data) => {
                     console.info('UPSERT', data, person.email, err);
-                    Meteor.users.upsert({ 'emails.address': person.email }, { $set: { profile: { ...person } } })
+                    Meteor.users.update({ 'emails.address': person.email }, { $set: { profile: { ...person } } })
                 });
             })
         })

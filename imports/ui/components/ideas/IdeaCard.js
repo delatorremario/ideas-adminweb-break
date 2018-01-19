@@ -24,7 +24,7 @@ const IdeaCard = ({ idea, imagesCursor, lap, handleRemove, showEdit, showNext, n
                     <div style={{ borderBottom: `1px solid ${color}` }}>
                         <small> <Moment format="DD MMM YYYY HH:mm" date={date} /> </small>
                         <div className="title-name" style={{ color: color }}>
-                            <b>&nbsp;{person.lastName} </b>{person.firstName} {person.secondName}
+                            <b>&nbsp;{person && person.lastName} </b>{ person && person.firstName} {person && person.secondName}
                         </div>
                     </div>
                     <br></br>
@@ -87,7 +87,7 @@ const IdeaCard = ({ idea, imagesCursor, lap, handleRemove, showEdit, showNext, n
                     </p>
                     <div className="col-md-12 panel-body-description">
                         <p>Ingresada: <small><Moment format="DD MMM YYYY" date={createdAt} /></small></p>
-                        <p><b>Lider: {leader.lastName} {leader.firstName} {leader.secondName}</b></p>
+                        <p><b>Lider: {leader && leader.lastName} {leader && leader.firstName} {leader && leader.secondName}</b></p>
                         <p>Encargado de Area: <b>{chief.lastName} {chief.firstName} {chief.secondName}</b></p>
                         <p>Oportunidad: <b>{opportunity}</b></p>
                         <p>Descripción: <b>{description}</b></p>
