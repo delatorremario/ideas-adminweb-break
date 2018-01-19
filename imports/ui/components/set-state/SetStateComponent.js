@@ -82,7 +82,6 @@ class SetStateComponent extends React.Component {
         const { toChanges } = this.state;
         switch (type) {
             case 'date':
-                console.log('---DATE---', e);
                 toChanges[index].date = e;
                 break;
             case 'chief':
@@ -112,6 +111,7 @@ class SetStateComponent extends React.Component {
     render() {
         const { idea } = this.props;
         const { toChanges } = this.state
+        const { area } = idea;
         return (
             <div>
                 <div>
@@ -167,7 +167,7 @@ class SetStateComponent extends React.Component {
                                     {
                                         toChange.type === 'area' && <div>
                                             <ControlLabel>{toChange.label}</ControlLabel>
-                                            <AreasSearch {...this.props} selectArea={selectArea} />
+                                            <AreasSearch {...this.props} areaSelected={area} selectArea={selectArea} />
                                         </div>
                                     }
                                     {
