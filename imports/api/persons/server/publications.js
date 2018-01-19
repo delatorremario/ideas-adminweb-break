@@ -16,15 +16,18 @@ Meteor.publish('persons.search', (text, onlyChief, myArea, limit) => {
   const self = this.Meteor;
   const user = self.user();
 
-  if (user) {
+  if (!user) return;
     const filters = { $text: { $search: text }, corporationId: (user.profile && user.profile.corporationId) || '' };
     if (onlyChief) _.extend(filters, { group: 'EXECUT.' })
+    if (myArea) {
+      _.extend(filters, { areaId: user.profile && user.profile.areaId })
+      console.log('myarea', myArea, user);
+    }
     const persons = Persons.find(
       filters,
       { fields: { score: { $meta: 'textScore' } } }, { sort: { score: -1 }, limit: limit });
 
     return persons;
-  } else return;
 });
 
 Meteor.publish('persons.view', (_id) => {
