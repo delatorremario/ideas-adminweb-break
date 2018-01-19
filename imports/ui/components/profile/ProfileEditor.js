@@ -343,6 +343,21 @@ export default class ProfileEditor extends Component {
                     </FormGroup> */}
                     <FormGroup>
                         <div className="col-sm-4">
+                            <ControlLabel>Código de Area</ControlLabel>
+                        </div>
+                        <div className="col-sm-6">
+                            <FormControl
+                                type="text"
+                                name="areaCode"
+                                value={areaCode}
+                                onChange={this.onChangeProfile}
+                                placeholder="Código de Area"
+                                disabled={!_.isEmpty(person)}
+                            />
+                        </div>
+                    </FormGroup>
+                    <FormGroup>
+                        <div className="col-sm-4">
                             <ControlLabel>Area de Trabajo</ControlLabel>
                         </div>
                         <div className="col-sm-6">
