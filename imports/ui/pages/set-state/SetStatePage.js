@@ -17,11 +17,11 @@ const SetStatePage = (props) => {
                 </ol>
             </div>
         </div>
-        <section id="main-content">
+        <section id="main-content" className='state-component'>
             <div className="row">
                 <div className="col-md-12 col-lg-12">
                     <div className="panel">
-                        <div className="panel-body ng-binding">
+                        <div className="panel-body">
 
                             <SetStateComponent {...props} />
 

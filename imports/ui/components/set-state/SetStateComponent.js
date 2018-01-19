@@ -113,7 +113,7 @@ class SetStateComponent extends React.Component {
         const { toChanges } = this.state
         const { area } = idea;
         return (
-            <div>
+            <div className='state-component'>
                 <div>
                     <FormGroup>
                         {
@@ -131,6 +131,10 @@ class SetStateComponent extends React.Component {
                                     }
                                     this.onChangeChange(index, 'chief')(chief);
                                 }
+                                // const myAreaCheck = () => {
+                                //     console.log('toChange.label', toChange.label, toChange.label === 'Otro Ejecutivo de mi Area');
+                                //     return false // toChange.label === 'Otro Ejecutivo de mi Area'
+                                // }
                                 return <div key={index}>
                                     {
                                         toChange.type === 'date' && <div>

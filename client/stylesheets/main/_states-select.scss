@@ -1,40 +1,39 @@
 .states-select {
     font-size: smaller;
-
     .state-row {
-        display: flex;
-        // border: 1px solid black;
-        padding: 5px;;
+        display: flex; // border: 1px solid black;
+        padding: 5px;
+        ;
         .state-color {
             width: 10px; // padding: 0px;
             min-width: 10px; // padding: 0px;
             margin-left: -5px;
             margin-top: -5px;
             margin-bottom: -5px;
-        }      
+        }
         .state-info {
             display: flex;
-            align-items: center;   
+            align-items: center;
             padding-left: 10px;
             div {
                 padding-right: 5px;
             }
-
             div:first-child {
                 min-width: 25px;
             }
         }
     }
-
     .state-row:hover {
         cursor: pointer;
-        background-color:rgb(235, 235, 235);
+        background-color: rgb(235, 235, 235);
     }
 }
 
-li:hover { cursor: pointer;}
+li:hover {
+    cursor: pointer;
+}
 
-li .state-info{
+li .state-info {
     padding-left: 15px;
 }
 
@@ -43,12 +42,17 @@ li .state-info{
     text-shadow: 1px 1px #888888;
 }
 
+.state-component {
+    .blur-content {
+        filter: none !important;
+    }
+}
+
 @media all and (max-width:768px) {
     .form-steps .states-select {
         margin-left: -45px;
         margin-right: -45px;
     }
-
     .show-filters {
         .states-select {
             margin-left: -16px;
