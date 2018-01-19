@@ -24,6 +24,7 @@ Meteor.methods({
         state6B();
         state7A();
         state7B();
+        console.log('-- end states relations --');
     }
 });
 
@@ -34,13 +35,13 @@ const state1A = () => {
         "title": "Dar Continuidad",
         "action": "Dar Continuidad",
         "code": "1B",
-        "color": "green",
+        "color": States.findOne({code:"1B"}).color,
     },
     {
         "title": "Derivar a otro Lider",
         "action": "Derivar a otro Lider",
         "code": "1A",
-        "color": "grey",
+        "color": States.findOne({code:"1A"}).color,
     }]
 
     const toChanges = [
@@ -74,19 +75,19 @@ const state1B = () => {
         "title": "Derivar",
         "action": "Derivar Idea",
         "code": "2A",
-        "color": "green",
+        "color": States.findOne({code:"2A"}).color,
     },
     {
         "title": "Rechazar / Repetida",
         "action": "Rechazar Idea Repetida",
         "code": "3B",
-        "color": "grey",
+        "color": States.findOne({code:"3B"}).color,
     },
     {
         "title": "Rechazar / Proceso",
         "action": "Rechazar Idea en Proceso",
         "code": "3A",
-        "color": "orange",
+        "color": States.findOne({code:"3A"}).color,
     }
     ]
 
@@ -119,19 +120,19 @@ const state2A = () => {
             "title": "No Corresponde a mi Area",
             "action": "Devolver Idea",
             "code": "2C",
-            "color": "green",
+            "color": States.findOne({code:"2C"}).color,
         },
         {
             "title": "Corresponde a mi Area, pero la decisión es de otro lider de Area",
             "action": "Rederivar Idea",
             "code": "2B",
-            "color": "grey",
+            "color": States.findOne({code: "2B"}).color,
         },
         {
             "title": "La decisión si me corresponde",
             "action": "Dar Continuidad",
             "code": "2D",
-            "color": "orange",
+            "color": States.findOne({code: "2D"}).color,
         },
     ]
 
@@ -167,19 +168,19 @@ const state2B = () => {
             "title": "No Corresponde a mi Area",
             "action": "Devolver Idea",
             "code": "2C",
-            "color": "green",
+            "color": States.findOne({code: "2C"}).color,
         },
         {
             "title": "Corresponde a mi Area, pero la decisión es de otro lider de Area",
             "action": "Rederivar Idea",
             "code": "2B",
-            "color": "grey",
+            "color": States.findOne({code: "2B"}).color,
         },
         {
             "title": "La decisión si me corresponde",
             "action": "Dar Continuidad",
             "code": "2D",
-            "color": "orange",
+            "color": States.findOne({code: "2D"}).color,
         },
     ]
 
@@ -214,13 +215,13 @@ const state2C = () => {
         "title": "Dar Continuidad",
         "action": "Dar Respuesta",
         "code": "1B",
-        "color": "green",
+        "color": States.findOne({code: "1B"}).color,
     },
     {
         "title": "Derivar a otra Area",
         "action": "Derivar a otra Area",
         "code": "1A",
-        "color": "grey",
+        "color": States.findOne({code: "1A"}).color,
     }]
 
     const toChanges = [
@@ -253,37 +254,37 @@ const state2D = () => {
             "title": "Aprobar",
             "action": "Aceptar Idea",
             "code": "5A",
-            "color": "green",
+            "color": States.findOne({code: "5A"}).color,
         },
         {
             "title": "Rechazar / Proceso",
             "action": "Rechazar Idea en Proceso",
             "code": "3A",
-            "color": "orange",
+            "color": States.findOne({code: "3A"}).color,
         },
         {
             "title": "Rechazar / Repetida",
             "action": "Rechazar Idea Repetida",
             "code": "3B",
-            "color": "grey",
+            "color": States.findOne({code: "3B",}).color,
         },
         {
             "title": "Rechazar / No factible",
             "action": "Rechazar Idea",
             "code": "3C",
-            "color": "grey",
+            "color": States.findOne({code: "3C",}).color,
         },
         {
             "title": "Postergar",
             "action": "Postergar Idea",
             "code": "4A",
-            "color": "orange",
+            "color": States.findOne({code: "4A",}).color,
         },
         {
             "title": "Reprogramar Feedback",
             "action": "Reprogramar Feedback",
             "code": "2D",
-            "color": "orange",
+            "color": States.findOne({code: "2D",}).color,
         },
     ]
 
@@ -322,7 +323,7 @@ const state3A = () => {
             "title": "Confirmar Rechazo",
             "action": "Confirmar Rechazo",
             "code": "3D",
-            "color": "green",
+            "color": States.findOne({code: "3D"}).color,
         },
     ]
 
@@ -361,7 +362,7 @@ const state3B = () => {
             "title": "Confirmar Rechazo",
             "action": "Confirmar Rechazo",
             "code": "3D",
-            "color": "green",
+            "color": States.findOne({code: "3D",}).color,
         },
     ]
 
@@ -400,7 +401,7 @@ const state3C = () => {
             "title": "Confirmar Rechazo",
             "action": "Confirmar Rechazo",
             "code": "3D",
-            "color": "green",
+            "color": States.findOne({code: "3D",}).color,
         },
     ]
 
@@ -470,13 +471,13 @@ const state4A = () => {
             "title": "Comenzar Proceso",
             "action": "Comenzar Proceso",
             "code": "2D",
-            "color": "green",
+            "color": States.findOne({code: "2D",}).color,
         },
         {
             "title": "Postergar Nuevamente",
             "action": "Postergar Idea",
             "code": "4A",
-            "color": "green",
+            "color": States.findOne({code: "4A",}).color,
         },
     ]
 
@@ -517,7 +518,7 @@ const state5A = () => {
             "title": "Ingresar Plan de Acción",
             "action": "Ingresar Plan de Acción",
             "code": "5B",
-            "color": "green",
+            "color": States.findOne({code: "5B",}).color,
         },
     ]
 
@@ -560,14 +561,14 @@ const state5B = () => {
             "title": "Exportar plan de acción formato Just Do It",
             "action": "Exportar plan de acción",
             "code": "6A",
-            "color": "green",
+            "color": States.findOne({code: "6A",}).color,
         },
-        {
-            "title": "Exportar plan de acción Formato Iniciativa Nueva",
-            "action": "Exportar plan de acción",
-            "code": "6A",
-            "color": "green",
-        },
+        // {
+        //     "title": "Exportar plan de acción Formato Iniciativa Nueva",
+        //     "action": "Exportar plan de acción",
+        //     "code": "6A",
+        //     "color": States.findOne({code: "6A",}).color,
+        // },
     ]
 
     const toChanges = [
@@ -609,7 +610,7 @@ const state6A = () => {
             "title": "Idea Implementada Just Do it",
             "action": "Cerrar Ciclo",
             "code": "7A",
-            "color": "green",
+            "color": States.findOne({code: "7A",}).color,
         },
     ]
 
@@ -648,7 +649,7 @@ const state6B = () => {
             "title": "Idea Implementada Iniciativa Nueva",
             "action": "Cerrar Ciclo",
             "code": "7B",
-            "color": "green",
+            "color": States.findOne({code: "7B",}).color,
         },
     ]
 
