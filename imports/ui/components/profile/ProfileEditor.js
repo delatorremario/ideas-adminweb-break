@@ -128,6 +128,7 @@ export default class ProfileEditor extends Component {
         const oneUp = profile && profile.managerCode || '';
         const emailChief = profile && profile.emailChief || '';
         const area = profile && profile.area || '';
+        const areaCode = profile && profile.areaCode || '';
         const oneText = MEL ? 'One Up' : 'Jefe Directo';
         const imageId = profile && profile.imageId || '';
         const image = Files.findOne({ _id: imageId });
