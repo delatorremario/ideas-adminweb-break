@@ -20,24 +20,22 @@ Meteor.methods({
                 _.extend(person, { corporationId: corp._id, origin: 'MEL' });
 
                 /* set area */
-                let area = person.masterarea && Areas.findOne({ code: person.areaCode, corporationId: corp._id });
+                const area = person.areaCode && Areas.findOne({ code: person.areaCode, corporationId: corp._id });
                 if (!area) area = Areas.findOne({ name: 'Escondida' });
+                // if (person.email != 'neftali.a.herrera@bhpbilliton.com') return;
+                // console.log('--email--', person.email, area.name);
                 /* end set area */
-                
-                const find = Persons.findOne({ rut: person.rut });
-                if (area) _.extend(person, { areaId: area._id });
-                else console.log('sin area');
-                if (find) {
-                    //const { firstName, secondName, lastName, email, rut, masterarea, corporationId, areaId, masterId, managerId, chief, origin } = person;
-                    const update = { $set: { ...person } };
-                    // console.log('UPDATE', update);
-                    Persons.update({ _id: find._id }, update, (data, err) => console.info('UPSERT', data, err.message));
-                }
-                else Persons.insert(person, (data, err) => err && console.error('insert', data, err.message));
 
+                const find = Persons.findOne({ rut: person.rut });
+                if (area) _.extend(person, { areaId: area._id, area: area.name });
+                else console.log('sin area');
+
+                Persons.upsert({ _id: find && find._id || '' }, { $set: { ...person } }, (err, data) => {
+                    console.info('UPSERT', data, person.email, err);
+                    Meteor.users.upsert({ 'emails.address': person.email }, { $set: { profile: { ...person } } })
+                });
             })
         })
-
         console.log('**** persons.populate call END ****')
     }
 });
