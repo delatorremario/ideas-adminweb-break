@@ -96,16 +96,17 @@ Meteor.methods({
         const user = self.user();
         if (user) {
             const filters = { corporationId: (user.profile && user.profile.corporationId) || '' };
-            const firstnodes = Areas.aggregate(
-                [
-                    { $lookup: { from: 'typesareas', foreignField: '_id', localField: 'typeAreaId', as: 'TypeArea' } },
-                    { $unwind: '$TypeArea' },
-                    { $lookup: { from: 'typesareastructure', foreignField: '_id', localField: 'typeAreaStructureId', as: 'TypeAreaStructure' } },
-                    { $unwind: '$TypeAreaStructure' },
-                    { $project: { name: { $concat: ['$name', ' - ', '$TypeAreaStructure.name', ' - ', '$TypeArea.name'] }, parentAreaId: '$parantAreaId', TypeAreaStructure: '$TypeAreaStructure', TypeArea: '$TypeArea' } },
-                ]
-            )
-
+            // const firstnodes = Areas.aggregate(
+            //     [
+            //         { $lookup: { from: 'typesareas', foreignField: '_id', localField: 'typeAreaId', as: 'TypeArea' } },
+            //         { $unwind: '$TypeArea' },
+            //         { $lookup: { from: 'typesareastructure', foreignField: '_id', localField: 'typeAreaStructureId', as: 'TypeAreaStructure' } },
+            //         { $unwind: '$TypeAreaStructure' },
+            //         { $project: { name: { $concat: ['$name', ' - ', '$TypeAreaStructure.name', ' - ', '$TypeArea.name'] }, parentAreaId: '$parantAreaId', TypeAreaStructure: '$TypeAreaStructure', TypeArea: '$TypeArea' } },
+            //     ]
+            // )
+            const firstnodes = Areas.find({ parentAreaId: { $exists: false } }).fetch();
+            console.log('firstnodes', firstnodes);
             _.map(firstnodes, firstnode => {
                 firstnode.children = addChildNodes(firstnode);
             })
