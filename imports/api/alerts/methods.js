@@ -3,6 +3,19 @@ import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import Alerts from './alerts';
 import rateLimit from '../../modules/rate-limit.js';
 
+// Meteor.call('alerts.upsert', {
+//     createdAt: new Date(),
+//     userOwner: 'cxa2qDGNdJcin8rvx',
+//     type: 'normal-notification',
+//     usersDestination: ['PYFeA2QWRgbK6XJdF'],
+//     state: 'new',
+//     body: {
+//         title: 'Aprender a cambiar un foco',
+//         message: 'La idea de Martín tiene un retraso'
+//     },
+//     path: '/idea/yRiiRrRr4dgPH6gBm/view'
+// })
+
 export const upsertAlert = new ValidatedMethod({
     name: 'alerts.upsert',
     validate: Alerts.schema.validator(),

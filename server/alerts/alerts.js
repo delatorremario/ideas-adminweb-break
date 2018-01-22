@@ -52,9 +52,9 @@ Meteor.methods({
                         const text = (alert.message || '') + `. La idea de ${idea.person.lastName}, ${idea.person.firstName} ${idea.person.secondName} tiene un atraso de ${diff} días`;
 
                         /* TODO: Agregar Alert mandando lista de viewers._id */
-                        moment.locale('es');
+                        Email.send({ to, from, subject, text });
                         Meteor.call('alerts.upsert', {
-                            createdAt: moment(),
+                            createdAt: moment().locale('es'),
                             userOwner: Meteor.userId(),
                             type: 'normal-notification',
                             usersDestination: _.map(idea.viewers, v => v.userId),
@@ -63,22 +63,14 @@ Meteor.methods({
                                 title: idea && idea.oportunity || 'Alerta de retraso!',
                                 message: text,
                             },
-                            path: '/my-ideas'
+                            path: `/idea/${idea._id}/view`
                         });
-                        // Meteor.call('alerts.upsert', {
-                        //     createdAt: new Date(),
-                        //     userOwner: 'cxa2qDGNdJcin8rvx',
-                        //     type: 'normal-notification',
-                        //     usersDestination: ['cxa2qDGNdJcin8rvx'],
-                        //     state: 'new',
-                        //     body: {
-                        //         title: 'Aprender a cambiar un foco',
-                        //         message: 'La idea de Martín tiene un retraso'
-                        //     },
-                        //     path: '/idea/SWK2uE4eWFNz8XKxA/view'
-                        // })
-                        Email.send({ to, from, subject, text });
-
+                        Meteor.call('userNotification',
+                            (idea && idea.oportunity || 'Alerta de retraso!'),
+                            text,
+                            (_.map(idea.viewers, v => v.userId))
+                        )
+                        console.log('Email enviado ***', alert.message);
                     }
                     else {
                         console.log('** :( no alert **');

@@ -41,7 +41,7 @@ Meteor.methods({
         console.log('--serverNotification--', text, title, viewers.length);
         check(text, String);
         check(title, String);
-        check(viewers, Array);
+        check(viewers, [String]);
         var badge = 1
         Push.send({
             from: 'push',

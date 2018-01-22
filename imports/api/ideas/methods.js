@@ -2,7 +2,7 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import _ from 'lodash';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import { Email } from 'meteor/email';
-
+import moment from 'moment';
 import Ideas from './ideas';
 import rateLimit from '../../modules/rate-limit.js';
 import PersonSchema from '../../api/persons/personSchema';
@@ -52,8 +52,25 @@ export const upsertIdea = new ValidatedMethod({
                             const text = `${alert.message}. La idea de ${idea.person.lastName}, ${idea.person.firstName} ${idea.person.secondName} cambió de estado`;
 
                             Email.send({ to, from, subject, text });
-                            console.log('Email enviado ***', alert.message);
+                            Meteor.call('alerts.upsert', {
+                                createdAt: moment().locale('es'),
+                                userOwner: Meteor.userId(),
+                                type: 'normal-notification',
+                                usersDestination: _.map(idea.viewers, v => v.userId),
+                                state: 'new',
+                                body: {
+                                    title: idea && idea.oportunity || 'Alerta de retraso!',
+                                    message: text,
+                                },
+                                path: `/idea/${idea._id}/view`
+                            });
+                            Meteor.call('userNotification',
+                                (idea && idea.oportunity || 'Alerta de retraso!'),
+                                text,
+                                (_.map(idea.viewers, v => v.userId))
+                            )
 
+                            console.log('Email enviado ***', alert.message);
                         }
                     })
 
