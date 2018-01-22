@@ -135,8 +135,8 @@ const areasData = [
     { code: '30059938', name: 'Producción mina N1', type: 'SuperIntendencia', parent: '30000109' },
     { code: '30064107', name: 'Servicios mina', type: 'SuperIntendencia', parent: '30000109' },
     { code: '30064999', name: 'Servicios mina', type: 'SuperIntendencia', parent: '30000109' },
-    { code: '30000092', name: 'Escondida', type: 'Presidencia', parent: '' },
-    { code: '30000311', name: 'Copper', type: 'Presidencia', parent: '' },
+    { code: '30000092', name: 'Escondida', type: 'Presidencia', parent: '40000000' },
+    { code: '30000311', name: 'Copper', type: 'Presidencia', parent: '40000000' },
     { code: '30000637', name: 'Concentradoras', type: 'Gerencia General', parent: '30000092' },
     { code: '30000638', name: 'Mina', type: 'Gerencia General', parent: '30000092' },
     { code: '30007385', name: 'Catodos', type: 'Gerencia General', parent: '30000092' },
@@ -176,6 +176,7 @@ const areasData = [
     { code: '30062938', name: 'Control de procesos', type: 'SuperIntendencia', parent: '30059238' },
     { code: '30009927', name: 'Standars y cambio de control cátodos', type: 'SuperIntendencia', parent: '30008393' },
     { code: '30045727', name: 'Governance & Technical Stewardship', type: 'SuperIntendencia', parent: '30008392' },
-    { code: '30000005', name: 'Corporate Affairs', type: 'Presidencia', parent: '30000005' },
+    { code: '30000005', name: 'Corporate Affairs', type: 'Presidencia', parent: '40000000' },
+    { code: '40000000', name: 'Funciones', type: 'Presidencia' },
 ]
 export default areasData
