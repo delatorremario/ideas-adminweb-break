@@ -139,6 +139,9 @@ const state2A = () => {
     const toChanges = [
         { type: 'chief', label: 'Encargado de Area', name: 'chief' },
         { type: 'text', label: 'Comentario', name: 'comment' },
+        { type: 'option', label: 'Seguridad', name: 'clasification' },
+        { type: 'option', label: 'Producción', name: 'clasification' },
+        { type: 'option', label: 'Cultura', name: 'clasification' },
     ];
 
     States.update({ "code": code }, {

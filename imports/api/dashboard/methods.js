@@ -37,16 +37,15 @@ Meteor.methods({
         // obtener todas las areas debajo del areas principal
         _.map(areasDashboard, area => {
             _.extend(area, {
-                match: { 'chief.areaId': { $in: area.family || [] } },
+                match: { ...filters, 'chief.areaId': { $in: area.family || [] } },
                 ideasstates,
                 ideasstatesshowCodes,
             })
         });
 
-        const match = { 
+        // my ideas
+        const match = { ...filters,
             $or: [{ 'person._id': user && user.profile._id }, { 'collaborators._id': user && user.profile._id }]
-
-            //'person._id': user && user.profile && user.profile._id || '' 
         };
         const miArea = {
             name: 'MIS IDEAS',
@@ -57,6 +56,23 @@ Meteor.methods({
             family: []
         };
         areasDashboard.push(miArea)
+        // end my ideas
+
+
+        // FUNCIONES
+        const areasFunctionals = Areas.find({ ...filters, function: true }).fetch()
+        const areasFunctionalsFamilyIds = _.flattenDeep(_.map(areasFunctionals, 'family'))
+        
+        const funciones = {
+            name: 'FUNCIONES',
+            match: filters,
+            ideasstates,
+            ideasstatesshowCodes,
+            family: areasFunctionalsFamilyIds,
+        };
+        areasDashboard.push(funciones)
+        // end Funciones
+
         _.map(areasDashboard, area => {
             getDashboardArea(area)
         });
