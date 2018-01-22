@@ -5,7 +5,7 @@ import Persons from '../persons/persons';
 import Ideas from '../ideas/ideas';
 import States from '../../api/states/states';
 import { Roles } from 'meteor/alanning:roles';
-
+import moment from 'moment';
 
 const getIdsAreas = area => {
     const areaIds = []
@@ -23,17 +23,20 @@ Meteor.methods({
         const self = this.Meteor;
         const user = self.user();
         if (!user) return;
+        const period = 1;
         const filters = { corporationId: (user.profile && user.profile.corporationId) || '' };
+
+        
         const ideasstates = States.find(filters).fetch();
         const ideasstatesshowCodes = _.map(_.filter(ideasstates, { showInDashboard: true }), 'code');
-
-
+        
+        
         // buscar las Areas que se mostraran en el Dashboard
-
+        
         let areasDashboard = [];
         if (Roles.userIsInRole(user._id, ['Leader'])) areasDashboard = Areas.find({ dashboard: true }).fetch();
         if (Roles.userIsInRole(user._id, ['Executive'])) areasDashboard = Areas.find({ _id: user.profile.areaId }).fetch();
-
+        
         // obtener todas las areas debajo del areas principal
         _.map(areasDashboard, area => {
             _.extend(area, {
@@ -42,9 +45,17 @@ Meteor.methods({
                 ideasstatesshowCodes,
             })
         });
-
+        
+        _.extend(filters, {
+            date: {
+                $gte: moment().subtract(period, 'month').toDate(),
+                $lte: new Date
+            }
+        })
+        console.log('filters', filters);
         // my ideas
-        const match = { ...filters,
+        const match = {
+            ...filters,
             $or: [{ 'person._id': user && user.profile._id }, { 'collaborators._id': user && user.profile._id }]
         };
         const miArea = {
@@ -62,7 +73,7 @@ Meteor.methods({
         // FUNCIONES
         const areasFunctionals = Areas.find({ ...filters, function: true }).fetch()
         const areasFunctionalsFamilyIds = _.flattenDeep(_.map(areasFunctionals, 'family'))
-        
+
         const funciones = {
             name: 'FUNCIONES',
             match: filters,
@@ -95,7 +106,6 @@ const getDashboardArea = (area) => {
             }
         }]);
     area.ideasAdded = (ideasAdded && ideasAdded[0] && ideasAdded[0].count) || 0;
-
 
     const extarnalPersons = Ideas.aggregate([
         { $match: area.match },
