@@ -32,7 +32,7 @@ export const addChildNodes = parentnode => {
         { $match: { parentAreaId: parentnode._id } },
         { $lookup: { from: 'typesareastructure', foreignField: '_id', localField: 'typeAreaStructureId', as: 'TypeAreaStructure' } },
         { $unwind: '$TypeAreaStructure' },
-        { $project: { name: { $concat: ['$name', ' - ', '$TypeAreaStructure.name'] }, parentAreaId: '$parantAreaId', TypeAreaStructure: '$TypeAreaStructure', TypeArea: '$TypeArea' } },
+        { $project: { name: { $concat: ['$name', ' - ','$code',' - ', '$TypeAreaStructure.name'] }, parentAreaId: '$parantAreaId', TypeAreaStructure: '$TypeAreaStructure', TypeArea: '$TypeArea' } },
 
     ]);
     _.map(childs, (child) => {
@@ -68,7 +68,7 @@ const addParentsNodes = node => {
         { $unwind: '$TypeAreaStructure' },
         {
             $project: {
-                name: 1,
+                name: { $concat: ['$name', ' - ','$code'] },
                 parentAreaId: 1,
                 typeAreaStructure: '$TypeAreaStructure.name',
                 typeArea: '$TypeArea.name',
