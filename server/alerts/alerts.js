@@ -45,7 +45,7 @@ Meteor.methods({
 
                         console.log('** :D ALEEEERT **');
 
-                        const to = ['mauricio.ma.rodriguez@bhpbilliton.com', 'dblazina@holos.cl ', 'mariodelatorre@holos.cl']
+                        const to = ['mauricio.ma.rodriguez@bhpbilliton.com', 'dblazina@holos.cl ', 'mariodelatorre@holos.cl', 'martingonzalez@holos.cl']
 
                         const from = 'Ideas 3.0 <no-replay@ideas.e-captum.com>';
                         const subject = 'Alerta!!';

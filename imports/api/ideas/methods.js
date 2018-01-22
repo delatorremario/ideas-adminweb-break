@@ -45,7 +45,7 @@ export const upsertIdea = new ValidatedMethod({
                 _.each(states, state => {
                     _.each(state.alerts, alert => {
                         if (alert.stateChange) {
-                            const to = ['mauricio.ma.rodriguez@bhpbilliton.com', 'dblazina@holos.cl ', 'mariodelatorre@holos.cl']
+                            const to = ['mauricio.ma.rodriguez@bhpbilliton.com', 'dblazina@holos.cl ', 'mariodelatorre@holos.cl','martingonzalez@holos.cl'];
 
                             const from = 'Ideas 3.0 <no-replay@ideas.e-captum.com>';
                             const subject = `Cambio al estado ${state.step} ${state.state}`;
