@@ -6,6 +6,7 @@ import Ideas from '../ideas/ideas';
 import States from '../../api/states/states';
 import { Roles } from 'meteor/alanning:roles';
 import moment from 'moment';
+import { check } from 'meteor/check';
 
 const getIdsAreas = area => {
     const areaIds = []
@@ -17,25 +18,61 @@ const getIdsAreas = area => {
 }
 
 Meteor.methods({
-    'getDashboard': () => {
-        console.log('--getDashboard--');
+    'getDashboard': (period) => {
+        console.log('--getDashboard--', period);
+        check(period, Number);
         if (!Meteor.isServer) return;
         const self = this.Meteor;
         const user = self.user();
         if (!user) return;
-        const period = 1;
         const filters = { corporationId: (user.profile && user.profile.corporationId) || '' };
 
-        
         const ideasstates = States.find(filters).fetch();
         const ideasstatesshowCodes = _.map(_.filter(ideasstates, { showInDashboard: true }), 'code');
-        
-        
+
         // buscar las Areas que se mostraran en el Dashboard
-        
+
         let areasDashboard = [];
         if (Roles.userIsInRole(user._id, ['Leader'])) areasDashboard = Areas.find({ dashboard: true }).fetch();
         if (Roles.userIsInRole(user._id, ['Executive'])) areasDashboard = Areas.find({ _id: user.profile.areaId }).fetch();
+
+        switch (period) {
+            case 0:
+                _.extend(filters, {
+                    date: {
+                        $gte: moment().startOf('month').toDate(),
+                        $lt: moment().endOf('month').toDate(),
+                    }
+                })
+                break;
+            case 1:
+                _.extend(filters, {
+                    date: {
+                        $gte: moment().subtract(1, 'month').startOf('month').toDate(),
+                        $lt: moment().subtract(1, 'month').endOf('month').toDate(),
+                    }
+                })
+                break;
+            case 3:
+                _.extend(filters, {
+                    date: {
+                        $gte: moment().subtract(3, 'month').startOf('month').toDate(),
+                        $lt: moment().subtract(1, 'month').endOf('month').toDate(),
+                    }
+                })
+                break;
+            case 6:
+                _.extend(filters, {
+                    date: {
+                        $gte: moment().subtract(6, 'month').startOf('month').toDate(),
+                        $lt: moment().subtract(1, 'month').endOf('month').toDate(),
+                    }
+                })
+                break;
+            default:
+        }
+
+        console.log('filters', filters);
         
         // obtener todas las areas debajo del areas principal
         _.map(areasDashboard, area => {
@@ -46,13 +83,6 @@ Meteor.methods({
             })
         });
         
-        _.extend(filters, {
-            date: {
-                $gte: moment().subtract(period, 'month').toDate(),
-                $lte: new Date
-            }
-        })
-        console.log('filters', filters);
         // my ideas
         const match = {
             ...filters,
