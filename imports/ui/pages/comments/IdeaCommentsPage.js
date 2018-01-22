@@ -13,9 +13,7 @@ export default class IdeaCommentsPage extends Component {
                 <div className="ci-header-position">
                     <div className="ci-header-container">
                         <div className="pageheader">
-                            <h1>
-                                Comentarios
-                </h1>
+                            <h1>Comentarios</h1>
                             <p>
                                 <br />
                                 <b>{idea.opportunity ? idea.opportunity : 'de una idea...'}</b>
@@ -24,9 +22,7 @@ export default class IdeaCommentsPage extends Component {
                                 <span className="label">You are here:</span>
                                 <ol className="breadcrumb">
                                     <li className="active">
-                                        Comentarios de {
-                                            idea.opportunity ? idea.opportunity : 'una idea...'
-                                        }
+                                        Comentarios
                                     </li>
                                 </ol>
                             </div>
