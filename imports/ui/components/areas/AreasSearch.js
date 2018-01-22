@@ -42,7 +42,7 @@ class AreasSearch extends Component {
         return <div className='areas-search'>
             {
                 !areaSelected &&
-                <input type="search" className="form-control input-sm" value={text} placeholder="Buscar por Nombre de Area ..." onChange={this.onChangeSearch.bind(this)} />
+                <input type="search" className="form-control input-sm" placeholder="Buscar por Nombre de Area ..." onChange={this.onChangeSearch.bind(this)} />
             }
             {
                 areaSelected &&
