@@ -138,10 +138,11 @@ Meteor.methods({
     },
     'areas.generateFamily': () => {
         if (!Meteor.isServer) return;
+        console.log('---- Begin generate family --- ');
         const areas = Areas.find().fetch();
         _.map(areas, area => {
             const family = getAreasIdChildren(area._id);
-            Areas.update({ _id: area._id }, { $set: { family } });
+            Areas.update({ _id: area._id }, { $set: { family } }, (err, data) => console.log(`update family ${area.name}`, err, data));
         })
         console.log('---- END generate family --- ');
         return '---- END generate family --- ';

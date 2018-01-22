@@ -37,7 +37,7 @@ Meteor.methods({
         // obtener todas las areas debajo del areas principal
         _.map(areasDashboard, area => {
             _.extend(area, {
-                match: { 'chief.areaId': { $in: area.family } },
+                match: { 'chief.areaId': { $in: area.family || [] } },
                 ideasstates,
                 ideasstatesshowCodes,
             })
@@ -68,7 +68,7 @@ Meteor.methods({
 
 const getDashboardArea = (area) => {
     const { ideasstates, ideasstatesshowCodes } = area;
-    const employes = Persons.find({ areaId: { $in: area.family } }, { fields: { _id: 1 } }).fetch();
+    const employes = Persons.find({ areaId: { $in: area.family || [] } }, { fields: { _id: 1 } }).fetch();
     area.employes = employes.length;
     const ideasAdded = Ideas.aggregate([
         { $match: area.match },
@@ -91,7 +91,7 @@ const getDashboardArea = (area) => {
         }]);
     area.extarnalPersons = (extarnalPersons && extarnalPersons[0] && extarnalPersons[0].count) || 0;
 
-    const ideasInFamily = Ideas.find({ 'person.areaId': { $in: area.family } }).fetch();
+    const ideasInFamily = Ideas.find({ 'person.areaId': { $in: area.family || [] } }).fetch();
 
     area.ideasPersonAdded = ideasInFamily.length; // (ideasPersonAdded && ideasPersonAdded[0] && ideasPersonAdded[0].count) || 0;
 
@@ -128,7 +128,7 @@ const getDashboardArea = (area) => {
                     lastState: { $arrayElemAt: ["$states", -1] },
                 }
         },
-        { $match: { 'lastState.code': { $in: ideasstatesshowCodes } } },
+        { $match: { 'lastState.code': { $in: ideasstatesshowCodes || [] } } },
         {
             $project:
                 {
