@@ -39,45 +39,45 @@ export const upsertIdea = new ValidatedMethod({
         return Ideas.upsert({ _id: idea._id }, { $set: idea }, (err, data) => {
             if (err) { console.log('ERROR', err); return; }
             if (Meteor.isServer) {
-                const ideastate = _.last(idea.states);
-                const states = States.find({ _id: ideastate._id, 'alerts.stateChange': true }).fetch();
+                Meteor.call('idea.addViewers', data.insertedId, (error, data) => {
+                    idea = data;
+                    idea.viewers = _.filter(idea.viewers, v => v.userId !== Meteor.userId());
+                    const ideastate = _.last(idea.states);
+                    const states = States.find({ _id: ideastate._id, 'alerts.stateChange': true }).fetch();
+                    _.each(states, state => {
+                        _.each(state.alerts, alert => {
+                            if (alert.stateChange) {
+                                // const to = ['mauricio.ma.rodriguez@bhpbilliton.com', 'dblazina@holos.cl ', 'mariodelatorre@holos.cl', 'martingonzalez@holos.cl'];
+                                const to = ['martingonzalez@holos.cl'];
+                                const from = 'Ideas 3.0 <no-replay@ideas.e-captum.com>';
+                                const subject = `Cambio al estado ${state.step} ${state.state}`;
+                                const text = `${(alert.message ? alert.message + '. ' : '')}La idea de ${idea.person.lastName}, ${idea.person.firstName} ${idea.person.secondName || ''} cambió de estado.`;
 
-                _.each(states, state => {
-                    _.each(state.alerts, alert => {
-                        if (alert.stateChange) {
-                            const to = ['mauricio.ma.rodriguez@bhpbilliton.com', 'dblazina@holos.cl ', 'mariodelatorre@holos.cl','martingonzalez@holos.cl'];
+                                Meteor.call('alerts.upsert', {
+                                    createdAt: new Date(),
+                                    userOwner: Meteor.userId(),
+                                    type: 'normal-notification',
+                                    usersDestination: (_.map(idea.viewers, v => v.userId)),
+                                    state: 'new',
+                                    body: {
+                                        title: idea && idea.opportunity || 'Alerta de retraso!',
+                                        message: text,
+                                    },
+                                    path: `/idea/${idea._id}/view`
+                                });
 
-                            const from = 'Ideas 3.0 <no-replay@ideas.e-captum.com>';
-                            const subject = `Cambio al estado ${state.step} ${state.state}`;
-                            const text = `${alert.message}. La idea de ${idea.person.lastName}, ${idea.person.firstName} ${idea.person.secondName} cambió de estado`;
-
-                            Email.send({ to, from, subject, text });
-                            Meteor.call('alerts.upsert', {
-                                createdAt: moment().locale('es'),
-                                userOwner: Meteor.userId(),
-                                type: 'normal-notification',
-                                usersDestination: _.map(idea.viewers, v => v.userId),
-                                state: 'new',
-                                body: {
-                                    title: idea && idea.oportunity || 'Alerta de retraso!',
-                                    message: text,
-                                },
-                                path: `/idea/${idea._id}/view`
-                            });
-                            Meteor.call('userNotification',
-                                (idea && idea.oportunity || 'Alerta de retraso!'),
-                                text,
-                                (_.map(idea.viewers, v => v.userId))
-                            )
-
-                            console.log('Email enviado ***', alert.message);
-                        }
+                                Meteor.call('userNotification',
+                                    (idea && idea.opportunity || 'Alerta de retraso!'),
+                                    text,
+                                    (_.map(idea.viewers, v => v.userId))
+                                )
+                                console.log('Email enviado ***', alert.message);
+                                Email.send({ to, from, subject, text });
+                            }
+                        })
                     })
-
-                })
-
+                });
             }
-            Meteor.call('idea.addViewers', data.insertedId);
         });
     },
 });
@@ -170,7 +170,7 @@ Meteor.methods({
             if (chief) viewers = _.union(viewers, [chief._id])
         };
 
-        // // collaborators
+        // collaborators
         if (idea.collaborators) {
             const collMails = _.map(idea.collaborators, 'email')
             const collaborators = Meteor.users.find({ 'emails.address': { $in: collMails } }).fetch()
@@ -179,6 +179,7 @@ Meteor.methods({
 
         viewers = _.map(viewers, id => ({ userId: id }));
         Ideas.update({ _id }, { $set: { viewers } });
+        return Ideas.findOne({ _id });
     },
     'idea.setAllViewers': () => {
         const ideas = Ideas.find({}, { fields: { _id: 1 } }).fetch();

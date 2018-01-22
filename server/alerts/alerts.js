@@ -54,13 +54,13 @@ Meteor.methods({
                         /* TODO: Agregar Alert mandando lista de viewers._id */
                         Email.send({ to, from, subject, text });
                         Meteor.call('alerts.upsert', {
-                            createdAt: moment().locale('es'),
+                            createdAt: new Date(),
                             userOwner: Meteor.userId(),
                             type: 'normal-notification',
                             usersDestination: _.map(idea.viewers, v => v.userId),
                             state: 'new',
                             body: {
-                                title: idea && idea.oportunity || 'Alerta de retraso!',
+                                title: idea && idea.opportunity || 'Alerta de retraso!',
                                 message: text,
                             },
                             path: `/idea/${idea._id}/view`
