@@ -107,6 +107,8 @@ export default class ProfileEditor extends Component {
 
         const { user, person } = this.state;
         const MEL = person && person.origin === 'MEL'
+        const BHP = person && person.origin === 'BHP'
+        const Contratista = person && person.origin === 'Contratista'
 
         const { _id, emails, profile } = this.state.user;
         const rut = profile && profile.rut || '';
@@ -125,7 +127,7 @@ export default class ProfileEditor extends Component {
         const emailChief = profile && profile.emailChief || '';
         const area = profile && profile.area || '';
         const areaCode = profile && profile.areaCode || '';
-        const oneText = MEL ? 'One Up' : 'Jefe Directo';
+        const oneText = MEL && 'One Up' || BHP && 'Jefe Directo' || 'Contract Owner';
         const imageId = profile && profile.imageId || '';
         const image = Files.findOne({ _id: imageId });
 
@@ -159,7 +161,8 @@ export default class ProfileEditor extends Component {
                                             ))
                                         }
                                     </span>
-                                    <span className="text-muted">{group}</span>
+                                    {group === 'EXECUT.' && <span className="text-muted">Ejecutivo</span>}
+
                                     {
                                         !completedProfile(user) &&
                                         <Alert bsStyle="warning">

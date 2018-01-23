@@ -24,11 +24,17 @@ const PersonSearch = ({ persons, onChangeSearchPerson, selectPerson }) => {
                                             <li key={index} className="list-group-item" onClick={selectPerson(person).bind(this)}
                                                 style={person.executive && { fontWeight: 'bold' }}
                                             >
-                                                {person.lastName}, {person.firstName} {person.secondName}
+                                                {person.lastName} {person.secondLastName}, {person.firstName} {person.secondName}
                                                 <span className="badge">
                                                     <small>{person.rut}</small>
                                                 </span>
-                                                <div><small>{person.group}</small></div>
+
+                                                {
+                                                    person.group === 'EXECUT.' &&
+                                                    <span className="badge">
+                                                        <small>Ejecutivo</small>
+                                                    </span>
+                                                }
                                             </li>))
                                     }
 

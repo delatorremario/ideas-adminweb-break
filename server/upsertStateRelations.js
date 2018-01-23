@@ -575,10 +575,26 @@ const state5B = () => {
     ]
 
     const toChanges = [
-        { type: 'text', label: 'Acción', name: 'actionplan' },
-        { type: 'text', label: 'Responsable', name: 'actionplan' },
-        { type: 'date', label: 'Fecha Inicio', name: 'iniDate' },
-        { type: 'date', label: 'Fecha Fin', name: 'endDate', maxDais: 100 },
+      
+        { type: 'text', label: 'Acción', name: 'actionplan1' },
+        { type: 'text', label: 'Responsable', name: 'actionplan1' },
+        { type: 'date', label: 'Fecha Inicio', name: 'iniDate1' },
+        { type: 'date', label: 'Fecha Fin', name: 'endDate1', maxDais: 100 },
+  
+        { type: 'text', label: 'Acción', name: 'actionplan2' },
+        { type: 'text', label: 'Responsable', name: 'actionplan2' },
+        { type: 'date', label: 'Fecha Inicio', name: 'iniDate2' },
+        { type: 'date', label: 'Fecha Fin', name: 'endDate2', maxDais: 100 },
+  
+        { type: 'text', label: 'Acción', name: 'actionplan3' },
+        { type: 'text', label: 'Responsable', name: 'actionplan3' },
+        { type: 'date', label: 'Fecha Inicio', name: 'iniDate3' },
+        { type: 'date', label: 'Fecha Fin', name: 'endDate3', maxDais: 100 },
+  
+        { type: 'text', label: 'Acción', name: 'actionplan4' },
+        { type: 'text', label: 'Responsable', name: 'actionplan4' },
+        { type: 'date', label: 'Fecha Inicio', name: 'iniDate4' },
+        { type: 'date', label: 'Fecha Fin', name: 'endDate4', maxDais: 100 },
   
     ];
 
