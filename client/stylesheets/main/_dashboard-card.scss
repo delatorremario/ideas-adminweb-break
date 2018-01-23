@@ -25,6 +25,8 @@
                 padding-right: 5px
             }
             .count {
+                color: white;
+                font-weight: 600;
                 display: flex;
                 font-size: smaller;
                 width: 30px;
@@ -34,6 +36,9 @@
                 align-items: center;
                 border-radius: 50%;
                 margin-left: 4px;
+                &:hover, &::before {
+                    color: white !important;
+                }
             }
         }
     }
