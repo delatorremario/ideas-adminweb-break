@@ -39,7 +39,7 @@ const Dashboard = ({ data, days }) => (
                 </div>
                 <div className="row cards-container">
                     {_.map(data, (area, index) =>
-                        <DashboardCard key={index} area={area} />
+                        <DashboardCard key={index} area={area} month={days.get()} />
                     )}
                 </div>
             </div>

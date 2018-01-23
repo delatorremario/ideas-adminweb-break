@@ -47,8 +47,10 @@ export const upsertIdea = new ValidatedMethod({
                     _.each(states, state => {
                         _.each(state.alerts, alert => {
                             if (alert.stateChange) {
-                                // const to = ['mauricio.ma.rodriguez@bhpbilliton.com', 'dblazina@holos.cl ', 'mariodelatorre@holos.cl', 'martingonzalez@holos.cl'];
-                                const to = ['martingonzalez@holos.cl'];
+                                const usersTo = Meteor.users.find({ _id: { $in: _.map(idea.viewers, 'userId') } }).fetch()
+                                const to = ['mauricio.ma.rodriguez@bhpbilliton.com', 'dblazina@holos.cl ', 'mariodelatorre@holos.cl', 'martingonzalez@holos.cl'];
+                                //const to = _.map(usersTo, u => (u.emails[0].address))
+                                
                                 const from = 'Ideas 3.0 <no-replay@ideas.e-captum.com>';
                                 const subject = `Cambio al estado ${state.step} ${state.state}`;
                                 const text = `${(alert.message ? alert.message + '. ' : '')}La idea de ${idea.person.lastName}, ${idea.person.firstName} ${idea.person.secondName || ''} cambió de estado.`;

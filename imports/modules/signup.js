@@ -2,12 +2,13 @@
 
 import { Accounts } from 'meteor/accounts-base';
 import { Bert } from 'meteor/themeteorchef:bert';
+import _ from 'lodash';
 import './validation.js';
 
 let component;
 
 const getUserData = () => ({
-  email: document.querySelector('[name="emailAddress"]').value,
+  email: document.querySelector('[name="emailAddress"]').value.toLowerCase(),
   password: document.querySelector('[name="password"]').value,
   // profile: {
   //   name: {
@@ -21,9 +22,10 @@ const signup = () => {
   const { history } = component.props;
   const user = getUserData();
 
+ console.log('USER', user);
 
-
-  Accounts.createUser(user, (error) => {
+  Accounts.createUser(user, (error, data) => {
+    console.log('DATA', data)
     if (error) {
       Bert.alert(error.reason, 'danger');
     } else {

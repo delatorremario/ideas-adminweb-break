@@ -72,8 +72,6 @@ Meteor.methods({
             default:
         }
 
-        console.log('filters', filters);
-        
         // obtener todas las areas debajo del areas principal
         _.map(areasDashboard, area => {
             _.extend(area, {
@@ -82,7 +80,27 @@ Meteor.methods({
                 ideasstatesshowCodes,
             })
         });
-        
+
+
+
+
+        // FUNCIONES
+        if (Roles.userIsInRole(user._id, ['Leader'])) {
+            const areasFunctionals = Areas.find({ ...filters, function: true }).fetch()
+            const areasFunctionalsFamilyIds = _.flattenDeep(_.map(areasFunctionals, 'family'))
+
+            const funciones = {
+                name: 'FUNCIONES',
+                match: { ...filters, 'chief.areaId': { $in: areasFunctionalsFamilyIds } },
+                ideasstates,
+                ideasstatesshowCodes,
+                family: areasFunctionalsFamilyIds,
+            };
+            areasDashboard.push(funciones)
+        }
+
+        // end Funciones
+
         // my ideas
         const match = {
             ...filters,
@@ -98,21 +116,6 @@ Meteor.methods({
         };
         areasDashboard.push(miArea)
         // end my ideas
-
-
-        // FUNCIONES
-        const areasFunctionals = Areas.find({ ...filters, function: true }).fetch()
-        const areasFunctionalsFamilyIds = _.flattenDeep(_.map(areasFunctionals, 'family'))
-
-        const funciones = {
-            name: 'FUNCIONES',
-            match: filters,
-            ideasstates,
-            ideasstatesshowCodes,
-            family: areasFunctionalsFamilyIds,
-        };
-        areasDashboard.push(funciones)
-        // end Funciones
 
         _.map(areasDashboard, area => {
             getDashboardArea(area)
