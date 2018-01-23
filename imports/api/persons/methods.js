@@ -3,6 +3,7 @@ import _ from 'lodash';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import Persons from './persons';
 import rateLimit from '../../modules/rate-limit.js';
+import Areas from '../areas/areas';
 
 export const upsertPerson = new ValidatedMethod({
     name: 'persons.upsert',
@@ -25,7 +26,7 @@ export const removePerson = new ValidatedMethod({
     },
 });
 
-export const joinUserPerson = ( user ) => {
+export const joinUserPerson = (user) => {
     console.log('USER', user);
     return `hola ${user._id}`
 }
@@ -39,5 +40,12 @@ rateLimit({
     timeRange: 1000,
 });
 
-
-
+Meteor.methods({
+    'persons.view': (_id) => {
+        if (!Meteor.isServer) return;
+        check(_id, String);
+        let person = Persons.findOne(_id);
+        person.area = Areas.findOne(person.areaId);
+        return person;
+    }
+})

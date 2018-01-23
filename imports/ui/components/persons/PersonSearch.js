@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { PropTypes } from 'react'
+import { PropTypes } from 'react';
 import { ControlLabel } from 'react-bootstrap';
 
 const PersonSearch = ({ persons, onChangeSearchPerson, selectPerson }) => {

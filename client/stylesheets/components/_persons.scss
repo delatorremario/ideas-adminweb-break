@@ -1,0 +1,36 @@
+.person-search {
+    width: 100px !important;
+    width: 280px;
+    .form-group {
+        width: 280px !important;
+        height: 52px !important;
+        display: flex !important;
+        flex-direction: row !important;
+        border-radius: 25px !important;
+        background-color: none !important;
+        border: 1px solid #4eb294 !important;
+        i {
+            background-color: none;
+            order: 1 !important;
+            box-sizing: border-box !important;
+            padding: 16px !important;
+            margin: 0px !important;
+            width: 20% !important;
+            text-align: center !important;
+        }
+        input {
+            background-color: none;
+            order: 2 !important;
+            box-sizing: border-box !important;
+            padding: 15px 0px !important;
+            margin: 1px !important;
+            background-color: none !important;
+            border: 0px;
+            outline: none !important;
+            width: 70% !important;
+            &:focus {
+                outline: none !important;
+            }
+        }
+    }
+}

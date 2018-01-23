@@ -37,6 +37,9 @@ import Dashboard from '../containers/dashboard/Dashboard';
 import BlankPage from '../pages/BlankPage';
 import ComponentsPage from '../pages/ComponentsPage';
 
+// Persons
+import PersonsContainer from '../containers/persons/PersonsContainer';
+
 // Profile
 import EditProfile from '../containers/profile/EditProfile';
 
@@ -98,12 +101,15 @@ const PageWrapper = () => (
                 {/* Ideas Usuario */}
                 <Route exact path="/ideas/new_user" component={EditIdeaUser} />
 
+                {/* Persons */}
+                <Route exact path="/persons" component={PersonsContainer} />
+
                 {/* Profile */}
                 <Route exact path="/profile" component={EditProfile} />
 
-
                 {/* Configs */}
                 <Route exact path="/configs" component={Configs} />
+
                 {/* <Route exact path="/ideas/new" component={EditIdea} /> */}
                 <Route exact path="/config/:_id/edit" component={EditConfig} />
 

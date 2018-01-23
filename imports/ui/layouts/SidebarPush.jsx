@@ -72,6 +72,11 @@ class SidebarPush extends Component {
                     path: "/comments",
                 },
                 {
+                    title: "Personas",
+                    iconClasses: ["fa", "fa-fw", "fa-users"],
+                    path: "/persons",
+                },
+                {
                     title: "Profile",
                     iconClasses: ["fa", "fa-fw", "fa-user-circle-o"],
                     path: "/profile",

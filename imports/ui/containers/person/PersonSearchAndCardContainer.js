@@ -1,9 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { composeWithTracker } from 'react-komposer';
 import { ReactiveVar } from 'meteor/reactive-var';
-
 import Loading from '../../components/Loading.js';
-
 import Persons from '../../../api/persons/persons';
 import PersonSearchAndCard from '../../components/persons/PersonSearchAndCard';
 
@@ -18,7 +16,6 @@ const onChangeSearchPerson = (e) => {
 }
 
 const composer = ({ selectPerson, person, onlyChief, myArea }, onData) => {
-
       const subscriptionPersons = Meteor.subscribe('persons.search', textSearch.get(), onlyChief || false, myArea || false, textSearchLimit.get());
       const subAreas = Meteor.subscribe('areas.list');
       if (subscriptionPersons.ready() && subAreas.ready()) {
