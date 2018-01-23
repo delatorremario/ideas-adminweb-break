@@ -5,7 +5,7 @@ import _ from 'lodash';
 
 import colors from '../../../api/dashboard/colors';
 
-const DashboardCard = ({ area }) => {
+const DashboardCard = ({ area, month }) => {
     const { name, employes, ideasAdded, ideasByStep, ideasPersonAdded, participation, ideasByStatus, extarnalPersons } = area;
 
     const labels = [];
@@ -85,9 +85,9 @@ const DashboardCard = ({ area }) => {
                         {
                             _.map(ideasByStatus, (state, index) =>  <div key={index} className="link-status"  >
                                     <Link to={
-                                        name === 'MIS IDEAS' 
-                                        && `/ideas/${state.code}/filter` 
-                                        || `/ideas/${state.code}/${area._id}/filter`}>
+                                        name === 'MIS IDEAS' && `/ideas/${state.code}/filter/${month}` ||
+                                        name === 'FUNCIONES' && `/ideas/${state.code}/funciones/filter/${month}` || 
+                                        `/ideas/${state.code}/${area._id}/filter/${month}`}>
                                         <div>{state.step} {state.state}</div>
                                         {/* <div className="count">{state.count}</div> */}
                                         <div className="count" style={{ backgroundColor: state.green == 0 ? 'none' : colors[0] }}>{state.green}</div>

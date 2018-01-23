@@ -51,19 +51,8 @@ const composer = ({ match }, onData) => {
 	if (subsIdeas.ready() && statessub.ready()) {
 
 		const ideasstates = States.find({}, {}).fetch();
-		// console.log('---filters---', filters);
 		const ideas = _.isEmpty(filters) && [] || Ideas.find({}, { sort: { date: 1 }, limit: ideasFindLimit.get() }).fetch();
-		//const ideas = Ideas.find({}, { sort: { date: 1 }, limit: ideasFindLimit.get() }).fetch();
-
-		// if (states.length > 0) {
-		// 	ideas = _.filter(ideas, (idea) => {
-		// 		const last = _.last(idea.states);
-		// 		return last && _.some(states, s => s === last.code);
-		// 	})
-		// }
-
 		const showEdit = Roles.userIsInRole(user && user._id, ['SuperAdminHolos', 'Leader'])
-
 
 		onData(null, { ideas, ideasstates, ideasFindLimit, textSearch, statesCodesFilter, areasIdsFilter, user, showEdit });
 	}

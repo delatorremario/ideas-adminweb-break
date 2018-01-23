@@ -82,7 +82,7 @@ const PageWrapper = () => (
 
                 {/* Ideas */}
                 <Route exact path="/ideas/find" component={IdeaListContainer} />
-                <Route exact path="/ideas/:stateCode?/:areaId?/filter" component={IdeasListFilter} />
+                <Route exact path="/ideas/:stateCode?/:areaId?/filter/:month?" component={IdeasListFilter} />
                 <Route exact path="/my-ideas" component={MyIdeasList} />
                 <Route exact path="/ideas/new" component={EditIdea} />
                 <Route exact path="/idea/:_id/edit" component={EditIdea} />

@@ -91,7 +91,7 @@ Meteor.methods({
 
             const funciones = {
                 name: 'FUNCIONES',
-                match: filters,
+                match: { ...filters, 'chief.areaId': { $in: areasFunctionalsFamilyIds } },
                 ideasstates,
                 ideasstatesshowCodes,
                 family: areasFunctionalsFamilyIds,
