@@ -127,7 +127,7 @@ export default class ProfileEditor extends Component {
         const emailChief = profile && profile.emailChief || '';
         const area = profile && profile.area || '';
         const areaCode = profile && profile.areaCode || '';
-        const oneText = MEL && 'One Up' || BHP && 'Jefe Directo' || 'Contract Owner' ;
+        const oneText = MEL && 'One Up' || BHP && 'Jefe Directo' || 'Contract Owner';
         const imageId = profile && profile.imageId || '';
         const image = Files.findOne({ _id: imageId });
 
@@ -161,7 +161,8 @@ export default class ProfileEditor extends Component {
                                             ))
                                         }
                                     </span>
-                                    <span className="text-muted">{group}</span>
+                                    {group === 'EXECUT.' && <span className="text-muted">Ejecutivo</span>}
+
                                     {
                                         !completedProfile(user) &&
                                         <Alert bsStyle="warning">
