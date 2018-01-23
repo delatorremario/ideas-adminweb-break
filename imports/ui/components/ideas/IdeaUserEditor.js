@@ -197,7 +197,6 @@ export default class IdeaUserEditor extends Component {
         const { formStep, area } = this.state;
         const { doc } = this.state;
         const { origin, _id, images } = this.state.doc;
-
         return (
             <div className="row">
                 <div className="col-xs-12 no-sides-padding">

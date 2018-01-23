@@ -36,7 +36,7 @@ const IdeasStep3 = ({ onChangeForm, data, driversArray, selectDriver }) =>
                     {_.map(driversArray, (driver, index) =>
                         <button style={{ marginBottom: "5px" }} key={index}
                             onClick={selectDriver(driver.driver).bind(this)}
-                            className={"btn btn-sm " + (_.includes(data.drivers, driver.driver) ? 'btn-success' : 'btn-trans btn-default')}>{driver.driver}</button>
+                            className={"btn btn-sm " + (_.includes(data.drivers, driver.driver) ? 'btn-success' : 'btn-trans btn-default')} title={driver.placeHolder}>{driver.driver}</button>
                     )}
                 </div>
             </div>
