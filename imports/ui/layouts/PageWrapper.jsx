@@ -12,6 +12,7 @@ import EditCorporation from '../containers/corporations/EditCorporation';
 import Areas from '../pages/areas/Areas';
 import NewArea from '../pages/areas/NewArea'; // debería llamar al contenedor
 import EditArea from '../containers/areas/EditArea';
+import AreasContainer from '../containers/areas/AreasContainer';
 
 // Ideas
 import IdeaListContainer from '../containers/ideas/IdeasListContainer';
@@ -67,15 +68,18 @@ const PageWrapper = () => (
         {
             componentDidMount() && !completedProfile() && <Route path="/" component={EditProfile} /> ||
             <div>
+                {/* Home */}
                 <Route exact path="/" component={Dashboard} />
                 <Route path="/dashboard" component={Dashboard} />
+
                 {/* Corporaciones */}
                 <Route exact path="/corporations" component={Corporations} />
                 <Route exact path="/corporations/new" component={NewCorporation} />
                 <Route exact path="/corporation/:_id/edit" component={EditCorporation} />
 
                 {/* Areas */}
-                <Route exact path="/areas" component={Areas} />
+                {/* <Route exact path="/areas" component={Areas} /> */}
+                <Route exact path="/areas" component={AreasContainer} />
                 <Route exact path="/areas/new" component={NewArea} />
                 <Route exact path="/area/:_id/edit" component={EditArea} />
 
@@ -112,9 +116,7 @@ const PageWrapper = () => (
 
                 {/* <Route exact path="/ideas/new" component={EditIdea} /> */}
                 <Route exact path="/config/:_id/edit" component={EditConfig} />
-
                 <Route path="/sendinvitation" component={SendInvitationPage} />
-
                 <Route path="/blank-page" component={BlankPage} />
                 <Route path="/components-page" component={ComponentsPage} />
             </div>

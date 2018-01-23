@@ -75,11 +75,18 @@ class SidebarPush extends Component {
                     title: "Personas",
                     iconClasses: ["fa", "fa-fw", "fa-users"],
                     path: "/persons",
+                    roles: ['SuperAdminHolos', 'Leader']
                 },
                 {
                     title: "Profile",
                     iconClasses: ["fa", "fa-fw", "fa-user-circle-o"],
                     path: "/profile",
+                },
+                {
+                    title: "Areas",
+                    iconClasses: ["fa", "fa-fw", "fa-building-o"],
+                    path: "/areas",
+                    roles: ['SuperAdminHolos', 'Leader']
                 },
                 {
                     title: "Enviar Invitación",
