@@ -9,7 +9,7 @@ const PersonsListComponent = ({ history, persons, onChangeSearchPerson }) => {
         <div className="col-xs-12">
             <div className="panel-body ng-binding">
                 <div className='ideas-list'>
-                    <div className="ideas-buttons">
+                    <div className="persons-buttons">
                         <Link to="/persons/new" className="btn btn-success btn-trans btn-action ideas-button">
                             <i className="fa fa-user"></i>
                         </Link>
