@@ -44,7 +44,8 @@ Meteor.methods({
                     if (diff >= alert.delay) {
 
                         console.log('** :D ALEEEERT **');
-
+                        const usersTo = Meteor.users.find({ _id: { $in: _.map(idea.viewers, 'userId') } }).fetch()
+                        //const to = _.map(usersTo, u => (u.emails[0].address))
                         const to = ['mauricio.ma.rodriguez@bhpbilliton.com', 'dblazina@holos.cl ', 'mariodelatorre@holos.cl', 'martingonzalez@holos.cl']
 
                         const from = 'Ideas 3.0 <no-replay@ideas.e-captum.com>';
