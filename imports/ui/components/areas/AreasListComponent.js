@@ -9,13 +9,13 @@ const AreasListComponent = ({ history, areas, onChangeSearchArea }) => {
             <div className="panel-body ng-binding">
                 <div className='ideas-list'>
                     <div className="persons-buttons">
-                        <Link to="/areas/new" className="btn btn-success btn-trans btn-action ideas-button">
+                        {/* <Link to="/areas/new" className="btn btn-success btn-trans btn-action ideas-button">
                             <i className="fa fa-building-o"></i>
-                        </Link>
+                        </Link> */}
                         <div className="col-md-6 person-search">
                             <div className="form-group">
                                 <i className="fa fa-search"></i>
-                                <input id="personSearchInput" type="text" placeholder="Nombre del area..." onChange={onChangeSearchArea.bind(this)} autoComplete="off" autoFocus />
+                                <input id="personSearchInput" type="text" placeholder="Nombre del area o código ..." onChange={onChangeSearchArea.bind(this)} autoComplete="off" autoFocus />
                             </div>
                         </div>
                     </div>
