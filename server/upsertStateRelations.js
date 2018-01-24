@@ -604,20 +604,50 @@ const state5B = () => {
         { type: 'date', label: 'Fecha Inicio', name: 'iniDate1' },
         { type: 'date', label: 'Fecha Fin', name: 'endDate1', maxDais: 100 },
 
-        { type: 'text', label: 'Acción', name: 'actionplan2' },
-        { type: 'text', label: 'Responsable', name: 'actionplan2' },
-        { type: 'date', label: 'Fecha Inicio', name: 'iniDate2' },
-        { type: 'date', label: 'Fecha Fin', name: 'endDate2', maxDais: 100 },
+        { type: 'text', label: 'Acción', name: 'actionplan2', optional: true },
+        { type: 'text', label: 'Responsable', name: 'actionplan2', optional: true },
+        { type: 'date', label: 'Fecha Inicio', name: 'iniDate2', optional: true },
+        { type: 'date', label: 'Fecha Fin', name: 'endDate2', maxDais: 100, optional: true },
 
-        { type: 'text', label: 'Acción', name: 'actionplan3' },
-        { type: 'text', label: 'Responsable', name: 'actionplan3' },
-        { type: 'date', label: 'Fecha Inicio', name: 'iniDate3' },
-        { type: 'date', label: 'Fecha Fin', name: 'endDate3', maxDais: 100 },
+        { type: 'text', label: 'Acción', name: 'actionplan3', optional: true },
+        { type: 'text', label: 'Responsable', name: 'actionplan3', optional: true },
+        { type: 'date', label: 'Fecha Inicio', name: 'iniDate3', optional: true },
+        { type: 'date', label: 'Fecha Fin', name: 'endDate3', maxDais: 100, optional: true },
 
-        { type: 'text', label: 'Acción', name: 'actionplan4' },
-        { type: 'text', label: 'Responsable', name: 'actionplan4' },
-        { type: 'date', label: 'Fecha Inicio', name: 'iniDate4' },
-        { type: 'date', label: 'Fecha Fin', name: 'endDate4', maxDais: 100 },
+        { type: 'text', label: 'Acción', name: 'actionplan4', optional: true },
+        { type: 'text', label: 'Responsable', name: 'actionplan4', optional: true },
+        { type: 'date', label: 'Fecha Inicio', name: 'iniDate4' , optional: true},
+        { type: 'date', label: 'Fecha Fin', name: 'endDate4', maxDais: 100 , optional: true},
+
+        { type: 'text', label: 'Acción', name: 'actionplan5', optional: true },
+        { type: 'text', label: 'Responsable', name: 'actionplan5', optional: true },
+        { type: 'date', label: 'Fecha Inicio', name: 'iniDate5' , optional: true},
+        { type: 'date', label: 'Fecha Fin', name: 'endDate5', maxDais: 100 , optional: true},
+
+        { type: 'text', label: 'Acción', name: 'actionplan6', optional: true },
+        { type: 'text', label: 'Responsable', name: 'actionplan6', optional: true },
+        { type: 'date', label: 'Fecha Inicio', name: 'iniDate6' , optional: true},
+        { type: 'date', label: 'Fecha Fin', name: 'endDate6', maxDais: 100 , optional: true},
+
+        { type: 'text', label: 'Acción', name: 'actionplan7', optional: true },
+        { type: 'text', label: 'Responsable', name: 'actionplan7', optional: true },
+        { type: 'date', label: 'Fecha Inicio', name: 'iniDate7' , optional: true},
+        { type: 'date', label: 'Fecha Fin', name: 'endDate7', maxDais: 100 , optional: true},
+
+        { type: 'text', label: 'Acción', name: 'actionplan8', optional: true },
+        { type: 'text', label: 'Responsable', name: 'actionplan8', optional: true },
+        { type: 'date', label: 'Fecha Inicio', name: 'iniDate8' , optional: true},
+        { type: 'date', label: 'Fecha Fin', name: 'endDate8', maxDais: 100 , optional: true},
+
+        { type: 'text', label: 'Acción', name: 'actionplan9', optional: true },
+        { type: 'text', label: 'Responsable', name: 'actionplan9', optional: true },
+        { type: 'date', label: 'Fecha Inicio', name: 'iniDate9' , optional: true},
+        { type: 'date', label: 'Fecha Fin', name: 'endDate9', maxDais: 100 , optional: true},
+
+        { type: 'text', label: 'Acción', name: 'actionplan10', optional: true },
+        { type: 'text', label: 'Responsable', name: 'actionplan10', optional: true },
+        { type: 'date', label: 'Fecha Inicio', name: 'iniDate10' , optional: true},
+        { type: 'date', label: 'Fecha Fin', name: 'endDate10', maxDais: 100 , optional: true},
 
     ];
 
