@@ -10,7 +10,8 @@ export const upsertArea = new ValidatedMethod({
     name: 'areas.upsert',
     validate: new SimpleSchema({
         _id: { type: String, optional: true },
-        name: { type: String, optional: true },
+        code: { type: String },
+        name: { type: String },
     }).validator(),
     run(area) {
         return Areas.upsert({ _id: area._id }, { $set: area });
@@ -75,7 +76,6 @@ const addParentsNodes = node => {
             }
         },
     ]);
-    console.log('PERENT', parent);
     parent = parent & parent[0] && addParentsNodes(parent[0]);
     if (parent) node.parent = parent;
     return node;

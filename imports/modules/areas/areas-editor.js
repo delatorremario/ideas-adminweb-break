@@ -8,6 +8,7 @@ const handleUpsert = () => {
     const { doc } = component.state;
     const confirmation = doc && doc._id ? 'Datos actualizados correctamente' : 'Datos guardados con éxito';
     const upsert = {
+         code: doc.name.trim(),
          name: doc.name.trim(),
         // adminsEmails: doc.adminsEmails,
     };
@@ -30,6 +31,9 @@ const handleUpsert = () => {
 const validate = () => {
     $(component.areaEditorForm).validate({
         rules: {
+            code: {
+                required: true,
+            },
             name: {
                 required: true,
             },

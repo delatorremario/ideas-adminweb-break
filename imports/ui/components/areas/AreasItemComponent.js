@@ -19,7 +19,7 @@ const AreasItemComponent = ({ history, area }) => {
                     </h5>
                     <div className="actions pull-right" style={{ marginTop: '5px' }}>
                         <Link to={`/area/${area._id}/edit`}><i className="fa fa-pencil"></i></Link>
-                        <i className="fa fa-trash" onClick={handleRemove(area._id).bind(this)}></i>
+                        {/* <i className="fa fa-trash" onClick={handleRemove(area._id).bind(this)}></i> */}
                     </div>
                 </div>
                 {/* <div className="row panel-body">

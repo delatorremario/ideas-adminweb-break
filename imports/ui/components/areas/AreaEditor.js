@@ -9,7 +9,8 @@ export default class AreaEditor extends Component {
     state = {
         doc: {
             _id: '',
-            name: ''
+            code: '',
+            name: '',
         }
     }
 
@@ -36,8 +37,8 @@ export default class AreaEditor extends Component {
     }
 
     render() {
-        const { name, _id } = this.state.doc;
-    
+        const { name, _id, code } = this.state.doc;
+
         return (
             <div>
                 <form
@@ -46,6 +47,21 @@ export default class AreaEditor extends Component {
                     ref={form => (this.areaEditorForm = form)}
                     onSubmit={event => event.preventDefault()}>
 
+
+                    <FormGroup>
+                        <div className="col-sm-4">
+                            <ControlLabel>Código</ControlLabel>
+                        </div>
+                        <div className="col-sm-6">
+                            <FormControl
+                                type="text"
+                                name="code"
+                                value={code}
+                                onChange={this.onChangeDoc}
+                                placeholder="Código del Area"
+                            />
+                        </div>
+                    </FormGroup>
                     <FormGroup>
                         <div className="col-sm-4">
                             <ControlLabel>Nombre</ControlLabel>
