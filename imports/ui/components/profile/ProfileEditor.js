@@ -9,6 +9,7 @@ import DatePicker from 'react-bootstrap-date-picker';
 import FileUpload from '../files/FileUpload';
 import Files from '../../../api/files/files';
 
+import PersonSearchAndCardContainer from '../../containers/person/PersonSearchAndCardContainer';
 
 const companies = ['BHP', 'Contratista']
 
@@ -335,6 +336,7 @@ export default class ProfileEditor extends Component {
                             </div>
                         </FormGroup>
                     }
+
                     <FormGroup>
                         <div className="col-sm-4">
                             <ControlLabel>
@@ -421,6 +423,20 @@ export default class ProfileEditor extends Component {
                                 value={address}
                                 onChange={this.onChangeProfile}
                                 placeholder="Dirección"
+                            />
+                        </div>
+                    </FormGroup>
+                    <FormGroup>
+                        <div className="col-sm-4">
+                            <ControlLabel>One up</ControlLabel>
+                        </div>
+                        <div className="col-sm-6">
+                            <PersonSearchAndCardContainer
+                                selectPerson={() => (e) => console.log('selectPerson')}
+                                person={undefined}
+                                onlyChief={true}
+                                myArea={false}
+                                parentArea={false}
                             />
                         </div>
                     </FormGroup>
