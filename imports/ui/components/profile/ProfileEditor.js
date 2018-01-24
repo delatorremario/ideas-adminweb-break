@@ -33,7 +33,9 @@ export default class ProfileEditor extends Component {
                 areaCode: '',
                 areaId: '',
                 group: '',
-                origin: ''
+                origin: '',
+                company: '',
+                companyName: '',
             },
         },
         person: {},
@@ -106,11 +108,15 @@ export default class ProfileEditor extends Component {
     render() {
 
         const { user, person } = this.state;
-        const MEL = person && person.origin === 'MEL'
-        const BHP = person && person.origin === 'BHP'
-        const Contratista = person && person.origin === 'Contratista'
+
+        console.log('Contratista', person);
 
         const { _id, emails, profile } = this.state.user;
+
+        const MEL = profile && profile.company === 'MEL'
+        const BHP = profile && profile.company === 'BHP'
+        const Contratista = profile && profile.company === 'Contratista'
+
         const rut = profile && profile.rut || '';
         const group = profile && profile.group || '';
         const firstName = profile && profile.firstName || '';
@@ -123,6 +129,7 @@ export default class ProfileEditor extends Component {
         const contactPhone = profile && profile.contactPhone || '';
         const address = profile && profile.address || '';
         const company = profile && profile.company || '';
+        const companyName = profile && profile.companyName || '';
         const oneUp = profile && profile.managerCode || '';
         const emailChief = profile && profile.emailChief || '';
         const area = profile && profile.area || '';
@@ -307,10 +314,27 @@ export default class ProfileEditor extends Component {
                                 value={company}
                                 onChange={this.onChangeProfile}
                                 placeholder="Empresa"
-                                disabled={!_.isEmpty(person)}
+                                disabled={true}
                             />
                         </div>
                     </FormGroup>
+                    {
+                        Contratista &&
+                        <FormGroup>
+                            <div className="col-sm-4">
+                                <ControlLabel>Nombre de la Empresa</ControlLabel>
+                            </div>
+                            <div className="col-sm-6">
+                                <FormControl
+                                    type="text"
+                                    name="companyName"
+                                    value={companyName}
+                                    onChange={this.onChangeProfile}
+                                    placeholder="Nombre de la Empresa"
+                                />
+                            </div>
+                        </FormGroup>
+                    }
                     <FormGroup>
                         <div className="col-sm-4">
                             <ControlLabel>
