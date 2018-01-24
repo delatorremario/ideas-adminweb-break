@@ -7,7 +7,7 @@ import Areas from '../areas';
 
 Meteor.publish('areas.search', (textSearch, limit) => {
   check(textSearch, String);
-  check(limit, Number);
+  check(limit, Match.Maybe(Number));
   const self = this.Meteor;
   const user = self.user();
   if (user) {
