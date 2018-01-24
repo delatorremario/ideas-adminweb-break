@@ -34,7 +34,8 @@ import SetStateContainer from '../containers/set-state/SetStateContainer';
 
 // Ideas new user
 import EditIdeaUser from '../containers/ideas/EditIdeaUser';
-import Dashboard from '../containers/dashboard/Dashboard';
+//import Dashboard from '../containers/dashboard/Dashboard';
+import Dashboard from '../pages/dashboard/Dashboard'; 
 import BlankPage from '../pages/BlankPage';
 import ComponentsPage from '../pages/ComponentsPage';
 
