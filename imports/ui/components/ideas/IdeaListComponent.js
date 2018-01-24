@@ -24,13 +24,9 @@ class IdeasListComponent extends Component {
         text: '',
         areaSelected: undefined,
         statesCodesSelected: [],
-        // showFilters: false,
         showArea: true,
         showStates: false,
-        // showMore: true,
     }
-
-
 
     handleNav = (history, _id) => {
         history.push(`/idea/${_id}`)
@@ -51,7 +47,6 @@ class IdeasListComponent extends Component {
                     Bert.alert(error.reason, 'danger')
                 } else {
                     Bert.alert('Datos eliminados', 'success')
-                    // history.push('/ideas') // NO SE DEBE LLAMAR NUEVAMENTE A LA RUTA YA QUE ES LOS DATOS SON REACTIVOS
                 }
             })
         }, (dismiss) => {
@@ -66,7 +61,6 @@ class IdeasListComponent extends Component {
         if (_.includes(statesCodes, state.code)) _.remove(statesCodes, code => code === state.code)
         else statesCodes.push(state.code);
         this.setState({ statesCodesSelected: statesCodes });
-        // statesCodesFilter.set(statesCodes);
     }
 
     selectArea = area => {
@@ -77,9 +71,7 @@ class IdeasListComponent extends Component {
     onChangeTextSearch = e => {
         e.preventDefault();
         const text = e.target.value;
-        console.log('text', text);
         this.setState({ text })
-        //this.props.textSearch.set(text);
     }
 
     showArea = e => {
@@ -100,31 +92,35 @@ class IdeasListComponent extends Component {
         statesCodesFilter.set(statesCodesSelected);
         this.setState({ showMore: true })
     }
+
     handleKeyPress = (event) => {
         if (event.key == 'Enter') {
             this.search();
         }
     }
+
     clear = () => {
         const { textSearch, statesCodesFilter, areasIdsFilter, ideasFindLimit } = this.props;
         this.setState({ text: '', statesCodesSelected: [] })
         textSearch.set('')
         statesCodesFilter.set([]);
-       // areasIdsFilter.set([])
+        // areasIdsFilter.set([])
         // ideasFindLimit.set(5);
     }
+
     more = () => {
         const { ideasFindLimit, ideas } = this.props;
         ideasFindLimit.set(ideasFindLimit.get() + 5)
         //this.setState({ showMore: (ideasFindLimit.get() === ideas.length + 5) })
     }
+
     render() {
 
         const { history, ideas, ideasstates, showEdit, user, textSearch, ideasFindLimit } = this.props;
         const { stateSelected, areaSelected, statesCodesSelected } = this.state;
         const { showFilters, showArea, showList, text, showStates } = this.state;
 
-        const showMore = ideasFindLimit.get() === ideas.length + 5
+        const showMore = ideasFindLimit.get() === ideas.length
 
         return (
             <div className='ideas-list'>
@@ -197,14 +193,18 @@ class IdeasListComponent extends Component {
                 <div>
                     {
                         ideas.length > 0 ?
-                            <div className="row cards-container">
-                                {_.map(ideas, (idea, index) => {
-                                    let lap = index / 2;
-                                    return <IdeaCard key={index} idea={idea} lap={lap} handleRemove={this.handleRemove} showEdit={showEdit} />
-                                })}
+                            <div>
+                                <div className="row cards-container">
+                                    {_.map(ideas, (idea, index) => {
+                                        let lap = index / 2;
+                                        return <IdeaCard key={index} idea={idea} lap={lap} handleRemove={this.handleRemove} showEdit={showEdit} />
+                                    })}
+                                </div>
                                 {
                                     showMore &&
-                                    <Button className={"btn btn-primary btn-search"} onClick={this.more}><i className="fa fa-bars"></i> ver más</Button>
+                                    <div className="row cards-container">
+                                        <Button className={"btn btn-primary btn-search"} onClick={this.more}><i className="fa fa-bars"></i> ver más</Button>
+                                    </div>
                                 }
 
                             </div>
@@ -216,6 +216,7 @@ class IdeasListComponent extends Component {
         )
     }
 }
+
 IdeasListComponent.propTypes = {
     history: PropTypes.object,
     ideas: PropTypes.array,

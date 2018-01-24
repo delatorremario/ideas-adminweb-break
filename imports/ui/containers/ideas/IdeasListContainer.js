@@ -14,7 +14,7 @@ import Loading from '../../components/Loading.js';
 
 const statesCodesFilter = new ReactiveVar([]);
 const areasIdsFilter = new ReactiveVar([]);
-const ideasFindLimit = new ReactiveVar(5);
+const ideasFindLimit = new ReactiveVar(10);
 const textSearch = new ReactiveVar('');
 
 const composer = ({ match }, onData) => {

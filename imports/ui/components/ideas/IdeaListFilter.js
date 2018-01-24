@@ -48,15 +48,20 @@ class IdeasListFilter extends Component {
             console.log(dismiss)
         })
     }
-
+    more = () => {
+        const { ideasFindLimit, ideas } = this.props;
+        ideasFindLimit.set(ideasFindLimit.get() + 5)
+        //this.setState({ showMore: (ideasFindLimit.get() === ideas.length + 5) })
+    }
 
     render() {
 
-        const { history, ideas, ideasstates, showEdit, user, remove } = this.props;
+        const { history, ideas, ideasstates, showEdit, user, remove, ideasFindLimit } = this.props;
        // const { areaId } = this.props.params;
         const { stateSelected, textSearch, areaSelected, statesCodesSelected } = this.state;
         const { showFilters, showArea, showList } = this.state;
 
+        const showMore = ideasFindLimit.get() === ideas.length + 5
 
         return (
             <div className='ideas-list'>
@@ -94,6 +99,10 @@ class IdeasListFilter extends Component {
                                     let lap = index / 2;
                                     return <IdeaCard key={index} idea={idea} lap={lap} handleRemove={this.handleRemove} showEdit={showEdit} />
                                 })}
+                                {
+                                    showMore &&
+                                    <Button className={"btn btn-primary btn-search"} onClick={this.more}><i className="fa fa-bars"></i> ver más</Button>
+                                }
                             </div>
                             : <Alert bsStyle="warning">No se encontraron datos.</Alert>
                     }

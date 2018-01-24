@@ -13,7 +13,7 @@ import Areas from '../../../api/areas/areas';
 
 import Loading from '../../components/Loading.js';
 
-// const ideasFindLimit = new ReactiveVar(0);
+const ideasFindLimit = new ReactiveVar(10);
 
 const composer = ({ match }, onData) => {
 
@@ -52,7 +52,6 @@ const composer = ({ match }, onData) => {
 		
 		switch (_.toInteger(month)) {
 			case 0:
-				console.log('entra cero')
 				_.extend(filters, {
 					date: {
 						$gte: moment().startOf('month').toDate(),
@@ -96,7 +95,7 @@ const composer = ({ match }, onData) => {
 
 			const showEdit = Roles.userIsInRole(user && user._id, ['SuperAdminHolos', 'Leader'])
 
-			onData(null, { ideas, user, showEdit });
+			onData(null, { ideas, user, showEdit, ideasFindLimit });
 		}
 	}
 };
