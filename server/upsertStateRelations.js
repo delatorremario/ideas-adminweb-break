@@ -7,6 +7,7 @@ import States from '../imports/api/states/states';
 Meteor.methods({
     'states.relations': () => {
         if (!Meteor.isServer) return;
+        console.log('-- end states relations --');        
         state1A();
         state1B();
         state2A();
@@ -30,18 +31,21 @@ Meteor.methods({
 
 const state1A = () => {
     const code = '1A';
-    const arrRoles = [{ role: 'Leader', title: 'Ideas Nuevas' }];
+    const arrRoles = [
+        { role: 'Leader', title: 'Ideas Nuevas' },
+        { role: 'Employee', title: 'Ideas Nuevas', onlyView: true }
+    ];
     const arrNext = [{
         "title": "Dar Continuidad",
         "action": "Dar Continuidad",
         "code": "1B",
-        "color": States.findOne({code:"1B"}).color,
+        "color": States.findOne({ code: "1B" }).color,
     },
     {
         "title": "Derivar a otro Lider",
         "action": "Derivar a otro Lider",
         "code": "1A",
-        "color": States.findOne({code:"1A"}).color,
+        "color": States.findOne({ code: "1A" }).color,
     }]
 
     const toChanges = [
@@ -70,24 +74,28 @@ const state1A = () => {
 const state1B = () => {
     const code = '1B';
 
-    const arrRoles = [{ role: 'Leader', title: 'Ideas Pendientes' }];
+    const arrRoles = [
+        { role: 'Leader', title: 'Ideas Pendientes' },
+        { role: 'Employee', title: 'Ideas Pendientes', onlyView: true }
+
+    ];
     const arrNext = [{
         "title": "Derivar",
         "action": "Derivar Idea",
         "code": "2A",
-        "color": States.findOne({code:"2A"}).color,
+        "color": States.findOne({ code: "2A" }).color,
     },
     {
         "title": "Rechazar / Repetida",
         "action": "Rechazar Idea Repetida",
         "code": "3B",
-        "color": States.findOne({code:"3B"}).color,
+        "color": States.findOne({ code: "3B" }).color,
     },
     {
         "title": "Rechazar / Proceso",
         "action": "Rechazar Idea en Proceso",
         "code": "3A",
-        "color": States.findOne({code:"3A"}).color,
+        "color": States.findOne({ code: "3A" }).color,
     }
     ]
 
@@ -114,25 +122,28 @@ const state1B = () => {
 const state2A = () => {
     const code = '2A';
 
-    const arrRoles = [{ role: 'Executive', title: 'Ideas Nuevas' }];
+    const arrRoles = [
+        { role: 'Executive', title: 'Ideas Nuevas' },
+        { role: 'Employee', title: 'Ideas Nuevas', onlyView: true }
+    ];
     const arrNext = [
         {
             "title": "No Corresponde a mi Area",
             "action": "Devolver Idea",
             "code": "2C",
-            "color": States.findOne({code:"2C"}).color,
+            "color": States.findOne({ code: "2C" }).color,
         },
         {
             "title": "Corresponde a mi Area, pero la decisión es de otro lider de Area",
             "action": "Rederivar Idea",
             "code": "2B",
-            "color": States.findOne({code: "2B"}).color,
+            "color": States.findOne({ code: "2B" }).color,
         },
         {
             "title": "La decisión si me corresponde",
             "action": "Dar Continuidad",
             "code": "2D",
-            "color": States.findOne({code: "2D"}).color,
+            "color": States.findOne({ code: "2D" }).color,
         },
     ]
 
@@ -165,25 +176,29 @@ const state2A = () => {
 const state2B = () => {
     const code = '2B';
 
-    const arrRoles = [{ role: 'Executive', title: 'Idea Derivada Por Otro Ejecutivo' }];
+    const arrRoles = [
+        { role: 'Executive', title: 'Idea Derivada Por Otro Ejecutivo' },
+        { role: 'Leader', title: 'Idea Derivada Por Otro Ejecutivo', onlyView: true },
+        { role: 'Employee', title: 'Idea Derivada Por Otro Ejecutivo', onlyView: true },
+    ];
     const arrNext = [
         {
             "title": "No Corresponde a mi Area",
             "action": "Devolver Idea",
             "code": "2C",
-            "color": States.findOne({code: "2C"}).color,
+            "color": States.findOne({ code: "2C" }).color,
         },
         {
             "title": "Corresponde a mi Area, pero la decisión es de otro lider de Area",
             "action": "Rederivar Idea",
             "code": "2B",
-            "color": States.findOne({code: "2B"}).color,
+            "color": States.findOne({ code: "2B" }).color,
         },
         {
             "title": "La decisión si me corresponde",
             "action": "Dar Continuidad",
             "code": "2D",
-            "color": States.findOne({code: "2D"}).color,
+            "color": States.findOne({ code: "2D" }).color,
         },
     ]
 
@@ -213,18 +228,21 @@ const state2B = () => {
 const state2C = () => {
     const code = '2C';
 
-    const arrRoles = [{ role: 'Leader', title: 'Idea Devuelta por Area' }];
+    const arrRoles = [
+        { role: 'Leader', title: 'Idea Devuelta por Area' },
+        { role: 'Employee', title: 'Idea Devuelta por Area', onlyView: true }
+    ];
     const arrNext = [{
         "title": "Dar Continuidad",
         "action": "Dar Respuesta",
         "code": "1B",
-        "color": States.findOne({code: "1B"}).color,
+        "color": States.findOne({ code: "1B" }).color,
     },
     {
         "title": "Derivar a otra Area",
         "action": "Derivar a otra Area",
         "code": "1A",
-        "color": States.findOne({code: "1A"}).color,
+        "color": States.findOne({ code: "1A" }).color,
     }]
 
     const toChanges = [
@@ -251,43 +269,46 @@ const state2C = () => {
 const state2D = () => {
     const code = '2D';
 
-    const arrRoles = [{ role: 'Executive', title: 'Ideas Pendientes' }];
+    const arrRoles = [
+        { role: 'Executive', title: 'Ideas Pendientes' },
+        { role: 'Employee', title: 'Ideas Pendientes', onlyView: true }
+    ];
     const arrNext = [
         {
             "title": "Aprobar",
             "action": "Aceptar Idea",
             "code": "5A",
-            "color": States.findOne({code: "5A"}).color,
+            "color": States.findOne({ code: "5A" }).color,
         },
         {
             "title": "Rechazar / Proceso",
             "action": "Rechazar Idea en Proceso",
             "code": "3A",
-            "color": States.findOne({code: "3A"}).color,
+            "color": States.findOne({ code: "3A" }).color,
         },
         {
             "title": "Rechazar / Repetida",
             "action": "Rechazar Idea Repetida",
             "code": "3B",
-            "color": States.findOne({code: "3B",}).color,
+            "color": States.findOne({ code: "3B", }).color,
         },
         {
             "title": "Rechazar / No factible",
             "action": "Rechazar Idea",
             "code": "3C",
-            "color": States.findOne({code: "3C",}).color,
+            "color": States.findOne({ code: "3C", }).color,
         },
         {
             "title": "Postergar",
             "action": "Postergar Idea",
             "code": "4A",
-            "color": States.findOne({code: "4A",}).color,
+            "color": States.findOne({ code: "4A", }).color,
         },
         {
             "title": "Reprogramar Feedback",
             "action": "Reprogramar Feedback",
             "code": "2D",
-            "color": States.findOne({code: "2D",}).color,
+            "color": States.findOne({ code: "2D", }).color,
         },
     ]
 
@@ -319,6 +340,7 @@ const state3A = () => {
 
     const arrRoles = [
         { role: 'Leader', title: 'Ideas Rechazadas', onlyView: true },
+      //  { role: 'Executive', title: 'Ideas Rechazadas', onlyView: true },
         { role: 'Employee', title: 'Ideas Rechazadas' },
     ];
     const arrNext = [
@@ -326,7 +348,7 @@ const state3A = () => {
             "title": "Confirmar Rechazo",
             "action": "Confirmar Rechazo",
             "code": "3D",
-            "color": States.findOne({code: "3D"}).color,
+            "color": States.findOne({ code: "3D" }).color,
         },
     ]
 
@@ -358,6 +380,7 @@ const state3B = () => {
 
     const arrRoles = [
         { role: 'Leader', title: 'Ideas Rechazadas', onlyView: true },
+        //{ role: 'Executive', title: 'Ideas Rechazadas', onlyView: true },
         { role: 'Employee', title: 'Ideas Rechazadas' },
     ];
     const arrNext = [
@@ -365,7 +388,7 @@ const state3B = () => {
             "title": "Confirmar Rechazo",
             "action": "Confirmar Rechazo",
             "code": "3D",
-            "color": States.findOne({code: "3D",}).color,
+            "color": States.findOne({ code: "3D", }).color,
         },
     ]
 
@@ -404,7 +427,7 @@ const state3C = () => {
             "title": "Confirmar Rechazo",
             "action": "Confirmar Rechazo",
             "code": "3D",
-            "color": States.findOne({code: "3D",}).color,
+            "color": States.findOne({ code: "3D", }).color,
         },
     ]
 
@@ -466,21 +489,21 @@ const state4A = () => {
 
     const arrRoles = [
         { role: 'Executive', title: 'Ideas StandBy' },
-        { role: 'Leader', title: 'Ideas StandBy',onlyView: true  },
-        // { role: 'Employee', title: 'Ideas Rechazadas' },
+        { role: 'Leader', title: 'Ideas StandBy', onlyView: true },
+        { role: 'Employee', title: 'Ideas Rechazadas', onlyView: true },
     ];
     const arrNext = [
         {
             "title": "Comenzar Proceso",
             "action": "Comenzar Proceso",
             "code": "2D",
-            "color": States.findOne({code: "2D",}).color,
+            "color": States.findOne({ code: "2D", }).color,
         },
         {
             "title": "Postergar Nuevamente",
             "action": "Postergar Idea",
             "code": "4A",
-            "color": States.findOne({code: "4A",}).color,
+            "color": States.findOne({ code: "4A", }).color,
         },
     ]
 
@@ -514,14 +537,14 @@ const state5A = () => {
     const arrRoles = [
         { role: 'Executive', title: 'Ideas Pendientes Ingreso Plan de Acción' },
         { role: 'Leader', title: 'Ideas Pendientes Ingreso Plan de Acción' },
-        // { role: 'Employee', title: 'Ideas Rechazadas' },
+        { role: 'Employee', title: 'Ideas Pendientes Ingreso Plan de Acción', onlyView: true },
     ];
     const arrNext = [
         {
             "title": "Ingresar Plan de Acción",
             "action": "Ingresar Plan de Acción",
             "code": "5B",
-            "color": States.findOne({code: "5B",}).color,
+            "color": States.findOne({ code: "5B", }).color,
         },
     ]
 
@@ -557,14 +580,14 @@ const state5B = () => {
     const arrRoles = [
         { role: 'Executive', title: 'Ideas Pendientes de Exportación', onlyView: true },
         { role: 'Leader', title: 'Ideas Pendientes de Exportación' },
-        // { role: 'Employee', title: 'Ideas Rechazadas' },
+        { role: 'Employee', title: 'Ideas Pendientes de Exportación', onlyView: true },
     ];
     const arrNext = [
         {
             "title": "Exportar plan de acción formato Just Do It",
             "action": "Exportar plan de acción",
             "code": "6A",
-            "color": States.findOne({code: "6A",}).color,
+            "color": States.findOne({ code: "6A", }).color,
         },
         // {
         //     "title": "Exportar plan de acción Formato Iniciativa Nueva",
@@ -575,27 +598,27 @@ const state5B = () => {
     ]
 
     const toChanges = [
-      
+
         { type: 'text', label: 'Acción', name: 'actionplan1' },
         { type: 'text', label: 'Responsable', name: 'actionplan1' },
         { type: 'date', label: 'Fecha Inicio', name: 'iniDate1' },
         { type: 'date', label: 'Fecha Fin', name: 'endDate1', maxDais: 100 },
-  
+
         { type: 'text', label: 'Acción', name: 'actionplan2' },
         { type: 'text', label: 'Responsable', name: 'actionplan2' },
         { type: 'date', label: 'Fecha Inicio', name: 'iniDate2' },
         { type: 'date', label: 'Fecha Fin', name: 'endDate2', maxDais: 100 },
-  
+
         { type: 'text', label: 'Acción', name: 'actionplan3' },
         { type: 'text', label: 'Responsable', name: 'actionplan3' },
         { type: 'date', label: 'Fecha Inicio', name: 'iniDate3' },
         { type: 'date', label: 'Fecha Fin', name: 'endDate3', maxDais: 100 },
-  
+
         { type: 'text', label: 'Acción', name: 'actionplan4' },
         { type: 'text', label: 'Responsable', name: 'actionplan4' },
         { type: 'date', label: 'Fecha Inicio', name: 'iniDate4' },
         { type: 'date', label: 'Fecha Fin', name: 'endDate4', maxDais: 100 },
-  
+
     ];
 
     States.update({ "code": code }, {
@@ -622,20 +645,20 @@ const state6A = () => {
     const arrRoles = [
         // { role: 'Executive', title: 'Ideas Pendientes Ingreso Plan de Acción' },
         { role: 'Leader', title: 'Ideas Ingresadas a Impact' },
-        // { role: 'Employee', title: 'Ideas Rechazadas' },
+        { role: 'Employee', title: 'Ideas Ingresadas a Impact', onlyView: true },
     ];
     const arrNext = [
         {
             "title": "Idea Implementada Just Do it",
             "action": "Cerrar Ciclo",
             "code": "7A",
-            "color": States.findOne({code: "7A",}).color,
+            "color": States.findOne({ code: "7A", }).color,
         },
     ]
 
     const toChanges = [
         { type: 'date', label: 'Fecha Compromiso Carga a Impact', name: 'compromise', maxDais: 3 },
-      ];
+    ];
 
     States.update({ "code": code }, {
         $set: {
@@ -659,16 +682,16 @@ const state6B = () => {
     const code = '6B';
 
     const arrRoles = [
-        // { role: 'Executive', title: 'Ideas Pendientes Ingreso Plan de Acción' },
+        { role: 'Executive', title: 'Ideas Ingresadas a Impact', onlyView: true },
         { role: 'Leader', title: 'Ideas Ingresadas a Impact' },
-        // { role: 'Employee', title: 'Ideas Rechazadas' },
+        { role: 'Employee', title: 'Ideas Ingresadas a Impact', onlyView: true },
     ];
     const arrNext = [
         {
             "title": "Idea Implementada Iniciativa Nueva",
             "action": "Cerrar Ciclo",
             "code": "7B",
-            "color": States.findOne({code: "7B",}).color,
+            "color": States.findOne({ code: "7B", }).color,
         },
     ]
 
