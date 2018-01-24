@@ -78,7 +78,7 @@ const PageWrapper = () => (
                 <Route exact path="/corporation/:_id/edit" component={EditCorporation} />
 
                 {/* Areas */}
-                {/* <Route exact path="/areas" component={Areas} /> */}
+                <Route exact path="/areas/tree" component={Areas} />
                 <Route exact path="/areas" component={AreasContainer} />
                 <Route exact path="/areas/new" component={NewArea} />
                 <Route exact path="/area/:_id/edit" component={EditArea} />
