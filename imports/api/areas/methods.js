@@ -166,7 +166,7 @@ rateLimit({
     timeRange: 1000,
 });
 
-const findLeader = (area) => {
+export const findLeader = (area) => {
     const leader = Meteor.users.findOne({ 'profile.leaderAreasIds': area._id }, { fields: { profile: 1 } })
     if (!leader) {
         if (!area.parentAreaId) return;

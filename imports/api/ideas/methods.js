@@ -1,3 +1,4 @@
+import { Meteor } from 'meteor/meteor';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import _ from 'lodash';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
@@ -7,7 +8,8 @@ import Ideas from './ideas';
 import rateLimit from '../../modules/rate-limit.js';
 import PersonSchema from '../../api/persons/personSchema';
 import States from '../../api/states/states';
-import { Meteor } from 'meteor/meteor';
+import { findLeader  } from '../../api/areas/methods';
+
 
 const ViewerSchema = new SimpleSchema({
     userId: { type: String },
@@ -163,7 +165,8 @@ Meteor.methods({
         if (owner) viewers.push(owner._id);
 
         // leaders
-        const leaders = Meteor.users.find({ roles: 'Leader' }, { fields: { _id: 1 } }).fetch();
+        const profile = findLeader({_id:idea.chief.areaId})
+        const leaders = Meteor.users.find({ profile }, { fields: { _id: 1 } }).fetch();
         viewers = _.union(viewers, _.map(leaders, '_id'));
 
         // chief

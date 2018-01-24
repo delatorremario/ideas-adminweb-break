@@ -13,9 +13,9 @@ Meteor.methods({
         const leadersMails = [
             { mail: 'Jorge.JN.Tom@bhpbilliton.com', areasCodes: ['30007385'] },
             { mail: 'Camila.CA.Perez@bhpbilliton.com', areasCodes: ['30000637'] },
-            { mail: 'Jorge.JM.Jalil@bhpbilliton.com', areasCodes: ['3000638'] },
+            { mail: 'Jorge.JM.Jalil@bhpbilliton.com', areasCodes: ['30000638'] },
             { mail: 'mauricio.ma.rodriguez@bhpbilliton.com', areasCodes: ['30007434'] },
-            { mail: 'Maria.MP.Bustamante@bhpbilliton.com', areasCodes: ['30000311','30000005','30007387','30058188','30058053'] },
+            { mail: 'Maria.MP.Bustamante@bhpbilliton.com', areasCodes: ['30000311', '30000005', '30007387', '30058188', '30058053'] },
             { mail: 'delatorremario@gmail.com', areasCodes: ['30000092', '30000311', '30000005'] },
         ]
 
