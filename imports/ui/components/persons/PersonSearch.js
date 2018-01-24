@@ -2,17 +2,20 @@ import React, { Component } from 'react';
 import { PropTypes } from 'react';
 import { ControlLabel } from 'react-bootstrap';
 
-const PersonSearch = ({ persons, onChangeSearchPerson, selectPerson }) => {
+const PersonSearch = ({ persons, onChangeSearchPerson, selectPerson, hideInput }) => {
     return (
         <div className="col-xs-12">
             <div className="row">
-                <div className="col-md-6">
+                {
+                    !hideInput &&
                     <div className="form-group">
-                        <ControlLabel>Seleccione una Persona</ControlLabel>
-                        <i className="fa fa-user"></i>
-                        <input id="personSearchInput" type="text" className="form-control" placeholder="Buscar por Apellido y Nombres o RUT" onChange={onChangeSearchPerson.bind(this)} autoComplete="off" />
+                        <div className="col-md-6">
+                            <ControlLabel>Seleccione una Persona</ControlLabel>
+                            <i className="fa fa-user"></i>
+                            <input id="personSearchInput" type="text" className="form-control" placeholder="Buscar por Apellido y Nombres o RUT" onChange={onChangeSearchPerson.bind(this)} autoComplete="off" />
+                        </div>
                     </div>
-                </div>
+                }
                 {
                     persons && <div className="form-group">
                         {/* <label className="col-md-10 control-label">Seleccione una Persona para continuar</label> */}

@@ -23,7 +23,7 @@ const composer = ({ match }, onData) => {
   const subscription = Meteor.subscribe('ideas.view', docId);
   const user = Meteor.user();
   const email = user && user.emails && user.emails[0] && user.emails[0].address;
-  const subscriptionPersons = Meteor.subscribe('persons.search', textSearch.get(), false, false, textSearchLimit.get());
+  const subscriptionPersons = Meteor.subscribe('persons.search', textSearch.get(), false, false, false, textSearchLimit.get());
   let subscriptionPerson = Meteor.subscribe('persons.email', email);
   const statessub = Meteor.subscribe('states.list');
   // const subscriptionAreas = Meteor.subscribe('areas.list');

@@ -163,8 +163,10 @@ class SetStateComponent extends React.Component {
                                             <PersonSearchAndCardContainer
                                                 onlyChief={true}
                                                 myArea={toChange.label === 'Otro Ejecutivo de mi Area'}
+                                                parentArea={toChange.label === 'Otro Ejecutivo de mi Area'}
                                                 selectPerson={selectPerson}
                                                 person={toChange.chief}
+                                                hideInput={true}
                                             />
                                         </div>
 

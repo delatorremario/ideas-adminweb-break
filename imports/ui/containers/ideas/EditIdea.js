@@ -26,7 +26,7 @@ const composer = ({ match }, onData) => {
   const docId = match.params._id || '';
   const subscription = Meteor.subscribe('ideas.view', docId);
 
-  const subscriptionPersons = Meteor.subscribe('persons.search', textSearch.get(),  false, false, textSearchLimit.get());
+  const subscriptionPersons = Meteor.subscribe('persons.search', textSearch.get(),  false, false, false, textSearchLimit.get());
   const statessub = Meteor.subscribe('states.list');
 
   // const subscriptionAreas = Meteor.subscribe('areas.list');

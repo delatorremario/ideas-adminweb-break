@@ -3,6 +3,8 @@ import { Roles } from 'meteor/alanning:roles';
 import _ from 'lodash';
 import { check } from 'meteor/check';
 import Persons from '../persons';
+import Areas from '../../areas/areas';
+import { findChiefs } from '../../areas/methods';
 
 Meteor.publish('persons.idList', (limit) => {
   check(limit, Number);
@@ -10,22 +12,31 @@ Meteor.publish('persons.idList', (limit) => {
   return persons;
 })
 
-Meteor.publish('persons.search', (text, onlyChief, myArea, limit) => {
+Meteor.publish('persons.search', (text, onlyChief, myArea, parentArea, limit) => {
   check(text, String);
   check(limit, Number);
   check(myArea, Boolean);
   check(onlyChief, Boolean);
+  check(parentArea, Boolean);
 
   const self = this.Meteor;
   const user = self.user();
 
   if (!user) return;
-  const filters = { $text: { $search: text }, corporationId: (user.profile && user.profile.corporationId) || '' };
+
+  let filters = { $text: { $search: text }, corporationId: (user.profile && user.profile.corporationId) || '' };
+  
   if (onlyChief) _.extend(filters, { group: 'EXECUT.' })
   if (myArea) {
     _.extend(filters, { areaId: user.profile && user.profile.areaId })
-    console.log('myarea', myArea, user);
   }
+  
+  if (onlyChief && parentArea) {
+    const area = Areas.findOne({ _id: user.profile && user.profile.areaId })
+    const chiefsIds = findChiefs(area);
+    filters = { _id: { $in: chiefsIds } }
+  }
+  
   const persons = Persons.find(
     filters,
     { fields: { score: { $meta: 'textScore' } } }, { sort: { score: -1 }, limit: limit });

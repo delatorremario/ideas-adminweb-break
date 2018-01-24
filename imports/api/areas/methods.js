@@ -33,7 +33,7 @@ export const addChildNodes = parentnode => {
         { $match: { parentAreaId: parentnode._id } },
         { $lookup: { from: 'typesareastructure', foreignField: '_id', localField: 'typeAreaStructureId', as: 'TypeAreaStructure' } },
         { $unwind: '$TypeAreaStructure' },
-        { $project: { name: { $concat: ['$name', ' - ','$code',' - ', '$TypeAreaStructure.name'] }, parentAreaId: '$parantAreaId', TypeAreaStructure: '$TypeAreaStructure', TypeArea: '$TypeArea' } },
+        { $project: { name: { $concat: ['$name', ' - ', '$code', ' - ', '$TypeAreaStructure.name'] }, parentAreaId: '$parantAreaId', TypeAreaStructure: '$TypeAreaStructure', TypeArea: '$TypeArea' } },
 
     ]);
     _.map(childs, (child) => {
@@ -69,7 +69,7 @@ const addParentsNodes = node => {
         { $unwind: '$TypeAreaStructure' },
         {
             $project: {
-                name: { $concat: ['$name', ' - ','$code'] },
+                name: { $concat: ['$name', ' - ', '$code'] },
                 parentAreaId: 1,
                 typeAreaStructure: '$TypeAreaStructure.name',
                 typeArea: '$TypeArea.name',
@@ -106,7 +106,7 @@ Meteor.methods({
             //     ]
             // )
             const firstnodes = Areas.find({ parentAreaId: { $exists: false } }).fetch();
-            console.log('firstnodes', firstnodes);
+            //console.log('firstnodes', firstnodes);
             _.map(firstnodes, firstnode => {
                 firstnode.children = addChildNodes(firstnode);
             })
@@ -174,4 +174,9 @@ export const findLeader = (area) => {
         return findLeader(parent);
     }
     return leader.profile;
+}
+export const findChiefs = (area) => {
+    const areasPaterns = Areas.find({ $or: [{ _id: area.parentAreaId }, { parentAreaId: area.parentAreaId }] }).fetch();
+    const chiefs = Persons.find({ group: 'EXECUT.', areaId: { $in: _.map(areasPaterns, '_id') } }).fetch()
+    return _.map(chiefs, '_id')
 }

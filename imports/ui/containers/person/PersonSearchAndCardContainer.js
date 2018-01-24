@@ -6,7 +6,7 @@ import Persons from '../../../api/persons/persons';
 import PersonSearchAndCard from '../../components/persons/PersonSearchAndCard';
 
 const textSearch = new ReactiveVar('');
-const textSearchLimit = new ReactiveVar(10);
+const textSearchLimit = new ReactiveVar(0);
 const personReactiveVar = new ReactiveVar(undefined);
 
 const onChangeSearchPerson = (e) => {
@@ -15,8 +15,8 @@ const onChangeSearchPerson = (e) => {
       textSearch.set(e.target.value);
 }
 
-const composer = ({ selectPerson, person, onlyChief, myArea }, onData) => {
-      const subscriptionPersons = Meteor.subscribe('persons.search', textSearch.get(), onlyChief || false, myArea || false, textSearchLimit.get());
+const composer = ({ selectPerson, person, onlyChief, myArea, parentArea }, onData) => {
+      const subscriptionPersons = Meteor.subscribe('persons.search', textSearch.get(), onlyChief || false, myArea || false, parentArea || false, textSearchLimit.get());
       const subAreas = Meteor.subscribe('areas.list');
       if (subscriptionPersons.ready() && subAreas.ready()) {
             const persons = Persons.find({}, { sort: { score: -1 }, limit: textSearchLimit.get() }).fetch();
