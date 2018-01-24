@@ -1,1 +1,1 @@
-db.areas.createIndex({"name":"text"})
+db.areas.createIndex({"code":"text","name":"text"})

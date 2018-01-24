@@ -9,7 +9,7 @@ Meteor.methods({
         if (!Meteor.isServer) return;
         //Persons._dropIndex()
         Persons._ensureIndex ({"lastName":"text","firstName":"text", "secondName":"text", "email":"text", "rut": "text"},{"weights": { lastName: 1, firstName:2, secondName:3, email:4, rut:5 }})
-        Areas._ensureIndex({"name":"text"})
+        Areas._ensureIndex({"code":"text","name":"text"})
         Ideas._ensureIndex({
             "opportunity":"text","description":"text",
             "person.lastName":"text",
