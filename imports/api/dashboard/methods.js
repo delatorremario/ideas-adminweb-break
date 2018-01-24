@@ -150,7 +150,9 @@ const getDashboardArea = (area) => {
         }]);
     area.extarnalPersons = (extarnalPersons && extarnalPersons[0] && extarnalPersons[0].count) || 0;
 
-    const ideasInFamily = Ideas.find({ 'person.areaId': { $in: area.family || [] } }).fetch();
+    const filterFamily = { 'person.areaId': { $in: area.family || [] } }
+    if (area.match.date) _.extend(filterFamily, { date: area.match.date })
+    const ideasInFamily = Ideas.find(filterFamily).fetch();
 
     area.ideasPersonAdded = ideasInFamily.length; // (ideasPersonAdded && ideasPersonAdded[0] && ideasPersonAdded[0].count) || 0;
 
