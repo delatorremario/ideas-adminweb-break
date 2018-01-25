@@ -7,7 +7,7 @@ import States from '../imports/api/states/states';
 Meteor.methods({
     'states.relations': () => {
         if (!Meteor.isServer) return;
-        console.log('-- end states relations --');        
+        console.log('-- begin states relations --');
         state1A();
         state1B();
         state2A();
@@ -148,7 +148,7 @@ const state2A = () => {
     ]
 
     const toChanges = [
-        { type: 'chief', label: 'Encargado de Area', name: 'chief' },
+        { type: 'chief', label: 'Encargado de Area', name: 'chief', parents: false },
         { type: 'text', label: 'Comentario', name: 'comment' },
         { type: 'option', label: 'Seguridad', name: 'clasification' },
         { type: 'option', label: 'Producción', name: 'clasification' },
@@ -174,6 +174,8 @@ const state2A = () => {
 }
 
 const state2B = () => {
+    console.log('-enter- 2b');
+    
     const code = '2B';
 
     const arrRoles = [
@@ -203,7 +205,7 @@ const state2B = () => {
     ]
 
     const toChanges = [
-        { type: 'chief', label: 'Otro Ejecutivo de mi Area', name: 'chief' },
+        { type: 'chief', label: 'Otro Ejecutivo de mi Area', name: 'chief', parents: true },
         { type: 'text', label: 'Comentario', name: 'comment' },
     ];
 
@@ -340,7 +342,7 @@ const state3A = () => {
 
     const arrRoles = [
         { role: 'Leader', title: 'Ideas Rechazadas', onlyView: true },
-      //  { role: 'Executive', title: 'Ideas Rechazadas', onlyView: true },
+        //  { role: 'Executive', title: 'Ideas Rechazadas', onlyView: true },
         { role: 'Employee', title: 'Ideas Rechazadas' },
     ];
     const arrNext = [
@@ -616,38 +618,38 @@ const state5B = () => {
 
         { type: 'text', label: 'Acción', name: 'actionplan4', optional: true },
         { type: 'text', label: 'Responsable', name: 'actionplan4', optional: true },
-        { type: 'date', label: 'Fecha Inicio', name: 'iniDate4' , optional: true},
-        { type: 'date', label: 'Fecha Fin', name: 'endDate4', maxDais: 100 , optional: true},
+        { type: 'date', label: 'Fecha Inicio', name: 'iniDate4', optional: true },
+        { type: 'date', label: 'Fecha Fin', name: 'endDate4', maxDais: 100, optional: true },
 
         { type: 'text', label: 'Acción', name: 'actionplan5', optional: true },
         { type: 'text', label: 'Responsable', name: 'actionplan5', optional: true },
-        { type: 'date', label: 'Fecha Inicio', name: 'iniDate5' , optional: true},
-        { type: 'date', label: 'Fecha Fin', name: 'endDate5', maxDais: 100 , optional: true},
+        { type: 'date', label: 'Fecha Inicio', name: 'iniDate5', optional: true },
+        { type: 'date', label: 'Fecha Fin', name: 'endDate5', maxDais: 100, optional: true },
 
         { type: 'text', label: 'Acción', name: 'actionplan6', optional: true },
         { type: 'text', label: 'Responsable', name: 'actionplan6', optional: true },
-        { type: 'date', label: 'Fecha Inicio', name: 'iniDate6' , optional: true},
-        { type: 'date', label: 'Fecha Fin', name: 'endDate6', maxDais: 100 , optional: true},
+        { type: 'date', label: 'Fecha Inicio', name: 'iniDate6', optional: true },
+        { type: 'date', label: 'Fecha Fin', name: 'endDate6', maxDais: 100, optional: true },
 
         { type: 'text', label: 'Acción', name: 'actionplan7', optional: true },
         { type: 'text', label: 'Responsable', name: 'actionplan7', optional: true },
-        { type: 'date', label: 'Fecha Inicio', name: 'iniDate7' , optional: true},
-        { type: 'date', label: 'Fecha Fin', name: 'endDate7', maxDais: 100 , optional: true},
+        { type: 'date', label: 'Fecha Inicio', name: 'iniDate7', optional: true },
+        { type: 'date', label: 'Fecha Fin', name: 'endDate7', maxDais: 100, optional: true },
 
         { type: 'text', label: 'Acción', name: 'actionplan8', optional: true },
         { type: 'text', label: 'Responsable', name: 'actionplan8', optional: true },
-        { type: 'date', label: 'Fecha Inicio', name: 'iniDate8' , optional: true},
-        { type: 'date', label: 'Fecha Fin', name: 'endDate8', maxDais: 100 , optional: true},
+        { type: 'date', label: 'Fecha Inicio', name: 'iniDate8', optional: true },
+        { type: 'date', label: 'Fecha Fin', name: 'endDate8', maxDais: 100, optional: true },
 
         { type: 'text', label: 'Acción', name: 'actionplan9', optional: true },
         { type: 'text', label: 'Responsable', name: 'actionplan9', optional: true },
-        { type: 'date', label: 'Fecha Inicio', name: 'iniDate9' , optional: true},
-        { type: 'date', label: 'Fecha Fin', name: 'endDate9', maxDais: 100 , optional: true},
+        { type: 'date', label: 'Fecha Inicio', name: 'iniDate9', optional: true },
+        { type: 'date', label: 'Fecha Fin', name: 'endDate9', maxDais: 100, optional: true },
 
         { type: 'text', label: 'Acción', name: 'actionplan10', optional: true },
         { type: 'text', label: 'Responsable', name: 'actionplan10', optional: true },
-        { type: 'date', label: 'Fecha Inicio', name: 'iniDate10' , optional: true},
-        { type: 'date', label: 'Fecha Fin', name: 'endDate10', maxDais: 100 , optional: true},
+        { type: 'date', label: 'Fecha Inicio', name: 'iniDate10', optional: true },
+        { type: 'date', label: 'Fecha Fin', name: 'endDate10', maxDais: 100, optional: true },
 
     ];
 

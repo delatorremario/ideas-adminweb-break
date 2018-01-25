@@ -49,6 +49,7 @@ const toChangeSchema = new SimpleSchema({
     date: { type: Date, optional: true },
     checked: { type: Boolean, optional: true },
     maxDais: { type: Number, optional: true },
+    parents: { type: Boolean, optional: true },
 })
 const RoleStateSchema = new SimpleSchema({
     role: { type: String, optional: true },

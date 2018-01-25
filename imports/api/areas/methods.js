@@ -176,7 +176,9 @@ export const findLeader = (area) => {
     return leader.profile;
 }
 export const findChiefs = (area) => {
-    const areasPaterns = Areas.find({ $or: [{ _id: area.parentAreaId }, { parentAreaId: area.parentAreaId }] }).fetch();
+    // const areasPaterns = Areas.find({ $or: [{ _id: area.parentAreaId }, { parentAreaId: area.parentAreaId }] }).fetch();
+    // const chiefs = Persons.find({ group: 'EXECUT.', areaId: { $in: _.map(areasPaterns, '_id') } }).fetch()
+    const areasPaterns = Areas.find({ family: area._id }).fetch();
     const chiefs = Persons.find({ group: 'EXECUT.', areaId: { $in: _.map(areasPaterns, '_id') } }).fetch()
     return _.map(chiefs, '_id')
 }
