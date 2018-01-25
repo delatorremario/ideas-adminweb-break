@@ -33,7 +33,7 @@ Accounts.onLogin((data) => {
         console.log('--- no existe en persons ---');
         // si el usuario no existe en PERSONS lo agrega
 
-        Persons.insert({ ...user.profile }, (err, data) => {
+        Persons.insert({ ...user.profile, email:user.emails[0].address }, (err, data) => {
             console.log('upsert person', err, data);
         })
     }
