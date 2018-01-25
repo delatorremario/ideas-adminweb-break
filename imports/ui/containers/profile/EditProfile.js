@@ -22,16 +22,20 @@ const composer = ({ match }, onData) => {
 
   if (subscription.ready() && subsFiles.ready()) {
     const person = Persons.findOne({ email });
-    const areaId = person && person.areaId || '';
-    const subsArea = Meteor.subscribe('areas.view', areaId);
 
-    if (subsArea.ready()) {
-      const area = Areas.findOne({ _id: areaId });
-      if (area) _.extend(person, ({ area: area.name }));
-      onData(null, { user, person, imageIdVar });
-    }
+    Meteor.call('persons.view', person._id, (err, personview) => {
+      onData(null, { user, person: personview, imageIdVar });
+      //onData(null, { history, person });
+    });
+    // const areaId = person && person.areaId || '';
+    // const subsArea = Meteor.subscribe('areas.view', areaId);
+
+    // if (subsArea.ready()) {
+    //   const area = Areas.findOne({ _id: areaId });
+    //   if (area) _.extend(person, ({ area: area.name }));
+
+
   }
-
-};
+}
 
 export default composeWithTracker(composer, Loading)(EditProfile);

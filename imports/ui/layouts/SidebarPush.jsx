@@ -272,7 +272,7 @@ class SidebarPush extends Component {
                         </a>
                         <div className="title">{user && user.roles && user.roles.map((rol, index) => (
                             index === 0 ? rol : `, ${rol}`)) || ' NO TIENE ROLES '}
-                            <div><small>{user && user.profile && user.profile.area || 'Sin Area Asignada'}</small></div>
+                            <div><small>{user && user.profile && user.profile.area && user.profile.area.name || 'Sin Area Asignada'}</small></div>
                         </div>
 
                         <ul className="dropdown-menu animated fadeInRight" role="menu">

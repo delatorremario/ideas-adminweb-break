@@ -14,7 +14,7 @@ const PersonsItemComponent = ({ history, person }) => {
                     <h5 className="panel-title">
                         <div style={{ borderBottom: `1px solid #6e8694 !important` }}>
                             <div className="title-name" style={{ color: '#2e3238 !important' }}>
-                                <b>&nbsp;&nbsp;{person && person.lastName}&nbsp;&nbsp;</b>{person && person.firstName} {person && person.secondName}
+                                <b>&nbsp;&nbsp;{person && person.lastName}&nbsp;&nbsp;</b>{person && person.secondLastName}, {person && person.firstName} {person && person.secondName}
                             </div>
                         </div>
                     </h5>
@@ -28,9 +28,11 @@ const PersonsItemComponent = ({ history, person }) => {
                         <p className="col-md-12 panel-body-title">
                             &nbsp;<i className="fa fa-envelope-o"></i><b>&nbsp;&nbsp;E-mail:&nbsp;</b> {person.email}
                         </p>
-                        <p className="col-md-12 panel-body-title">
-                            &nbsp;<i className="fa fa-building-o"></i><b>&nbsp;&nbsp;&nbsp;Area:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b>{person.area.name}
-                        </p>
+                        {person.area && person.area.name &&
+                            <p className="col-md-12 panel-body-title">
+                                &nbsp;<i className="fa fa-building-o"></i><b>&nbsp;&nbsp;&nbsp;Area:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b>{person.area.name}
+                            </p>
+                        }
                     </small>
                 </div>
             </div>

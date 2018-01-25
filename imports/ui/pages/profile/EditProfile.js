@@ -3,13 +3,13 @@ import ProfileEditor from '../../components/profile/ProfileEditor';
 import { Link } from 'react-router-dom';
 import NotFound from '../NotFound';
 
-const EditProfile= (props) => {
+const EditProfile = (props) => {
     const user = props.user;
     return user ? (
         <div className="pageWrapper">
             <div className="pageheader">
                 <h1>{user && user.origin}</h1>
-
+                <p className="description">Profile</p>
                 <div className="breadcrumb-wrapper hidden-xs">
                     <span className="label">Estás aquí:</span>
                     <ol className="breadcrumb">
@@ -27,7 +27,7 @@ const EditProfile= (props) => {
                         <div className="panel">
                             <div className="panel-body ng-binding">
 
-                                <ProfileEditor {...props}/>
+                                <ProfileEditor {...props} />
 
                             </div>
 

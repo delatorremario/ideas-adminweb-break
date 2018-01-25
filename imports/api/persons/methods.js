@@ -46,6 +46,8 @@ Meteor.methods({
         check(_id, String);
         let person = Persons.findOne(_id);
         person.area = Areas.findOne(person.areaId);
+        person.oneUp = Persons.findOne({ masterCode: person.managerCode })
+        if(person.oneUp) person.oneUp.area = Areas.findOne(person.oneUp.areaId);
         return person;
     }
 })

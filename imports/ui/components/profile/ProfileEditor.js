@@ -11,6 +11,9 @@ import Files from '../../../api/files/files';
 
 import PersonSearchAndCardContainer from '../../containers/person/PersonSearchAndCardContainer';
 
+import AreasItemComponent from '../areas/AreasItemComponent';
+import PersonsItemComponent from '../persons/PersonsItemComponent';
+
 const companies = ['BHP', 'Contratista']
 
 const completedProfile = (user) => {
@@ -36,7 +39,8 @@ export default class ProfileEditor extends Component {
                 group: '',
                 origin: '',
                 company: '',
-                companyName: '',
+                oneUp: {},
+                area: {},
             },
         },
         person: {},
@@ -45,6 +49,7 @@ export default class ProfileEditor extends Component {
 
     componentDidMount() {
         profileEditor({ component: this });
+        console.log('this.props', this.props);
         const { user, person } = this.props;
 
         this.setState({ person, user: { ...user, profile: { ...user.profile } } });
@@ -64,12 +69,12 @@ export default class ProfileEditor extends Component {
         }));
     }
 
-    onChangeInc = inc => {
+    onChangeInc = origin => {
         this.setState(prev => ({
             user: {
                 ...prev.user,
                 profile: {
-                    ...prev.user.profile, company: inc
+                    ...prev.user.profile, origin
                 }
             }
         }));
@@ -93,7 +98,7 @@ export default class ProfileEditor extends Component {
     }
 
     setDatosMel = () => {
-        this.setState(prev => ({ user: { ...prev.user, profile: { ...prev.user.profile, ...prev.person, company: 'MEL' } } }))
+        this.setState(prev => ({ user: { ...prev.user, profile: { ...prev.user.profile, ...prev.person, origin: 'MEL' } } }))
         Bert.alert("Datos actualizados desde MEL. Guarde los cambios antes de salir para mantenerlos.", 'warning');
     }
 
@@ -110,13 +115,11 @@ export default class ProfileEditor extends Component {
 
         const { user, person } = this.state;
 
-        console.log('Contratista', person);
-
         const { _id, emails, profile } = this.state.user;
 
-        const MEL = profile && profile.company === 'MEL'
-        const BHP = profile && profile.company === 'BHP'
-        const Contratista = profile && profile.company === 'Contratista'
+        const MEL = profile && profile.origin === 'MEL'
+        const BHP = profile && profile.origin === 'BHP'
+        const Contratista = profile && profile.origin === 'Contratista'
 
         const rut = profile && profile.rut || '';
         const group = profile && profile.group || '';
@@ -130,15 +133,15 @@ export default class ProfileEditor extends Component {
         const contactPhone = profile && profile.contactPhone || '';
         const address = profile && profile.address || '';
         const company = profile && profile.company || '';
-        const companyName = profile && profile.companyName || '';
-        const oneUp = profile && profile.managerCode || '';
+        const origin = profile && profile.origin || '';
+        const oneUp = profile && profile.oneUp || '';
+        const managerCode = profile && profile.managerCode || '';
         const emailChief = profile && profile.emailChief || '';
         const area = profile && profile.area || '';
         const areaCode = profile && profile.areaCode || '';
         const oneText = MEL && 'One Up' || BHP && 'Jefe Directo' || 'Contract Owner';
         const imageId = profile && profile.imageId || '';
         const image = Files.findOne({ _id: imageId });
-
         return (
             <div>
 
@@ -186,7 +189,7 @@ export default class ProfileEditor extends Component {
                                             <div className="col-sm-12">
                                                 {
                                                     _.map(companies, (inc, index) =>
-                                                        <Radio key={index} name="company" value={inc} checked={inc == company}
+                                                        <Radio key={index} name="origin" value={inc} checked={inc === origin}
                                                             // onChange={this.onChangeProfile} 
                                                             onChange={(e) => this.onChangeInc(inc)}
                                                             inline>
@@ -203,243 +206,221 @@ export default class ProfileEditor extends Component {
                     </section>
 
 
-
-                    <FormGroup>
-                        <div className="col-sm-4">
-                            <ControlLabel>RUT</ControlLabel>
-                        </div>
-                        <div className="col-sm-6">
-                            <FormControl
-                                type="text"
-                                name="rut"
-                                value={rut}
-                                onChange={this.onChangeProfile}
-                                placeholder="RUT"
-                            />
-                        </div>
-                    </FormGroup>
-                    <FormGroup>
-                        <div className="col-sm-4">
-                            <ControlLabel>Primer Nombre</ControlLabel>
-                        </div>
-                        <div className="col-sm-6">
-                            <FormControl
-                                type="text"
-                                name="firstName"
-                                value={firstName}
-                                onChange={this.onChangeProfile}
-                                placeholder="Primer Nombre"
-                            />
-                        </div>
-                    </FormGroup>
-                    <FormGroup>
-                        <div className="col-sm-4">
-                            <ControlLabel>Segundo Nombre</ControlLabel>
-                        </div>
-                        <div className="col-sm-6">
-                            <FormControl
-                                type="text"
-                                name="secondName"
-                                value={secondName}
-                                onChange={this.onChangeProfile}
-                                placeholder="Segundo Nombre"
-                            />
-                        </div>
-                    </FormGroup>
-                    <FormGroup>
-                        <div className="col-sm-4">
-                            <ControlLabel>Primer Apellido</ControlLabel>
-                        </div>
-                        <div className="col-sm-6">
-                            <FormControl
-                                type="text"
-                                name="lastName"
-                                value={lastName}
-                                onChange={this.onChangeProfile}
-                                placeholder="Primer Apellido"
-                            />
-                        </div>
-                    </FormGroup>
-                    <FormGroup>
-                        <div className="col-sm-4">
-                            <ControlLabel>Segundo Apellido</ControlLabel>
-                        </div>
-                        <div className="col-sm-6">
-                            <FormControl
-                                type="text"
-                                name="secondLastName"
-                                value={secondLastName}
-                                onChange={this.onChangeProfile}
-                                placeholder="Segundo Apellido"
-                            />
-                        </div>
-                    </FormGroup>
-                    <FormGroup>
-                        <div className="col-sm-4">
-                            <ControlLabel>Fecha de Nacimiento</ControlLabel>
-                        </div>
-                        <div className="col-sm-6">
-                            <DatePicker
-                                id="date"
-                                value={birthdate}
-                                onChange={this.handleChangeDate}
-                                name="birthdate"
-                                dateFormat={'DD MM YYYY'}
-                                dayLabels={['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab']}
-                                monthLabels={['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']}
-                            />
-                        </div>
-                    </FormGroup>
-                    <FormGroup>
-                        <div className="col-sm-4">
-                            <ControlLabel>Nacionalidad</ControlLabel>
-                        </div>
-                        <div className="col-sm-6">
-                            <FormControl
-                                type="text"
-                                name="nationality"
-                                value={nationality}
-                                onChange={this.onChangeProfile}
-                                placeholder="Nacionalidad"
-                            />
-                        </div>
-                    </FormGroup>
-                    <FormGroup>
-                        <div className="col-sm-4">
-                            <ControlLabel>Empresa</ControlLabel>
-                        </div>
-                        <div className="col-sm-6">
-                            <FormControl
-                                type="text"
-                                name="company"
-                                value={company}
-                                onChange={this.onChangeProfile}
-                                placeholder="Empresa"
-                                disabled={true}
-                            />
-                        </div>
-                    </FormGroup>
-                    {
-                        Contratista &&
+                    <div className='row'>
                         <FormGroup>
                             <div className="col-sm-4">
-                                <ControlLabel>Nombre de la Empresa</ControlLabel>
+                                <ControlLabel>RUT</ControlLabel>
                             </div>
                             <div className="col-sm-6">
                                 <FormControl
                                     type="text"
-                                    name="companyName"
-                                    value={companyName}
+                                    name="rut"
+                                    value={rut}
                                     onChange={this.onChangeProfile}
-                                    placeholder="Nombre de la Empresa"
+                                    placeholder="RUT"
                                 />
                             </div>
                         </FormGroup>
-                    }
+                        <FormGroup>
+                            <div className="col-sm-4">
+                                <ControlLabel>Primer Nombre</ControlLabel>
+                            </div>
+                            <div className="col-sm-6">
+                                <FormControl
+                                    type="text"
+                                    name="firstName"
+                                    value={firstName}
+                                    onChange={this.onChangeProfile}
+                                    placeholder="Primer Nombre"
+                                />
+                            </div>
+                        </FormGroup>
+                        <FormGroup>
+                            <div className="col-sm-4">
+                                <ControlLabel>Segundo Nombre</ControlLabel>
+                            </div>
+                            <div className="col-sm-6">
+                                <FormControl
+                                    type="text"
+                                    name="secondName"
+                                    value={secondName}
+                                    onChange={this.onChangeProfile}
+                                    placeholder="Segundo Nombre"
+                                />
+                            </div>
+                        </FormGroup>
+                        <FormGroup>
+                            <div className="col-sm-4">
+                                <ControlLabel>Primer Apellido</ControlLabel>
+                            </div>
+                            <div className="col-sm-6">
+                                <FormControl
+                                    type="text"
+                                    name="lastName"
+                                    value={lastName}
+                                    onChange={this.onChangeProfile}
+                                    placeholder="Primer Apellido"
+                                />
+                            </div>
+                        </FormGroup>
+                        <FormGroup>
+                            <div className="col-sm-4">
+                                <ControlLabel>Segundo Apellido</ControlLabel>
+                            </div>
+                            <div className="col-sm-6">
+                                <FormControl
+                                    type="text"
+                                    name="secondLastName"
+                                    value={secondLastName}
+                                    onChange={this.onChangeProfile}
+                                    placeholder="Segundo Apellido"
+                                />
+                            </div>
+                        </FormGroup>
+                        <FormGroup>
+                            <div className="col-sm-4">
+                                <ControlLabel>Fecha de Nacimiento</ControlLabel>
+                            </div>
+                            <div className="col-sm-6">
+                                <DatePicker
+                                    id="date"
+                                    value={birthdate}
+                                    onChange={this.handleChangeDate}
+                                    name="birthdate"
+                                    dateFormat={'DD MM YYYY'}
+                                    dayLabels={['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab']}
+                                    monthLabels={['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']}
+                                />
+                            </div>
+                        </FormGroup>
+                        <FormGroup>
+                            <div className="col-sm-4">
+                                <ControlLabel>Nacionalidad</ControlLabel>
+                            </div>
+                            <div className="col-sm-6">
+                                <FormControl
+                                    type="text"
+                                    name="nationality"
+                                    value={nationality}
+                                    onChange={this.onChangeProfile}
+                                    placeholder="Nacionalidad"
+                                />
+                            </div>
+                        </FormGroup>
 
-                    <FormGroup>
+                        {
+                            Contratista &&
+                            <FormGroup>
+                                <div className="col-sm-4">
+                                    <ControlLabel>Empresa</ControlLabel>
+                                </div>
+                                <div className="col-sm-6">
+                                    <FormControl
+                                        type="text"
+                                        name="company"
+                                        value={company}
+                                        onChange={this.onChangeProfile}
+                                        placeholder="Empresa"
+                                        disabled={true}
+                                    />
+                                </div>
+                            </FormGroup>
+                        }
+
+                        <FormGroup>
+                            <div className="col-sm-4">
+                                <ControlLabel>
+                                    Código {oneText}
+                                </ControlLabel>
+                            </div>
+                            <div className="col-sm-6">
+                                <FormControl
+                                    type="text"
+                                    name="managerCode"
+                                    value={managerCode}
+                                    onChange={this.onChangeProfile}
+                                    placeholder={oneText}
+                                    disabled={true}
+                                />
+                            </div>
+                        </FormGroup>
+
+                        <FormGroup>
+                            <div className="col-sm-4">
+                                <ControlLabel>Tel Contacto</ControlLabel>
+                            </div>
+                            <div className="col-sm-6">
+                                <FormControl
+                                    type="text"
+                                    name="contactPhone"
+                                    value={contactPhone}
+                                    onChange={this.onChangeProfile}
+                                    placeholder="Tel Contacto"
+                                />
+                            </div>
+                        </FormGroup>
+                        <FormGroup>
+                            <div className="col-sm-4">
+                                <ControlLabel>Dirección</ControlLabel>
+                            </div>
+                            <div className="col-sm-6">
+                                <FormControl
+                                    type="text"
+                                    name="address"
+                                    value={address}
+                                    onChange={this.onChangeProfile}
+                                    placeholder="Dirección"
+                                />
+                            </div>
+                        </FormGroup>
+                    </div>
+                    <div className="row">
+                        <FormGroup>
+                            <div className="col-sm-4">
+                            </div>
+                            <div className="col-sm-6">
+                                <ControlLabel>Area de Trabajo</ControlLabel>
+                            </div>
+                        </FormGroup>
+                    </div>
+                    <div className="row">
                         <div className="col-sm-4">
-                            <ControlLabel>
-                                Código {oneText}
-                            </ControlLabel>
+                        </div>
+                        {
+                            area && MEL &&
+                            <AreasItemComponent area={area} />
+                        }
+                    </div>
+                    <div className="row">
+                        <div className="col-sm-4">
                         </div>
                         <div className="col-sm-6">
-                            <FormControl
-                                type="text"
-                                name="oneUp"
-                                value={oneUp}
-                                onChange={this.onChangeProfile}
-                                placeholder={oneText}
-                                disabled={true}
-                            />
+                            <ControlLabel>One up</ControlLabel>
                         </div>
-                    </FormGroup>
+                    </div>
+                    <div className="row">
+                        <div className="col-sm-4">
+                        </div>
+                        {
+                            oneUp &&
+                            <PersonsItemComponent person={oneUp} />
+                        }
+                    </div>
+
                     {/* <FormGroup>
-                        <div className="col-sm-4">
-                            <ControlLabel>Email {oneText}</ControlLabel>
-                        </div>
-                        <div className="col-sm-6">
-                            <FormControl
-                                type="text"
-                                name="emailChief"
-                                value={emailChief}
-                                onChange={this.onChangeProfile}
-                                placeholder={'Email ' + oneText}
-                            />
-                        </div>
-                    </FormGroup> */}
-                    <FormGroup>
-                        <div className="col-sm-4">
-                            <ControlLabel>Código de Area</ControlLabel>
-                        </div>
-                        <div className="col-sm-6">
-                            <FormControl
-                                type="text"
-                                name="areaCode"
-                                value={areaCode}
-                                onChange={this.onChangeProfile}
-                                placeholder="Código de Area"
-                                disabled={!_.isEmpty(person)}
-                            />
-                        </div>
-                    </FormGroup>
-                    <FormGroup>
-                        <div className="col-sm-4">
-                            <ControlLabel>Area de Trabajo</ControlLabel>
-                        </div>
-                        <div className="col-sm-6">
-                            <FormControl
-                                type="text"
-                                name="area"
-                                value={area}
-                                onChange={this.onChangeProfile}
-                                placeholder="Area"
-                                disabled={!_.isEmpty(person)}
-                            />
-                        </div>
-                    </FormGroup>
-                    <FormGroup>
-                        <div className="col-sm-4">
-                            <ControlLabel>Tel Contacto</ControlLabel>
-                        </div>
-                        <div className="col-sm-6">
-                            <FormControl
-                                type="text"
-                                name="contactPhone"
-                                value={contactPhone}
-                                onChange={this.onChangeProfile}
-                                placeholder="Tel Contacto"
-                            />
-                        </div>
-                    </FormGroup>
-                    <FormGroup>
-                        <div className="col-sm-4">
-                            <ControlLabel>Dirección</ControlLabel>
-                        </div>
-                        <div className="col-sm-6">
-                            <FormControl
-                                type="text"
-                                name="address"
-                                value={address}
-                                onChange={this.onChangeProfile}
-                                placeholder="Dirección"
-                            />
-                        </div>
-                    </FormGroup>
-                    <FormGroup>
                         <div className="col-sm-4">
                             <ControlLabel>One up</ControlLabel>
                         </div>
                         <div className="col-sm-6">
                             <PersonSearchAndCardContainer
                                 selectPerson={() => (e) => console.log('selectPerson')}
-                                person={undefined}
+                                person={oneUp}
                                 onlyChief={true}
                                 myArea={false}
                                 parentArea={false}
                             />
                         </div>
-                    </FormGroup>
+                    </FormGroup> */}
                     <div className="row">
                         <div className="col-sm-12 col-sm-offset-4 col-sm-6 control-bottom">
                             <Button type="submit" className="reset-icon" bsStyle="success">
