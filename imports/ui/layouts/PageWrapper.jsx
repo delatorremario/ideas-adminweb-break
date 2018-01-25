@@ -35,7 +35,7 @@ import SetStateContainer from '../containers/set-state/SetStateContainer';
 // Ideas new user
 import EditIdeaUser from '../containers/ideas/EditIdeaUser';
 //import Dashboard from '../containers/dashboard/Dashboard';
-import Dashboard from '../pages/dashboard/Dashboard'; 
+import Dashboard from '../pages/dashboard/Dashboard';
 import BlankPage from '../pages/BlankPage';
 import ComponentsPage from '../pages/ComponentsPage';
 
@@ -50,13 +50,7 @@ import Configs from '../containers/configs/Configs';
 import EditConfig from '../containers/configs/EditConfig';
 import SendInvitationPage from '../pages/singinup/SendInvitationPage';
 
-const completedProfile = () => {
-    const user = Meteor.user()
-    return user && user.profile
-        && user.profile.firstName
-        && user.profile.lastName
-        && user.profile.rut
-}
+import { completedProfile } from '../../api/profile/methods';
 
 const componentDidMount = () => {
     $('html,body').stop(true, true);

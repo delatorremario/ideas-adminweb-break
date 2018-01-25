@@ -5,6 +5,43 @@ import { ValidatedMethod } from 'meteor/mdg:validated-method';
 
 import rateLimit from '../../modules/rate-limit.js';
 
+export const completedProfile = () => {
+    const user = Meteor.user();
+
+    const { origin } = user.profile;
+
+    switch (origin) {
+        case 'MEL':
+            return user && user.profile
+                && user.profile.firstName
+                && user.profile.lastName
+                && user.profile.rut
+                && user.profile.area &&
+                (
+                    user.profile.oneUp ||
+                    user.emails[0].address === 'mauro.nevesdemoraes@bhpbilliton.com'
+                )
+            break;
+        case 'Contratista':
+            return user && user.profile
+                && user.profile.firstName
+                && user.profile.lastName
+                && user.profile.rut
+                && user.profile.area
+                && user.profile.company;
+            break;
+        default:
+            return user && user.profile
+                && user.profile.firstName
+                && user.profile.lastName
+                && user.profile.rut
+                && user.profile.area
+    }
+
+
+
+}
+
 Meteor.methods(
     {
         updateProfile: (user) => {

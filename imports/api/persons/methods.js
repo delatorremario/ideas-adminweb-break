@@ -47,7 +47,16 @@ Meteor.methods({
         let person = Persons.findOne(_id);
         person.area = Areas.findOne(person.areaId);
         person.oneUp = Persons.findOne({ masterCode: person.managerCode })
-        if(person.oneUp) person.oneUp.area = Areas.findOne(person.oneUp.areaId);
+        if (person.oneUp) person.oneUp.area = Areas.findOne(person.oneUp.areaId);
+        return person;
+    },
+    'persons.view.email': (email) => {
+        if (!Meteor.isServer) return;
+        check(email, String);
+        let person = Persons.findOne({ email });
+        if (person && person.areaId) person.area = Areas.findOne(person.areaId);
+        if (person && person.managerCode) person.oneUp = Persons.findOne({ masterCode: person.managerCode })
+        if (person && person.oneUp) person.oneUp.area = person.oneUp && person.oneUp.areaId && Areas.findOne(person.oneUp.areaId);
         return person;
     }
 })

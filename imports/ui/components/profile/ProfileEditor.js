@@ -10,18 +10,14 @@ import FileUpload from '../files/FileUpload';
 import Files from '../../../api/files/files';
 
 import PersonSearchAndCardContainer from '../../containers/person/PersonSearchAndCardContainer';
+import AreasSearch from '../../containers/areas/AreasSearch';
 
 import AreasItemComponent from '../areas/AreasItemComponent';
 import PersonsItemComponent from '../persons/PersonsItemComponent';
+import { completedProfile } from '../../../api/profile/methods';
 
 const companies = ['BHP', 'Contratista']
 
-const completedProfile = (user) => {
-    return user && user.profile
-        && user.profile.firstName
-        && user.profile.lastName
-        && user.profile.rut
-}
 export default class ProfileEditor extends Component {
     state = {
         user: {
@@ -49,11 +45,8 @@ export default class ProfileEditor extends Component {
 
     componentDidMount() {
         profileEditor({ component: this });
-        console.log('this.props', this.props);
         const { user, person } = this.props;
-
         this.setState({ person, user: { ...user, profile: { ...user.profile } } });
-
     }
 
     onChangeProfile = e => {
@@ -110,6 +103,30 @@ export default class ProfileEditor extends Component {
             if (err) { Bert.alert(err.message, 'danger') }
         })
     }
+    onSelectPerson = oneUp => e => {
+        e.preventDefault();
+        if (this.state.user.profile.oneUp === oneUp) oneUp = undefined
+        this.setState(prev => ({
+            user: {
+                ...prev.user,
+                profile: {
+                    ...prev.user.profile, oneUp
+                }
+            }
+        }));
+    }
+    onSelectArea = area => {
+        console.log('lalalal', area)
+        if (this.state.user.profile.area === area) area = undefined
+        this.setState(prev => ({
+            user: {
+                ...prev.user,
+                profile: {
+                    ...prev.user.profile, area, areaId: area._id || undefined
+                }
+            }
+        }));
+    }
 
     render() {
 
@@ -138,10 +155,12 @@ export default class ProfileEditor extends Component {
         const managerCode = profile && profile.managerCode || '';
         const emailChief = profile && profile.emailChief || '';
         const area = profile && profile.area || '';
+        const areaId = profile && profile.areaId || '';
         const areaCode = profile && profile.areaCode || '';
         const oneText = MEL && 'One Up' || BHP && 'Jefe Directo' || 'Contract Owner';
         const imageId = profile && profile.imageId || '';
         const image = Files.findOne({ _id: imageId });
+
         return (
             <div>
 
@@ -175,7 +194,7 @@ export default class ProfileEditor extends Component {
                                     {group === 'EXECUT.' && <span className="text-muted">Ejecutivo</span>}
 
                                     {
-                                        !completedProfile(user) &&
+                                        !completedProfile() &&
                                         <Alert bsStyle="warning">
                                             Debe completar su perfil para continuar
                                         </Alert>
@@ -321,30 +340,10 @@ export default class ProfileEditor extends Component {
                                         value={company}
                                         onChange={this.onChangeProfile}
                                         placeholder="Empresa"
-                                        disabled={true}
                                     />
                                 </div>
                             </FormGroup>
                         }
-
-                        <FormGroup>
-                            <div className="col-sm-4">
-                                <ControlLabel>
-                                    Código {oneText}
-                                </ControlLabel>
-                            </div>
-                            <div className="col-sm-6">
-                                <FormControl
-                                    type="text"
-                                    name="managerCode"
-                                    value={managerCode}
-                                    onChange={this.onChangeProfile}
-                                    placeholder={oneText}
-                                    disabled={true}
-                                />
-                            </div>
-                        </FormGroup>
-
                         <FormGroup>
                             <div className="col-sm-4">
                                 <ControlLabel>Tel Contacto</ControlLabel>
@@ -387,25 +386,47 @@ export default class ProfileEditor extends Component {
                         <div className="col-sm-4">
                         </div>
                         {
-                            area && MEL &&
+                            MEL && area &&
                             <AreasItemComponent area={area} />
                         }
-                    </div>
-                    <div className="row">
-                        <div className="col-sm-4">
-                        </div>
-                        <div className="col-sm-6">
-                            <ControlLabel>One up</ControlLabel>
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="col-sm-4">
-                        </div>
                         {
-                            oneUp &&
-                            <PersonsItemComponent person={oneUp} />
+                            !MEL &&
+                            <div className="col-sm-6">
+                                <AreasSearch selectArea={this.onSelectArea} areaSelected={area} />
+                            </div>
                         }
                     </div>
+                    {
+                        (Contratista || MEL) &&
+                        <div>
+                            <div className="row">
+                                <div className="col-sm-4">
+                                </div>
+                                <div className="col-sm-6">
+                                    <ControlLabel>{oneText}</ControlLabel>
+                                </div>
+                            </div>
+
+                            <div className="row">
+                                <div className="col-sm-4">
+                                </div>
+                                {
+                                    oneUp && MEL &&
+                                    <PersonsItemComponent person={oneUp} /> ||
+                                    Contratista &&
+                                    <div className='col-sm-6'>
+                                        <PersonSearchAndCardContainer
+                                            selectPerson={this.onSelectPerson}
+                                            person={oneUp}
+                                            onlyChief={false}
+                                            myArea={false}
+                                            parentArea={false}
+                                        />
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    }
 
                     {/* <FormGroup>
                         <div className="col-sm-4">

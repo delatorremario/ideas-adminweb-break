@@ -9,8 +9,8 @@ const PersonSearch = ({ persons, onChangeSearchPerson, selectPerson, hideInput }
                 !hideInput &&
                 <div className="form-group">
                     <div>
-                        <ControlLabel>Seleccione una Persona  <i className="fa fa-user"></i></ControlLabel>
-
+                        <ControlLabel>Seleccione una Persona </ControlLabel>
+                            {/* <i className="fa fa-user"></i> */}
                         <input id="personSearchInput" type="text" className="form-control" placeholder="Buscar por Apellido y Nombres o RUT" onChange={onChangeSearchPerson.bind(this)} autoComplete="off" />
                     </div>
                 </div>

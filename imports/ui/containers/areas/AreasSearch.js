@@ -8,13 +8,13 @@ import AreasSearch from '../../components/areas/AreasSearch';
 
 import Loading from '../../components/Loading.js';
 
-const textSearch = new ReactiveVar('');
+const textSearchArea = new ReactiveVar('');
 
 const composer = ({ selectArea, areaId, areaSelected }, onData) => {
-const subscription = Meteor.subscribe('areas.search', textSearch.get());
+	const subscription = Meteor.subscribe('areas.search', textSearchArea.get());
 	if (subscription.ready()) {
 		const areas = Areas.find({}, { sort: { score: -1 } }).fetch();
-		onData(null, { textSearch, selectArea, areas, areaId, areaSelected });
+		onData(null, { textSearch: textSearchArea, selectArea, areas, areaId, areaSelected });
 	}
 };
 

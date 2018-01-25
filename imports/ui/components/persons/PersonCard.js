@@ -20,7 +20,7 @@ class PersonCard extends Component {
         const { area } = this.state;
 
         return (
-            <div className="col-md-6 person-card" style={{ display: "flex" }}>
+            <div className="col-xs-12 person-card" style={{ display: "flex" }}>
                 <div className="card-single" style={{ width: "100%" }}>
                     <div className="close-card" onClick={removePerson(person).bind(this)} ><i className="fa fa-times"></i></div>
                     <h2><i className="fa fa-user title-icon"></i> {person.lastName} {person.secondLastName}, {person.firstName} {person.secondName}</h2>

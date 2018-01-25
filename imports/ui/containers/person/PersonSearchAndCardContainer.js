@@ -17,8 +17,8 @@ const onChangeSearchPerson = (e) => {
 
 const composer = ({ selectPerson, person, onlyChief, myArea, parentArea }, onData) => {
       const subscriptionPersons = Meteor.subscribe('persons.search', textSearch.get(), onlyChief || false, myArea || false, parentArea || false, textSearchLimit.get());
-      const subAreas = Meteor.subscribe('areas.list');
-      if (subscriptionPersons.ready() && subAreas.ready()) {
+      //const subAreas = Meteor.subscribe('areas.list');
+      if (subscriptionPersons.ready()) {
             const persons = Persons.find({}, { sort: { score: -1 }, limit: textSearchLimit.get() }).fetch();
             if (person) textSearch.set('');
             onData(null, { persons, person, onChangeSearchPerson, selectPerson });

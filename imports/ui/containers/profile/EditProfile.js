@@ -16,25 +16,12 @@ const composer = ({ match }, onData) => {
   const email = user && user.emails && user.emails[0] && user.emails[0].address || '';
 
   // buscar en personas para ver si existe el perfil
-  const subscription = Meteor.subscribe('persons.email', email);
   const subsFiles = Meteor.subscribe('files.list', [imageIdVar.get()]);
 
-
-  if (subscription.ready() && subsFiles.ready()) {
-    const person = Persons.findOne({ email });
-
-    Meteor.call('persons.view', person._id, (err, personview) => {
-      onData(null, { user, person: personview, imageIdVar });
-      //onData(null, { history, person });
+  if (subsFiles.ready()) {
+    Meteor.call('persons.view.email', email, (err, person) => {
+       onData(null, { user, person, imageIdVar });
     });
-    // const areaId = person && person.areaId || '';
-    // const subsArea = Meteor.subscribe('areas.view', areaId);
-
-    // if (subsArea.ready()) {
-    //   const area = Areas.findOne({ _id: areaId });
-    //   if (area) _.extend(person, ({ area: area.name }));
-
-
   }
 }
 
