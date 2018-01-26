@@ -205,7 +205,7 @@ const state2B = () => {
     ]
 
     const toChanges = [
-        { type: 'chief', label: 'Otro Ejecutivo de mi Area', name: 'chief', parents: true },
+        { type: 'chief', label: 'Otro Ejecutivo de mi Area', name: 'chief', parents: false },
         { type: 'text', label: 'Comentario', name: 'comment' },
     ];
 
