@@ -20,7 +20,6 @@ export const upsertAlert = new ValidatedMethod({
     name: 'alerts.upsert',
     validate: Alerts.schema.validator(),
     run(alert) {
-        console.log('Alert', alert);
         return Alerts.upsert({ _id: alert._id }, { $set: alert });
     },
 });

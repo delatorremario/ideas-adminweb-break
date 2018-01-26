@@ -16,7 +16,7 @@ Meteor.methods({
             { mail: 'Jorge.JM.Jalil@bhpbilliton.com', areasCodes: ['30000638'] },
             { mail: 'mauricio.ma.rodriguez@bhpbilliton.com', areasCodes: ['30007434'] },
             { mail: 'Maria.MP.Bustamante@bhpbilliton.com', areasCodes: ['30000311', '30000005', '30007387', '30058188', '30058053'] },
-            { mail: 'delatorremario@gmail.com', areasCodes: ['30000092', '30000311', '30000005'] },
+            //{ mail: 'delatorremario@gmail.com', areasCodes: ['30000092', '30000311', '30000005'] },
         ]
 
         _.each(leadersMails, leader => {

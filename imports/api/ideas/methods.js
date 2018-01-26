@@ -8,7 +8,9 @@ import Ideas from './ideas';
 import rateLimit from '../../modules/rate-limit.js';
 import PersonSchema from '../../api/persons/personSchema';
 import States from '../../api/states/states';
-import { findLeader  } from '../../api/areas/methods';
+import Areas from '../../api/areas/areas';
+
+import { findLeader } from '../../api/areas/methods';
 
 
 const ViewerSchema = new SimpleSchema({
@@ -38,50 +40,13 @@ export const upsertIdea = new ValidatedMethod({
 
     }).validator(),
     run(idea) {
-        return Ideas.upsert({ _id: idea._id }, { $set: idea }, (err, data) => {
+        return Ideas.upsert({ _id: idea._id }, { $set: idea }, (err, result) => {
             if (err) { console.log('ERROR', err); return; }
-            if (Meteor.isServer) {
-                Meteor.call('idea.addViewers', data.insertedId, (error, data) => {
-                    idea = data;
-                    idea.viewers = _.filter(idea.viewers, v => v.userId !== Meteor.userId());
-                    const ideastate = _.last(idea.states);
-                    const states = States.find({ _id: ideastate._id, 'alerts.stateChange': true }).fetch();
-                    _.each(states, state => {
-                        _.each(state.alerts, alert => {
-                            if (alert.stateChange) {
-                                const usersTo = Meteor.users.find({ _id: { $in: _.map(idea.viewers, 'userId') } }).fetch()
-                                const to = ['mauricio.ma.rodriguez@bhpbilliton.com', 'dblazina@holos.cl ', 'mariodelatorre@holos.cl', 'martingonzalez@holos.cl'];
-                                //const to = _.map(usersTo, u => (u.emails[0].address))
-                                
-                                const from = 'Ideas 3.0 <no-replay@ideas.e-captum.com>';
-                                const subject = `Cambio al estado ${state.step} ${state.state}`;
-                                const text = `${(alert.message ? alert.message + '. ' : '')}La idea de ${idea.person.lastName}, ${idea.person.firstName} ${idea.person.secondName || ''} cambió de estado.`;
-
-                                Meteor.call('alerts.upsert', {
-                                    createdAt: new Date(),
-                                    userOwner: Meteor.userId(),
-                                    type: 'normal-notification',
-                                    usersDestination: (_.map(idea.viewers, v => v.userId)),
-                                    state: 'new',
-                                    body: {
-                                        title: idea && idea.opportunity || 'Alerta de retraso!',
-                                        message: text,
-                                    },
-                                    path: `/idea/${idea._id}/view`
-                                });
-
-                                Meteor.call('userNotification',
-                                    (idea && idea.opportunity || 'Alerta de retraso!'),
-                                    text,
-                                    (_.map(idea.viewers, v => v.userId))
-                                )
-                                console.log('Email enviado ***', alert.message);
-                                Email.send({ to, from, subject, text });
-                            }
-                        })
-                    })
-                });
-            }
+            if (!Meteor.isServer) return;
+            Meteor.call('sendAlertChangeState', result.insertedId, (err, data) => {
+                if (err) { console.log('ERROR', err); return; }
+                console.log('--result sendAlertChangeState--', data);
+            });
         });
     },
 });
@@ -131,8 +96,12 @@ Meteor.methods({
             if (onchange.chief) _.extend(update, { $set: { chief: onchange.chief } })
         })
 
-        Ideas.update({ _id }, update);
-        Meteor.call('idea.addViewers', _id)
+        Ideas.update({ _id }, update, (err) => {
+            if (err) { console.log(err); return }
+            Meteor.call('sendAlertChangeState', _id, (err) => {
+                if (err) { console.log(err); return }
+            })
+        });
     },
     'idea.saveComment': (_id, comment) => {
         check(_id, String);
@@ -162,27 +131,29 @@ Meteor.methods({
 
         // owner
         const owner = Meteor.users.findOne({ 'emails.address': idea.person.email })
-        if (owner) viewers.push(owner._id);
+        if (owner) viewers.push({ userId: owner._id, group: 'owner' });
 
         // leaders
-        const profile = findLeader({_id:idea.chief.areaId})
+        const area = Areas.findOne({ _id: idea.chief.areaId });
+        const profile = findLeader(area);
         const leaders = Meteor.users.find({ profile }, { fields: { _id: 1 } }).fetch();
-        viewers = _.union(viewers, _.map(leaders, '_id'));
+        viewers = _.union(viewers, _.map(leaders, u => ({ userId: u._id, group: 'leader' })));
 
         // chief
         if (idea.chief && idea.chief.email) {
             const chief = Meteor.users.findOne({ 'emails.address': idea.chief.email })
-            if (chief) viewers = _.union(viewers, [chief._id])
+            if (chief) viewers = _.union(viewers, [{ userId: chief._id, group: 'chief' }])
         };
 
         // collaborators
         if (idea.collaborators) {
             const collMails = _.map(idea.collaborators, 'email')
             const collaborators = Meteor.users.find({ 'emails.address': { $in: collMails } }).fetch()
-            viewers = _.union(viewers, _.map(collaborators, '_id'));
+            viewers = _.union(viewers, _.map(collaborators, u => ({ userId: u._id, group: 'collaborator' })));
         }
 
-        viewers = _.map(viewers, id => ({ userId: id }));
+        // viewers = _.map(viewers, id => ({ userId: id }));
+        console.log('---viewers---', viewers)
         Ideas.update({ _id }, { $set: { viewers } });
         return Ideas.findOne({ _id });
     },

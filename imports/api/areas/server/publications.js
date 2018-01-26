@@ -6,7 +6,7 @@ import { check } from 'meteor/check';
 import Areas from '../areas';
 
 Meteor.publish('areas.search', (textSearch, limit) => {
-  console.log('publish areas.search', textSearch);
+  // console.log('publish areas.search', textSearch);
   check(textSearch, String);
   check(limit, Match.Maybe(Number));
   const self = this.Meteor;
