@@ -34,7 +34,7 @@ class ConfigEditor extends Component {
         });
     }
     sendAlerts = () => {
-        Meteor.call('sendAlerts', (err) => {
+        Meteor.call('sendAlertsTemporals', (err) => {
             if (err) { Bert.alert(err.message, 'danger'); return; }
             Bert.alert('Alertas Testeadas', 'success');
         });
