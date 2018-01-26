@@ -14,8 +14,8 @@ const ideasstates = [
 
     { code:'4A', step:'STAND BY', state:'STAND BY', description:'Idea postergada por encargado de área.', color:'#9f2996'},
 
-    { code:'5A', step:'APROBADA', state:'POR SUPERINTENDENTE',   description:'Idea aprobada a la espera del plan de ejecución.', color:'#01ab8b'},
-    { code:'5B', step:'APROBADA', state:'SIN PLAN DE ACCION',   description:'Idea aprobada con plan de ejecución pendiente de exportación', color:'#01ab8b'},
+    { code:'5A', step:'APROBADA', state:'SIN PLAN DE ACCION',   description:'Idea aprobada a la espera del plan de ejecución.', color:'#01ab8b'},
+    { code:'5B', step:'APROBADA', state:'CON PLAN DE ACCION',   description:'Idea aprobada con plan de ejecución pendiente de exportación', color:'#01ab8b'},
     
     { code:'6A', step:'EXPORTADA', state:'PLAN DE ACCION JUST DO IT', description:'Idea exportada para Impact con formato Just Do It.', color:'#01ab8b'},
     { code:'6B', step:'EXPORTADA', state:'PLAN DE ACCION INICIATIVA', description:'Idea exportada para Impact con formato Iniciativa Nueva.', color:'#01ab8b'},
