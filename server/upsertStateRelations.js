@@ -134,7 +134,7 @@ const state2A = () => {
             "color": States.findOne({ code: "2C" }).color,
         },
         {
-            "title": "Corresponde a mi Area, pero la decisión es de otro lider de Area",
+            "title": "Corresponde a mi Area, pero la decisión es de otro Ejecutivo de Area",
             "action": "Rederivar Idea",
             "code": "2B",
             "color": States.findOne({ code: "2B" }).color,
@@ -191,7 +191,7 @@ const state2B = () => {
             "color": States.findOne({ code: "2C" }).color,
         },
         {
-            "title": "Corresponde a mi Area, pero la decisión es de otro lider de Area",
+            "title": "Corresponde a mi Area, pero la decisión es de otro Lider de Area",
             "action": "Rederivar Idea",
             "code": "2B",
             "color": States.findOne({ code: "2B" }).color,
