@@ -28,6 +28,7 @@ export const completedProfile = () => {
                 && user.profile.lastName
                 && user.profile.rut
                 && user.profile.area
+                && user.profile.oneUp
                 && user.profile.company;
             break;
         default:

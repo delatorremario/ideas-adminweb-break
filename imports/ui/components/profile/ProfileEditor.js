@@ -105,24 +105,36 @@ export default class ProfileEditor extends Component {
     }
     onSelectPerson = oneUp => e => {
         e.preventDefault();
-        if (this.state.user.profile.oneUp === oneUp) oneUp = undefined
-        this.setState(prev => ({
-            user: {
-                ...prev.user,
-                profile: {
-                    ...prev.user.profile, oneUp
+        const { user } = this.state;
+        if (user.profile.oneUp === oneUp) oneUp = undefined
+
+        Meteor.call('persons.view.email', oneUp && oneUp.email || '', (err, person) => {
+            if (err) { Bert.alert(err.message, 'danger'); return; }
+            const area = person && person.area;
+            this.setState(prev => ({
+                user: {
+                    ...prev.user,
+                    profile: {
+                        ...prev.user.profile,
+                        oneUp,
+                        area,
+                        areaId: area && area._id || undefined
+                    }
                 }
-            }
-        }));
+            }));
+        })
+
+
     }
     onSelectArea = area => {
-        console.log('lalalal', area)
-        if (this.state.user.profile.area === area) area = undefined
         this.setState(prev => ({
             user: {
                 ...prev.user,
                 profile: {
-                    ...prev.user.profile, area, areaId: area._id || undefined
+                    ...prev.user.profile,
+                    area,
+                    areaId: area && area._id || undefined,
+                    oneUp: undefined
                 }
             }
         }));
@@ -372,76 +384,51 @@ export default class ProfileEditor extends Component {
                                 />
                             </div>
                         </FormGroup>
-                    </div>
-                    <div className="row">
-                        <FormGroup>
-                            <div className="col-sm-4">
-                            </div>
-                            <div className="col-sm-6">
-                                <ControlLabel>Area de Trabajo</ControlLabel>
-                            </div>
-                        </FormGroup>
-                    </div>
-                    <div className="row">
-                        <div className="col-sm-4">
-                        </div>
                         {
-                            MEL && area &&
-                            <AreasItemComponent area={area} />
+                            !BHP &&
+                            <FormGroup>
+                                <div className="col-sm-4">
+                                    <ControlLabel>Area de Trabajo</ControlLabel>
+                                </div>
+                                <div className="col-sm-6" style={{ borderColor: 'gray' }} >
+                                    <div className='form-control' style={{ backgroundColor: '#eee' }}>{area && area.name}</div>
+                                </div>
+                            </FormGroup>
                         }
                         {
-                            !MEL &&
-                            <div className="col-sm-6">
-                                <AreasSearch selectArea={this.onSelectArea} areaSelected={area} />
-                            </div>
+                            BHP &&
+                            <FormGroup>
+                                <div className="col-sm-4">
+                                    <ControlLabel>Area de Trabajo</ControlLabel>
+                                </div>
+                                <div className="col-sm-6">
+                                    <AreasSearch selectArea={this.onSelectArea} areaSelected={area} />
+                                </div>
+                            </FormGroup>
                         }
                     </div>
+
+
                     {
-                        (Contratista || MEL) &&
+                        !BHP &&
                         <div>
                             <div className="row">
                                 <div className="col-sm-4">
-                                </div>
-                                <div className="col-sm-6">
                                     <ControlLabel>{oneText}</ControlLabel>
                                 </div>
-                            </div>
-
-                            <div className="row">
-                                <div className="col-sm-4">
+                                <div className='col-sm-6'>
+                                    <PersonSearchAndCardContainer
+                                        selectPerson={this.onSelectPerson}
+                                        person={oneUp}
+                                        onlyChief={false}
+                                        myArea={false}
+                                        parentArea={false}
+                                    />
                                 </div>
-                                {
-                                    oneUp && MEL &&
-                                    <PersonsItemComponent person={oneUp} /> ||
-                                    Contratista &&
-                                    <div className='col-sm-6'>
-                                        <PersonSearchAndCardContainer
-                                            selectPerson={this.onSelectPerson}
-                                            person={oneUp}
-                                            onlyChief={false}
-                                            myArea={false}
-                                            parentArea={false}
-                                        />
-                                    </div>
-                                }
                             </div>
                         </div>
                     }
 
-                    {/* <FormGroup>
-                        <div className="col-sm-4">
-                            <ControlLabel>One up</ControlLabel>
-                        </div>
-                        <div className="col-sm-6">
-                            <PersonSearchAndCardContainer
-                                selectPerson={() => (e) => console.log('selectPerson')}
-                                person={oneUp}
-                                onlyChief={true}
-                                myArea={false}
-                                parentArea={false}
-                            />
-                        </div>
-                    </FormGroup> */}
                     <div className="row">
                         <div className="col-sm-12 col-sm-offset-4 col-sm-6 control-bottom">
                             <Button type="submit" className="reset-icon" bsStyle="success">
