@@ -22,8 +22,10 @@ Accounts.onLogin((data) => {
 
     if (person) {
         if (person && person.group === 'EXECUT.') Roles.addUsersToRoles(user, ['Executive']);
-        if (person && person.origin === 'MEL') Meteor.users.update({ _id: user._id }, { $set: { profile: { ...person } } })
-
+        if (user && user.profile && !user.profile._id &&
+            person && person.origin === 'MEL') {
+            Meteor.users.update({ _id: user._id }, { $set: { profile: { ...person } } })
+        }
     }
 
     if (!person) {
@@ -33,7 +35,7 @@ Accounts.onLogin((data) => {
         console.log('--- no existe en persons ---');
         // si el usuario no existe en PERSONS lo agrega
 
-        Persons.insert({ ...user.profile, email:user.emails[0].address }, (err, data) => {
+        Persons.insert({ ...user.profile, email: user.emails[0].address }, (err, data) => {
             console.log('upsert person', err, data);
         })
     }
