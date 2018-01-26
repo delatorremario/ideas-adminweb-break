@@ -163,7 +163,7 @@ class MyIdeasList extends Component {
                                         <div className="row cards-container">
                                             {_.map(ideas, (idea, index) => {
                                                 let lap = index / 2;
-                                                return <IdeaCard key={index} idea={idea} lap={lap} handleRemove={this.handleRemove} showEdit={showEdit} />
+                                                return <IdeaCard key={index} idea={idea} lap={lap} handleRemove={this.handleRemove} showEdit={showEdit} showNext={true} />
                                             })}
                                         </div>
                                         || <Alert bsStyle="warning">No se encontraron datos.</Alert>
