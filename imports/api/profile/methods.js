@@ -5,6 +5,8 @@ import { ValidatedMethod } from 'meteor/mdg:validated-method';
 
 import rateLimit from '../../modules/rate-limit.js';
 
+import Persons from '../../api/persons/persons';
+
 export const completedProfile = () => {
     const user = Meteor.user();
 
@@ -13,6 +15,7 @@ export const completedProfile = () => {
     switch (origin) {
         case 'MEL':
             return user && user.profile
+                && user.profile._id
                 && user.profile.firstName
                 && user.profile.lastName
                 && user.profile.rut
@@ -24,6 +27,7 @@ export const completedProfile = () => {
             break;
         case 'Contratista':
             return user && user.profile
+                && user.profile._id
                 && user.profile.firstName
                 && user.profile.lastName
                 && user.profile.rut
@@ -33,6 +37,7 @@ export const completedProfile = () => {
             break;
         default:
             return user && user.profile
+                && user.profile._id
                 && user.profile.firstName
                 && user.profile.lastName
                 && user.profile.rut
@@ -47,7 +52,14 @@ Meteor.methods(
     {
         updateProfile: (user) => {
             check(user, Object);
-            return Meteor.users.update({ _id: user._id }, { $set: { profile: user.profile } });
+            console.log('--user--', user);
+            Meteor.users.update({ _id: user._id }, { $set: { profile: user.profile } }, (err) => {
+                if (err) { console.log(err); return; }
+                Persons.upsert({ _id: user && user.profile && user.profile._id }, { $set: { ...user.profile, email: user.emails[0].address } }, (err, data) => {
+                    console.log('--DATA--', data)
+                    if (data && data.insertedId) Meteor.users.update({ _id: user._id }, { $set: { 'profile._id': data.insertedId } })
+                })
+            });
         },
         'profile.setImage': (imageId) => {
             check(imageId, String)
