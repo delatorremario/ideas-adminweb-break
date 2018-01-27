@@ -35,9 +35,11 @@ Accounts.onLogin((data) => {
         console.log('--- no existe en persons ---');
         // si el usuario no existe en PERSONS lo agrega
 
-        Persons.insert({ ...user.profile, email: user.emails[0].address }, (err, data) => {
-            console.log('upsert person', err, data);
-        })
+        // Persons.insert({ ...user.profile, email: user.emails[0].address }, (err, data) => {
+        //     console.log('upsert person', err, data);
+        //    // Meteor.users.update({ _id: user._id }, { $set: { 'profile._id':  data.insert } })
+            
+        // })
     }
 
     if (user && !Roles.userIsInRole(user, ['SuperAdminHolos', 'AdminGrupoNegocio', 'Leader', 'Employee', 'Executive', 'Reporter'])) {
