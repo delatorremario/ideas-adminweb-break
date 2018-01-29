@@ -237,4 +237,9 @@
             }
         }
     }
+    .sidebar.sidebar-left {
+        position: fixed !important;
+        top: 0px !important;
+        left: 0px !important;
+    }
 }

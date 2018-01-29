@@ -140,7 +140,7 @@ class SidebarPush extends Component {
     }
 
     componentDidMount() {
-        $('.sidebar.sidebar-left').mCustomScrollbar();
+        $('.sidebarNav').mCustomScrollbar();
         let bodyEl = $('#main-wrapper');
         $(window).on('resize', () => {
             if ($(window).width() < 767) {
@@ -153,15 +153,16 @@ class SidebarPush extends Component {
 
     setHeightScrollbar() {
         let windowHeight = $(window).height();
-        // console.log('WH', windowHeight)
-        if (windowHeight < 600) {
-            windowHeight -= 200;
+        let windowWidth = $(window).width();
+        console.log('WH', windowHeight)
+        if (windowWidth < 768) {
+            windowHeight -= 300;
             // console.log('WHM', windowHeight)
         } else {
-            windowHeight -= 200;
+            windowHeight -= 260;
             // console.log('WHD', windowHeight)
         }
-        $('.sidebar.sidebar-left').css({ height: windowHeight });
+        $('.sidebarNav').css({ height: windowHeight });
     }
 
     sidebarPushMobile = () => {
