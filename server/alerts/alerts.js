@@ -14,6 +14,7 @@ Meteor.startup(() => {
 Meteor.methods({
     sendAlertsTemporals: () => {
         // buscar los estados configurados
+        if (!Meteor.isServer) return;
 
         const filters = {
             // corporationId: (user.profile && user.profile.corporationId) || '',
@@ -31,60 +32,30 @@ Meteor.methods({
                 }
             }).fetch();
             _.each(ideas, idea => {
-                const last = _.last(idea.states);
-                // console.log('last:', last.code);
-                // console.log('delay:', moment(last.createdAt).format('DD MMM YYYY'));
-                const a = moment();
-                const b = moment(last.createdAt);
-                const diff = a.diff(b, 'days') // 1
-                _.each(state.alerts, alert => {
-                    if (!alert.temporal) return;
-                    console.log('diff', diff);
-                    console.log('config', alert.delay);
-                    if (diff >= alert.delay) {
-
-                        console.log('** :D ALEEEERT **');
-                        const usersTo = Meteor.users.find({ _id: { $in: _.map(idea.viewers, 'userId') } }).fetch()
-                        // const to = _.map(usersTo, u => (u.emails[0].address))
-                        // const to = ['mauricio.ma.rodriguez@bhpbilliton.com', 'dblazina@holos.cl ', 'mariodelatorre@holos.cl', 'martingonzalez@holos.cl']
-
-                        const from = 'Ideas 3.0 <no-replay@ideas.e-captum.com>';
-                        const subject = 'Alerta!!';
-                        const text = (alert.message || '') + `. La idea de ${idea.person.lastName}, ${idea.person.firstName} ${idea.person.secondName} tiene un atraso de ${diff} días`;
-
-                        Meteor.call('userNotification',
-                            (idea && idea.oportunity || 'Alerta de retraso!'),
-                            text,
-                            (_.map(idea.viewers, v => v.userId))
-                        )
-
-                        if (alert.sendEmail) {
-                            const to = _.map(usersTo, u => (u.emails[0].address))
-                            console.log('--alert.sendEmail to --', to);
-                            console.log('Envío de Email ***', Email.send({ to, from, subject, text }));
+                Meteor.call('idea.addViewers', idea._id, (err, idea) => {
+                    if (err) { console.log('ERROR', err); return; }
+                    const viewers = idea.viewers;
+                    const last = _.last(idea.states);
+                    
+                    const a = moment();
+                    const b = moment(last.createdAt);
+                    const diff = a.diff(b, 'days') // 1
+                    _.each(state.alerts, alert => {
+                        if (!alert.temporal) return;
+                        if (diff >= alert.delay) {
+    
+                            console.log('** :D ALEEEERT **');
+    
+                            const subject = 'Alerta!!';
+                            const text = (alert.message || '') + `. La idea de ${idea.person.lastName}, ${idea.person.firstName} tiene un atraso de ${diff} días`;
+    
+                            sendAlert(viewers, subject, text, alert, `/idea/${idea._id}/view`)
+                            
                         }
-
-                        if (alert.sendInbox) {
-                            Meteor.call('alerts.upsert', {
-                                createdAt: new Date(),
-                                userOwner: Meteor.userId(),
-                                type: 'normal-notification',
-                                usersDestination: (_.map(viewers, v => v.userId)),
-                                state: 'new',
-                                body: {
-                                    title: subject,
-                                    message: text,
-                                },
-                                path: `/idea/${idea._id}/view`
-                            }, (err, data) => {
-                                if (err) { console.log('err alerts.upsert', err) };
-                                console.log('--alerts.upsert to --', _.map(viewers, v => v.userId), data);
-                            });
+                        else {
+                            console.log('** :( no alert **');
                         }
-                    }
-                    else {
-                        console.log('** :( no alert **');
-                    }
+                    })
                 })
             })
         })
@@ -133,16 +104,16 @@ const sendAlert = (viewers, subject, text, alert, path) => {
 
     const to = _.map(Meteor.users.find({ _id: { $in: viewersUserId } }).fetch(), u => (u.emails[0].address))
 
-    // Meteor.call('userNotification',
-    //     subject,
-    //     text,
-    //     viewersUserId,
-    //     (err, data) => {
-    //         if (err) { console.log('err userNotification', err) };
-    //         console.log('--userNotification to --', viewersUserId, data);
-    //     })
+    Meteor.call('userNotification',
+        subject,
+        text,
+        viewersUserId,
+        (err, data) => {
+            if (err) { console.log('err userNotification', err) };
+            console.log('--userNotification to --', viewersUserId, data);
+        })
 
-    console.log('--viewersUserId--', viewersUserId);
+    console.log('--viewers--', viewers);
 
     if (sendInbox && viewersUserId.length > 0) {
         Meteor.call('alerts.upsert', {
