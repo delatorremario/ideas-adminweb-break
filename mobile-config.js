@@ -84,3 +84,12 @@ App.configurePlugin('phonegap-plugin-push', {
 App.accessRule('*');
 App.accessRule('http://*')
 App.accessRule('https://*')
+
+App.appendToConfig(`<platform name="ios">
+    <config-file platform="ios" target="*-Info.plist" parent="NSPhotoLibraryUsageDescription">
+      <string>My app needs access to Photo Library for Upload new Idea Image</string>
+    </config-file>
+    <config-file platform="ios" target="*-Info.plist" parent="NSCameraUsageDescription">
+      <string>My app needs access to Camera for Upload new Idea Image</string>
+    </config-file>
+  </platform>`);
