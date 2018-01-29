@@ -109,7 +109,7 @@ Meteor.methods({
                 const toChangesDates = _.filter(laststate.toChanges, { type: 'date', name: 'feedback' })
                 _.each(toChangesDates, toChangeDate => {
                    
-                    const { date } = toChangeDate;
+                    const { date, label } = toChangeDate;
                     const a = moment();
                     const b = moment(date);
                     const diff = a.diff(b, 'days')
@@ -123,12 +123,12 @@ Meteor.methods({
                         message = `vence en ${b.toNow()}`;
                     }
 
-                    const subject = `Feedback ${message}!!`;
-                    const text = `El Feedback para la idea de ${idea.person.lastName}, ${idea.person.firstName} ${message}!!`;
+                    const subject = `${label} ${message}!!`;
+                    const text = `${label} para la idea de ${idea.person.lastName}, ${idea.person.firstName} con estado ${idea.step} ${idea.state}, ${message}!!`;
                                    
                     const alert = {
                         sendInbox: true,
-                        sendEmail: true,
+                        sendEmail: false,
                         owner: false,
                         lead: true,
                         oneUp: true,
