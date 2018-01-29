@@ -25,7 +25,7 @@ const IdeaViewPage = (props) => {
                     <div className="col-md-12 col-lg-12">
                         <div className="panel">
                             <div className="panel-body ng-binding idea-view" style={{ display: 'flex', justifyContent: 'center' }}>
-                                <IdeaCardContainer {...props} idea={doc} />
+                                <IdeaCardContainer {...props} idea={doc} showNext={true} />
                             </div>
                         </div>
                     </div>
