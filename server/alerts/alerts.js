@@ -5,9 +5,12 @@ import { Email } from 'meteor/email';
 import States from '../../imports/api/states/states';
 import Ideas from '../../imports/api/ideas/ideas';
 
+moment.locale('es');
+
 Meteor.startup(() => {
     Meteor.setInterval(() => {
         Meteor.call('sendAlertsTemporals')
+        Meteor.call('sendAlertsFeedbacks')
     }, 86400000)
 })
 
@@ -36,21 +39,21 @@ Meteor.methods({
                     if (err) { console.log('ERROR', err); return; }
                     const viewers = idea.viewers;
                     const last = _.last(idea.states);
-                    
+
                     const a = moment();
                     const b = moment(last.createdAt);
                     const diff = a.diff(b, 'days') // 1
                     _.each(state.alerts, alert => {
                         if (!alert.temporal) return;
                         if (diff >= alert.delay) {
-    
+
                             console.log('** :D ALEEEERT **');
-    
+
                             const subject = 'Alerta!!';
                             const text = (alert.message || '') + `. La idea de ${idea.person.lastName}, ${idea.person.firstName} tiene un atraso de ${diff} días`;
-    
+
                             sendAlert(viewers, subject, text, alert, `/idea/${idea._id}/view`)
-                            
+
                         }
                         else {
                             console.log('** :( no alert **');
@@ -85,6 +88,59 @@ Meteor.methods({
             })
         });
     },
+    sendAlertsFeedbacks: () => {
+        // buscar los estados configurados
+        if (!Meteor.isServer) return;
+
+        // buscar las ideas con feedback
+        const ideas = Ideas.find({ 'states.toChanges.type': 'date' }).fetch()
+        //     $where: () => {
+        //         return _.last(this.states).toChanges.type === 'date'
+        //     }
+        // }).fetch();
+
+
+        _.each(ideas, (idea, index) => {
+            console.log('--idea--', index, idea._id);
+            Meteor.call('idea.addViewers', idea._id, (err, idea) => {
+                if (err) { console.log('ERROR', err); return; }
+                const viewers = idea.viewers;
+                const laststate = _.last(idea.states);
+                const toChangesDates = _.filter(laststate.toChanges, { type: 'date', name: 'feedback' })
+                _.each(toChangesDates, toChangeDate => {
+                   
+                    const { date } = toChangeDate;
+                    const a = moment();
+                    const b = moment(date);
+                    const diff = a.diff(b, 'days')
+                    
+                    let message = ''
+                    if (diff === 0) message = 'vence hoy'
+                    if (diff < 0 && diff >= -2) {
+                        message = `venció hace ${b.fromNow()}`;
+                    }
+                    if (diff > 0 && diff <= 2) {
+                        message = `vence en ${b.toNow()}`;
+                    }
+
+                    const subject = `Feedback ${message}!!`;
+                    const text = `El Feedback para la idea de ${idea.person.lastName}, ${idea.person.firstName} ${message}!!`;
+                                   
+                    const alert = {
+                        sendInbox: true,
+                        sendEmail: true,
+                        owner: false,
+                        lead: true,
+                        oneUp: true,
+                        chief: true
+                    };
+
+                    sendAlert(viewers, subject, text, alert, `/idea/${idea._id}/view`)
+
+                })
+            })
+        })
+    },
 })
 
 const sendAlert = (viewers, subject, text, alert, path) => {
@@ -96,7 +152,7 @@ const sendAlert = (viewers, subject, text, alert, path) => {
 
     const viewersUserId = _.map(_.filter(viewers, v => (
         owner && v.group === 'owner' ||
-        lead && v.group === 'lead' ||
+        lead && v.group === 'leader' ||
         oneUp && v.group === 'oneUp' ||
         chief && v.group === 'chief') &&
         v.userId
@@ -104,16 +160,17 @@ const sendAlert = (viewers, subject, text, alert, path) => {
 
     const to = _.map(Meteor.users.find({ _id: { $in: viewersUserId } }).fetch(), u => (u.emails[0].address))
 
+    console.log('--viewers--', viewers );
+    console.log('-- viewersUserId --', viewersUserId);
+    console.log('-- to --', to);
     Meteor.call('userNotification',
         subject,
         text,
         viewersUserId,
         (err, data) => {
             if (err) { console.log('err userNotification', err) };
-            console.log('--userNotification to --', viewersUserId, data);
         })
 
-    console.log('--viewers--', viewers);
 
     if (sendInbox && viewersUserId.length > 0) {
         Meteor.call('alerts.upsert', {
@@ -129,13 +186,10 @@ const sendAlert = (viewers, subject, text, alert, path) => {
             path, // `/idea/${idea._id}/view`
         }, (err, data) => {
             if (err) { console.log('err alerts.upsert', err) };
-            console.log('--alerts.upsert to --', viewersUserId, data);
         });
     }
 
-
     if (sendEmail && to.length > 0) {
-        console.log('-- send email', to);
         Email.send({ to, from, subject, text });
     }
 }
