@@ -45,7 +45,7 @@ const onChangeMessage = (_id, index) => e => {
 
 const ConfigEditorAlert = ({ _id, index, alert, handleSelect }) => {
 
-    const { temporal, stateChange, delay, daily, weekly, sendEmail, sendInbox, employee, lead, oneUp, chief, message } = alert;
+    const { temporal, stateChange, delay, daily, weekly, sendEmail, sendInbox, owner, lead, oneUp, chief, message } = alert;
     return (
         <div className="config-editor-alert">
             <div className="alert-types">
@@ -97,7 +97,7 @@ const ConfigEditorAlert = ({ _id, index, alert, handleSelect }) => {
                 <div className="alert-types">
                     <div className="alert-type">
                         <div className="alert-type-text">Creador de la Idea</div>
-                        <Switch onClick={stateAlertValue.bind(this, _id, index, 'employee', !employee)} on={employee} />
+                        <Switch onClick={stateAlertValue.bind(this, _id, index, 'owner', !owner)} on={owner} />
                     </div>
                     <div className="alert-type">
                         <div className="alert-type-text">lead</div>

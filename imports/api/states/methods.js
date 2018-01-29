@@ -56,7 +56,7 @@ Meteor.methods({
             weekly: false,
             sendEmail: true,
             sendInbox: false,
-            employee: false,
+            owner: false,
             lead: true,
             oneUp: false,
             chief: false,

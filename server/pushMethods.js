@@ -1,4 +1,4 @@
-Push.debug = true;
+Push.debug = false;
 
 Push.allow({
     send: function (userId, notification) {
@@ -38,7 +38,7 @@ Meteor.methods({
         console.log('--sended--')
     },
     userNotification: function (text, title, viewers) {
-        console.log('--serverNotification--', text, title, viewers.length);
+        console.log('-- USER serverNotification--', text, title, viewers.length);
         check(text, String);
         check(title, String);
         check(viewers, [String]);

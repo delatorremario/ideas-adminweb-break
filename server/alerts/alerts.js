@@ -63,7 +63,7 @@ Meteor.methods({
                             console.log('--alert.sendEmail to --', to);
                             console.log('Envío de Email ***', Email.send({ to, from, subject, text }));
                         }
-                        
+
                         if (alert.sendInbox) {
                             Meteor.call('alerts.upsert', {
                                 createdAt: new Date(),
@@ -92,58 +92,79 @@ Meteor.methods({
     sendAlertChangeState: (ideaId) => {
         console.log('--sendAlertChangeState--', ideaId);
         check(ideaId, String);
-        
+
         if (!Meteor.isServer) return;
         Meteor.call('idea.addViewers', ideaId, (err, idea) => {
             if (err) { console.log('ERROR', err); return; }
             const viewers = _.filter(idea.viewers, v => v.userId !== Meteor.userId());
             const ideastate = _.last(idea.states);
             const state = States.findOne({ _id: ideastate._id, 'alerts.stateChange': true });
+            console.log('--STATE--', state.step, state.state);
+
             _.map(state.alerts, alert => {
+                console.log('---ALERT---', alert);
                 if (alert.stateChange) {
-                    const usersTo = Meteor.users.find({ _id: { $in: _.map(viewers, 'userId') } }).fetch()
                     // const to = ['mauricio.ma.rodriguez@bhpbilliton.com', 'dblazina@holos.cl ', 'mariodelatorre@holos.cl', 'martingonzalez@holos.cl'];
-                    const from = 'Ideas 3.0 <no-replay@ideas.e-captum.com>';
                     const subject = `Cambio al estado ${state.step} ${state.state}`;
                     const text = `${(alert.message ? alert.message + '. ' : '')}La idea de ${idea.person.lastName}, ${idea.person.firstName} ${idea.person.secondName || ''} cambió de estado.`;
 
-                    Meteor.call('userNotification',
-                        subject,
-                        text,
-                        (_.map(viewers, v => v.userId))
-                        , (err, data) => {
-                            if (err) { console.log('err userNotification', err) };
-                            console.log('--userNotification to --', _.map(idea.viewers, v => v.userId), data);
-                        })
+                    sendAlert(viewers, subject, text, alert, `/idea/${idea._id}/view`)
 
-                    if (alert.sendInbox) {
-                        Meteor.call('alerts.upsert', {
-                            createdAt: new Date(),
-                            userOwner: Meteor.userId(),
-                            type: 'normal-notification',
-                            usersDestination: (_.map(viewers, v => v.userId)),
-                            state: 'new',
-                            body: {
-                                title: subject,
-                                message: text,
-                            },
-                            path: `/idea/${idea._id}/view`
-                        }, (err, data) => {
-                            if (err) { console.log('err alerts.upsert', err) };
-                            console.log('--alerts.upsert to --', _.map(viewers, v => v.userId), data);
-                        });
-                    }
-
-
-                    if (alert.sendEmail) {
-                        const to = _.map(usersTo, u => (u.emails[0].address))
-                        console.log('--alert.sendEmail to --', to);
-                        console.log('Envío de Email ***', Email.send({ to, from, subject, text }));
-                    }
                 }
             })
         });
-
-
     },
 })
+
+const sendAlert = (viewers, subject, text, alert, path) => {
+    console.log('enter on sendAlert');
+
+    const from = 'Ideas 3.0 <no-replay@ideas.e-captum.com>';
+
+    const { sendInbox, sendEmail, owner, lead, oneUp, chief } = alert;
+
+    const viewersUserId = _.map(_.filter(viewers, v => (
+        owner && v.group === 'owner' ||
+        lead && v.group === 'lead' ||
+        oneUp && v.group === 'oneUp' ||
+        chief && v.group === 'chief') &&
+        v.userId
+    ), 'userId');
+
+    const to = _.map(Meteor.users.find({ _id: { $in: viewersUserId } }).fetch(), u => (u.emails[0].address))
+
+    // Meteor.call('userNotification',
+    //     subject,
+    //     text,
+    //     viewersUserId,
+    //     (err, data) => {
+    //         if (err) { console.log('err userNotification', err) };
+    //         console.log('--userNotification to --', viewersUserId, data);
+    //     })
+
+    console.log('--viewersUserId--', viewersUserId);
+
+    if (sendInbox && viewersUserId.length > 0) {
+        Meteor.call('alerts.upsert', {
+            createdAt: new Date(),
+            userOwner: Meteor.userId(),
+            type: 'normal-notification',
+            usersDestination: viewersUserId,
+            state: 'new',
+            body: {
+                title: subject,
+                message: text,
+            },
+            path, // `/idea/${idea._id}/view`
+        }, (err, data) => {
+            if (err) { console.log('err alerts.upsert', err) };
+            console.log('--alerts.upsert to --', viewersUserId, data);
+        });
+    }
+
+
+    if (sendEmail && to.length > 0) {
+        console.log('-- send email', to);
+        Email.send({ to, from, subject, text });
+    }
+}

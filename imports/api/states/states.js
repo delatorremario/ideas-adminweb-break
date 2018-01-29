@@ -12,7 +12,7 @@ const AlertSchema = new SimpleSchema({
     weekly: { type: Boolean, optional: true, defaultValue: false },
     sendEmail: { type: Boolean, defaultValue: true },
     sendInbox: { type: Boolean },
-    employee: { type: Boolean },
+    owner: { type: Boolean },
     lead: { type: Boolean, defaultValue: true },
     oneUp: { type: Boolean },
     chief: { type: Boolean },

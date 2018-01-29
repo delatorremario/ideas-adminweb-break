@@ -23,6 +23,7 @@ Ideas.deny({
 
 export const ViewerSchema = new SimpleSchema({
     userId: { type: String },
+    group: { type: String },
     viewedAt: { type: Date, optional: true }
 })
 

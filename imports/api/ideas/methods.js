@@ -153,7 +153,7 @@ Meteor.methods({
         }
 
         // viewers = _.map(viewers, id => ({ userId: id }));
-        console.log('---viewers---', viewers)
+        console.log('---idea.addViewers---', viewers)
         Ideas.update({ _id }, { $set: { viewers } });
         return Ideas.findOne({ _id });
     },
