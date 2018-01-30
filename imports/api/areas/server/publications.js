@@ -11,7 +11,7 @@ Meteor.publish('areas.search', (textSearch, limit) => {
   check(limit, Match.Maybe(Number));
   const self = this.Meteor;
   const user = self.user();
-  if (!user) return this.stop();
+  if (!user) return;
   const filters = {
     corporationId: (user.profile && user.profile.corporationId) || '',
     $text: { $search: textSearch },
