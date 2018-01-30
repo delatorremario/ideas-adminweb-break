@@ -10,7 +10,7 @@ import SetStateComponent from '../../components/set-state/SetStateComponent';
 import IdeaCardChiefAreaContainer from './IdeaCardChiefAreaContainer';
 
 const IdeaCard = ({ idea, imagesCursor, lap, handleRemove, showEdit, showNext, nonViewed }) => {
-    const { userId, person, chief, description, opportunity, collaborators, drivers, origin, createdAt, date, states, images, area } = idea;
+    const { _id, userId, person, chief, description, opportunity, collaborators, drivers, origin, createdAt, date, states, images, area } = idea;
     const { leader } = area;
     const createdUser = Meteor.users.findOne(userId);
     const lastState = states && _.last(states);
@@ -22,9 +22,10 @@ const IdeaCard = ({ idea, imagesCursor, lap, handleRemove, showEdit, showNext, n
             <div className="panel-heading" style={{ borderColor: color, backgroundColor: color + '0C' }}>
                 <h5 className="panel-title">
                     <div style={{ borderBottom: `1px solid ${color}` }}>
+                        {/* <small>{_id}</small> */}
                         <small> <Moment format="DD MMM YYYY HH:mm" date={date} /> </small>
                         <div className="title-name" style={{ color: color }}>
-                            <b>&nbsp;{person && person.lastName} </b>{ person && person.firstName} {person && person.secondName}
+                            <b>&nbsp;{person && person.lastName} </b>{person && person.firstName} {person && person.secondName}
                         </div>
                     </div>
                     <br></br>

@@ -9,6 +9,8 @@ Meteor.methods({
         // role this user
         if (!Meteor.isServer) return;
         const user = Meteor.user();
+        if (!user) return;
+        if (!Roles.userIsInRole(user._id, ['Leader','Executive','Employee'])) return;
         const { roles, profile } = user;
         const states = States.aggregate([
             { $unwind: '$roles' },
@@ -24,28 +26,18 @@ Meteor.methods({
             let families = [];
             _.each(areas, area => families = _.union(families, area.family))
             _.extend(filters, {
-                // $or: [
-                // { 'person._id': user && user.profile._id },
-                //{
                 'chief.areaId': { $in: families }
-                //}
-                // ]
+            })
+        }
+        if (Roles.userIsInRole(user._id, ['Executive'])) {
+             _.extend(filters, {
+                'chief._id': user && user.profile && user.profile._id
             })
         }
         if (Roles.userIsInRole(user._id, ['Employee'])) {
-            // const areas = Areas.find({ _id: { $in: user.profile.leaderAreasIds } }).fetch();
-            //console.log('AREAS ', areas);
             let families = [];
-            //_.each(areas, area => families = _.union(families, area.family))
             _.extend(filters, {
-                // $or: [
-                // { 
                 'person._id': user && user.profile._id
-                //},
-                //{
-                //'chief.areaId': { $in: families }
-                //}
-                // ]
             })
         }
 
