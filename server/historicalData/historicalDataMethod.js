@@ -27,8 +27,8 @@ Meteor.methods({
 
             if (!area) { errors.push({ err: 'no existe area', index, areaCode }); return; }
             if (!person) {
-                if (validateEmail(personRef)) {
-                    const idPerson = Persons.insert({ email: personRef, areaId: area._id })
+                if (validateEmail(_.toLower(personRef))) {
+                    const idPerson = Persons.insert({ email: _.toLower(personRef), areaId: area._id })
                     console.log('idPerson', idPerson);
 
                     person = Persons.findOne(idPerson);
@@ -59,7 +59,7 @@ Meteor.methods({
                 const { insertedId } = data;
                 if (insertedId) { inserted++; Meteor.call('idea.addViewers', insertedId) }
                 else updated++
-                console.log('upsert', data);
+                console.log('upsert', index, data);
             })
 
         })
