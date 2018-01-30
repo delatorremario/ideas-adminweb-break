@@ -14,7 +14,6 @@ const composer = ({ match }, onData) => {
     const subComments = Meteor.subscribe('comments.list');
     if (subComments.ready()) {
         const comments = Comments.find({}).fetch();
-        console.log('comments',comments)
         const commentsIds = _.map(comments,'ideaId');
         const userId = Meteor.userId();
         const filters = { _id: { $in: commentsIds }, 'viewers.userId': userId }
