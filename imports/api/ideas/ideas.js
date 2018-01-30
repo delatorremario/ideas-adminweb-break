@@ -47,7 +47,8 @@ Ideas.schema = new SimpleSchema([
     { states: { type: [States.schema] } },
     { images: { type: [String], optional: true } },
     { comments: { type: [CommentSchema], optional: true } },
-    { viewers: { type: [ViewerSchema], optional: true } }
+    { viewers: { type: [ViewerSchema], optional: true } },
+    { impactId: { type: String, optional: true } },
 ]);
 
 Ideas.attachSchema(Ideas.schema);
