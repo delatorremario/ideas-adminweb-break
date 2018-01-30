@@ -1,10 +1,13 @@
-import React, { Component } from 'react';
 import PersonsItemContainer from '../../containers/persons/PersonsItemContainer';
-import { Link } from 'react-router-dom';
 import { ControlLabel } from 'react-bootstrap';
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import ExcelPersonComponent from '../excel/ExcelPersonComponent';
+import swal from 'sweetalert2';
+import XLSX from 'xlsx';
+import _ from 'lodash';
 
 const PersonsListComponent = ({ history, persons, onChangeSearchPerson }) => {
-    console.log(persons);
     return (
         <div className="col-xs-12">
             <div className="panel-body ng-binding">
@@ -13,6 +16,7 @@ const PersonsListComponent = ({ history, persons, onChangeSearchPerson }) => {
                         <Link to="/persons/new" className="btn btn-success btn-trans btn-action ideas-button">
                             <i className="fa fa-user"></i>
                         </Link>
+                        <ExcelPersonComponent />
                         <div className="col-md-6 person-search">
                             <div className="form-group">
                                 <i className="fa fa-search"></i>
@@ -20,7 +24,7 @@ const PersonsListComponent = ({ history, persons, onChangeSearchPerson }) => {
                             </div>
                         </div>
                     </div>
-                    <br className="isMobile"/>
+                    <br className="isMobile" />
                 </div>
             </div>
             <div className="row cards-container">

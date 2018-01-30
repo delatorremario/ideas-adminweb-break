@@ -1,6 +1,13 @@
 import React, { Component } from 'react'
 import ReactDom from 'react-dom'
 import classNames from "classnames"
+import ColoredAvatar from '../components/ColoredAvatar';
+import $ from 'jquery';
+import { Roles } from 'meteor/alanning:roles';
+import '../../../node_modules/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar';
+import NonViewedContainer from '../containers/nonViewed/NonViewedContainer';
+import AvatarContainer from '../containers/avatar/AvatarContainer.js';
+import Ideas from '../../api/ideas/ideas';
 import {
     Router,
     Route,
@@ -17,15 +24,7 @@ import {
     MenuItem,
     ProgressBar
 } from "react-bootstrap";
-import ColoredAvatar from '../components/ColoredAvatar';
-import $ from 'jquery';
-import { Roles } from 'meteor/alanning:roles';
-import '../../../node_modules/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar';
-// import NonViewedComponent from '../components/nonViewed/NonViewedComponent';
-import NonViewedContainer from '../containers/nonViewed/NonViewedContainer';
-import AvatarContainer from '../containers/avatar/AvatarContainer.js';
 require('malihu-custom-scrollbar-plugin')($);
-import Ideas from '../../api/ideas/ideas';
 
 class SidebarPush extends Component {
     constructor(props, context) {
@@ -154,7 +153,6 @@ class SidebarPush extends Component {
     setHeightScrollbar() {
         let windowHeight = $(window).height();
         let windowWidth = $(window).width();
-        console.log('WH', windowHeight)
         if (windowWidth < 768) {
             windowHeight -= 300;
             // console.log('WHM', windowHeight)
