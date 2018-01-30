@@ -74,7 +74,7 @@ Meteor.methods({
     'getIdeasByIds': (ids) => {
         check(ids, [String]);
         if (!Meteor.isServer) return;
-        return Ideas.aggregate([
+        const ideas = Ideas.aggregate([
             { $match: { _id: { $in: ids } } },
             { $lookup: { from: 'areas', foreignField: '_id', localField: 'chief.areaId', as: 'destinationarea' } },
             { $unwind: '$destinationarea' },
@@ -82,6 +82,12 @@ Meteor.methods({
             { $unwind: '$personarea' },
             { $sort: { date: 1 } },
         ]);
+        _.map(ideas,idea=>{
+            const area = Areas.findOne({ code: idea.chief && idea.chief.areaCode })
+            const leader = findLeader(area);
+            _.extend(idea, { leader });
+        })
+        return ideas;
     },
     'idea.setState': (_id, state) => {
         if (!Meteor.isServer) return;

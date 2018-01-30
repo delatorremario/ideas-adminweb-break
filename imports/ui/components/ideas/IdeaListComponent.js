@@ -26,6 +26,7 @@ class IdeasListComponent extends Component {
         statesCodesSelected: [],
         showArea: true,
         showStates: false,
+        showExcelButton: false,
     }
 
     handleNav = (history, _id) => {
@@ -118,16 +119,16 @@ class IdeasListComponent extends Component {
         const { ideasFindLimit } = this.props;
         ideasFindLimit.set(0)
 
-        swal({
-            position: 'top-end',
-            // type: 'success',
-            title: 'Preparando la información...',
-            showConfirmButton: false,
-            timer: 10000,
-            onOpen: () => {
-                swal.showLoading()
-            }
-        })
+        // swal({
+        //     position: 'top-end',
+        //     // type: 'success',
+        //     title: 'Preparando la información...',
+        //     showConfirmButton: false,
+        //     timer: 10000,
+        //     onOpen: () => {
+        //         swal.showLoading()
+        //     }
+        // })
         this.setState(prev => ({ showExcelButton: !prev.showExcelButton }))
     }
 

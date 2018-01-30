@@ -10,6 +10,7 @@ import historicalDataDb from './historicalDataDb';
 
 Meteor.methods({
     'import.historical': () => {
+        if(!Meteor.isServer) return;
         const errors = [];
         let updated = 0
         let inserted = 0
@@ -27,13 +28,13 @@ Meteor.methods({
 
             if (!area) { errors.push({ err: 'no existe area', index, areaCode }); return; }
             if (!person) {
-                if (validateEmail(_.toLower(personRef))) {
-                    const idPerson = Persons.insert({ email: _.toLower(personRef), areaId: area._id })
-                    console.log('idPerson', idPerson);
+                // if (validateEmail(_.toLower(personRef))) {
+                //     const idPerson = Persons.insert({ email: _.toLower(personRef), areaId: area._id })
+                //     console.log('idPerson', idPerson);
 
-                    person = Persons.findOne(idPerson);
-                }
-                else
+                //     person = Persons.findOne(idPerson);
+                // }
+                // else
                     errors.push({ err: 'no existe persona', index, personRef }); return;
             }
             if (!state) { errors.push({ err: 'no existe state', index, stateCode }); return; }
