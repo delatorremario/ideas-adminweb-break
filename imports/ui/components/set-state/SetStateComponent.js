@@ -131,10 +131,7 @@ class SetStateComponent extends React.Component {
                                     }
                                     this.onChangeChange(index, 'chief')(chief);
                                 }
-                                // const myAreaCheck = () => {
-                                //     console.log('toChange.label', toChange.label, toChange.label === 'Otro Ejecutivo de mi Area');
-                                //     return false // toChange.label === 'Otro Ejecutivo de mi Area'
-                                // }
+                                
                                 return <div key={index}>
                                     {
                                         toChange.type === 'date' && <div>
@@ -162,11 +159,11 @@ class SetStateComponent extends React.Component {
                                             <ControlLabel>{toChange.label}</ControlLabel>
                                             <PersonSearchAndCardContainer
                                                 onlyChief={true}
-                                                myArea={toChange.label === 'Otro Ejecutivo de mi Area'}
-                                                parentArea={toChange.label === 'Otro Ejecutivo de mi Area'}
+                                                // myArea={toChange.label === 'Otro Ejecutivo de mi Area'}
+                                                // parentArea={toChange.label === 'Otro Ejecutivo de mi Area'}
                                                 selectPerson={selectPerson}
                                                 person={toChange.chief}
-                                                hideInput={toChange.parents}
+                                                // hideInput={toChange.parents}
                                             />
                                         </div>
 
