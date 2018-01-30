@@ -16,7 +16,7 @@ Meteor.methods({
         _.each(historicalDataDb, (data, index) => {
             const { date, origin, personRef, stateCode, impactId, stateDate, areaCode, opportunity, description, drivers } = data;
             let person = Persons.findOne({
-                $or: [{ masterCode: personRef }, { email: personRef }, { rut: personRef }]
+                $or: [{ masterCode: _.toLower(personRef) }, { email: _.toLower(personRef) }, { rut: _.toLower(personRef) }]
             });
             const state = States.findOne({ code: stateCode });
             state.createdAt = new Date()
