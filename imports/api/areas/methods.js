@@ -182,3 +182,12 @@ export const findChiefs = (area) => {
     const chiefs = Persons.find({ group: 'EXECUT.', areaId: { $in: _.map(areasPaterns, '_id') } }).fetch()
     return _.map(chiefs, '_id')
 }
+export const findChiefOne = (area) => {
+    const chief = Persons.findOne({ group: 'EXECUT.', areaId: area._id });
+    if (!chief) {
+        if (!area.parentAreaId) return;
+        const parent = Areas.findOne({ _id: area.parentAreaId });
+        return findChiefOne(parent);
+    }
+    return chief;
+}
