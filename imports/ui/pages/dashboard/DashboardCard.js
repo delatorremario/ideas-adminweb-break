@@ -83,18 +83,33 @@ const DashboardCard = ({ area, month }) => {
                     </div>
                     <div className="link-status-container">
                         {
-                            _.map(ideasByStatus, (state, index) =>  <div key={index} className="link-status"  >
-                                    <Link to={
-                                        name === 'MIS IDEAS' && `/ideas/${state.code}/filter/${month}` ||
-                                        name === 'FUNCIONES' && `/ideas/${state.code}/funciones/filter/${month}` || 
-                                        `/ideas/${state.code}/${area._id}/filter/${month}`}>
-                                        <div>{state.step} {state.state}</div>
-                                        {/* <div className="count">{state.count}</div> */}
-                                        <div className="count" style={{ backgroundColor: state.green == 0 ? 'none' : colors[0] }}>{state.green}</div>
-                                        <div className="count" style={{ backgroundColor: state.yellow == 0 ? 'none' : colors[1] }}>{state.yellow}</div>
-                                        <div className="count" style={{ backgroundColor: state.red == 0 ? 'none' : colors[2] }}>{state.red}</div>
-                                    </Link>
-                                </div>
+                            _.map(ideasByStatus, (state, index) => <div key={index} className="link-status"  >
+                                <Link to={
+                                    name === 'MIS IDEAS' && `/ideas/${state.code}/filter/${month}` ||
+                                    name === 'FUNCIONES' && `/ideas/${state.code}/funciones/filter/${month}` ||
+                                    `/ideas/${state.code}/${area._id}/filter/${month}`}>
+                                    <div>{state.step} {state.state}</div>
+                                    {/* <div className="count">{state.count}</div> */}
+                                    <div className="count" style={
+                                        {
+                                            backgroundColor: state.green === 0 ? 'none' : colors[0],
+                                            opacity: state.green === 0 ? '0' : '1'
+                                        }
+                                    }>{state.green}</div>
+                                    <div className="count" style={
+                                        {
+                                            backgroundColor: state.yellow === 0 ? 'none' : colors[1],
+                                            opacity: state.yellow === 0 ? '0' : '1'
+                                        }
+                                    }>{state.yellow}</div>
+                                    <div className="count" style={
+                                        {
+                                            backgroundColor: state.red === 0 ? 'none' : colors[2],
+                                            opacity: state.red === 0 ? '0' : '1'
+                                        }
+                                    }>{state.red}</div>
+                                </Link>
+                            </div>
                             )
                         }
                     </div>
