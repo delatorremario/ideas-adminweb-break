@@ -114,13 +114,31 @@ class IdeasListComponent extends Component {
         //this.setState({ showMore: (ideasFindLimit.get() === ideas.length + 5) })
     }
 
+    showDownloadExcel = () => {
+        const { ideasFindLimit } = this.props;
+        ideasFindLimit.set(0)
+
+        swal({
+            position: 'top-end',
+            // type: 'success',
+            title: 'Preparando la información...',
+            showConfirmButton: false,
+            timer: 10000,
+            onOpen: () => {
+                swal.showLoading()
+            }
+        })
+        this.setState(prev => ({ showExcelButton: !prev.showExcelButton }))
+    }
+
     render() {
 
         const { history, ideas, ideasstates, showEdit, user, textSearch, ideasFindLimit } = this.props;
-        const { stateSelected, areaSelected, statesCodesSelected } = this.state;
+        const { stateSelected, areaSelected, statesCodesSelected, showExcelButton } = this.state;
         const { showFilters, showArea, showList, text, showStates } = this.state;
 
         const showMore = ideasFindLimit.get() === ideas.length
+        console.log('showExcelButton 2', showExcelButton)
 
         return (
             <div className='ideas-list'>
@@ -137,7 +155,12 @@ class IdeasListComponent extends Component {
                             </Link>
                         }
                         {
-                            showEdit && <ReactHTMLTableToExcel
+                            showEdit && !showExcelButton &&
+                            <button className="btn btn-success btn-trans btn-action btn-ideas-excel ideas-button"
+                                onClick={this.showDownloadExcel}>
+                                <i className="fa fa-download"></i>
+                            </button> ||
+                            <ReactHTMLTableToExcel
                                 id="ideas-xls-button"
                                 className="btn btn-success btn-trans btn-action btn-ideas-excel ideas-button"
                                 table="ideas-to-xls"

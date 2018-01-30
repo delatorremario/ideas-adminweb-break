@@ -147,14 +147,7 @@ class MyIdeasList extends Component {
                                         <Link className="btn btn-success btn-action ideas-button btn-trans" to='/ideas/find'>
                                             <i className="fa fa-search"></i>
                                         </Link>
-                                        {showEdit && <ReactHTMLTableToExcel
-                                            id="ideas-xls-button"
-                                            className="btn btn-success btn-trans btn-action btn-ideas-excel ideas-button"
-                                            table="ideas-to-xls"
-                                            filename={"ideas-" + new Date().toLocaleDateString()}
-                                            sheet="ideas"
-                                            buttonText="xls" />
-                                        }
+                                        
                                     </div>
                                 </div>
                                 <div>
