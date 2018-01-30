@@ -123,8 +123,8 @@ Meteor.methods({
                         message = `vence en ${b.toNow()}`;
                     }
 
-                    const subject = `${label} ${message}!!`;
-                    const text = `${label} para la idea de ${idea.person.lastName}, ${idea.person.firstName} con estado ${idea.step} ${idea.state}, ${message}!!`;
+                    const subject = `${label} ${message}`;
+                    const text = `${label} para la idea de ${idea.person.lastName}, ${idea.person.firstName} con estado ${laststate.step} ${laststate.state}, ${message}.`;
                                    
                     const alert = {
                         sendInbox: true,
