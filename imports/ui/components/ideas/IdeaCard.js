@@ -19,10 +19,10 @@ const IdeaCard = ({ idea, imagesCursor, lap, handleRemove, showEdit, showNext, n
 
     return <div className="col-sm-6 col-lg-4 cards-item">
         <div className="panel panel-default" style={{ borderColor: color }}>
+                        {/* <small>{idea._id}</small> */}
             <div className="panel-heading" style={{ borderColor: color, backgroundColor: color + '0C' }}>
                 <h5 className="panel-title">
                     <div style={{ borderBottom: `1px solid ${color}` }}>
-                        {/* <small>{_id}</small> */}
                         <small> <Moment format="DD MMM YYYY HH:mm" date={date} /> </small>
                         <div className="title-name" style={{ color: color }}>
                             <b>&nbsp;{person && person.lastName} </b>{person && person.firstName} {person && person.secondName}
