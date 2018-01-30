@@ -154,7 +154,7 @@ class SidebarPush extends Component {
     setHeightScrollbar() {
         let windowHeight = $(window).height();
         let windowWidth = $(window).width();
-        console.log('WH', windowHeight)
+        // console.log('WH', windowHeight)
         if (windowWidth < 768) {
             windowHeight -= 300;
             // console.log('WHM', windowHeight)
