@@ -7,6 +7,9 @@ Meteor.publish('comments.byIdea', (ideaId) => {
     check(ideaId, String);
     return Comments.find({ ideaId: ideaId }, { sort: { createdAt: 1 } });
 });
+Meteor.publish('comments.list', () => {
+    return Comments.find({});
+});
 
 Meteor.publish('comments.byId', (id) => {
     check(id, String);
