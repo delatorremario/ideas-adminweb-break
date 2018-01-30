@@ -7,7 +7,7 @@ App.info({
     author: 'Holos Develops',
     email: 'desarrollo@holos.cl',
     website: 'http://holos.cl/',
-    version: "0.0.9",
+    version: "0.0.10",
 });
 
 // Set up resources such as icons and launch screens.
