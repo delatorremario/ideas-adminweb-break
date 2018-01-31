@@ -52,11 +52,9 @@ Meteor.methods(
     {
         updateProfile: (user) => {
             check(user, Object);
-            console.log('--user--', user);
             Meteor.users.update({ _id: user._id }, { $set: { profile: user.profile } }, (err) => {
                 if (err) { console.log(err); return; }
                 Persons.upsert({ _id: user && user.profile && user.profile._id }, { $set: { ...user.profile, email: user.emails[0].address } }, (err, data) => {
-                    console.log('--DATA--', data)
                     if (data && data.insertedId) Meteor.users.update({ _id: user._id }, { $set: { 'profile._id': data.insertedId } })
                 })
             });

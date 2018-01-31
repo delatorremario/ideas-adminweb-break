@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
 import AreasItemComponent from '../../components/areas/AreasItemComponent';
-import { Link } from 'react-router-dom';
 import { ControlLabel } from 'react-bootstrap';
+import ExcelAreaComponent from '../excel/ExcelAreaComponent';
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 const AreasListComponent = ({ history, areas, onChangeSearchArea }) => {
     return (
@@ -12,6 +13,7 @@ const AreasListComponent = ({ history, areas, onChangeSearchArea }) => {
                         {/* <Link to="/areas/new" className="btn btn-success btn-trans btn-action ideas-button">
                             <i className="fa fa-building-o"></i>
                         </Link> */}
+                        <ExcelAreaComponent />
                         <div className="col-md-6 person-search">
                             <div className="form-group">
                                 <i className="fa fa-search"></i>
