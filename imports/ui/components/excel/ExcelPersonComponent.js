@@ -8,7 +8,9 @@ import _ from 'lodash';
 class ExcelPersonComponent extends Component {
 
     state = {
-        isLoading: ''
+        isLoading: '',
+        total: undefined,
+        person: undefined
     }
 
     componentDidMount() {
@@ -19,10 +21,12 @@ class ExcelPersonComponent extends Component {
         })
     }
 
-    xlsxReceptor = bstr => {
-        if (bstr && /xls|xlsx|/i.test(bstr.extension)) {
-            const name = bstr.name;
-            const size = (bstr.size / (1000000)).toFixed(2) + 'MB';
+    xlsxReceptor = e => {
+        e.persist();
+        const file = e.currentTarget.files[0];
+        if (file && /xls|xlsx|/i.test(file.extension)) {
+            const name = file.name;
+            const size = (file.size / (1000000)).toFixed(2) + 'MB';
             swal({
                 title: 'Cargar Datos',
                 text: `Esta acción no se puede revertir. ¿Está seguro que desea cargar "${name} ${size}" al sistema?`,
@@ -34,10 +38,9 @@ class ExcelPersonComponent extends Component {
                 this.setState(prev => ({
                     status: 'uploading'
                 }))
-                this.xlsxParser(bstr);
-                /* Este setTimeout se debe remplazar por el upsert de personas */
-                setTimeout(() => {
-                    error = true;
+                this.xlsxParser(e, (persons, error) => {
+                    console.log('persons', persons);
+                    /* Acá habría que poner el upsert */
                     if (error) {
                         Bert.alert('Error', 'danger');
                         this.setState(prev => ({
@@ -61,21 +64,66 @@ class ExcelPersonComponent extends Component {
                             }))
                         }, 1000);
                     }
-                }, 2000);
+                });
             }, (dismiss) => {
                 console.log(dismiss)
             })
         }
     }
 
-    xlsxParser = (xlsx) => {
-        console.log(xlsx);
+    xlsxParser = (evt, callback) => {
+        const target = evt.target;
+        const reader = new FileReader();
+        let setState = this.setState;
+        this.nombreArchivo = target.files[0].name;
+        reader.onload = function (e) {
+            const bstr = e.target.result;
+            const wb = XLSX.read(bstr, { type: 'binary' });
+            const wsname = wb.SheetNames[0];
+            const ws = wb.Sheets[wsname];
+            var data = XLSX.utils.sheet_to_json(ws, { header: 1 });
+            const header = data[0];
+            if (header !== 10) {
+                callback(undefined, 'Formato incorrecto: cantidad de comlumnas incorrecta');
+            } else {
+                let persons = [];
+                data = _.remove(data, d => !_.isEqual(d, header))
+                console.log('data', header, data);
+                setState(prev => ({
+                    total: data.length,
+                    person: 0
+                }))
+                _.each(data, (d, index) => {
+                    setState(prev => ({
+                        person: index
+                    }))
+                    const person = {
+                        masterCode: d[0] || '',
+                        rut: d[1] || '',
+                        lastName: d[2] || '',
+                        secondLastName: d[3] || '',
+                        firstName: d[4] || '',
+                        secondName: d[5] || '',
+                        email: d[6] || '',
+                        group: d[7] || '',
+                        managerCode: d[8] || '',
+                        areaCode: d[9] || ''
+                    };
+                    persons = _.concat(persons, person);
+                })
+                callback(persons, undefined);
+            }
+        };
+        reader.readAsBinaryString(target.files[0]);
     }
 
     render() {
-        const { status, onLoad, icon } = this.state;
+        const { status, onLoad, icon, person, total } = this.state;
         return (
-            <ExcelUploaderComponent status={status} onLoad={onLoad} icon={icon} />
+            <div>
+                {total && person && person + '/' + total}
+                <ExcelUploaderComponent status={status} onLoad={onLoad} icon={icon} />
+            </div>
         )
     }
 }

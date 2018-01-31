@@ -4,6 +4,8 @@ import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import Persons from './persons';
 import rateLimit from '../../modules/rate-limit.js';
 import Areas from '../areas/areas';
+import XLSX from 'xlsx';
+import { check } from 'meteor/check';
 
 export const upsertPerson = new ValidatedMethod({
     name: 'persons.upsert',
@@ -58,5 +60,13 @@ Meteor.methods({
         if (person && person.managerCode) person.oneUp = Persons.findOne({ masterCode: person.managerCode })
         if (person && person.oneUp) person.oneUp.area = person.oneUp && person.oneUp.areaId && Areas.findOne(person.oneUp.areaId);
         return person;
+    },
+    'upload': (file) => {
+        check(file, Object);
+        let data = new Uint8Array(file);
+        let arr = new Array();
+        arr = _.map(arr, a => String.fromCharCode(a));
+        let bstr = arr.join("");
+        return XLSX.read(bstr, { type: 'binary' });
     }
 })

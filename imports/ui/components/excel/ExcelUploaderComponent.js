@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { Meteor } from 'meteor/meteor';
 import swal from 'sweetalert2';
-import XLSX from 'xlsx';
 import _ from 'lodash';
 
 class ExcelUploaderComponent extends Component {
@@ -33,7 +32,7 @@ class ExcelUploaderComponent extends Component {
                 <i className={fa}></i>
                 <input id="file"
                     type="file"
-                    onChange={e => onLoad(e.target && e.target.files[0] || undefined)}
+                    onChange={e => onLoad(e)}
                     style={{ display: 'none' }}
                     multiple="false"
                     accept=".xls,.xlsx"
