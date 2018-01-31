@@ -40,9 +40,8 @@ class ExcelPersonComponent extends Component {
                 }))
                 this.xlsxParser(e, (persons, error) => {
                     console.log('persons', persons);
-                    /* Acá habría que poner el upsert */
                     if (error) {
-                        Bert.alert('Error', 'danger');
+                        Bert.alert(error, 'danger');
                         this.setState(prev => ({
                             status: 'idle',
                             icon: 'fa fa-times'
@@ -53,16 +52,36 @@ class ExcelPersonComponent extends Component {
                             }))
                         }, 1000);
                     } else {
-                        Bert.alert('Datos cargados', 'success');
+                        persons = _.slice(persons, 0, 500);
                         this.setState(prev => ({
-                            status: 'idle',
-                            icon: 'fa fa-check'
+                            total: persons.length,
+                            person: 0
                         }))
-                        setTimeout(() => {
-                            this.setState(prev => ({
-                                icon: 'fa fa-file-excel-o'
-                            }))
-                        }, 1000);
+                        let count = 0;
+                        _.each(persons, (p, index) => {
+                            Meteor.call('persons.update', [p], (err, resp) => {
+                                if (err) {
+                                    Bert.alert(err, 'danger');
+                                } else {
+                                    count++;
+                                    this.setState(prev => ({
+                                        person: count
+                                    }))
+                                    if (count === persons.length) {
+                                        Bert.alert('Datos cargados', 'success');
+                                        this.setState(prev => ({
+                                            status: 'idle',
+                                            icon: 'fa fa-check'
+                                        }))
+                                        setTimeout(() => {
+                                            this.setState(prev => ({
+                                                icon: 'fa fa-file-excel-o'
+                                            }))
+                                        }, 2000);
+                                    }
+                                }
+                            })
+                        })
                     }
                 });
             }, (dismiss) => {
@@ -74,7 +93,6 @@ class ExcelPersonComponent extends Component {
     xlsxParser = (evt, callback) => {
         const target = evt.target;
         const reader = new FileReader();
-        let setState = this.setState;
         this.nombreArchivo = target.files[0].name;
         reader.onload = function (e) {
             const bstr = e.target.result;
@@ -83,20 +101,13 @@ class ExcelPersonComponent extends Component {
             const ws = wb.Sheets[wsname];
             var data = XLSX.utils.sheet_to_json(ws, { header: 1 });
             const header = data[0];
-            if (header !== 10) {
-                callback(undefined, 'Formato incorrecto: cantidad de comlumnas incorrecta');
+            console.log('data', header, data);
+            if (header.length !== 10) {
+                callback(undefined, 'Formato incorrecto: cantidad de columnas incorrecta.');
             } else {
                 let persons = [];
                 data = _.remove(data, d => !_.isEqual(d, header))
-                console.log('data', header, data);
-                setState(prev => ({
-                    total: data.length,
-                    person: 0
-                }))
                 _.each(data, (d, index) => {
-                    setState(prev => ({
-                        person: index
-                    }))
                     const person = {
                         masterCode: d[0] || '',
                         rut: d[1] || '',
