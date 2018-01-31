@@ -5,7 +5,7 @@ import swal from 'sweetalert2';
 import XLSX from 'xlsx';
 import _ from 'lodash';
 
-class ExcelPersonComponent extends Component {
+class ExcelAreasComponent extends Component {
 
     state = {
         isLoading: '',
@@ -38,7 +38,7 @@ class ExcelPersonComponent extends Component {
                 this.setState(prev => ({
                     status: 'uploading'
                 }))
-                this.xlsxParser(e, (persons, error) => {
+                this.xlsxParser(e, (areas, error) => {
                     e.target.value = '';
                     if (error) {
                         Bert.alert(error, 'danger');
@@ -53,12 +53,12 @@ class ExcelPersonComponent extends Component {
                         }, 1000);
                     } else {
                         this.setState(prev => ({
-                            total: persons.length,
+                            total: areas.length,
                             index: 0
                         }))
                         let count = 0;
-                        _.each(persons, (person, index) => {
-                            Meteor.call('persons.update', [person], (err, resp) => {
+                        _.each(areas, (area, index) => {
+                            Meteor.call('areas.update', [area], (err, resp) => {
                                 if (err) {
                                     Bert.alert(err, 'danger');
                                     this.setState(prev => ({
@@ -75,8 +75,8 @@ class ExcelPersonComponent extends Component {
                                     this.setState(prev => ({
                                         index: count
                                     }))
-                                    if (count === persons.length) {
-                                        Bert.alert(persons.length === 1 ? '1 persona cargada.' : persons.length + ' personas cargadas.', 'success');
+                                    if (count === areas.length) {
+                                        Bert.alert(areas.length === 1 ? '1 persona cargada.' : areas.length + ' personas cargadas.', 'success');
                                         this.setState(prev => ({
                                             status: 'idle',
                                             icon: 'fa fa-check'
@@ -111,37 +111,27 @@ class ExcelPersonComponent extends Component {
             var data = XLSX.utils.sheet_to_json(ws, { header: 1 });
             const header = data[0];
             if (
-                header[0] !== 'masterCode' &&
-                header[1] !== 'rut' &&
-                header[2] !== 'lastName' &&
-                header[3] !== 'secondLastName' &&
-                header[4] !== 'firstName' &&
-                header[5] !== 'secondName' &&
-                header[6] !== 'email' &&
-                header[7] !== 'group' &&
-                header[8] !== 'managerCode' &&
-                header[9] !== 'areaCode'
+                header[0] !== 'code' &&
+                header[1] !== 'name' &&
+                header[2] !== 'type' &&
+                header[3] !== 'parent' &&
+                header[4] !== 'functional'
             ) {
                 callback(undefined, 'Formato incorrecto.');
             } else {
-                let persons = [];
+                let areas = [];
                 data = _.remove(data, d => !_.isEqual(d, header))
                 _.each(data, (d, index) => {
                     const person = {
-                        masterCode: d[0] || '',
-                        rut: d[1] || '',
-                        lastName: d[2] || '',
-                        secondLastName: d[3] || '',
-                        firstName: d[4] || '',
-                        secondName: d[5] || '',
-                        email: d[6] || '',
-                        group: d[7] || '',
-                        managerCode: d[8] || '',
-                        areaCode: d[9] || ''
+                        code: d[0] || '',
+                        name: d[1] || '',
+                        type: d[2] || '',
+                        parent: d[3] || '',
+                        functional: d[4] || ''
                     };
-                    persons = _.concat(persons, person);
+                    areas = _.concat(areas, person);
                 })
-                callback(persons, undefined);
+                callback(areas, undefined);
             }
         };
         reader.readAsBinaryString(target.files[0]);
@@ -157,4 +147,4 @@ class ExcelPersonComponent extends Component {
     }
 }
 
-export default ExcelPersonComponent;
+export default ExcelAreasComponent;

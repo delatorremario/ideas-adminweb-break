@@ -40,10 +40,10 @@ class ExcelUploaderComponent extends Component {
                         disabled={status === 'uploading' ? true : false} />
                 </div>
                 {
-                    index !== total &&
+                    status === 'uploading' && index !== total &&
                     <div to="#" className="btn btn-info ideas-button">
-                        <div style={{ zoom: '0.5 !importants' }}>{((index / total) * 100).toFixed(0)}%</div>
-                    </div>
+                    <div style={{ zoom: '0.5 !importants' }}>{((index / total) * 100).toFixed(0)}%</div>
+                </div>
                 }
             </div>
         )

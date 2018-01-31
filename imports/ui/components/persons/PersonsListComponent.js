@@ -1,8 +1,8 @@
 import PersonsItemContainer from '../../containers/persons/PersonsItemContainer';
+import ExcelPersonComponent from '../excel/ExcelPersonComponent';
 import { ControlLabel } from 'react-bootstrap';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import ExcelPersonComponent from '../excel/ExcelPersonComponent';
 import swal from 'sweetalert2';
 import XLSX from 'xlsx';
 import _ from 'lodash';
