@@ -1,6 +1,7 @@
 // nginx config https://gist.github.com/jamiewilson/4e1d28f9a200cb34ad59
 // http://meteor-up.com/
 // https://medium.com/@grahamleslie/setting-up-meteor-meteor-up-letsencrypt-ssl-and-nginx-dddb3b5a4baa
+// https://codearmy.co/como-crear-autenticaci%C3%B3n-y-permitir-acceso-remoto-a-mongodb-1b0231a6df44
 
 const url = 'ideas.e-captum.com';
 
@@ -44,7 +45,8 @@ module.exports = {
       // TODO: Change to your app's url
       // If you are using ssl, it needs to start with https://
       ROOT_URL: `https://${url}`,
-      MONGO_URL: 'mongodb://ideas:ideas@ds129053.mlab.com:29053/ideas-dev',
+      // MONGO_URL: 'mongodb://ideas:ideas@ds129053.mlab.com:29053/ideas-dev',
+      MONGO_URL: 'mongodb://ideas:1qaz2wsx@172.31.7.159:29053/ideas',
       PORT: 5010
     },
 
