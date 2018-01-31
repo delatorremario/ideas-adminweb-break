@@ -4,6 +4,8 @@ import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import Persons from './persons';
 import rateLimit from '../../modules/rate-limit.js';
 import Areas from '../areas/areas';
+import XLSX from 'xlsx';
+import { check } from 'meteor/check';
 
 export const upsertPerson = new ValidatedMethod({
     name: 'persons.upsert',

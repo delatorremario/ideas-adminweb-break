@@ -28,7 +28,40 @@ Meteor.methods({
 
             _.map(areasData, (area) => {
                 const typeAreaStructureId = TypesAreaStructure.findOne({ name: area.type })._id
-                
+
+                _.extend(area, {
+                    typeAreaStructureId,
+                    corporationId: corp._id,
+                });
+                const parent = Areas.findOne({ code: area.parent })
+                if (parent) _.extend(area, { parentAreaId: parent._id })
+                console.log('---PARENT---', parent);
+
+                Areas.upsert({ code: area.code }, { $set: { ...area } });
+            });
+        });
+    },
+    'areas.update': (areasData) => {
+        check(areasData, Array);
+        if (!Meteor.isServer) return;
+
+        const corporations = Corporations.find().fetch();
+        /* add typesareasstructure */
+        _.map(corporations, (corp) => {
+            _.map(['Presidencia', 'Vicepresidencia', 'Gerencia General', 'Gerencia', 'SuperIntendencia'], (typearea, key) => {
+                const find = TypesAreaStructure.findOne({ name: typearea, corporationId: corp._id });
+                if (!find) {
+                    TypesAreaStructure.insert({
+                        name: typearea,
+                        order: key + 1,
+                        corporationId: corp._id || '',
+                    });
+                }
+            });
+
+            _.map(areasData, (area) => {
+                const typeAreaStructureId = TypesAreaStructure.findOne({ name: area.type })._id
+
                 _.extend(area, {
                     typeAreaStructureId,
                     corporationId: corp._id,
