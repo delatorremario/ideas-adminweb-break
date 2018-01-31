@@ -101,7 +101,6 @@ class ExcelPersonComponent extends Component {
             const ws = wb.Sheets[wsname];
             var data = XLSX.utils.sheet_to_json(ws, { header: 1 });
             const header = data[0];
-            console.log('data', header, data);
             if (header.length !== 10) {
                 callback(undefined, 'Formato incorrecto: cantidad de columnas incorrecta.');
             } else {
