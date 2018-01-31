@@ -13,6 +13,7 @@ const Start = {
     createAccounts();
     initRoles();
     addSuperAdminHolos();
+    addPMOs();
     addLeaders();
     addEmployees();
     addExecutives();
@@ -41,6 +42,7 @@ const leaders = ['mauricio.ma.rodriguez@bhpbilliton.com', 'delatorremario@gmail.
   'jorge.jm.jalil@bhpbilliton.com', 'jorge.jn.tom@bhpbilliton.com',
   'camila.ca.perez@bhpbilliton.com', 'maria.mp.bustamante@bhpbilliton.com'
 ];
+const pmos = ['mauricio.ma.rodriguez@bhpbilliton.com'];
 
 const executives = ['luis.gonzalez4@bhpbilliton.com', 'carlos.r.delgado@bhpbilliton.com']
 const employees = ['cristhianco.diaz@bhpbilliton.com', 'neftali.a.herrera@bhpbilliton.com'];
@@ -61,6 +63,7 @@ const createAccounts = () => {
 const initRoles = () => {
   if (_.includes(Roles.getAllRoles(), 'SuperAdminHolos')) Roles.createRole('SuperAdminHolos');
   if (_.includes(Roles.getAllRoles(), 'AdminGrupoNegocio')) Roles.createRole('AdminGrupoNegocio');
+  if (_.includes(Roles.getAllRoles(), 'PMO')) Roles.createRole('PMO');
   if (_.includes(Roles.getAllRoles(), 'Leader')) Roles.createRole('Leader');
   if (_.includes(Roles.getAllRoles(), 'Employee')) Roles.createRole('Employee');
   if (_.includes(Roles.getAllRoles(), 'Executive')) Roles.createRole('Executive');
@@ -74,6 +77,16 @@ const addSuperAdminHolos = () => {
     if (user && !Roles.userIsInRole(user, ['SuperAdminHolos'])) {
       Roles.addUsersToRoles(user, ['SuperAdminHolos']);
       console.log('user agreado a SuperAdminHolos', mail);
+    }
+  });
+};
+const addPMOs = () => {
+
+  _.map(pmos, (mail) => {
+    const user = Meteor.users.findOne({ 'emails.address': mail });
+    if (user && !Roles.userIsInRole(user, ['PMO'])) {
+      Roles.addUsersToRoles(user, ['PMO']);
+      console.log('user agreado a PMO', mail);
     }
   });
 };
