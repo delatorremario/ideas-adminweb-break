@@ -10,7 +10,7 @@ class ExcelUploaderComponent extends Component {
     }
 
     render() {
-        const { status, onLoad, icon } = this.props;
+        const { status, onLoad, icon, index, total } = this.props;
         let fa = '';
         let btn = '';
         switch (status) {
@@ -28,15 +28,23 @@ class ExcelUploaderComponent extends Component {
                 break;
         }
         return (
-            <div to="#" className={`btn ${btn} btn-trans btn-action ideas-button`} onClick={e => this.load(e)}>
-                <i className={fa}></i>
-                <input id="file"
-                    type="file"
-                    onChange={e => onLoad(e)}
-                    style={{ display: 'none' }}
-                    multiple="false"
-                    accept=".xls,.xlsx"
-                    disabled={status === 'uploading' ? true : false} />
+            <div>
+                <div to="#" className={`btn ${btn} btn-trans btn-action ideas-button`} onClick={e => this.load(e)}>
+                    <i className={fa}></i>
+                    <input id="file"
+                        type="file"
+                        onChange={e => onLoad(e)}
+                        style={{ display: 'none' }}
+                        multiple="false"
+                        accept=".xls,.xlsx"
+                        disabled={status === 'uploading' ? true : false} />
+                </div>
+                {
+                    index !== total &&
+                    <div to="#" className="btn btn-info ideas-button">
+                        <div style={{ zoom: '0.5 !importants' }}>{((index / total) * 100).toFixed(0)}%</div>
+                    </div>
+                }
             </div>
         )
     }

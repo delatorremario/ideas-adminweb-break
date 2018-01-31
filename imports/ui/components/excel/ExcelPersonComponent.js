@@ -1,5 +1,5 @@
-import React, { Component, PropTypes } from 'react';
 import ExcelUploaderComponent from './ExcelUploaderComponent';
+import React, { Component, PropTypes } from 'react';
 import { Meteor } from 'meteor/meteor';
 import swal from 'sweetalert2';
 import XLSX from 'xlsx';
@@ -10,7 +10,7 @@ class ExcelPersonComponent extends Component {
     state = {
         isLoading: '',
         total: undefined,
-        person: undefined
+        index: undefined
     }
 
     componentDidMount() {
@@ -39,7 +39,7 @@ class ExcelPersonComponent extends Component {
                     status: 'uploading'
                 }))
                 this.xlsxParser(e, (persons, error) => {
-                    console.log('persons', persons);
+                    e.target.value = '';
                     if (error) {
                         Bert.alert(error, 'danger');
                         this.setState(prev => ({
@@ -52,10 +52,10 @@ class ExcelPersonComponent extends Component {
                             }))
                         }, 1000);
                     } else {
-                        persons = _.slice(persons, 0, 500);
+                        // persons = _.slice(persons, 0, 500);
                         this.setState(prev => ({
                             total: persons.length,
-                            person: 0
+                            index: 0
                         }))
                         let count = 0;
                         _.each(persons, (p, index) => {
@@ -65,10 +65,10 @@ class ExcelPersonComponent extends Component {
                                 } else {
                                     count++;
                                     this.setState(prev => ({
-                                        person: count
+                                        index: count
                                     }))
                                     if (count === persons.length) {
-                                        Bert.alert('Datos cargados', 'success');
+                                        Bert.alert(persons.length === 1 ? '1 persona cargada.' : persons.length + ' personas cargadas.', 'success');
                                         this.setState(prev => ({
                                             status: 'idle',
                                             icon: 'fa fa-check'
@@ -87,13 +87,14 @@ class ExcelPersonComponent extends Component {
             }, (dismiss) => {
                 console.log(dismiss)
             })
+        } else {
+            e.target.value = '';
         }
     }
 
     xlsxParser = (evt, callback) => {
         const target = evt.target;
         const reader = new FileReader();
-        this.nombreArchivo = target.files[0].name;
         reader.onload = function (e) {
             const bstr = e.target.result;
             const wb = XLSX.read(bstr, { type: 'binary' });
@@ -128,11 +129,10 @@ class ExcelPersonComponent extends Component {
     }
 
     render() {
-        const { status, onLoad, icon, person, total } = this.state;
+        const { status, onLoad, icon, index, total } = this.state;
         return (
             <div>
-                {total && person && person + '/' + total}
-                <ExcelUploaderComponent status={status} onLoad={onLoad} icon={icon} />
+                <ExcelUploaderComponent status={status} onLoad={onLoad} icon={icon} index={index} total={total} />
             </div>
         )
     }
