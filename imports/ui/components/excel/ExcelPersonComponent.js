@@ -8,16 +8,18 @@ import _ from 'lodash';
 class ExcelPersonComponent extends Component {
 
     state = {
-        isLoading: true
+        isLoading: ''
     }
 
     componentDidMount() {
         this.setState({
-            isLoading: true
+            status: 'idle',
+            onLoad: this.xlsxReceptor,
+            icon: 'fa fa-file-excel-o'
         })
     }
 
-    xlsxParser = bstr => {
+    xlsxReceptor = bstr => {
         if (bstr && /xls|xlsx|/i.test(bstr.extension)) {
             const name = bstr.name;
             const size = (bstr.size / (1000000)).toFixed(2) + 'MB';
@@ -29,28 +31,51 @@ class ExcelPersonComponent extends Component {
                 confirmButtonText: 'Cargar',
                 cancelButtonText: 'Cancelar',
             }).then(() => {
-                error = false;
-                if (error) {
-                    Bert.alert('Error', 'danger')
-                } else {
-                    Bert.alert('Datos cargados', 'success')
-                }
+                this.setState(prev => ({
+                    status: 'uploading'
+                }))
+                this.xlsxParser(bstr);
+                /* Este setTimeout se debe remplazar por el upsert de personas */
+                setTimeout(() => {
+                    error = true;
+                    if (error) {
+                        Bert.alert('Error', 'danger');
+                        this.setState(prev => ({
+                            status: 'idle',
+                            icon: 'fa fa-times'
+                        }))
+                        setTimeout(() => {
+                            this.setState(prev => ({
+                                icon: 'fa fa-file-excel-o'
+                            }))
+                        }, 1000);
+                    } else {
+                        Bert.alert('Datos cargados', 'success');
+                        this.setState(prev => ({
+                            status: 'idle',
+                            icon: 'fa fa-check'
+                        }))
+                        setTimeout(() => {
+                            this.setState(prev => ({
+                                icon: 'fa fa-file-excel-o'
+                            }))
+                        }, 1000);
+                    }
+                }, 2000);
             }, (dismiss) => {
                 console.log(dismiss)
             })
         }
     }
 
-    changeLoading = e => {
-        this.setState(prev => {
-            isLoading: !prev.isLoading
-        })
+    xlsxParser = (xlsx) => {
+        console.log(xlsx);
     }
 
     render() {
-        const { isLoading, onLoad, icon } = this.state;
+        const { status, onLoad, icon } = this.state;
         return (
-            <ExcelUploaderComponent isLoading={isLoading} onLoad={onLoad} icon={icon} />
+            <ExcelUploaderComponent status={status} onLoad={onLoad} icon={icon} />
         )
     }
 }
